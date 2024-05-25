@@ -102,10 +102,18 @@ t = linspace(0,tmax,nt);
 G_C = zeros(nx,nt);
 G_H = zeros(nx,nt);
 G_OH = zeros(nx,nt);
+
 Sigma = zeros(nx,nt);
+Sigma_ref = ones(nx,nt);
+sigma_ref = Sigma_ref*sigma_surface;
+
 s_H = zeros(nx,nt);
 s_C = zeros(nx,nt);
 s_OH = zeros(nx,nt);
+
+K_H2O = zeros(nx,nt);
+K_a = zeros(nx,nt);
+K_b = zeros(nx,nt);
 
 % --- Set IC and BC
 
@@ -146,8 +154,10 @@ for m= 2:nt-1
         s_OH(i,m) = (z_OH^2)*v_OH*G_OH(i,m);
         s_C(i,m) = (z_C^2)*v_H*G_C(i,m);
         Sigma(i,m) = (F^2)*(s_C(i,m) + s_H(i,m) + s_OH(i,m)) + Sigma_ref(i,m);
-        ix_H(i,m) = (-1*Sigma(i,m) - F*z1*D*(G(i+1,m) - G(i-1,m)))/(tau^2);
-        ix_OH(i,m) = (-1*Sigma(i,m) - F*z3*D*(G(i+1,m) - G(i-1,m)))/(tau^2);
+        i_z(i,m) = (-1*Sigma(i,m)*dEdx - F*((z_C*D_C*(G_C(i+1,m) - G_C(i-1,m))) + (z_H*D_H*(G_H(i+1,m) - G_H(i-1,m))) + (z_OH*D_OH*(G_OH(i+1,m) - G_OH(i-1,m)))))/(tau^2);
+        K_H2O(i,m) = G_H(i,m)*G_OH(i,m);
+        % K_a(i,m) = (G_H(i,m)*G_A(i,m))/G_HA(i,m);
+        % K_b(i,m) = (G_B(i,m)*G_OH(i,m))/G_BOH(i,m);
         
     end
 end
