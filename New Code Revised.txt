@@ -1,0 +1,7 @@
+% Geomesh info
+L = 0.4;                        % length of domain in x direction [m]       
+tmax = 41;                      % end time [day]
+nx = 35;                        % number of nodes in x direction
+nt = 50401;                     % number of time steps
+dx = L/(nx-1);
+dt = tmax/(nt-1);
