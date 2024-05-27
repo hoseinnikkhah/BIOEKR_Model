@@ -196,7 +196,7 @@ for m= 2:nt-1
         % R_H(i,m) = (K_H2O(i,m)*G_H(i,m)) + (K_a(i,m)*G_HA(i,m));
         % R_OH(i,m) = (K_H2O(i,m)*G_OH(i,m)) + (K_b(i,m)*G_BOH(i,m));
         % R_B(i,m) = (K_b(i,m)*G_BOH(i,m));
-        % R_A(i,m) = (K_a(i.m)*G_HA(i,m));
+        % R_A(i,m) = (K_a(i,m)*G_HA(i,m));
         % R_C(i,m)?
         % 
     end
