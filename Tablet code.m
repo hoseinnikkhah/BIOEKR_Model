@@ -93,7 +93,11 @@ D_B = 1.34*10^-8*24*3600;         % Mass advection for Base agent [m^2/day]     
 % Species Diffuision abberation with coeff                                      |
 D_star_H = D_H*coeff*(dt/dx^2);   % Dimensionless of Diffusion                  |
 D_star_C = D_C*coeff*(dt/dx^2);   % Dimensionless of Diffusion                  |
-D_star_OH = D_OH*coeff*(dt/dx^2); % Dimensionless of Diffusion with K influence |
+D_star_OH = D_OH*coeff*(dt/dx^2); % Dimensionless of Diffusion                  |
+D_star_HA = D_HA*coeff*(dt/dx^2); % Dimensionless of Diffusion                  |
+D_star_BOH = D_BOH*coeff*(dt/dx^2); % Dimensionless of Diffusion                |
+D_star_A = D_A*coeff*(dt/dx^2); % Dimensionless of Diffusion                    |
+D_star_B = D_B*coeff*(dt/dx^2); % Dimensionless of Diffuision                   |
                                                                                 |
 % Species Diffuision abberation standalone                                      |
 D_prime_H = D_H*(dt/dx^2);        % Dimensionless of Diffusion                  |
