@@ -121,6 +121,10 @@ alpha_B = D_star_B/n;             % Diffusion Advection                         
 prime_H = D_prime_H/n;            % Diffusion Advection                         |
 prime_C = D_prime_C/n;            % Diffusion Advection                         |
 prime_OH = D_prime_OH/n;          % Diffusion Advection                         |
+prime_HA = D_prime_HA/n;          % Diffusion Advection                         |
+prime_BOH = D_prime_BOH/n;        % Diffusion Advection                         |
+prime_A = D_prime_A/n;            % Diffusion Advection                         |
+prime_B = D_prime_B/n;            % Diffusion Advection                         |
 %-------------------------------------------------------------------------------
 
 R_D = coeff*(dt)/n;              % Reaction rate Dimensionless factorr
