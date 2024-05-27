@@ -51,6 +51,10 @@ i = F*(z_H+z_OH+z_C+z_HA+z_BOH+z_A+z_B);
 v_C = (D_C/(R*T));                % mobility [Hydrocarbon]                      |
 v_H = (D_H/(R*T));                % mobility [Hydrogen]                         |
 v_OH = (D_OH/(R*T));              % mobility [Hydroxid]                         |
+v_HA = (D_HA/(R*T));              % mobility [Acid]                             |
+v_BOH = (D_BOH/(R*T));            % mobility [Base]                             |
+v_A = (D_A/(R*T));                % mobility [Dissolved Acid]                   |
+v_B = (D_B/(R*T));                % mobility [Dissolved Base]                   |
                                                                                 |
 % Species electromigration velocity                                             |
 u_e_H = (v_H*z_H*F*dEdx)/(tau^2);              % electromigration [Hydrogen]    |
