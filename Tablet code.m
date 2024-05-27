@@ -107,6 +107,7 @@ prime_C = D_prime_C/n;            % Diffusion Advection                         
 prime_OH = D_prime_OH/n;          % Diffusion Advection                         |
 %-------------------------------------------------------------------------------
 
+R_D = coeff*(dt)/n;              % Reaction rate Dimensionless factorr
 % Double layer
 % D_l = sqrt((epsilon*R*T)/2*(z^2)*(F^2)*c)
 % this formulas exits to confirm there is a dl here, it is not used in anywhere in model
@@ -144,7 +145,6 @@ R_OH = zeros(nx,nt);
 R_A = zeros(nx,nt);
 R_B = zeros(nx,nt);
 
-
 % --- Set IC and BC
 
 G_C(:,1)= 10000;
@@ -156,6 +156,11 @@ G_H(:,2)= 10000;
 G_OH(:,1)= 2000;
 G_OH(:,2)= 2000;
 
+R_C(:,1) = R_i*coeff*(dt)/n;
+R_OH(:,1) = R_i*coeff*(dt)/n;
+R_H(:,1) = R_i*coeff*(dt)/n;
+R_B(:,1) = R_i*coeff*(dt)/n;
+R_A(:,1) = R_i*coeff*(dt)/n;
 
 s_H(:,1) = (z_H^2)*v_H*G_H_i;
 s_OH(:,1) = (z_OH^2)*v_OH*G_OH_i;
@@ -176,9 +181,9 @@ for m= 2:nt-1
     for i= 2:nx-1
         
         
-        G_C(i,m+1) = G_C(i,m) + sub(i,m)*(alpha*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) + beta_C*(G(i+1,m) - G(i-1,m)) + rrr);
-        G_H(i,m+1) = G_H(i,m) + sub(i,m)*(alpha_H*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) + beta_H*(G_H(i+1,m) - G_H(i-1,m)) + rrr);
-        G_OH(i,m+1) = G_OH(i,m) + sub(i,m)*(alpha_OH*(G_OH(i+1,m) -2*G_OH(i,m) + G_OH(i-1,m)) + beta_OH*(G_OH(i+1,m) - G_OH(i-1,m)) + rrr);
+        G_C(i,m+1) = G_C(i,m) + sub(i,m)*(alpha*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) + beta_C*(G(i+1,m) - G(i-1,m)) + R_C(i,m)/R_D);
+        G_H(i,m+1) = G_H(i,m) + sub(i,m)*(alpha_H*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) + beta_H*(G_H(i+1,m) - G_H(i-1,m)) + R_H(i,m)/R_D);
+        G_OH(i,m+1) = G_OH(i,m) + sub(i,m)*(alpha_OH*(G_OH(i+1,m) -2*G_OH(i,m) + G_OH(i-1,m)) + beta_OH*(G_OH(i+1,m) - G_OH(i-1,m)) + R_OH(i,m)/R_D);
         s_H(i,m) = (z_H^2)*v_H*G_H(i,m);
         s_OH(i,m) = (z_OH^2)*v_OH*G_OH(i,m);
         s_C(i,m) = (z_C^2)*v_H*G_C(i,m);
