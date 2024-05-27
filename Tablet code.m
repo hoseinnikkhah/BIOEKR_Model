@@ -41,7 +41,8 @@ z_A = -1;
 z_B = 1;
 
 % Current density
-i = F*(z_H+z_OH+z_C);             % there is a flux term at the end as well but it is not calculated since sum of valencies are zero in this phenomena
+i = F*(z_H+z_OH+z_C+z_HA+z_BOH+z_A+z_B);
+% there is a flux term at the end as well but it is not calculated since sum of valencies are zero in this phenomena
 
 %-------------------------------------------------------------------------------
 % Species Velocities                                                            |
