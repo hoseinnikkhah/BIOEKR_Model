@@ -24,7 +24,7 @@ K = 0.02;                         % Exprimental Microbal constant
 K_A = 1.75*10^-5;                 % Dissociation constant [mol/m3]
 k_i = 0.075;                      % Exprimental constant
 coeff = 1/(1+k_i);                % Adsorbing coefficent
-
+R_i = (0.693/53.2);               % Initial Reaction flow rate
 
 % Dimensionless parameters
 Pe = 47;
@@ -121,6 +121,7 @@ for w = 1:nx
     sub(w,:) = M_g;
 end
 
+
 G_C = zeros(nx,nt);
 G_H = zeros(nx,nt);
 G_OH = zeros(nx,nt);
@@ -136,6 +137,13 @@ s_OH = zeros(nx,nt);
 K_H2O = zeros(nx,nt);
 K_a = zeros(nx,nt);
 K_b = zeros(nx,nt);
+
+R_C = zeros(nx,nt);
+R_H = zeros(nx,nt);
+R_OH = zeros(nx,nt);
+R_A = zeros(nx,nt);
+R_B = zeros(nx,nt);
+
 
 % --- Set IC and BC
 
