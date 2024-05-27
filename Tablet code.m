@@ -53,13 +53,17 @@ v_H = (D_H/(R*T));                % mobility [Hydrogen]                         
 v_OH = (D_OH/(R*T));              % mobility [Hydroxid]                         |
 v_HA = (D_HA/(R*T));              % mobility [Acid]                             |
 v_BOH = (D_BOH/(R*T));            % mobility [Base]                             |
-v_A = (D_A/(R*T));                % mobility [Dissolved Acid]                   |
-v_B = (D_B/(R*T));                % mobility [Dissolved Base]                   |
+v_A = (D_A/(R*T));                % mobility [A]                                |
+v_B = (D_B/(R*T));                % mobility [B]                                |
                                                                                 |
 % Species electromigration velocity                                             |
 u_e_H = (v_H*z_H*F*dEdx)/(tau^2);              % electromigration [Hydrogen]    |
 u_e_OH = (v_OH*z_OH*F*dEdx)/(tau^2);           % electromigration [Hydroxid]    |
 u_e_C = (v_C*z_C*F*dEdx)/(tau^2);              % electromigration [Carbon]      |
+u_e_HA = (v_HA*z_HA*F*dEdx)/(tau^2);           % electromigration [Acid]        |
+u_e_BOH = (v_BOH*z_BOH*F*dEdx)/(tau^2)         % electromigration [Base]        |
+u_e_A = (v_A*z_A*F*dEdx)/(tau^2);              % electromigration [A]           |
+u_e_B = (v_B*z_B*F*dEdx)/(tau^2);              % electromigration [B]           |
                                                                                 |
 % domain velocity                                                               |
 u_x = (epsilon/mu_solution)*(zeta*dEdx)        % Volumetric Velocity [m3/s]     |
