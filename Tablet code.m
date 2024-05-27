@@ -85,6 +85,10 @@ sigma_surface = 2.74*10^7;        % Conductivity [S/m]
 D_H = 3.5447*10^-9*24*3600;       % Mass advection for Hydrogen [m^2/day]       |
 D_C = 2.063*10^-9*24*3600;        % Mass advection for Hydrocarbon [m^2/day]    |
 D_OH = 0.450*10^-8*24*3600;       % Mass advection for Hydroxid [m^2/day]       |
+D_HA = 1.2*10^-8*24*3600;         % Mass advection for Acid [m^2/day]           |
+D_A = 1.2*10^-8*24*3600;          % Mass advection for Acid agent [m^2/day]     |
+D_BOH = 1.2*10^-8*24*3600;        % Mass advection for Base [m^2/day]           |
+D_B = 1.34*10^-8*24*3600;         % Mass advection for Base agent [m^2/day]     |
                                                                                 |
 % Species Diffuision abberation with coeff                                      |
 D_star_H = D_H*coeff*(dt/dx^2);   % Dimensionless of Diffusion                  |
