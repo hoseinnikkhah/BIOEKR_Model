@@ -41,23 +41,39 @@ z_C = 0;
 i = F*(z_H+z_OH+z_C);             % there is a flux term at the end as well but it is not calculated since sum of valencies are zero in this phenomena
 
 %-------------------------------------------------------------------------------
-% Species Velocities                                                           |
-                                                                               |
-% Species Mobility                                                             |
-v_C = (D_C/(R*T));                % mobility [Hydrocarbon]                     |
-v_H = (D_H/(R*T));                % mobility [Hydrogen]                        |
-v_OH = (D_OH/(R*T));              % mobility [Hydroxid]                        |
-                                                                               |
-% Species electromigration velocity                                            |
-u_e_H = (v_H*z_H*F*dEdx)/(tau^2);              % electromigration [Hydrogen]   |
-u_e_OH = (v_OH*z_OH*F*dEdx)/(tau^2);           % electromigration [Hydroxid]   |
-u_e_C = (v_C*z_C*F*dEdx)/(tau^2);              % electromigration [Carbon]     |
-                                                                               |
-% domain velocity                                                              |
-u_x = (epsilon/mu_solution)*(Zeta*dEdx)        % Volumetric Velocity [m3/s]    |
-u_c = (1/tau^2)*u_x;                           % Convection Velocity [m3/s]    |
-u_eo = ((epsilon*Zeta)/mu_solution)*dEdx;      % Electoosmotic Velocity [m3/s] |
-u_s = n*u_c;                                                                   |
+% Species Velocities                                                            |
+                                                                                |
+% Species Mobility                                                              |
+v_C = (D_C/(R*T));                % mobility [Hydrocarbon]                      |
+v_H = (D_H/(R*T));                % mobility [Hydrogen]                         |
+v_OH = (D_OH/(R*T));              % mobility [Hydroxid]                         |
+                                                                                |
+% Species electromigration velocity                                             |
+u_e_H = (v_H*z_H*F*dEdx)/(tau^2);              % electromigration [Hydrogen]    |
+u_e_OH = (v_OH*z_OH*F*dEdx)/(tau^2);           % electromigration [Hydroxid]    |
+u_e_C = (v_C*z_C*F*dEdx)/(tau^2);              % electromigration [Carbon]      |
+                                                                                |
+% domain velocity                                                               |
+u_x = (epsilon/mu_solution)*(zeta*dEdx)        % Volumetric Velocity [m3/s]     |
+u_c = (1/tau^2)*u_x;                           % Convection Velocity [m3/s]     |
+u_eo = ((epsilon*zeta)/mu_solution)*dEdx;      % Electoosmotic Velocity [m3/s]  |
+u_s = n*u_c;                                                                    |
+                                                                                |
+% Species total velocity                                                        |
+u_t_C = u_e_C + u_c;                                                            |
+u_t_H = u_e_H + u_c;                                                            |
+u_t_OH = u_e_OH + u_c;                                                          |
+                                                                                |
+% Velocity advection without coefficent                                         |
+beta_C = u_t_C*(dt/2*dx);                                                       |
+beta_H = u_t_H*(dt/2*dx);                                                       |
+beta_OH = u_t_OH*(dt/2*dx);                                                     |
+                                                                                |
+% Velocity advection with coefficent abberation                                 |
+beta_prime_c = coeff*u_t_C*(dt/2*dx);                                           |
+beta_prime_H = coeff*u_t_H*(dt/2*dx);                                           |
+beta_prime_OH = coeff*u_t_OH*(dt/2*dx);                                         |
+                                                                                |
 %-------------------------------------------------------------------------------
 
 % Counductivity
@@ -92,8 +108,8 @@ prime_OH = D_prime_OH/n;          % Diffusion Advection                         
 %-------------------------------------------------------------------------------
 
 % Double layer
-D_l = sqrt((epsilon*R*T)/2*(z^2)*(F^2)*c)
-
+% D_l = sqrt((epsilon*R*T)/2*(z^2)*(F^2)*c)
+% this formulas exits to confirm there is a dl here, it is not used in anywhere in model
 
 % --- Create arrays to save data for export
 x = linspace(0,L,nx);
@@ -130,7 +146,6 @@ G_OH(:,2)= 2000;
 s_H(:,1) = (z_H^2)*v_H*G_H_i;
 s_OH(:,1) = (z_OH^2)*v_OH*G_OH_i;
 s_C(:,1) = (z_C^2)*v_C*G_C_i;
-sigma_coeff = 
 Sigma(:,1) = (F^2)*(s_H + s_OH + s_C);
 
 for m= 2:nt-1
