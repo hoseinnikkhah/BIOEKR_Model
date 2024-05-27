@@ -112,6 +112,10 @@ D_prime_B = D_B*(dt/dx^2);        % Dimensionless of Diffusion                  
 alpha_H = D_star_H/n;             % Diffusion Advection                         |
 alpha_C = D_star_C/n;             % Diffusion Advection                         |
 alpha_OH = D_star_OH/n;           % Diffusion Advection                         |
+alpha_HA = D_star_HA/n;           % Diffusion Advection                         |
+alpha_BOH = D_star_BOH/n;         % Diffusion Advection                         |
+alpha_A = D_star_A/n;             % Diffusion Advection                         |
+alpha_B = D_star_B/n;             % Diffusion Advection                         |
                                                                                 |
 % Species Diffusion advection standalone                                        |
 prime_H = D_prime_H/n;            % Diffusion Advection                         |
