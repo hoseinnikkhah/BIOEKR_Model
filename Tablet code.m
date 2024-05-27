@@ -75,6 +75,10 @@ u_s = n*u_c;                                                                    
 u_t_C = u_e_C + u_c;                                                            |
 u_t_H = u_e_H + u_c;                                                            |
 u_t_OH = u_e_OH + u_c;                                                          |
+u_t_HA = u_e_HA + u_c;                                                          |
+u_t_BOH = u_e_BOH + u_c;                                                        |
+u_t_A = u_e_A + u_c;                                                            |
+u_t_B = u_e_B + u_c;                                                            |
                                                                                 |
 % Velocity advection without coefficent                                         |
 beta_C = u_t_C*(dt/2*dx);                                                       |
