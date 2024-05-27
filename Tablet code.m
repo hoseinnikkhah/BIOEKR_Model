@@ -185,11 +185,11 @@ for m= 2:nt-1
         Sigma(i,m) = (F^2)*(s_C(i,m) + s_H(i,m) + s_OH(i,m)) + Sigma_ref(i,m);
         i_z(i,m) = (-1*Sigma(i,m)*dEdx - F*((z_C*D_C*(G_C(i+1,m) - G_C(i-1,m))) + (z_H*D_H*(G_H(i+1,m) - G_H(i-1,m))) + (z_OH*D_OH*(G_OH(i+1,m) - G_OH(i-1,m)))))/(tau^2);
         if i == 2
-            R_prime_H = i_z/F;
-            R_H(i,m) = -1*R_prime_H
+            R_prime_H = i_z(i,m)/F;
+            R_H(i,m) = -1*R_prime_H(i,m)
         if i == nx-1
-            R_prime_OH = i_z/F;
-            R_OH(i,m) = -1*R_prime_OH;
+            R_prime_OH = i_z(i,m)/F;
+            R_OH(i,m) = -1*R_prime_OH(i,m);
         % K_H2O(i,m) = G_H(i,m)*G_OH(i,m);
         % K_a(i,m) = (G_H(i,m)*G_A(i,m))/G_HA(i,m);
         % K_b(i,m) = (G_B(i,m)*G_OH(i,m))/G_BOH(i,m);
