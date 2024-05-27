@@ -20,7 +20,7 @@ epsilon = 7*10^10;                % Electrical permitivity [F/m]
 mu_oil = 510*24*3600;             % Oil viscosity [kg/(m.day)]
 mu_solution = 0.001*24*3600;      % Solution viscosity [kg/(m.day)]
 zeta = -0.0027;                   % Zeta potential [V]
-K = 0.02;
+K = 0.02;                         % Exprimental Microbal constant
 K_A = 1.75*10^-5;                 % Dissociation constant [mol/m3]
 k_i = 0.075;                      % Exprimental constant
 coeff = 1/(1+k_i);                % Adsorbing coefficent
@@ -114,6 +114,12 @@ prime_OH = D_prime_OH/n;          % Diffusion Advection                         
 % --- Create arrays to save data for export
 x = linspace(0,L,nx);
 t = linspace(0,tmax,nt);
+
+sub = zeros(nx,nt);
+M_g = exp(-K*t);             % Microbal growth constant 
+for w = 1:nx
+    sub(w,:) = M_g;
+end
 
 G_C = zeros(nx,nt);
 G_H = zeros(nx,nt);
