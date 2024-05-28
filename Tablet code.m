@@ -84,6 +84,10 @@ u_t_B = u_e_B + u_c;                                                            
 beta_C = u_t_C*(dt/2*dx);                                                       |
 beta_H = u_t_H*(dt/2*dx);                                                       |
 beta_OH = u_t_OH*(dt/2*dx);                                                     |
+beta_HA = u_t_HA*(dt/2*dx);                                                     |
+beta_BOH = u_t_BOH*(dt/2*dx);                                                   |
+beta_A = u_t_A*(dt/2*dx);                                                       |
+beta_B = u_t_B*(dt/2*dx);                                                       |
                                                                                 |
 % Velocity advection with coefficent abberation                                 |
 beta_prime_c = coeff*u_t_C*(dt/2*dx);                                           |
