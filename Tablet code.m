@@ -93,6 +93,10 @@ beta_B = u_t_B*(dt/2*dx);                                                       
 beta_prime_c = coeff*u_t_C*(dt/2*dx);                                           |
 beta_prime_H = coeff*u_t_H*(dt/2*dx);                                           |
 beta_prime_OH = coeff*u_t_OH*(dt/2*dx);                                         |
+beta_prime_HA = coeff*u_t_HA*(dt/2*dx);                                         |
+beta_prime_BOH = coeff*u_t_BOH*(dt/2*dx);                                       |
+beta_prime_A = coeff*u_t_A*(dt/2*dx);                                           |
+beta_prime_B = coeff*u_t_B*(dt/2*dx);                                           |
                                                                                 |
 %-------------------------------------------------------------------------------
 
