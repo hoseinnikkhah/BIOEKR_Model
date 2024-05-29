@@ -244,10 +244,12 @@ for m= 2:nt-1
         G_BOH(i,m+1) = G_BOH(i,m) + sub(i,m)*(alpha_BOH*(G_BOH(i+1,m) -2*G_BOH(i,m) + G_BOH(i-1,m)) + beta_BOH*(G_BOH(i+1,m) - G_BOH(i-1,m)) + R_BOH(i,m)/R_D);
         G_A(i,m+1) = G_A(i,m) + sub(i,m)*(alpha_A*(G_A(i+1,m) -2*G_A(i,m) + G_A(i-1,m)) + beta_A*(G_A(i+1,m) - G_A(i-1,m)) + R_A(i,m)/R_D);
         G_B(i,m+1) = G_B(i,m) + sub(i,m)*(alpha_B*(G_B(i+1,m) -2*G_B(i,m) + G_B(i-1,m)) + beta_B*(G_B(i+1,m) - G_B(i-1,m)) + R_B(i,m)/R_D);
+        
         s_H(i,m) = (z_H^2)*v_H*G_H(i,m);
         s_OH(i,m) = (z_OH^2)*v_OH*G_OH(i,m);
         s_C(i,m) = (z_C^2)*v_H*G_C(i,m);
         Sigma(i,m) = (F^2)*(s_C(i,m) + s_H(i,m) + s_OH(i,m)) + Sigma_ref(i,m);
+        
         i_z(i,m) = (-1*Sigma(i,m)*dEdx - F*((z_C*D_C*(G_C(i+1,m) - G_C(i-1,m))) + (z_H*D_H*(G_H(i+1,m) - G_H(i-1,m))) + (z_OH*D_OH*(G_OH(i+1,m) - G_OH(i-1,m)))))/(tau^2);
         if i == 2
             R_prime_H = i_z(i,m)/F;
@@ -255,13 +257,13 @@ for m= 2:nt-1
         if i == nx-1
             R_prime_OH = i_z(i,m)/F;
             R_OH(i,m) = -1*R_prime_OH(i,m);
-        % K_H2O(i,m) = G_H(i,m)*G_OH(i,m);
-        % K_a(i,m) = (G_H(i,m)*G_A(i,m))/G_HA(i,m);
-        % K_b(i,m) = (G_B(i,m)*G_OH(i,m))/G_BOH(i,m);
-        % R_H(i,m) = (K_H2O(i,m)*G_H(i,m)) + (K_a(i,m)*G_HA(i,m));
-        % R_OH(i,m) = (K_H2O(i,m)*G_OH(i,m)) + (K_b(i,m)*G_BOH(i,m));
-        % R_B(i,m) = (K_b(i,m)*G_BOH(i,m));
-        % R_A(i,m) = (K_a(i,m)*G_HA(i,m));
+        K_H2O(i,m) = G_H(i,m)*G_OH(i,m);
+        K_a(i,m) = (G_H(i,m)*G_A(i,m))/G_HA(i,m);
+        K_b(i,m) = (G_B(i,m)*G_OH(i,m))/G_BOH(i,m);
+        R_H(i,m) = (K_H2O(i,m)*G_H(i,m)) + (K_a(i,m)*G_HA(i,m));
+        R_OH(i,m) = (K_H2O(i,m)*G_OH(i,m)) + (K_b(i,m)*G_BOH(i,m));
+        R_B(i,m) = (K_b(i,m)*G_BOH(i,m));
+        R_A(i,m) = (K_a(i,m)*G_HA(i,m));
         % R_C(i,m)?
         % 
     end
