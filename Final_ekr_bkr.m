@@ -225,10 +225,10 @@ R_H(:,1) = R_i*coeff*(dt)/n;
 R_B(:,1) = R_i*coeff*(dt)/n;
 R_A(:,1) = R_i*coeff*(dt)/n;
 
-s_H(:,1) = (z_H^2)*v_H*G_H_i;
-s_OH(:,1) = (z_OH^2)*v_OH*G_OH_i;
-s_C(:,1) = (z_C^2)*v_C*G_C_i;
-Sigma(:,1) = (F^2)*(s_H + s_OH + s_C);
+s_H(:,1) = (z_H^2)*v_H*G_H(:,1);
+s_OH(:,1) = (z_OH^2)*v_OH*G_OH(:,1);
+s_C(:,1) = (z_C^2)*v_C*G_C(:,1);
+Sigma(:,1) = (F^2)*(s_H(:,1) + s_OH(:,1) + s_C(:,1));
 
 for m= 2:nt-1
 
