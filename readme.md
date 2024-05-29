@@ -58,3 +58,16 @@ G_HA(i,m+1) = G_HA(i,m) + sub(i,m)*(alpha_HA*(G_HA(i+1,m) -2*G_HA(i,m) + G_HA(i-
 ```
 
 This is becuase reaction rates were not included for this part of model, after adding needed parameter problem fixed for both acid and base
+
+## Fifth issue
+
+Since rate for both acid and base are only calculated sepratly at both x=0 and x=L there are two conditional if in code, though a mistake happend and made both R_prime for acid and base as array which is wrong. As result following line of code resulted in returning syntax error
+
+```matlab
+R_OH(i,m) = -1*R_prime_OH(i,m);
+```
+and
+```matlab
+R_H(i,m) = -1*R_prime_H(i,m);
+```
+In order to fix the issue we need to remove `(i,m)1 from prime values.
