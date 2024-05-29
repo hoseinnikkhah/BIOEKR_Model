@@ -259,9 +259,11 @@ for m= 2:nt-1
         if i == 2
             R_prime_H = i_z(i,m)/F;
             R_H(i,m) = -1*R_prime_H(i,m);
+        end
         if i == nx-1
             R_prime_OH = i_z(i,m)/F;
             R_OH(i,m) = -1*R_prime_OH(i,m);
+        end
         K_H2O(i,m) = G_H(i,m)*G_OH(i,m);
         K_a(i,m) = (G_H(i,m)*G_A(i,m))/G_HA(i,m);
         K_b(i,m) = (G_B(i,m)*G_OH(i,m))/G_BOH(i,m);
