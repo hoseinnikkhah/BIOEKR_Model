@@ -243,6 +243,7 @@ for m= 2:nt-1
         G_HA(i,m+1) = G_HA(i,m) + sub(i,m)*(alpha_HA*(G_HA(i+1,m) -2*G_HA(i,m) + G_HA(i-1,m)) + beta_HA*(G_HA(i+1,m) - G_HA(i-1,m)) + R_HA(i,m)/R_D);
         G_BOH(i,m+1) = G_BOH(i,m) + sub(i,m)*(alpha_BOH*(G_BOH(i+1,m) -2*G_BOH(i,m) + G_BOH(i-1,m)) + beta_BOH*(G_BOH(i+1,m) - G_BOH(i-1,m)) + R_BOH(i,m)/R_D);
         G_A(i,m+1) = G_A(i,m) + sub(i,m)*(alpha_A*(G_A(i+1,m) -2*G_A(i,m) + G_A(i-1,m)) + beta_A*(G_A(i+1,m) - G_A(i-1,m)) + R_A(i,m)/R_D);
+        G_B(i,m+1) = G_B(i,m) + sub(i,m)*(alpha_B*(G_B(i+1,m) -2*G_B(i,m) + G_B(i-1,m)) + beta_B*(G_B(i+1,m) - G_B(i-1,m)) + R_B(i,m)/R_D);
         s_H(i,m) = (z_H^2)*v_H*G_H(i,m);
         s_OH(i,m) = (z_OH^2)*v_OH*G_OH(i,m);
         s_C(i,m) = (z_C^2)*v_H*G_C(i,m);
