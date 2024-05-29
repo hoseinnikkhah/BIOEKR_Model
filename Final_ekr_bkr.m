@@ -58,7 +58,7 @@ D_HA = 1.2*10^-8*24*3600;         % Mass advection for Acid [m^2/day]           
 D_A = 1.2*10^-8*24*3600;          % Mass advection for Acid agent [m^2/day]     |
 D_BOH = 1.2*10^-8*24*3600;        % Mass advection for Base [m^2/day]           |
 D_B = 1.34*10^-8*24*3600;         % Mass advection for Base agent [m^2/day]     |
-                                                                                |
+%                                                                               |
 % Species Diffuision abberation with coeff                                      |
 D_star_H = D_H*coeff*(dt/dx^2);   % Dimensionless of Diffusion                  |
 D_star_C = D_C*coeff*(dt/dx^2);   % Dimensionless of Diffusion                  |
@@ -67,7 +67,7 @@ D_star_HA = D_HA*coeff*(dt/dx^2); % Dimensionless of Diffusion                  
 D_star_BOH = D_BOH*coeff*(dt/dx^2); % Dimensionless of Diffusion                |
 D_star_A = D_A*coeff*(dt/dx^2);     % Dimensionless of Diffusion                |
 D_star_B = D_B*coeff*(dt/dx^2);     % Dimensionless of Diffuision               |
-                                                                                |
+%                                                                               |
 % Species Diffuision abberation standalone                                      |
 D_prime_H = D_H*(dt/dx^2);        % Dimensionless of Diffusion                  |
 D_prime_C = D_C*(dt/dx^2);        % Dimensionless of Diffusion                  |
@@ -76,7 +76,7 @@ D_prime_HA = D_HA*(dt/dx^2);      % Dimensionless of Diffusion                  
 D_prime_BOH = D_BOH*(dt/dx^2);    % Dimensionless of Diffusion                  |
 D_prime_A = D_A*(dt/dx^2);        % Dimensionless of Diffusion                  |
 D_prime_B = D_B*(dt/dx^2);        % Dimensionless of Diffusion                  |
-                                                                                |
+%                                                                               |
 % Species Diffusion advection with coeff                                        |
 alpha_H = D_star_H/n;             % Diffusion Advection                         |
 alpha_C = D_star_C/n;             % Diffusion Advection                         |
@@ -85,7 +85,7 @@ alpha_HA = D_star_HA/n;           % Diffusion Advection                         
 alpha_BOH = D_star_BOH/n;         % Diffusion Advection                         |
 alpha_A = D_star_A/n;             % Diffusion Advection                         |
 alpha_B = D_star_B/n;             % Diffusion Advection                         |
-                                                                                |
+%                                                                               |
 % Species Diffusion advection standalone                                        |
 prime_H = D_prime_H/n;            % Diffusion Advection                         |
 prime_C = D_prime_C/n;            % Diffusion Advection                         |
@@ -98,7 +98,7 @@ prime_B = D_prime_B/n;            % Diffusion Advection                         
 
 %-------------------------------------------------------------------------------
 % Species Velocities                                                            |
-                                                                                |
+%                                                                               |
 % Species Mobility                                                              |
 v_C = (D_C/(R*T));                % mobility [Hydrocarbon]                      |
 v_H = (D_H/(R*T));                % mobility [Hydrogen]                         |
@@ -107,49 +107,49 @@ v_HA = (D_HA/(R*T));              % mobility [Acid]                             
 v_BOH = (D_BOH/(R*T));            % mobility [Base]                             |
 v_A = (D_A/(R*T));                % mobility [A]                                |
 v_B = (D_B/(R*T));                % mobility [B]                                |
-                                                                                |
+%                                                                               |
 % Species electromigration velocity                                             |
 u_e_H = (v_H*z_H*F*dEdx)/(tau^2);              % electromigration [Hydrogen]    |
 u_e_OH = (v_OH*z_OH*F*dEdx)/(tau^2);           % electromigration [Hydroxid]    |
 u_e_C = (v_C*z_C*F*dEdx)/(tau^2);              % electromigration [Carbon]      |
 u_e_HA = (v_HA*z_HA*F*dEdx)/(tau^2);           % electromigration [Acid]        |
-u_e_BOH = (v_BOH*z_BOH*F*dEdx)/(tau^2)         % electromigration [Base]        |
+u_e_BOH = (v_BOH*z_BOH*F*dEdx)/(tau^2);        % electromigration [Base]        |
 u_e_A = (v_A*z_A*F*dEdx)/(tau^2);              % electromigration [A]           |
 u_e_B = (v_B*z_B*F*dEdx)/(tau^2);              % electromigration [B]           |
-                                                                                |
+%                                                                               |
 % domain velocity                                                               |
-u_x = (epsilon/mu_solution)*(zeta*dEdx)        % Volumetric Velocity [m3/s]     |
+u_x = (epsilon/mu_solution)*(zeta*dEdx);       % Volumetric Velocity [m3/s]     |
 u_c = (1/tau^2)*u_x;                           % Convection Velocity [m3/s]     |
 u_eo = ((epsilon*zeta)/mu_solution)*dEdx;      % Electoosmotic Velocity [m3/s]  |
-u_s = n*u_c;                                                                    |
-                                                                                |
+u_s = n*u_c; %                                                                  |
+%                                                                               |
 % Species total velocity                                                        |
-u_t_C = u_e_C + u_c;                                                            |
-u_t_H = u_e_H + u_c;                                                            |
-u_t_OH = u_e_OH + u_c;                                                          |
-u_t_HA = u_e_HA + u_c;                                                          |
-u_t_BOH = u_e_BOH + u_c;                                                        |
-u_t_A = u_e_A + u_c;                                                            |
-u_t_B = u_e_B + u_c;                                                            |
-                                                                                |
+u_t_C = u_e_C + u_c; %                                                          |
+u_t_H = u_e_H + u_c; %                                                          |
+u_t_OH = u_e_OH + u_c; %                                                        |
+u_t_HA = u_e_HA + u_c; %                                                        |
+u_t_BOH = u_e_BOH + u_c; %                                                      |
+u_t_A = u_e_A + u_c; %                                                          |
+u_t_B = u_e_B + u_c; %                                                          |
+%                                                                               |
 % Velocity advection without coefficent                                         |
-beta_C = u_t_C*(dt/2*dx);                                                       |
-beta_H = u_t_H*(dt/2*dx);                                                       |
-beta_OH = u_t_OH*(dt/2*dx);                                                     |
-beta_HA = u_t_HA*(dt/2*dx);                                                     |
-beta_BOH = u_t_BOH*(dt/2*dx);                                                   |
-beta_A = u_t_A*(dt/2*dx);                                                       |
-beta_B = u_t_B*(dt/2*dx);                                                       |
-                                                                                |
+beta_C = u_t_C*(dt/2*dx); %                                                     |
+beta_H = u_t_H*(dt/2*dx); %                                                     |
+beta_OH = u_t_OH*(dt/2*dx); %                                                   |
+beta_HA = u_t_HA*(dt/2*dx); %                                                   |
+beta_BOH = u_t_BOH*(dt/2*dx); %                                                 |
+beta_A = u_t_A*(dt/2*dx); %                                                     |
+beta_B = u_t_B*(dt/2*dx); %                                                     |
+%                                                                               |
 % Velocity advection with coefficent abberation                                 |
-beta_prime_c = coeff*u_t_C*(dt/2*dx);                                           |
-beta_prime_H = coeff*u_t_H*(dt/2*dx);                                           |
-beta_prime_OH = coeff*u_t_OH*(dt/2*dx);                                         |
-beta_prime_HA = coeff*u_t_HA*(dt/2*dx);                                         |
-beta_prime_BOH = coeff*u_t_BOH*(dt/2*dx);                                       |
-beta_prime_A = coeff*u_t_A*(dt/2*dx);                                           |
-beta_prime_B = coeff*u_t_B*(dt/2*dx);                                           |
-                                                                                |
+beta_prime_c = coeff*u_t_C*(dt/2*dx); %                                         |
+beta_prime_H = coeff*u_t_H*(dt/2*dx); %                                         |
+beta_prime_OH = coeff*u_t_OH*(dt/2*dx); %                                       |
+beta_prime_HA = coeff*u_t_HA*(dt/2*dx); %                                       |
+beta_prime_BOH = coeff*u_t_BOH*(dt/2*dx); %                                     |
+beta_prime_A = coeff*u_t_A*(dt/2*dx); %                                         |
+beta_prime_B = coeff*u_t_B*(dt/2*dx); %                                         |
+%                                                                               |
 %-------------------------------------------------------------------------------
 
 R_D = coeff*(dt)/n;              % Reaction rate Dimensionless factor
@@ -258,7 +258,7 @@ for m= 2:nt-1
         i_z(i,m) = (-1*Sigma(i,m)*dEdx - F*((z_C*D_C*(G_C(i+1,m) - G_C(i-1,m))) + (z_H*D_H*(G_H(i+1,m) - G_H(i-1,m))) + (z_OH*D_OH*(G_OH(i+1,m) - G_OH(i-1,m)))))/(tau^2);
         if i == 2
             R_prime_H = i_z(i,m)/F;
-            R_H(i,m) = -1*R_prime_H(i,m)
+            R_H(i,m) = -1*R_prime_H(i,m);
         if i == nx-1
             R_prime_OH = i_z(i,m)/F;
             R_OH(i,m) = -1*R_prime_OH(i,m);
