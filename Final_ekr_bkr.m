@@ -180,6 +180,8 @@ Sigma = zeros(nx,nt);
 Sigma_ref = ones(nx,nt);
 sigma_ref = Sigma_ref*sigma_surface;
 
+i_z = zeros(nx, nt);
+
 s_H = zeros(nx,nt);
 s_C = zeros(nx,nt);
 s_OH = zeros(nx,nt);
