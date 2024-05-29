@@ -197,6 +197,8 @@ K_b = zeros(nx,nt);
 R_C = zeros(nx,nt);
 R_H = zeros(nx,nt);
 R_OH = zeros(nx,nt);
+R_HA = zeros(nx,nt);
+R_BOH = zeros(nx,nt);
 R_A = zeros(nx,nt);
 R_B = zeros(nx,nt);
 
@@ -226,6 +228,8 @@ G_B(:,2)= 2000;
 R_C(:,1) = R_i*coeff*(dt)/n;
 R_OH(:,1) = R_i*coeff*(dt)/n;
 R_H(:,1) = R_i*coeff*(dt)/n;
+R_HA(:,1) = R_i*coeff*(dt)/n;
+R_BOH(:,1) = R_i*coeff*(dt)/n;
 R_B(:,1) = R_i*coeff*(dt)/n;
 R_A(:,1) = R_i*coeff*(dt)/n;
 
