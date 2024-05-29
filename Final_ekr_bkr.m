@@ -175,6 +175,10 @@ end
 G_C = zeros(nx,nt);
 G_H = zeros(nx,nt);
 G_OH = zeros(nx,nt);
+G_HA = zeros(nx,nt);
+G_BOH = zeros(nx,nt);
+G_A = zeros(nx,nt);
+G_B = zeros(nx,nt);
 
 Sigma = zeros(nx,nt);
 Sigma_ref = ones(nx,nt);

@@ -30,3 +30,17 @@ So new code will look like this:
 ```matlab
 G_C(i,m+1) = G_C(i,m) + sub(i,m)*(alpha_C*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) + beta_C*(G_C(i+1,m) - G_C(i-1,m)) + R_C(i,m)/R_D);
 ```
+## Third issue
+
+In line 250 we face this code:
+```matlab
+G_HA(i,m+1) = G_HA(i,m) + sub(i,m)*(alpha_HA*(G_HA(i+1,m) -2*G_HA(i,m) + G_HA(i-1,m)) + beta_HA*(G_HA(i+1,m) - G_HA(i-1,m)) + R_HA(i,m)/R_D);
+```
+This is mainly becuase we have not created any of active models arays, to do so these lines of codes were added
+
+```
+G_HA = zeros(nx,nt);
+G_BOH = zeros(nx,nt);
+G_A = zeros(nx,nt);
+G_B = zeros(nx,nt);
+```
