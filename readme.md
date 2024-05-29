@@ -9,16 +9,16 @@
 * Run the code in MATLAB
 
 ***
-## First issue
+## # 1
 
-Several errors come up which were expected, the first thing we've encountered is in this line of code
+* Several errors come up which were expected, the first thing we've encountered is in this line of code
 ```matlab
 s_H(:,1) = (z_H^2)*v_H*G_H(:,1);
 s_OH(:,1) = (z_OH^2)*v_OH*G_OH(:,1);
 s_C(:,1) = (z_C^2)*v_C*G_C(:,1);
 Sigma(:,1) = (F^2)*(s_H + s_OH + s_C);
 ```
-As we are only changing values for all x nodes in initial time node we neede to add `(:,1)` to fix the error, ideally we will have the following code
+* As we are only changing values for all x nodes in initial time node we neede to add `(:,1)` to fix the error, ideally we will have the following code
 
 ```matlab
 s_H(:,1) = (z_H^2)*v_H*G_H(:,1);
@@ -26,42 +26,42 @@ s_OH(:,1) = (z_OH^2)*v_OH*G_OH(:,1);
 s_C(:,1) = (z_C^2)*v_C*G_C(:,1);
 Sigma(:,1) = (F^2)*(s_H(:,1) + s_OH(:,1) + s_C(:,1));
 ```
-## Second issue
+## # 2
 
-In this line we are using `alpha` which is not defined in code and it should be 1alpha_C` instead. not to mention all concentration should be for Carbon or `G_C` in inital code I have used `G` which is not mentioned in this code.
+* In this line we are using `alpha` which is not defined in code and it should be 1alpha_C` instead. not to mention all concentration should be for Carbon or `G_C` in inital code I have used `G` which is not mentioned in this code.
 ```matlab
 G_C(i,m+1) = G_C(i,m) + sub(i,m)*(alpha*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) + beta_C*(G(i+1,m) - G(i-1,m)) + R_C(i,m)/R_D);
 ```
-So new code will look like this:
+* So new code will look like this:
 ```matlab
 G_C(i,m+1) = G_C(i,m) + sub(i,m)*(alpha_C*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) + beta_C*(G_C(i+1,m) - G_C(i-1,m)) + R_C(i,m)/R_D);
 ```
-## Third issue
+## # 3
 
-In line 250 we face this code:
+* In line 250 we face this code:
 ```matlab
 G_HA(i,m+1) = G_HA(i,m) + sub(i,m)*(alpha_HA*(G_HA(i+1,m) -2*G_HA(i,m) + G_HA(i-1,m)) + beta_HA*(G_HA(i+1,m) - G_HA(i-1,m)) + R_HA(i,m)/R_D);
 ```
-This is mainly becuase we have not created any of active models arays, to do so these lines of codes were added
+* This is mainly becuase we have not created any of active models arays, to do so these lines of codes were added
 
-```
+```matlab
 G_HA = zeros(nx,nt);
 G_BOH = zeros(nx,nt);
 G_A = zeros(nx,nt);
 G_B = zeros(nx,nt);
 ```
-## Forth issue
+## # 4
 
-following code reutrned an unkown parameter error
-```
+* following code reutrned an unkown parameter error
+```matlab
 G_HA(i,m+1) = G_HA(i,m) + sub(i,m)*(alpha_HA*(G_HA(i+1,m) -2*G_HA(i,m) + G_HA(i-1,m)) + beta_HA*(G_HA(i+1,m) - G_HA(i-1,m)) + R_HA(i,m)/R_D);
 ```
 
-This is becuase reaction rates were not included for this part of model, after adding needed parameter problem fixed for both acid and base
+* This is becuase reaction rates were not included for this part of model, after adding needed parameter problem fixed for both acid and base
 
-## Fifth issue
+## # 5
 
-Since rate for both acid and base are only calculated sepratly at both x=0 and x=L there are two conditional if in code, though a mistake happend and made both R_prime for acid and base as array which is wrong. As result following line of code resulted in returning syntax error
+* Since rate for both acid and base are only calculated sepratly at both x=0 and x=L there are two conditional if in code, though a mistake happend and made both R_prime for acid and base as array which is wrong. As result following line of code resulted in returning syntax error
 
 ```matlab
 R_OH(i,m) = -1*R_prime_OH(i,m);
@@ -70,4 +70,6 @@ and
 ```matlab
 R_H(i,m) = -1*R_prime_H(i,m);
 ```
-In order to fix the issue we need to remove `(i,m)1 from prime values.
+* In order to fix the issue we need to remove `(i,m)` from prime values.
+
+# Plots
