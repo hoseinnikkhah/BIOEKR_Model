@@ -268,11 +268,11 @@ for m= 2:nt-1
         i_z(i,m) = (-1*Sigma(i,m)*dEdx - F*((z_C*D_C*(G_C(i+1,m) - G_C(i-1,m))) + (z_H*D_H*(G_H(i+1,m) - G_H(i-1,m))) + (z_OH*D_OH*(G_OH(i+1,m) - G_OH(i-1,m)))))/(tau^2);
         if i == 2
             R_prime_H = i_z(i,m)/F;
-            R_H(i,m) = -1*R_prime_H(i,m);
+            R_H(i,m) = -1*R_prime_H;
         end
         if i == nx-1
             R_prime_OH = i_z(i,m)/F;
-            R_OH(i,m) = -1*R_prime_OH(i,m);
+            R_OH(i,m) = -1*R_prime_OH;
         end
         K_H2O(i,m) = G_H(i,m)*G_OH(i,m);
         K_a(i,m) = (G_H(i,m)*G_A(i,m))/G_HA(i,m);
