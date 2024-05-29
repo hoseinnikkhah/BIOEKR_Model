@@ -50,3 +50,11 @@ G_BOH = zeros(nx,nt);
 G_A = zeros(nx,nt);
 G_B = zeros(nx,nt);
 ```
+## Forth issue
+
+following code reutrned an unkown parameter error
+```
+G_HA(i,m+1) = G_HA(i,m) + sub(i,m)*(alpha_HA*(G_HA(i+1,m) -2*G_HA(i,m) + G_HA(i-1,m)) + beta_HA*(G_HA(i+1,m) - G_HA(i-1,m)) + R_HA(i,m)/R_D);
+```
+
+This is becuase reaction rates were not included for this part of model, after adding needed parameter problem fixed for both acid and base
