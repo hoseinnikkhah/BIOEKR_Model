@@ -277,3 +277,22 @@ end
 xl = [0,5,10,15,20,25,30,35];
 yl = [10000,7900,7100,6000,5700,5500,5400,5100];
 figure;
+
+hold on;
+
+plot(t,G_C(10,:),'--','DisplayName', 'Hydrocarbon');
+
+plot(t,G_H(10,:),'-','DisplayName', 'Hydrogen');
+
+plot(t,G_OH(10,:),'-','DisplayName', 'Hydroxid');
+
+plot(t,G_BOH(10,:),'-','DisplayName', 'Base');
+
+plot(t,G_HA(10,:),'-','DisplayName', 'Acid');
+
+scatter(xl,yl, 'DisplayName', 'Expriment Data');
+
+xlabel('Time');
+ylabel('Conc(mg/kg)');
+
+legend();
