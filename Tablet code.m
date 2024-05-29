@@ -157,6 +157,11 @@ R_D = coeff*(dt)/n;              % Reaction rate Dimensionless factor
 % D_l = sqrt((epsilon*R*T)/2*(z^2)*(F^2)*c)
 % this formulas exits to confirm there is a dl here, it is not used in anywhere in model
 
+% Flux properties
+I0 = 0.0000829*24*60*60;        % Initial concetration
+J0 = I0/sqrt(R_i*alpha_C); 
+J0 = J0/100;
+
 % --- Create arrays to save data for export
 x = linspace(0,L,nx);
 t = linspace(0,tmax,nt);
