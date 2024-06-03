@@ -361,14 +361,14 @@ for m= 2:nt-1
             R_prime_OH = i_z(i,m)/F;
             R_OH(i,m) = -1*R_prime_OH;
         end
-        K_H2O(i,m) = G_H_B(i,m)*G_OH_B(i,m);
-        K_a(i,m) = (G_H_B(i,m)*G_A_B(i,m))/G_HA_B(i,m);
-        K_b(i,m) = (G_B_B(i,m)*G_OH_B(i,m))/G_BOH_B(i,m);
-        R_H(i,m) = (K_H2O(i,m)*G_H_B(i,m)) + (K_a(i,m)*G_HA_B(i,m));
-        R_OH(i,m) = (K_H2O(i,m)*G_OH_B(i,m)) + (K_b(i,m)*G_BOH_B(i,m));
-        R_B(i,m) = (K_b(i,m)*G_BOH_B(i,m));
-        R_A(i,m) = (K_a(i,m)*G_HA_B(i,m));
-        R_C(i,m) = R_i*coeff*(dt)/n;
+        K_H2O_B(i,m) = G_H_B(i,m)*G_OH_B(i,m);
+        K_a_B(i,m) = (G_H_B(i,m)*G_A_B(i,m))/G_HA_B(i,m);
+        K_b_B(i,m) = (G_B_B(i,m)*G_OH_B(i,m))/G_BOH_B(i,m);
+        R_H_B(i,m) = (K_H2O(i,m)*G_H_B(i,m)) + (K_a(i,m)*G_HA_B(i,m));
+        R_OH_B(i,m) = (K_H2O(i,m)*G_OH_B(i,m)) + (K_b(i,m)*G_BOH_B(i,m));
+        R_B_B(i,m) = (K_b(i,m)*G_BOH_B(i,m));
+        R_A_B(i,m) = (K_a(i,m)*G_HA_B(i,m));
+        R_C_B(i,m) = R_i*coeff*(dt)/n;
         
     end
 end
