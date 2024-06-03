@@ -318,6 +318,16 @@ R_BOH_B = zeros(nx,nt);
 R_A_B = zeros(nx,nt);
 R_B_B = zeros(nx,nt);
 
+Sigma_B = zeros(nx,nt);
+Sigma_ref_B = ones(nx,nt);
+sigma_ref_B = Sigma_ref_B*sigma_surface;
+
+i_z_B = zeros(nx, nt);
+
+s_H_B = zeros(nx,nt);
+s_C_B = zeros(nx,nt);
+s_OH_B = zeros(nx,nt);
+
 % --- Set IC and BC
 
 G_C_B(:,1)= 10000;
@@ -348,6 +358,11 @@ R_HA_B(:,1) = R_i*coeff*(dt)/n;
 R_BOH_B(:,1) = R_i*coeff*(dt)/n;
 R_B_B(:,1) = R_i*coeff*(dt)/n;
 R_A_B(:,1) = R_i*coeff*(dt)/n;
+
+s_H_B(:,1) = (z_H^2)*v_H*G_H_B(:,1);
+s_OH_B(:,1) = (z_OH^2)*v_OH*G_OH_B(:,1);
+s_C_B(:,1) = (z_C^2)*v_C*G_C_B(:,1);
+Sigma_B(:,1) = (F^2)*(s_H_B(:,1) + s_OH_B(:,1) + s_C_B(:,1));
 
 for m= 2:nt-1
 
