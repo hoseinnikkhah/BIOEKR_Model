@@ -1,10 +1,11 @@
 % Geomesh info
-L = 0.335;                      % length of domain in x direction [m]       
+L = 0.4;                      % length of domain in x direction [m]       
 tmax = 35;                      % end time [day]
-nx = 35;                        % number of nodes in x direction
+nx = 41;                        % number of nodes in x direction
 nt = 50401;                     % number of time steps
 dx = L/(nx-1);
 dt = tmax/(nt-1);
+
 
 I0 = 0.0000829*24*60*60;        % Initial concetration
 R1 = (0.693/53.2);              % Reaction flow rate
@@ -25,7 +26,17 @@ sigma_surface = 2.74*10^7;        % Conductivity [S/m]
 k_i = 0.075;
 coeff = 1/(1+k_i);                % Adsorbing coefficent
 R = 8.314;                        % Gas constant [J/mol.K]
-
+dEdx = 150;                       % Eletric field [V/m]
+epsilon = 2.1;                    % dielectric constant [hydrocarbon]
+epsilon_H = 1.2;                  % dielectric constant [Hydrogen]
+epsilon_water = 80;               % dielectric constant [water]
+epsilon_OH = 2.21;                % dielectric constant [OH]
+zeta = -0.0027;                   % Zeta potential [V]
+T = 25+273;                       % Absolute temperature [K]
+mu_water = 0.001*24*3600;         % Water Viscosity [kg/(m.day)]
+mu_oil = 510*24*3600;             % Oil viscosity [kg/(m.day)]
+F = 96485;                        % Faraady constant [C/mol]
+K = 0.02;
 
 
 % H+ Diffusion
@@ -49,19 +60,6 @@ D_star1_OH = D_OH*(dt/dx^2);
 alpha_OH = D_star_OH/n;           % Diffusion Advection 
 alpha1_OH = D_star1_OH/n;
 
-
-% Inputs
-dEdx = 150;                       % Eletric field [V/m]
-epsilon = 2.1;                    % dielectric constant [hydrocarbon]
-epsilon_H = 1.2;                  % dielectric constant [Hydrogen]
-epsilon_water = 80;               % dielectric constant [water]
-epsilon_OH = 2.21;                % dielectric constant [OH]
-zeta = -0.0027;                   % Zeta potential [V]
-T = 25+273;                       % Absolute temperature [K]
-mu_water = 0.001*24*3600;         % Water Viscosity [kg/(m.day)]
-mu_oil = 510*24*3600;             % Oil viscosity [kg/(m.day)]
-F = 96485;                        % Faraady constant [C/mol]
-K = 0.02;
 
 % Electroosmotic Values
 u_star = ((epsilon*zeta)/mu_oil)*(dEdx/(tau^2));                 % Hydrocarbon
