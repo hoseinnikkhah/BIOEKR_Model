@@ -306,6 +306,10 @@ G_BOH_B = zeros(nx,nt);
 G_A_B = zeros(nx,nt);
 G_B_B = zeros(nx,nt);
 
+K_H2O_B = zeros(nx,nt);
+K_a_B = zeros(nx,nt);
+K_b_B = zeros(nx,nt);
+
 R_C_B = zeros(nx,nt);
 R_H_B = zeros(nx,nt);
 R_OH_B = zeros(nx,nt);
