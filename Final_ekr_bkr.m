@@ -297,6 +297,67 @@ for m= 2:nt-1
     end
 end
 
+
+for m= 2:nt-1
+
+    G_C_B(1,m) =J0; %--- Upper boundary
+    G_C_B(end,m) = 0; %--- Lower boundary
+
+    G_H_B(1,m) =J0; %--- Upper boundary
+    G_H_B(end,m) = 0; %--- Lower boundary
+
+    G_OH_B(1,m) =J0; %--- Upper boundary
+    G_OH_B(end,m) = 0; %--- Lower boundary
+
+    G_HA_B(1,m) =J0; %--- Upper boundary
+    G_HA_B(end,m) = 0; %--- Lower boundary
+
+    G_BOH_B(1,m) =J0; %--- Upper boundary
+    G_BOH_B(end,m) = 0; %--- Lower boundary
+
+    G_A_B(1,m) =J0; %--- Upper boundary
+    G_A_B(end,m) = 0; %--- Lower boundary
+
+    G_B_B(1,m) =J0; %--- Upper boundary
+    G_B_B(end,m) = 0; %--- Lower boundary
+    for i= 2:nx-1
+        
+        
+        G_C_B(i,m+1) = G_C_B(i,m) + sub(i,m)*(alpha_prime_C*(G_C_B(i+1,m) -2*G_C_B(i,m) + G_C_B(i-1,m)) + beta_prime_C*(G_C_B(i+1,m) - G_C_B(i-1,m)) + R_C(i,m)/R_D);
+        G_H_B(i,m+1) = G_H_B(i,m) + sub(i,m)*(alpha_prime_H*(G_H_B(i+1,m) -2*G_H_B(i,m) + G_H_B(i-1,m)) + beta_prime_H*(G_H_B(i+1,m) - G_H_B(i-1,m)) + R_H(i,m)/R_D);
+        G_OH_B(i,m+1) = G_OH_B(i,m) + sub(i,m)*(alpha_prime_OH*(G_OH_B(i+1,m) -2*G_OH_B(i,m) + G_OH_B(i-1,m)) + beta_prime_OH*(G_OH_B(i+1,m) - G_OH_B(i-1,m)) + R_OH(i,m)/R_D);
+        G_HA_B(i,m+1) = G_HA_B(i,m) + sub(i,m)*(alpha_prime_HA*(G_HA_B(i+1,m) -2*G_HA_B(i,m) + G_HA_B(i-1,m)) + beta_prime_HA*(G_HA_B(i+1,m) - G_HA_B(i-1,m)) + R_HA(i,m)/R_D);
+        G_BOH_B(i,m+1) = G_BOH_B(i,m) + sub(i,m)*(alpha_prime_BOH*(G_BOH_B(i+1,m) -2*G_BOH_B(i,m) + G_BOH_B(i-1,m)) + beta_prime_BOH*(G_BOH_B(i+1,m) - G_BOH_B(i-1,m)) + R_BOH(i,m)/R_D);
+        G_A_B(i,m+1) = G_A_B(i,m) + sub(i,m)*(alpha_prime_A*(G_A_B(i+1,m) -2*G_A_B(i,m) + G_A_B(i-1,m)) + beta_prime_A*(G_A_B(i+1,m) - G_A_B(i-1,m)) + R_A(i,m)/R_D);
+        G_B_B(i,m+1) = G_B_B(i,m) + sub(i,m)*(alpha_prime_B*(G_B_B(i+1,m) -2*G_B_B(i,m) + G_B_B(i-1,m)) + beta_prime_B*(G_B_B(i+1,m) - G_B_B(i-1,m)) + R_B(i,m)/R_D);
+        
+        s_H(i,m) = (z_H^2)*v_H*G_H_B(i,m);
+        s_OH(i,m) = (z_OH^2)*v_OH*G_OH_B(i,m);
+        s_C(i,m) = (z_C^2)*v_H*G_C_B(i,m);
+        Sigma(i,m) = (F^2)*(s_C(i,m) + s_H(i,m) + s_OH(i,m)) + Sigma_ref(i,m);
+        
+        i_z(i,m) = (-1*Sigma(i,m)*dEdx - F*((z_C*D_C*(G_C_B(i+1,m) - G_C(i-1,m))) + (z_H*D_H*(G_H_B(i+1,m) - G_H_B(i-1,m))) + (z_OH*D_OH*(G_OH_B(i+1,m) - G_OH_B(i-1,m)))))/(tau^2);
+        if i == 2
+            R_prime_H = i_z(i,m)/F;
+            R_H(i,m) = -1*R_prime_H;
+        end
+        if i == nx-1
+            R_prime_OH = i_z(i,m)/F;
+            R_OH(i,m) = -1*R_prime_OH;
+        end
+        K_H2O(i,m) = G_H_B(i,m)*G_OH_B(i,m);
+        K_a(i,m) = (G_H_B(i,m)*G_A_B(i,m))/G_HA_B(i,m);
+        K_b(i,m) = (G_B_B(i,m)*G_OH_B(i,m))/G_BOH_B(i,m);
+        R_H(i,m) = (K_H2O(i,m)*G_H_B(i,m)) + (K_a(i,m)*G_HA_B(i,m));
+        R_OH(i,m) = (K_H2O(i,m)*G_OH_B(i,m)) + (K_b(i,m)*G_BOH_B(i,m));
+        R_B(i,m) = (K_b(i,m)*G_BOH_B(i,m));
+        R_A(i,m) = (K_a(i,m)*G_HA_B(i,m));
+        R_C(i,m) = R_i*coeff*(dt)/n;
+        
+    end
+end
+
+
 pH = log10(G_H);
 pH_scale = linspace(1,40,41);
 xl = [0,5,10,15,20,25,30,35];
