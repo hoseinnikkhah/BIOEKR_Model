@@ -318,6 +318,37 @@ R_BOH_B = zeros(nx,nt);
 R_A_B = zeros(nx,nt);
 R_B_B = zeros(nx,nt);
 
+% --- Set IC and BC
+
+G_C_B(:,1)= 10000;
+G_C_B(:,2)= 10000;
+
+G_H_B(:,1)= 2000;
+G_H_B(:,2)= 2000;
+
+G_OH_B(:,1)= 10000;
+G_OH_B(:,2)= 10000;
+
+G_HA_B(:,1)= 10000;
+G_HA_B(:,2)= 10000;
+
+G_BOH_B(:,1)= 10000;
+G_BOH_B(:,2)= 10000;
+
+G_A_B(:,1)= 10000;
+G_A_B(:,2)= 10000;
+
+G_B_B(:,1)= 10000;
+G_B_B(:,2)= 10000;
+
+R_C_B(:,1) = R_i*coeff*(dt)/n;
+R_OH_B(:,1) = R_i*coeff*(dt)/n;
+R_H_B(:,1) = R_i*coeff*(dt)/n;
+R_HA_B(:,1) = R_i*coeff*(dt)/n;
+R_BOH_B(:,1) = R_i*coeff*(dt)/n;
+R_B_B(:,1) = R_i*coeff*(dt)/n;
+R_A_B(:,1) = R_i*coeff*(dt)/n;
+
 for m= 2:nt-1
 
     G_C_B(1,m) =J0; %--- Upper boundary
