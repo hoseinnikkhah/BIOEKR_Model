@@ -432,15 +432,19 @@ figure;
 
 hold on;
 
-plot(t,G_C(10,:),'--','DisplayName', 'Hydrocarbon');
+plot(t,G_C(10,:),'-','DisplayName', 'Hydrocarbon (EKR)');
+plot(t,G_C_B(10,:),'--','DisplayName', 'Hydrocarbon (BKR)');
 
-% plot(t,G_H(10,:),'-','DisplayName', 'Hydrogen');
+% plot(t,G_H(10,:),'-','DisplayName', 'Hydrogen (EKR)');
 
-plot(t,G_OH(10,:),'-','DisplayName', 'Hydroxid');
+plot(t,G_OH(10,:),'-','DisplayName', 'Hydroxid (EKR)');
+plot(t,G_OH_B(10,:),'--','DisplayName', 'Hydroxid (BKR)');
 
-plot(t,G_BOH(10,:),'-','DisplayName', 'Base');
+plot(t,G_BOH(10,:),'-','DisplayName', 'Base (EKR)');
+plot(t,G_BOH_B(10,:),'--','DisplayName', 'Base (BKR)');
 
-plot(t,G_HA(10,:),'-','DisplayName', 'Acid');
+plot(t,G_HA(10,:),'-','DisplayName', 'Acid (EKR)');
+plot(t,G_HA_B(10,:),'--','DisplayName', 'Acid (BKR)');
 
 scatter(xl,yl, 'DisplayName', 'Expriment Data');
 
@@ -452,7 +456,8 @@ legend();
 
 figure;
 hold on;
-plot(pH_scale,pH(:,50400),'--','DisplayName', 'pH')
+plot(pH_scale,pH(:,50400),'--','DisplayName', 'pH (EKR)')
+plot(pH_scale,pH(:,50400),'--','DisplayName', 'pH (BKR)')
 
 xlabel('Length (cm)');
 ylabel('pH level');
