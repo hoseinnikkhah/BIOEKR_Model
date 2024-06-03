@@ -294,7 +294,7 @@ hold on;
 
 plot(t,G_C(10,:),'--','DisplayName', 'Hydrocarbon');
 
-plot(t,G_H(10,:),'-','DisplayName', 'Hydrogen');
+% plot(t,G_H(10,:),'-','DisplayName', 'Hydrogen');
 
 plot(t,G_OH(10,:),'-','DisplayName', 'Hydroxid');
 
