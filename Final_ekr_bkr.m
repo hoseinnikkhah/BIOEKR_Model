@@ -225,13 +225,13 @@ G_A(:,2)= 10000;
 G_B(:,1)= 10000;
 G_B(:,2)= 10000;
 
-R_C(:,1) = R_i*coeff*(dt)/n;
-R_OH(:,1) = R_i*coeff*(dt)/n;
-R_H(:,1) = R_i*coeff*(dt)/n;
-R_HA(:,1) = R_i*coeff*(dt)/n;
-R_BOH(:,1) = R_i*coeff*(dt)/n;
-R_B(:,1) = R_i*coeff*(dt)/n;
-R_A(:,1) = R_i*coeff*(dt)/n;
+R_C(:,1) = R_i*(dt)/n;
+R_OH(:,1) = R_i*(dt)/n;
+R_H(:,1) = R_i*(dt)/n;
+R_HA(:,1) = R_i*(dt)/n;
+R_BOH(:,1) = R_i*(dt)/n;
+R_B(:,1) = R_i*(dt)/n;
+R_A(:,1) = R_i*(dt)/n;
 
 s_H(:,1) = (z_H^2)*v_H*G_H(:,1);
 s_OH(:,1) = (z_OH^2)*v_OH*G_OH(:,1);
