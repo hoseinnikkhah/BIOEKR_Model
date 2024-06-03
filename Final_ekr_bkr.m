@@ -310,3 +310,12 @@ xlabel('Time');
 ylabel('Conc(mg/kg)');
 
 legend();
+
+figure;
+hold on;
+plot(pH_scale,pH(:,50400),'--','DisplayName', 'pH')
+
+xlabel('Length (cm)');
+ylabel('pH level');
+
+legend();
