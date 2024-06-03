@@ -298,6 +298,22 @@ for m= 2:nt-1
 end
 
 
+G_C_B = zeros(nx,nt);
+G_H_B = zeros(nx,nt);
+G_OH_B = zeros(nx,nt);
+G_HA_B = zeros(nx,nt);
+G_BOH_B = zeros(nx,nt);
+G_A_B = zeros(nx,nt);
+G_B_B = zeros(nx,nt);
+
+R_C_B = zeros(nx,nt);
+R_H_B = zeros(nx,nt);
+R_OH_B = zeros(nx,nt);
+R_HA_B = zeros(nx,nt);
+R_BOH_B = zeros(nx,nt);
+R_A_B = zeros(nx,nt);
+R_B_B = zeros(nx,nt);
+
 for m= 2:nt-1
 
     G_C_B(1,m) =J0; %--- Upper boundary
