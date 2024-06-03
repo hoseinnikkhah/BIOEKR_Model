@@ -119,7 +119,7 @@ u_e_B = (v_B*z_B*F*dEdx)/(tau^2);              % electromigration [B]           
 %                                                                               |
 % domain velocity                                                               |
 u_x = (epsilon/mu_solution)*(zeta*dEdx);       % Volumetric Velocity [m3/s]     |
-u_c = (1/tau^2)*u_x;                           % Convection Velocity [m3/s]     |
+u_c = ((1/tau^2)*u_x)/(24000000*3600);                           % Convection Velocity [m3/s]     |
 u_eo = ((epsilon*zeta)/mu_solution)*dEdx;      % Electoosmotic Velocity [m3/s]  |
 u_s = n*u_c; %                                                                  |
 %                                                                               |
@@ -207,23 +207,23 @@ R_B = zeros(nx,nt);
 G_C(:,1)= 10000;
 G_C(:,2)= 10000;
 
-G_H(:,1)= 10000;
-G_H(:,2)= 10000;
+G_H(:,1)= 2000;
+G_H(:,2)= 2000;
 
-G_OH(:,1)= 2000;
-G_OH(:,2)= 2000;
+G_OH(:,1)= 10000;
+G_OH(:,2)= 10000;
 
-G_HA(:,1)= 2000;
-G_HA(:,2)= 2000;
+G_HA(:,1)= 10000;
+G_HA(:,2)= 10000;
 
-G_BOH(:,1)= 2000;
-G_BOH(:,2)= 2000;
+G_BOH(:,1)= 10000;
+G_BOH(:,2)= 10000;
 
-G_A(:,1)= 2000;
-G_A(:,2)= 2000;
+G_A(:,1)= 10000;
+G_A(:,2)= 10000;
 
-G_B(:,1)= 2000;
-G_B(:,2)= 2000;
+G_B(:,1)= 10000;
+G_B(:,2)= 10000;
 
 R_C(:,1) = R_i*coeff*(dt)/n;
 R_OH(:,1) = R_i*coeff*(dt)/n;
@@ -249,6 +249,17 @@ for m= 2:nt-1
     G_OH(1,m) =J0; %--- Upper boundary
     G_OH(end,m) = 0; %--- Lower boundary
 
+    G_HA(1,m) =J0; %--- Upper boundary
+    G_HA(end,m) = 0; %--- Lower boundary
+
+    G_BOH(1,m) =J0; %--- Upper boundary
+    G_BOH(end,m) = 0; %--- Lower boundary
+
+    G_A(1,m) =J0; %--- Upper boundary
+    G_A(end,m) = 0; %--- Lower boundary
+
+    G_B(1,m) =J0; %--- Upper boundary
+    G_B(end,m) = 0; %--- Lower boundary
     for i= 2:nx-1
         
         
@@ -285,9 +296,9 @@ for m= 2:nt-1
         
     end
 end
+
 pH = log10(G_H);
 pH_scale = linspace(1,40,41);
-
 xl = [0,5,10,15,20,25,30,35];
 yl = [10000,7900,7100,6000,5700,5500,5400,5100];
 figure;
@@ -310,6 +321,7 @@ xlabel('Time');
 ylabel('Conc(mg/kg)');
 
 legend();
+
 
 figure;
 hold on;
