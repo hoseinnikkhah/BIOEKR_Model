@@ -142,7 +142,7 @@ beta_A = u_t_A*(dt/2*dx); %                                                     
 beta_B = u_t_B*(dt/2*dx); %                                                     |
 %                                                                               |
 % Velocity advection with coefficent abberation                                 |
-beta_prime_c = coeff*u_t_C*(dt/2*dx); %                                         |
+beta_prime_C = coeff*u_t_C*(dt/2*dx); %                                         |
 beta_prime_H = coeff*u_t_H*(dt/2*dx); %                                         |
 beta_prime_OH = coeff*u_t_OH*(dt/2*dx); %                                       |
 beta_prime_HA = coeff*u_t_HA*(dt/2*dx); %                                       |
@@ -408,7 +408,7 @@ for m= 2:nt-1
             R_H_B(i,m) = -1*R_prime_H_B;
         end
         if i == nx-1
-            R_prime_OH = i_z_B(i,m)/F;
+            R_prime_OH_B = i_z_B(i,m)/F;
             R_OH_B(i,m) = -1*R_prime_OH_B;
         end
         K_H2O_B(i,m) = G_H_B(i,m)*G_OH_B(i,m);
