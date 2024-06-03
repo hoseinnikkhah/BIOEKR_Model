@@ -458,7 +458,7 @@ legend();
 figure;
 hold on;
 plot(pH_scale,pH(:,50400),'--','DisplayName', 'pH (EKR)')
-plot(pH_scale,pH(:,50400),'--','DisplayName', 'pH (BKR)')
+plot(pH_scale,pH_B(:,50400),'-','DisplayName', 'pH (BKR)')
 
 xlabel('Length (cm)');
 ylabel('pH level');
