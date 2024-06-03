@@ -116,3 +116,9 @@ In order to check and validate differences in both working codes, mat files of b
 Generally speaking, this code contains EKR and BKR however finished code I am sharing here does only have Bio-EKR, although it can be instituted with EKR only with changing diffusion and velocity advections with proper terms already calculated in the code
 
 # Images
+
+![image](https://github.com/hoseinnikkhah/ThesisEKR_Model/assets/116885462/44bab805-75ea-40a2-9e4f-a9e7ac34d3de)
+
+![image](https://github.com/hoseinnikkhah/ThesisEKR_Model/assets/116885462/30fb5968-227a-4538-8a22-63988a4df2a8)
+
+
