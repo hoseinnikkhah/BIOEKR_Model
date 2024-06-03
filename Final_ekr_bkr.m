@@ -87,13 +87,13 @@ alpha_A = D_star_A/n;             % Diffusion Advection                         
 alpha_B = D_star_B/n;             % Diffusion Advection                         |
 %                                                                               |
 % Species Diffusion advection standalone                                        |
-prime_H = D_prime_H/n;            % Diffusion Advection                         |
-prime_C = D_prime_C/n;            % Diffusion Advection                         |
-prime_OH = D_prime_OH/n;          % Diffusion Advection                         |
-prime_HA = D_prime_HA/n;          % Diffusion Advection                         |
-prime_BOH = D_prime_BOH/n;        % Diffusion Advection                         |
-prime_A = D_prime_A/n;            % Diffusion Advection                         |
-prime_B = D_prime_B/n;            % Diffusion Advection                         |
+alpha_prime_H = D_prime_H/n;            % Diffusion Advection                   |
+alpha_prime_C = D_prime_C/n;            % Diffusion Advection                   |
+alpha_prime_OH = D_prime_OH/n;          % Diffusion Advection                   |
+alpha_prime_HA = D_prime_HA/n;          % Diffusion Advection                   |
+alpha_prime_BOH = D_prime_BOH/n;        % Diffusion Advection                   |
+alpha_prime_A = D_prime_A/n;            % Diffusion Advection                   |
+alpha_prime_B = D_prime_B/n;            % Diffusion Advection                   |
 %-------------------------------------------------------------------------------
 
 %-------------------------------------------------------------------------------
@@ -119,7 +119,7 @@ u_e_B = (v_B*z_B*F*dEdx)/(tau^2);              % electromigration [B]           
 %                                                                               |
 % domain velocity                                                               |
 u_x = (epsilon/mu_solution)*(zeta*dEdx);       % Volumetric Velocity [m3/s]     |
-u_c = ((1/tau^2)*u_x)/(24000000*3600);                           % Convection Velocity [m3/s]     |
+u_c = ((1/tau^2)*u_x)/(24000000*3600);         % Convection Velocity [m3/s]     |
 u_eo = ((epsilon*zeta)/mu_solution)*dEdx;      % Electoosmotic Velocity [m3/s]  |
 u_s = n*u_c; %                                                                  |
 %                                                                               |
