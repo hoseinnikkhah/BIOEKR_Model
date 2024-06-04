@@ -78,22 +78,22 @@ D_prime_A = D_A*coeff*(dt/dx^2);        % Dimensionless of Diffusion            
 D_prime_B = D_B*coeff*(dt/dx^2);        % Dimensionless of Diffusion            |
 %                                                                               |
 % Species Diffusion advection with coeff                                        |
-alpha_H = D_star_H/n;             % Diffusion Advection                         |
-alpha_C = D_star_C/n;             % Diffusion Advection                         |
-alpha_OH = D_star_OH/n;           % Diffusion Advection                         |
-alpha_HA = D_star_HA/n;           % Diffusion Advection                         |
-alpha_BOH = D_star_BOH/n;         % Diffusion Advection                         |
-alpha_A = D_star_A/n;             % Diffusion Advection                         |
-alpha_B = D_star_B/n;             % Diffusion Advection                         |
+alpha_H = D_star_H/(n*tau^2);             % Diffusion Advection                         |
+alpha_C = D_star_C/(n*tau^2);             % Diffusion Advection                         |
+alpha_OH = D_star_OH/(n*tau^2);           % Diffusion Advection                         |
+alpha_HA = D_star_HA/(n*tau^2);           % Diffusion Advection                         |
+alpha_BOH = D_star_BOH/(n*tau^2);         % Diffusion Advection                         |
+alpha_A = D_star_A/(n*tau^2);             % Diffusion Advection                         |
+alpha_B = D_star_B/(n*tau^2);             % Diffusion Advection                         |
 %                                                                               |
 % Species Diffusion advection standalone                                        |
-alpha_prime_H = D_prime_H/n;            % Diffusion Advection                   |
-alpha_prime_C = D_prime_C/n;            % Diffusion Advection                   |
-alpha_prime_OH = D_prime_OH/n;          % Diffusion Advection                   |
-alpha_prime_HA = D_prime_HA/n;          % Diffusion Advection                   |
-alpha_prime_BOH = D_prime_BOH/n;        % Diffusion Advection                   |
-alpha_prime_A = D_prime_A/n;            % Diffusion Advection                   |
-alpha_prime_B = D_prime_B/n;            % Diffusion Advection                   |
+alpha_prime_H = D_prime_H/(n*tau^2);            % Diffusion Advection                   |
+alpha_prime_C = D_prime_C/(n*tau^2);            % Diffusion Advection                   |
+alpha_prime_OH = D_prime_OH/(n*tau^2);          % Diffusion Advection                   |
+alpha_prime_HA = D_prime_HA/(n*tau^2);          % Diffusion Advection                   |
+alpha_prime_BOH = D_prime_BOH/(n*tau^2);        % Diffusion Advection                   |
+alpha_prime_A = D_prime_A/(n*tau^2);            % Diffusion Advection                   |
+alpha_prime_B = D_prime_B/(n*tau^2);            % Diffusion Advection                   |
 %-------------------------------------------------------------------------------
 
 %-------------------------------------------------------------------------------
@@ -124,13 +124,13 @@ u_eo = ((epsilon*zeta)/mu_solution)*dEdx;      % Electoosmotic Velocity [m3/s]  
 u_s = n*u_c; %                                                                  |
 %                                                                               |
 % Species total velocity                                                        |
-u_t_C = (u_e_C + u_c)/(n*tau^2); %                                              |
-u_t_H = (u_e_H + u_c)/(n*tau^2); %                                              |
-u_t_OH = (u_e_OH + u_c)/(n*tau^2); %                                            |
-u_t_HA = (u_e_HA + u_c)/(n*tau^2); %                                            |
-u_t_BOH = (u_e_BOH + u_c)/(n*tau^2); %                                          |
-u_t_A = (u_e_A + u_c)/(n*tau^2); %                                              |
-u_t_B = (u_e_B + u_c)/(n*tau^2); %                                              |
+u_t_C = (u_e_C + u_c)/n; %                                                      |
+u_t_H = (u_e_H + u_c)/n; %                                                      |
+u_t_OH = (u_e_OH + u_c)/n; %                                                    |
+u_t_HA = (u_e_HA + u_c)/n; %                                                    |
+u_t_BOH = (u_e_BOH + u_c)/n; %                                                  |
+u_t_A = (u_e_A + u_c)/n; %                                                      |
+u_t_B = (u_e_B + u_c)/n; %                                                      |
 %                                                                               |
 % Velocity advection without coefficent                                         |
 beta_C = u_t_C*(dt/2*dx); %                                                     |
@@ -159,8 +159,9 @@ R_D = coeff*(dt)/n;              % Reaction rate Dimensionless factor
 
 % Flux properties
 I0 = 0.0000829*24*60*60;         % Initial concetration
-J0 = I0/sqrt(R_i*alpha_C); 
-J0 = J0/100;
+
+
+%J0 = J0/100;
 
 % --- Create arrays to save data for export
 x = linspace(0,L,nx);
@@ -207,8 +208,8 @@ R_B = zeros(nx,nt);
 G_C(:,1)= 10000;
 G_C(:,2)= 10000;
 
-G_H(:,1)= 2000;
-G_H(:,2)= 2000;
+G_H(:,1)= 10000;
+G_H(:,2)= 10000;
 
 G_OH(:,1)= 10000;
 G_OH(:,2)= 10000;
