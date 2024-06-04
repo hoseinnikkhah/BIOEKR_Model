@@ -121,4 +121,10 @@ Generally speaking, this code contains EKR and BKR however finished code I am sh
 
 ![image](https://github.com/hoseinnikkhah/ThesisEKR_Model/assets/116885462/30fb5968-227a-4538-8a22-63988a4df2a8)
 
+![image](https://github.com/hoseinnikkhah/ThesisEKR_Model/assets/116885462/c24e843d-f80e-45e0-a04e-2bf34e318f98)
+
+![image](https://github.com/hoseinnikkhah/ThesisEKR_Model/assets/116885462/54ab8305-423e-41ef-9690-185ab2ef921e)
+
+***
+
 
