@@ -78,22 +78,22 @@ D_prime_A = D_A*coeff*(dt/dx^2);        % Dimensionless of Diffusion            
 D_prime_B = D_B*coeff*(dt/dx^2);        % Dimensionless of Diffusion            |
 %                                                                               |
 % Species Diffusion advection with coeff                                        |
-alpha_H = D_star_H/n;             % Diffusion Advection                         |
-alpha_C = D_star_C/n;             % Diffusion Advection                         |
-alpha_OH = D_star_OH/n;           % Diffusion Advection                         |
-alpha_HA = D_star_HA/n;           % Diffusion Advection                         |
-alpha_BOH = D_star_BOH/n;         % Diffusion Advection                         |
-alpha_A = D_star_A/n;             % Diffusion Advection                         |
-alpha_B = D_star_B/n;             % Diffusion Advection                         |
+alpha_H = D_star_H/(n*tau^2);             % Diffusion Advection                         |
+alpha_C = D_star_C/(n*tau^2);             % Diffusion Advection                         |
+alpha_OH = D_star_OH/(n*tau^2);           % Diffusion Advection                         |
+alpha_HA = D_star_HA/(n*tau^2);           % Diffusion Advection                         |
+alpha_BOH = D_star_BOH/(n*tau^2);         % Diffusion Advection                         |
+alpha_A = D_star_A/(n*tau^2);             % Diffusion Advection                         |
+alpha_B = D_star_B/(n*tau^2);             % Diffusion Advection                         |
 %                                                                               |
 % Species Diffusion advection standalone                                        |
-alpha_prime_H = D_prime_H/n;            % Diffusion Advection                   |
-alpha_prime_C = D_prime_C/n;            % Diffusion Advection                   |
-alpha_prime_OH = D_prime_OH/n;          % Diffusion Advection                   |
-alpha_prime_HA = D_prime_HA/n;          % Diffusion Advection                   |
-alpha_prime_BOH = D_prime_BOH/n;        % Diffusion Advection                   |
-alpha_prime_A = D_prime_A/n;            % Diffusion Advection                   |
-alpha_prime_B = D_prime_B/n;            % Diffusion Advection                   |
+alpha_prime_H = D_prime_H/(n*tau^2);            % Diffusion Advection                   |
+alpha_prime_C = D_prime_C/(n*tau^2);            % Diffusion Advection                   |
+alpha_prime_OH = D_prime_OH/(n*tau^2);          % Diffusion Advection                   |
+alpha_prime_HA = D_prime_HA/(n*tau^2);          % Diffusion Advection                   |
+alpha_prime_BOH = D_prime_BOH/(n*tau^2);        % Diffusion Advection                   |
+alpha_prime_A = D_prime_A/(n*tau^2);            % Diffusion Advection                   |
+alpha_prime_B = D_prime_B/(n*tau^2);            % Diffusion Advection                   |
 %-------------------------------------------------------------------------------
 
 %-------------------------------------------------------------------------------
@@ -158,9 +158,10 @@ R_D = coeff*(dt)/n;              % Reaction rate Dimensionless factor
 % this formulas exits to confirm there is a dl here, it is not used in anywhere in model
 
 % Flux properties
-I0 = 0.0000829*24*60*60;        % Initial concetration
-J0 = I0/sqrt(R_i*alpha_C); 
-J0 = J0/100;
+I0 = 0.0000829*24*60*60;         % Initial concetration
+
+
+%J0 = J0/100;
 
 % --- Create arrays to save data for export
 x = linspace(0,L,nx);
@@ -171,6 +172,14 @@ M_g = exp(-K*t);             % Microbal growth constant
 for w = 1:nx
     sub(w,:) = M_g;
 end
+
+J_C = zeros(nx,nt);
+J_H = zeros(nx,nt);
+J_OH = zeros(nx,nt);
+J_HA = zeros(nx,nt);
+J_BOH = zeros(nx,nt);
+J_A = zeros(nx,nt);
+J_B = zeros(nx,nt);
 
 G_C = zeros(nx,nt);
 G_H = zeros(nx,nt);
@@ -206,24 +215,31 @@ R_B = zeros(nx,nt);
 
 G_C(:,1)= 10000;
 G_C(:,2)= 10000;
+J_C(1,:)= (u_c + u_e_C)*10000;
 
-G_H(:,1)= 2000;
-G_H(:,2)= 2000;
+G_H(:,1)= 10000;
+G_H(:,2)= 10000;
+J_H(1,:)= (u_c + u_e_H)*10000;
 
 G_OH(:,1)= 10000;
 G_OH(:,2)= 10000;
+J_OH(1,:)= (u_c + u_e_OH)*10000;
 
 G_HA(:,1)= 10000;
 G_HA(:,2)= 10000;
+J_HA(1,:)= (u_c + u_e_HA)*10000;
 
 G_BOH(:,1)= 10000;
 G_BOH(:,2)= 10000;
+J_BOH(1,:)= (u_c + u_e_BOH)*10000;
 
 G_A(:,1)= 10000;
 G_A(:,2)= 10000;
+J_A(1,:)= (u_c + u_e_A)*10000;
 
-G_B(:,1)= 10000;
-G_B(:,2)= 10000;
+G_B(:,1)= 1000;
+G_B(:,2)= 1000;
+J_B(1,:)= (u_c + u_e_B)*1000;
 
 R_C(:,1) = R_i*(dt)/n;
 R_OH(:,1) = R_i*(dt)/n;
@@ -240,25 +256,25 @@ Sigma(:,1) = (F^2)*(s_H(:,1) + s_OH(:,1) + s_C(:,1));
 
 for m= 2:nt-1
 
-    G_C(1,m) =J0; %--- Upper boundary
+    G_C(1,m) =J_C(1,m); %--- Upper boundary
     G_C(end,m) = 0; %--- Lower boundary
 
-    G_H(1,m) =J0; %--- Upper boundary
+    G_H(1,m) =J_H(1,m); %--- Upper boundary
     G_H(end,m) = 0; %--- Lower boundary
 
-    G_OH(1,m) =J0; %--- Upper boundary
+    G_OH(1,m) =J_OH(1,m); %--- Upper boundary
     G_OH(end,m) = 0; %--- Lower boundary
 
-    G_HA(1,m) =J0; %--- Upper boundary
+    G_HA(1,m) =J_HA(1,m); %--- Upper boundary
     G_HA(end,m) = 0; %--- Lower boundary
 
-    G_BOH(1,m) =J0; %--- Upper boundary
+    G_BOH(1,m) =J_BOH(1,m); %--- Upper boundary
     G_BOH(end,m) = 0; %--- Lower boundary
 
-    G_A(1,m) =J0; %--- Upper boundary
+    G_A(1,m) =J_A(1,m); %--- Upper boundary
     G_A(end,m) = 0; %--- Lower boundary
 
-    G_B(1,m) =J0; %--- Upper boundary
+    G_B(1,m) =J_B(1,m); %--- Upper boundary
     G_B(end,m) = 0; %--- Lower boundary
     for i= 2:nx-1
         
@@ -271,6 +287,14 @@ for m= 2:nt-1
         G_A(i,m+1) = G_A(i,m) + (alpha_A*(G_A(i+1,m) -2*G_A(i,m) + G_A(i-1,m)) + beta_A*(G_A(i+1,m) - G_A(i-1,m)) + R_A(i,m)/R_D);
         G_B(i,m+1) = G_B(i,m) + (alpha_B*(G_B(i+1,m) -2*G_B(i,m) + G_B(i-1,m)) + beta_B*(G_B(i+1,m) - G_B(i-1,m)) + R_B(i,m)/R_D);
         
+        J_C(i,m+1) = (u_c + u_e_C)*G_C(i,m) - alpha_C*(G_C(i+1,m) - G_C(i-1,m));
+        J_H(i,m+1) = (u_c + u_e_H)*G_H(i,m) - alpha_H*(G_H(i+1,m) - G_H(i-1,m));
+        J_OH(i,m+1) = (u_c + u_e_OH)*G_OH(i,m) - alpha_OH*(G_OH(i+1,m) - G_OH(i-1,m));
+        J_HA(i,m+1) = (u_c + u_e_HA)*G_HA(i,m) - alpha_HA*(G_HA(i+1,m) - G_HA(i-1,m));
+        J_BOH(i,m+1) = (u_c + u_e_BOH)*G_BOH(i,m) - alpha_BOH*(G_BOH(i+1,m) - G_BOH(i-1,m));
+        J_A(i,m+1) = (u_c + u_e_A)*G_A(i,m) - alpha_A*(G_A(i+1,m) - G_A(i-1,m));
+        J_B(i,m+1) = (u_c + u_e_B)*G_B(i,m) - alpha_B*(G_B(i+1,m) - G_B(i-1,m));
+
         s_H(i,m) = (z_H^2)*v_H*G_H(i,m);
         s_OH(i,m) = (z_OH^2)*v_OH*G_OH(i,m);
         s_C(i,m) = (z_C^2)*v_H*G_C(i,m);
@@ -306,6 +330,14 @@ G_BOH_B = zeros(nx,nt);
 G_A_B = zeros(nx,nt);
 G_B_B = zeros(nx,nt);
 
+J_C_B = zeros(nx,nt);
+J_H_B = zeros(nx,nt);
+J_OH_B = zeros(nx,nt);
+J_HA_B = zeros(nx,nt);
+J_BOH_B = zeros(nx,nt);
+J_A_B = zeros(nx,nt);
+J_B_B = zeros(nx,nt);
+
 K_H2O_B = zeros(nx,nt);
 K_a_B = zeros(nx,nt);
 K_b_B = zeros(nx,nt);
@@ -332,24 +364,31 @@ s_OH_B = zeros(nx,nt);
 
 G_C_B(:,1)= 10000;
 G_C_B(:,2)= 10000;
+J_C_B(1,:)= (u_c + u_e_C)*10000;
 
-G_H_B(:,1)= 2000;
-G_H_B(:,2)= 2000;
+G_H_B(:,1)= 10000;
+G_H_B(:,2)= 10000;
+J_H_B(1,:)= (u_c + u_e_H)*10000;
 
 G_OH_B(:,1)= 10000;
 G_OH_B(:,2)= 10000;
+J_OH_B(1,:)= (u_c + u_e_OH)*10000;
 
 G_HA_B(:,1)= 10000;
 G_HA_B(:,2)= 10000;
+J_HA_B(1,:)= (u_c + u_e_HA)*10000;
 
 G_BOH_B(:,1)= 10000;
 G_BOH_B(:,2)= 10000;
+J_BOH_B(:,1)= (u_c + u_e_BOH)*10000;
 
 G_A_B(:,1)= 10000;
 G_A_B(:,2)= 10000;
+J_A_B(1,:)= (u_c + u_e_A)*10000;
 
-G_B_B(:,1)= 10000;
-G_B_B(:,2)= 10000;
+G_B_B(:,1)= 1000;
+G_B_B(:,2)= 1000;
+G_B_B(1,:)= (u_c + u_e_B)*1000;
 
 R_C_B(:,1) = R_i*coeff*(dt)/n;
 R_OH_B(:,1) = R_i*coeff*(dt)/n;
@@ -366,25 +405,25 @@ Sigma_B(:,1) = (F^2)*(s_H_B(:,1) + s_OH_B(:,1) + s_C_B(:,1));
 
 for m= 2:nt-1
 
-    G_C_B(1,m) =J0; %--- Upper boundary
+    G_C_B(1,m) =J_C_B(1,m); %--- Upper boundary
     G_C_B(end,m) = 0; %--- Lower boundary
 
-    G_H_B(1,m) =J0; %--- Upper boundary
+    G_H_B(1,m) =J_H_B(1,m); %--- Upper boundary
     G_H_B(end,m) = 0; %--- Lower boundary
 
-    G_OH_B(1,m) =J0; %--- Upper boundary
+    G_OH_B(1,m) =J_OH_B(1,m); %--- Upper boundary
     G_OH_B(end,m) = 0; %--- Lower boundary
 
-    G_HA_B(1,m) =J0; %--- Upper boundary
+    G_HA_B(1,m) =J_HA_B(1,m); %--- Upper boundary
     G_HA_B(end,m) = 0; %--- Lower boundary
 
-    G_BOH_B(1,m) =J0; %--- Upper boundary
+    G_BOH_B(1,m) =J_BOH_B(1,m); %--- Upper boundary
     G_BOH_B(end,m) = 0; %--- Lower boundary
 
-    G_A_B(1,m) =J0; %--- Upper boundary
+    G_A_B(1,m) =J_A_B(1,m); %--- Upper boundary
     G_A_B(end,m) = 0; %--- Lower boundary
 
-    G_B_B(1,m) =J0; %--- Upper boundary
+    G_B_B(1,m) = J_B_B(1,m); %--- Upper boundary
     G_B_B(end,m) = 0; %--- Lower boundary
     for i= 2:nx-1
         
@@ -396,7 +435,15 @@ for m= 2:nt-1
         G_BOH_B(i,m+1) = G_BOH_B(i,m) + sub(i,m)*(alpha_prime_BOH*(G_BOH_B(i+1,m) -2*G_BOH_B(i,m) + G_BOH_B(i-1,m)) + beta_prime_BOH*(G_BOH_B(i+1,m) - G_BOH_B(i-1,m)) + R_BOH_B(i,m)/R_D);
         G_A_B(i,m+1) = G_A_B(i,m) + sub(i,m)*(alpha_prime_A*(G_A_B(i+1,m) -2*G_A_B(i,m) + G_A_B(i-1,m)) + beta_prime_A*(G_A_B(i+1,m) - G_A_B(i-1,m)) + R_A_B(i,m)/R_D);
         G_B_B(i,m+1) = G_B_B(i,m) + sub(i,m)*(alpha_prime_B*(G_B_B(i+1,m) -2*G_B_B(i,m) + G_B_B(i-1,m)) + beta_prime_B*(G_B_B(i+1,m) - G_B_B(i-1,m)) + R_B_B(i,m)/R_D);
-        
+
+        J_C_B(i,m+1) = (u_c + u_e_C)*G_C_B(i,m) - alpha_prime_C*(G_C_B(i+1,m) - G_C_B(i-1,m));
+        J_H_B(i,m+1) = (u_c + u_e_H)*G_H_B(i,m) - alpha_prime_H*(G_H_B(i+1,m) - G_H_B(i-1,m));
+        J_OH_B(i,m+1) = (u_c + u_e_OH)*G_OH_B(i,m) - alpha_prime_OH*(G_OH_B(i+1,m) - G_OH_B(i-1,m));
+        J_HA_B(i,m+1) = (u_c + u_e_HA)*G_HA_B(i,m) - alpha_prime_HA*(G_HA_B(i+1,m) - G_HA_B(i-1,m));
+        J_BOH_B(i,m+1) = (u_c + u_e_BOH)*G_BOH_B(i,m) - alpha_prime_BOH*(G_BOH_B(i+1,m) - G_BOH_B(i-1,m));
+        J_A_B(i,m+1) = (u_c + u_e_A)*G_A_B(i,m) - alpha_prime_A*(G_A_B(i+1,m) - G_A_B(i-1,m));
+        J_B_B(i,m+1) = (u_c + u_e_B)*G_B_B(i,m) - alpha_prime_B*(G_B_B(i+1,m) - G_B_B(i-1,m));
+
         s_H_B(i,m) = (z_H^2)*v_H*G_H_B(i,m);
         s_OH_B(i,m) = (z_OH^2)*v_OH*G_OH_B(i,m);
         s_C_B(i,m) = (z_C^2)*v_H*G_C_B(i,m);
@@ -436,16 +483,17 @@ hold on;
 plot(t,G_C(10,:),'-','DisplayName', 'Hydrocarbon (EKR)');
 plot(t,G_C_B(10,:),'--','DisplayName', 'Hydrocarbon (BKR)');
 
-% plot(t,G_H(10,:),'-','DisplayName', 'Hydrogen (EKR)');
+plot(t,G_B(10,:),'-','DisplayName', 'Base (EKR)');
+plot(t,G_B_B(10,:),'-','DisplayName', 'Base (BKR)');
 
-plot(t,G_OH(10,:),'-','DisplayName', 'Hydroxid (EKR)');
-plot(t,G_OH_B(10,:),'--','DisplayName', 'Hydroxid (BKR)');
+%plot(t,G_OH(10,:),'-','DisplayName', 'Hydroxid (EKR)');
+%plot(t,G_OH_B(10,:),'--','DisplayName', 'Hydroxid (BKR)');
 
-plot(t,G_BOH(10,:),'-','DisplayName', 'Base (EKR)');
-plot(t,G_BOH_B(10,:),'--','DisplayName', 'Base (BKR)');
+%plot(t,G_BOH(10,:),'-','DisplayName', 'Base (EKR)');
+%plot(t,G_BOH_B(10,:),'--','DisplayName', 'Base (BKR)');
 
-plot(t,G_HA(10,:),'-','DisplayName', 'Acid (EKR)');
-plot(t,G_HA_B(10,:),'--','DisplayName', 'Acid (BKR)');
+%plot(t,G_HA(10,:),'-','DisplayName', 'Acid (EKR)');
+%plot(t,G_HA_B(10,:),'--','DisplayName', 'Acid (BKR)');
 
 scatter(xl,yl, 'DisplayName', 'Expriment Data');
 
