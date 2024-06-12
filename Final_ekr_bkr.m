@@ -403,6 +403,15 @@ s_OH_B(:,1) = (z_OH^2)*v_OH*G_OH_B(:,1);
 s_C_B(:,1) = (z_C^2)*v_C*G_C_B(:,1);
 Sigma_B(:,1) = (F^2)*(s_H_B(:,1) + s_OH_B(:,1) + s_C_B(:,1));
 
+for xx = 1:nx
+    for tt = 1:nt
+        M_g = exp(-K*(tt/1440));
+        sub(xx,tt) = M_g;
+        fixup(xx,tt) = 1/(-0.01*(tt/1440) + 0.61);
+    end
+end
+growth = sub.*fixup;
+
 for m= 2:nt-1
 
     G_C_B(1,m) =J_C_B(1,m); %--- Upper boundary
