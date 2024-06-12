@@ -428,14 +428,14 @@ for m= 2:nt-1
     for i= 2:nx-1
         
         
-        G_C_B(i,m+1) = G_C_B(i,m) + sub(i,m)*(alpha_prime_C*(G_C_B(i+1,m) -2*G_C_B(i,m) + G_C_B(i-1,m)) + beta_prime_C*(G_C_B(i+1,m) - G_C_B(i-1,m)) + R_C_B(i,m)/R_D);
-        G_H_B(i,m+1) = G_H_B(i,m) + sub(i,m)*(alpha_prime_H*(G_H_B(i+1,m) -2*G_H_B(i,m) + G_H_B(i-1,m)) + beta_prime_H*(G_H_B(i+1,m) - G_H_B(i-1,m)) + R_H_B(i,m)/R_D);
-        G_OH_B(i,m+1) = G_OH_B(i,m) + sub(i,m)*(alpha_prime_OH*(G_OH_B(i+1,m) -2*G_OH_B(i,m) + G_OH_B(i-1,m)) + beta_prime_OH*(G_OH_B(i+1,m) - G_OH_B(i-1,m)) + R_OH_B(i,m)/R_D);
-        G_HA_B(i,m+1) = G_HA_B(i,m) + sub(i,m)*(alpha_prime_HA*(G_HA_B(i+1,m) -2*G_HA_B(i,m) + G_HA_B(i-1,m)) + beta_prime_HA*(G_HA_B(i+1,m) - G_HA_B(i-1,m)) + R_HA_B(i,m)/R_D);
-        G_BOH_B(i,m+1) = G_BOH_B(i,m) + sub(i,m)*(alpha_prime_BOH*(G_BOH_B(i+1,m) -2*G_BOH_B(i,m) + G_BOH_B(i-1,m)) + beta_prime_BOH*(G_BOH_B(i+1,m) - G_BOH_B(i-1,m)) + R_BOH_B(i,m)/R_D);
-        G_A_B(i,m+1) = G_A_B(i,m) + sub(i,m)*(alpha_prime_A*(G_A_B(i+1,m) -2*G_A_B(i,m) + G_A_B(i-1,m)) + beta_prime_A*(G_A_B(i+1,m) - G_A_B(i-1,m)) + R_A_B(i,m)/R_D);
-        G_B_B(i,m+1) = G_B_B(i,m) + sub(i,m)*(alpha_prime_B*(G_B_B(i+1,m) -2*G_B_B(i,m) + G_B_B(i-1,m)) + beta_prime_B*(G_B_B(i+1,m) - G_B_B(i-1,m)) + R_B_B(i,m)/R_D);
-
+        G_C_B(i,m+1) = G_C_B(i,m) + growth(i,m)*(alpha_prime_C*(G_C_B(i+1,m) -2*G_C_B(i,m) + G_C_B(i-1,m)) + beta_prime_C*(G_C_B(i+1,m) - G_C_B(i-1,m)) + R_C_B(i,m)/R_D);
+        G_H_B(i,m+1) = G_H_B(i,m) + growth(i,m)*(alpha_prime_H*(G_H_B(i+1,m) -2*G_H_B(i,m) + G_H_B(i-1,m)) + beta_prime_H*(G_H_B(i+1,m) - G_H_B(i-1,m)) + R_H_B(i,m)/R_D);
+        G_OH_B(i,m+1) = G_OH_B(i,m) + growth(i,m)*(alpha_prime_OH*(G_OH_B(i+1,m) -2*G_OH_B(i,m) + G_OH_B(i-1,m)) + beta_prime_OH*(G_OH_B(i+1,m) - G_OH_B(i-1,m)) + R_OH_B(i,m)/R_D);
+        G_HA_B(i,m+1) = G_HA_B(i,m) + growth(i,m)*(alpha_prime_HA*(G_HA_B(i+1,m) -2*G_HA_B(i,m) + G_HA_B(i-1,m)) + beta_prime_HA*(G_HA_B(i+1,m) - G_HA_B(i-1,m)) + R_HA_B(i,m)/R_D);
+        G_BOH_B(i,m+1) = G_BOH_B(i,m) + growth(i,m)*(alpha_prime_BOH*(G_BOH_B(i+1,m) -2*G_BOH_B(i,m) + G_BOH_B(i-1,m)) + beta_prime_BOH*(G_BOH_B(i+1,m) - G_BOH_B(i-1,m)) + R_BOH_B(i,m)/R_D);
+        G_A_B(i,m+1) = G_A_B(i,m) + growth(i,m)*(alpha_prime_A*(G_A_B(i+1,m) -2*G_A_B(i,m) + G_A_B(i-1,m)) + beta_prime_A*(G_A_B(i+1,m) - G_A_B(i-1,m)) + R_A_B(i,m)/R_D);
+        G_B_B(i,m+1) = G_B_B(i,m) + growth(i,m)*(alpha_prime_B*(G_B_B(i+1,m) -2*G_B_B(i,m) + G_B_B(i-1,m)) + beta_prime_B*(G_B_B(i+1,m) - G_B_B(i-1,m)) + R_B_B(i,m)/R_D);
+        
         J_C_B(i,m+1) = (u_c + u_e_C)*G_C_B(i,m) - alpha_prime_C*(G_C_B(i+1,m) - G_C_B(i-1,m));
         J_H_B(i,m+1) = (u_c + u_e_H)*G_H_B(i,m) - alpha_prime_H*(G_H_B(i+1,m) - G_H_B(i-1,m));
         J_OH_B(i,m+1) = (u_c + u_e_OH)*G_OH_B(i,m) - alpha_prime_OH*(G_OH_B(i+1,m) - G_OH_B(i-1,m));
