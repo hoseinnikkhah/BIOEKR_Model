@@ -60,53 +60,53 @@ D_BOH = 1.2*10^-8*24*3600;        % Mass advection for Base [m^2/day]           
 D_B = 1.34*10^-8*24*3600;         % Mass advection for Base agent [m^2/day]     |
 %                                                                               |
 % Species Diffuision abberation with coeff                                      |
-D_star_H = D_H*(dt/dx^2);   % Dimensionless of Diffusion                        |
-D_star_C = D_C*(dt/dx^2);   % Dimensionless of Diffusion                        |
-D_star_OH = D_OH*(dt/dx^2); % Dimensionless of Diffusion                        |
-D_star_HA = D_HA*(dt/dx^2); % Dimensionless of Diffusion                        |
-D_star_BOH = D_BOH*(dt/dx^2); % Dimensionless of Diffusion                      |
-D_star_A = D_A*(dt/dx^2);     % Dimensionless of Diffusion                      |
-D_star_B = D_B*(dt/dx^2);     % Dimensionless of Diffuision                     |
+D_star_H = D_H*(dt/dx^2);                % Dimensionless of Diffusion           |
+D_star_C = D_C*(dt/dx^2);                % Dimensionless of Diffusion           |
+D_star_OH = D_OH*(dt/dx^2);              % Dimensionless of Diffusion           |
+D_star_HA = D_HA*(dt/dx^2);              % Dimensionless of Diffusion           |
+D_star_BOH = D_BOH*(dt/dx^2);            % Dimensionless of Diffusion           |
+D_star_A = D_A*(dt/dx^2);                % Dimensionless of Diffusion           |
+D_star_B = D_B*(dt/dx^2);                % Dimensionless of Diffusion           |
 %                                                                               |
 % Species Diffuision abberation standalone                                      |
-D_prime_H = D_H*coeff*(dt/dx^2);        % Dimensionless of Diffusion            |
-D_prime_C = D_C*coeff*(dt/dx^2);        % Dimensionless of Diffusion            |
-D_prime_OH = D_OH*coeff*(dt/dx^2);      % Dimensionless of Diffusion            |
-D_prime_HA = D_HA*coeff*(dt/dx^2);      % Dimensionless of Diffusion            |
-D_prime_BOH = D_BOH*coeff*(dt/dx^2);    % Dimensionless of Diffusion            |
-D_prime_A = D_A*coeff*(dt/dx^2);        % Dimensionless of Diffusion            |
-D_prime_B = D_B*coeff*(dt/dx^2);        % Dimensionless of Diffusion            |
+D_prime_H = D_H*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
+D_prime_C = D_C*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
+D_prime_OH = D_OH*coeff*(dt/dx^2);       % Dimensionless of Diffusion           |
+D_prime_HA = D_HA*coeff*(dt/dx^2);       % Dimensionless of Diffusion           |
+D_prime_BOH = D_BOH*coeff*(dt/dx^2);     % Dimensionless of Diffusion           |
+D_prime_A = D_A*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
+D_prime_B = D_B*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
 %                                                                               |
 % Species Diffusion advection with coeff                                        |
-alpha_H = D_star_H/(n*tau^2);             % Diffusion Advection                 |
-alpha_C = D_star_C/(n*tau^2);             % Diffusion Advection                 |
-alpha_OH = D_star_OH/(n*tau^2);           % Diffusion Advection                 |
-alpha_HA = D_star_HA/(n*tau^2);           % Diffusion Advection                 |
-alpha_BOH = D_star_BOH/(n*tau^2);         % Diffusion Advection                 |
-alpha_A = D_star_A/(n*tau^2);             % Diffusion Advection                 |
-alpha_B = D_star_B/(n*tau^2);             % Diffusion Advection                 |
+alpha_H = D_star_H/(n*tau^2);            % Diffusion Advection                  |
+alpha_C = D_star_C/(n*tau^2);            % Diffusion Advection                  |
+alpha_OH = D_star_OH/(n*tau^2);          % Diffusion Advection                  |
+alpha_HA = D_star_HA/(n*tau^2);          % Diffusion Advection                  |
+alpha_BOH = D_star_BOH/(n*tau^2);        % Diffusion Advection                  |
+alpha_A = D_star_A/(n*tau^2);            % Diffusion Advection                  |
+alpha_B = D_star_B/(n*tau^2);            % Diffusion Advection                  |
 %                                                                               |
 % Species Diffusion advection standalone                                        |
-alpha_prime_H = D_prime_H/(n*tau^2);            % Diffusion Advection           |
-alpha_prime_C = D_prime_C/(n*tau^2);            % Diffusion Advection           |
-alpha_prime_OH = D_prime_OH/(n*tau^2);          % Diffusion Advection           |
-alpha_prime_HA = D_prime_HA/(n*tau^2);          % Diffusion Advection           |
-alpha_prime_BOH = D_prime_BOH/(n*tau^2);        % Diffusion Advection           |
-alpha_prime_A = D_prime_A/(n*tau^2);            % Diffusion Advection           |
-alpha_prime_B = D_prime_B/(n*tau^2);            % Diffusion Advection           |
+alpha_prime_H = D_prime_H/(n*tau^2);     % Diffusion Advection                  |
+alpha_prime_C = D_prime_C/(n*tau^2);     % Diffusion Advection                  |
+alpha_prime_OH = D_prime_OH/(n*tau^2);   % Diffusion Advection                  |
+alpha_prime_HA = D_prime_HA/(n*tau^2);   % Diffusion Advection                  |
+alpha_prime_BOH = D_prime_BOH/(n*tau^2); % Diffusion Advection                  |
+alpha_prime_A = D_prime_A/(n*tau^2);     % Diffusion Advection                  |
+alpha_prime_B = D_prime_B/(n*tau^2);     % Diffusion Advection                  |
 %-------------------------------------------------------------------------------
 
 %-------------------------------------------------------------------------------
 % Species Velocities                                                            |
 %                                                                               |
 % Species Mobility                                                              |
-v_C = (D_C/(R*T));                % mobility [Hydrocarbon]                      |
-v_H = (D_H/(R*T));                % mobility [Hydrogen]                         |
-v_OH = (D_OH/(R*T));              % mobility [Hydroxid]                         |
-v_HA = (D_HA/(R*T));              % mobility [Acid]                             |
-v_BOH = (D_BOH/(R*T));            % mobility [Base]                             |
-v_A = (D_A/(R*T));                % mobility [A]                                |
-v_B = (D_B/(R*T));                % mobility [B]                                |
+v_C = (D_C/(R*T));                             % mobility [Hydrocarbon]         |
+v_H = (D_H/(R*T));                             % mobility [Hydrogen]            |
+v_OH = (D_OH/(R*T));                           % mobility [Hydroxid]            |
+v_HA = (D_HA/(R*T));                           % mobility [Acid]                |
+v_BOH = (D_BOH/(R*T));                         % mobility [Base]                |
+v_A = (D_A/(R*T));                             % mobility [A]                   |
+v_B = (D_B/(R*T));                             % mobility [B]                   |
 %                                                                               |
 % Species electromigration velocity                                             |
 u_e_H = (v_H*z_H*F*dEdx)/(tau^2);              % electromigration [Hydrogen]    |
