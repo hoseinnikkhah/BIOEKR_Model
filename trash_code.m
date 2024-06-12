@@ -60,53 +60,53 @@ D_BOH = 1.2*10^-8*24*3600;        % Mass advection for Base [m^2/day]           
 D_B = 1.34*10^-8*24*3600;         % Mass advection for Base agent [m^2/day]     |
 %                                                                               |
 % Species Diffuision abberation with coeff                                      |
-D_star_H = D_H*(dt/dx^2);   % Dimensionless of Diffusion                        |
-D_star_C = D_C*(dt/dx^2);   % Dimensionless of Diffusion                        |
-D_star_OH = D_OH*(dt/dx^2); % Dimensionless of Diffusion                        |
-D_star_HA = D_HA*(dt/dx^2); % Dimensionless of Diffusion                        |
-D_star_BOH = D_BOH*(dt/dx^2); % Dimensionless of Diffusion                      |
-D_star_A = D_A*(dt/dx^2);     % Dimensionless of Diffusion                      |
-D_star_B = D_B*(dt/dx^2);     % Dimensionless of Diffuision                     |
+D_star_H = D_H*(dt/dx^2);                % Dimensionless of Diffusion           |
+D_star_C = D_C*(dt/dx^2);                % Dimensionless of Diffusion           |
+D_star_OH = D_OH*(dt/dx^2);              % Dimensionless of Diffusion           |
+D_star_HA = D_HA*(dt/dx^2);              % Dimensionless of Diffusion           |
+D_star_BOH = D_BOH*(dt/dx^2);            % Dimensionless of Diffusion           |
+D_star_A = D_A*(dt/dx^2);                % Dimensionless of Diffusion           |
+D_star_B = D_B*(dt/dx^2);                % Dimensionless of Diffusion           |
 %                                                                               |
 % Species Diffuision abberation standalone                                      |
-D_prime_H = D_H*coeff*(dt/dx^2);        % Dimensionless of Diffusion            |
-D_prime_C = D_C*coeff*(dt/dx^2);        % Dimensionless of Diffusion            |
-D_prime_OH = D_OH*coeff*(dt/dx^2);      % Dimensionless of Diffusion            |
-D_prime_HA = D_HA*coeff*(dt/dx^2);      % Dimensionless of Diffusion            |
-D_prime_BOH = D_BOH*coeff*(dt/dx^2);    % Dimensionless of Diffusion            |
-D_prime_A = D_A*coeff*(dt/dx^2);        % Dimensionless of Diffusion            |
-D_prime_B = D_B*coeff*(dt/dx^2);        % Dimensionless of Diffusion            |
+D_prime_H = D_H*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
+D_prime_C = D_C*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
+D_prime_OH = D_OH*coeff*(dt/dx^2);       % Dimensionless of Diffusion           |
+D_prime_HA = D_HA*coeff*(dt/dx^2);       % Dimensionless of Diffusion           |
+D_prime_BOH = D_BOH*coeff*(dt/dx^2);     % Dimensionless of Diffusion           |
+D_prime_A = D_A*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
+D_prime_B = D_B*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
 %                                                                               |
 % Species Diffusion advection with coeff                                        |
-alpha_H = D_star_H/(n*tau^2);             % Diffusion Advection                 |
-alpha_C = D_star_C/(n*tau^2);             % Diffusion Advection                 |
-alpha_OH = D_star_OH/(n*tau^2);           % Diffusion Advection                 |
-alpha_HA = D_star_HA/(n*tau^2);           % Diffusion Advection                 |
-alpha_BOH = D_star_BOH/(n*tau^2);         % Diffusion Advection                 |
-alpha_A = D_star_A/(n*tau^2);             % Diffusion Advection                 |
-alpha_B = D_star_B/(n*tau^2);             % Diffusion Advection                 |
+alpha_H = D_star_H/(n*tau^2);            % Diffusion Advection                  |
+alpha_C = D_star_C/(n*tau^2);            % Diffusion Advection                  |
+alpha_OH = D_star_OH/(n*tau^2);          % Diffusion Advection                  |
+alpha_HA = D_star_HA/(n*tau^2);          % Diffusion Advection                  |
+alpha_BOH = D_star_BOH/(n*tau^2);        % Diffusion Advection                  |
+alpha_A = D_star_A/(n*tau^2);            % Diffusion Advection                  |
+alpha_B = D_star_B/(n*tau^2);            % Diffusion Advection                  |
 %                                                                               |
 % Species Diffusion advection standalone                                        |
-alpha_prime_H = D_prime_H/(n*tau^2);            % Diffusion Advection           |
-alpha_prime_C = D_prime_C/(n*tau^2);            % Diffusion Advection           |
-alpha_prime_OH = D_prime_OH/(n*tau^2);          % Diffusion Advection           |
-alpha_prime_HA = D_prime_HA/(n*tau^2);          % Diffusion Advection           |
-alpha_prime_BOH = D_prime_BOH/(n*tau^2);        % Diffusion Advection           |
-alpha_prime_A = D_prime_A/(n*tau^2);            % Diffusion Advection           |
-alpha_prime_B = D_prime_B/(n*tau^2);            % Diffusion Advection           |
+alpha_prime_H = D_prime_H/(n*tau^2);     % Diffusion Advection                  |
+alpha_prime_C = D_prime_C/(n*tau^2);     % Diffusion Advection                  |
+alpha_prime_OH = D_prime_OH/(n*tau^2);   % Diffusion Advection                  |
+alpha_prime_HA = D_prime_HA/(n*tau^2);   % Diffusion Advection                  |
+alpha_prime_BOH = D_prime_BOH/(n*tau^2); % Diffusion Advection                  |
+alpha_prime_A = D_prime_A/(n*tau^2);     % Diffusion Advection                  |
+alpha_prime_B = D_prime_B/(n*tau^2);     % Diffusion Advection                  |
 %-------------------------------------------------------------------------------
 
 %-------------------------------------------------------------------------------
 % Species Velocities                                                            |
 %                                                                               |
 % Species Mobility                                                              |
-v_C = (D_C/(R*T));                % mobility [Hydrocarbon]                      |
-v_H = (D_H/(R*T));                % mobility [Hydrogen]                         |
-v_OH = (D_OH/(R*T));              % mobility [Hydroxid]                         |
-v_HA = (D_HA/(R*T));              % mobility [Acid]                             |
-v_BOH = (D_BOH/(R*T));            % mobility [Base]                             |
-v_A = (D_A/(R*T));                % mobility [A]                                |
-v_B = (D_B/(R*T));                % mobility [B]                                |
+v_C = (D_C/(R*T));                             % mobility [Hydrocarbon]         |
+v_H = (D_H/(R*T));                             % mobility [Hydrogen]            |
+v_OH = (D_OH/(R*T));                           % mobility [Hydroxid]            |
+v_HA = (D_HA/(R*T));                           % mobility [Acid]                |
+v_BOH = (D_BOH/(R*T));                         % mobility [Base]                |
+v_A = (D_A/(R*T));                             % mobility [A]                   |
+v_B = (D_B/(R*T));                             % mobility [B]                   |
 %                                                                               |
 % Species electromigration velocity                                             |
 u_e_H = (v_H*z_H*F*dEdx)/(tau^2);              % electromigration [Hydrogen]    |
@@ -158,8 +158,6 @@ R_D = coeff*(dt)/n;              % Reaction rate Dimensionless factor
 % this formulas exits to confirm there is a dl here, it is not used in anywhere in model
 
 % Flux properties
-I0 = 0.0000829*24*60*60;         % Initial concetration
-
 
 %J0 = J0/100;
 
@@ -249,7 +247,7 @@ s_C(:,1) = (z_C^2)*v_C*G_C(:,1);
 Sigma(:,1) = (F^2)*(s_H(:,1) + s_OH(:,1) + s_C(:,1));
 
 for m= 2:nt-1
-    
+
     G_C(1,m) =J_C(1,m); %--- Upper boundary
     G_C(end,m) = 0; %--- Lower boundary
 
@@ -270,7 +268,6 @@ for m= 2:nt-1
 
     G_B(1,m) =J_B(1,m); %--- Upper boundary
     G_B(end,m) = 0; %--- Lower boundary
-
     for i= 2:nx-1
         
         
@@ -472,39 +469,68 @@ pH_B = log10(G_H_B);
 pH_scale = linspace(1,40,41);
 xl = [0,5,10,15,20,25,30,35];
 yl = [10000,7900,7100,6000,5700,5500,5400,5100];
-figure;
 
+
+figure(1);
 hold on;
 
-plot(t,G_C(10,:),'-','DisplayName', 'Hydrocarbon (EKR)');
-plot(t,G_C_B(10,:),'--','DisplayName', 'Hydrocarbon (BKR)');
+plot(t, G_C(10,:), '-', 'DisplayName', 'Hydrocarbon (EKR)');
+plot(t, G_C_B(10,:), '--', 'DisplayName', 'Hydrocarbon (BKR)');
 
-plot(t,G_B(10,:),'-','DisplayName', 'Base (EKR)');
-plot(t,G_B_B(10,:),'-','DisplayName', 'Base (BKR)');
+plot(t, G_B(10,:), '-', 'DisplayName', 'Base (EKR)');
+plot(t, G_B_B(10,:), '-', 'DisplayName', 'Base (BKR)');
 
-%plot(t,G_OH(10,:),'-','DisplayName', 'Hydroxid (EKR)');
-%plot(t,G_OH_B(10,:),'--','DisplayName', 'Hydroxid (BKR)');
+% plot(t, G_OH(10,:), '-', 'DisplayName', 'Hydroxid (EKR)');
+% plot(t, G_OH_B(10,:), '--', 'DisplayName', 'Hydroxid (BKR)');
 
-%plot(t,G_BOH(10,:),'-','DisplayName', 'Base (EKR)');
-%plot(t,G_BOH_B(10,:),'--','DisplayName', 'Base (BKR)');
+% plot(t, G_BOH(10,:), '-', 'DisplayName', 'Base (EKR)');
+% plot(t, G_BOH_B(10,:), '--', 'DisplayName', 'Base (BKR)');
 
-%plot(t,G_HA(10,:),'-','DisplayName', 'Acid (EKR)');
-%plot(t,G_HA_B(10,:),'--','DisplayName', 'Acid (BKR)');
+% plot(t, G_HA(10,:), '-', 'DisplayName', 'Acid (EKR)');
+% plot(t, G_HA_B(10,:), '--', 'DisplayName', 'Acid (BKR)');
 
-scatter(xl,yl, 'DisplayName', 'Expriment Data');
+scatter(xl, yl, 'DisplayName', 'Experiment Data');
 
 xlabel('Time');
-ylabel('Conc(mg/kg)');
+ylabel('Conc (mg/kg)');
 
 legend();
 
+hold off;
 
-figure;
+% Plot for figure 2
+
+gif_filename = 'pH_change_animation.gif';
+
+figure(2);
 hold on;
-plot(pH_scale,pH(:,50400),'--','DisplayName', 'pH (EKR)')
-plot(pH_scale,pH_B(:,50400),'-','DisplayName', 'pH (BKR)')
 
-xlabel('Length (cm)');
-ylabel('pH level');
+fig1 = plot(pH_scale, pH(:,1), 'DisplayName', 'pH change in EKR');
+fig2 = plot(pH_scale, pH_B(:,1), 'DisplayName', 'pH change in BKR');
 
-legend();
+xlabel('Distance (cm)');
+ylabel('pH Level');
+
+for h = 1:50401
+    set(fig1, 'XData', pH_scale, 'YData', pH(:,h)');
+    set(fig2, 'XData', pH_scale, 'YData', pH_B(:,h)');
+
+    h2 = h / 1440;
+    title(['pH Change - Day: ', sprintf('%.2f', h2)]);
+    
+    frame = getframe(gcf);
+    im = frame2im(frame);
+    [imind, cm] = rgb2ind(im, 256);
+    
+    if h == 1
+        imwrite(imind, cm, gif_filename, 'gif', 'Loopcount', inf, 'DelayTime', 0.01);
+    else
+        imwrite(imind, cm, gif_filename, 'gif', 'WriteMode', 'append', 'DelayTime', 0.01);
+    end
+    
+    pause(0.00001);
+end
+
+legend;
+hold off;
+
