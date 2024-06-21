@@ -116,21 +116,21 @@ v_A = (D_A/(R*T));                             % mobility [A]                   
 v_B = (D_B/(R*T));                             % mobility [B]                   |
 %                                                                               |
 % Species electromigration velocity                                             |
-u_e_H = (v_H*z_H*F*E_field)/(tau^2);           % electromigration [Hydrogen]    |
-u_e_OH = (v_OH*z_OH*F*E_field)/(tau^2);        % electromigration [Hydroxid]    |
-u_e_C = (v_C*z_C*F*E_field)/(tau^2);           % electromigration [Carbon]      |
-u_e_HA = (v_HA*z_HA*F*E_field)/(tau^2);        % electromigration [Acid]        |
-u_e_BOH = (v_BOH*z_BOH*F*E_field)/(tau^2);     % electromigration [Base]        |
-u_e_A = (v_A*z_A*F*E_field)/(tau^2);           % electromigration [A]           |
-u_e_B = (v_B*z_B*F*E_field)/(tau^2);           % electromigration [B]           |
+u_e_H = (v_H*z_H*F*E_field)/(tau^2);              % electromigration [Hydrogen]    |
+u_e_OH = (v_OH*z_OH*F*E_field)/(tau^2);           % electromigration [Hydroxid]    |
+u_e_C = (v_C*z_C*F*E_field)/(tau^2);              % electromigration [Carbon]      |
+u_e_HA = (v_HA*z_HA*F*E_field)/(tau^2);           % electromigration [Acid]        |
+u_e_BOH = (v_BOH*z_BOH*F*E_field)/(tau^2);        % electromigration [Base]        |
+u_e_A = (v_A*z_A*F*E_field)/(tau^2);              % electromigration [A]           |
+u_e_B = (v_B*z_B*F*E_field)/(tau^2);              % electromigration [B]           |
 %                                                                               |
 % domain velocity                                                               |
-u_x = (epsilon/mu_solution)*(zeta*E_field);    % Volumetric Velocity [m3/s]     |
+u_x = (epsilon/mu_solution)*(zeta*E_field);       % Volumetric Velocity [m3/s]     |
 u_c = ones(nx,nt);
-% u_C = ((1/tau^2)*u_x)*Z/(24*3600*Pe);        % Convection Velocity [m3/s]     |
-u_C = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta);     % Convection Velocity [m3/s]     |
+% u_C = ((1/tau^2)*u_x)*Z/(24*3600*Pe);         % Convection Velocity [m3/s]     |
+u_C = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta);         % Convection Velocity [m3/s]     |
 u_c = u_c.*u_C;
-u_eo = ((epsilon*zeta)/mu_solution)*E_field;   % Electoosmotic Velocity [m3/s]  |
+u_eo = ((epsilon*zeta)/mu_solution)*E_field;      % Electoosmotic Velocity [m3/s]  |
 u_s = n*u_c; %                                                                  |
 %                                                                               |
 % Species total velocity                                                        |
@@ -395,7 +395,7 @@ Sigma_B(:,1) = (F^2)*(s_H_B(:,1) + s_OH_B(:,1) + s_C_B(:,1));
 
 for xx = 1:nx
     for tt = 1:nt
-        M_g = exp(-K*(tt/1440)*Z*(Beta/Pe));
+        M_g = exp(-K*(tt/1440));
         sub(xx,tt) = M_g;
         % fixup(xx,tt) = 1/(-0.01*(tt/1440) + 1.61);
         fixup(xx,tt) = 1/(-0.01*(tt/1440) + 0.61);
@@ -406,19 +406,25 @@ growth = sub.*fixup;
 for m= 1:nt-1
 
     G_C_B(1,m) =J_C_B(1,m); %--- Upper boundary
+    G_C_B(end,m) = J_C_B(1,m); %--- Lower boundary
 
     G_H_B(1,m) =J_H_B(1,m); %--- Upper boundary
+    G_H_B(end,m) = 0; %--- Lower boundary
 
     G_OH_B(1,m) =J_OH_B(1,m); %--- Upper boundary
+    G_OH_B(end,m) = 0; %--- Lower boundary
 
     G_HA_B(1,m) =J_HA_B(1,m); %--- Upper boundary
+    G_HA_B(end,m) = 0; %--- Lower boundary
 
     G_BOH_B(1,m) =J_BOH_B(1,m); %--- Upper boundary
+    G_BOH_B(end,m) = 0; %--- Lower boundary
 
     G_A_B(1,m) =J_A_B(1,m); %--- Upper boundary
+    G_A_B(end,m) = 0; %--- Lower boundary
 
     G_B_B(1,m) = J_B_B(1,m); %--- Upper boundary
-
+    G_B_B(end,m) = 0; %--- Lower boundary
     for i= 2:nx-1
         
         
@@ -438,13 +444,13 @@ for m= 1:nt-1
         J_A_B(i,m) = (u_c(i,m) + u_e_A(i,m))*G_A_B(i,m) - alpha_prime_A*(G_A_B(i+1,m) - G_A_B(i-1,m));
         J_B_B(i,m) = (u_c(i,m) + u_e_B(i,m))*G_B_B(i,m) - alpha_prime_B*(G_B_B(i+1,m) - G_B_B(i-1,m));
 
-        G_C_B(end,m) = J_C_B(i,m); %--- Lower boundary
-        G_H_B(end,m) = J_H_B(i,m); %--- Lower boundary
-        G_OH_B(end,m) = J_OH_B(i,m); %--- Lower boundary
-        G_HA_B(end,m) = J_HA_B(i,m); %--- Lower boundary
-        G_BOH_B(end,m) = J_BOH_B(i,m); %--- Lower boundary
-        G_A_B(end,m) = J_A_B(i,m); %--- Lower boundary
-        G_B_B(end,m) = J_B_B(i,m); %--- Lower boundary
+        G_C_B(end,m) = J_C(i,m); %--- Lower boundary
+        G_H_B(end,m) = J_H(i,m); %--- Lower boundary
+        G_OH_B(end,m) = J_OH(i,m); %--- Lower boundary
+        G_HA_B(end,m) = J_HA(i,m); %--- Lower boundary
+        G_BOH_B(end,m) = J_BOH(i,m); %--- Lower boundary
+        G_A_B(end,m) = J_A(i,m); %--- Lower boundary
+        G_B(end,m) = J_B(i,m); %--- Lower boundary
 
         s_H_B(i,m) = (z_H^2)*v_H*G_H_B(i,m);
         s_OH_B(i,m) = (z_OH^2)*v_OH*G_OH_B(i,m);

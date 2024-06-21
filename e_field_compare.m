@@ -38,6 +38,18 @@ for timestep = 1:nt
     E_field(:,timestep) = M;
 end
 
+E_field_e = ones(nx,nt);
+ke = 5; % Adjust this value to change the steepness of the exponential curve
+% Create a steep exponential distribution from dEdx to 0
+Me = linspace(0, 1, nx);       % Create a normalized linear space for exponents
+Me = dEdx * exp(-ke * Me);       % Transform to get steep exponential distribution
+
+for timestep = 1:nt
+    E_field_e(:,timestep) = Me;
+end
+
+
+
 % Species Valency
 z_H = 1;
 z_OH = -1;
@@ -116,32 +128,50 @@ v_A = (D_A/(R*T));                             % mobility [A]                   
 v_B = (D_B/(R*T));                             % mobility [B]                   |
 %                                                                               |
 % Species electromigration velocity                                             |
-u_e_H = (v_H*z_H*F*E_field)/(tau^2);           % electromigration [Hydrogen]    |
-u_e_OH = (v_OH*z_OH*F*E_field)/(tau^2);        % electromigration [Hydroxid]    |
-u_e_C = (v_C*z_C*F*E_field)/(tau^2);           % electromigration [Carbon]      |
-u_e_HA = (v_HA*z_HA*F*E_field)/(tau^2);        % electromigration [Acid]        |
-u_e_BOH = (v_BOH*z_BOH*F*E_field)/(tau^2);     % electromigration [Base]        |
-u_e_A = (v_A*z_A*F*E_field)/(tau^2);           % electromigration [A]           |
-u_e_B = (v_B*z_B*F*E_field)/(tau^2);           % electromigration [B]           |
-%                                                                               |
+u_e_H = (v_H*z_H*F*E_field)/(tau^2);              % electromigration [Hydrogen]    |
+u_e_OH = (v_OH*z_OH*F*E_field)/(tau^2);           % electromigration [Hydroxid]    |
+u_e_C = (v_C*z_C*F*E_field)/(tau^2);              % electromigration [Carbon]      |
+u_e_HA = (v_HA*z_HA*F*E_field)/(tau^2);           % electromigration [Acid]        |
+u_e_BOH = (v_BOH*z_BOH*F*E_field)/(tau^2);        % electromigration [Base]        |
+u_e_A = (v_A*z_A*F*E_field)/(tau^2);              % electromigration [A]           |
+u_e_B = (v_B*z_B*F*E_field)/(tau^2);              % electromigration [B]           |
+%                               
+u_e_H1 = (v_H*z_H*F*E_field_e)/(tau^2);              % electromigration [Hydrogen]    |
+u_e_OH1 = (v_OH*z_OH*F*E_field_e)/(tau^2);           % electromigration [Hydroxid]    |
+u_e_C1 = (v_C*z_C*F*E_field_e)/(tau^2);              % electromigration [Carbon]      |
+u_e_HA1 = (v_HA*z_HA*F*E_field_e)/(tau^2);           % electromigration [Acid]        |
+u_e_BOH1 = (v_BOH*z_BOH*F*E_field_e)/(tau^2);        % electromigration [Base]        |
+u_e_A1 = (v_A*z_A*F*E_field_e)/(tau^2);              % electromigration [A]           |
+u_e_B1 = (v_B*z_B*F*E_field_e)/(tau^2);              % electromigration [B]  
+% |
 % domain velocity                                                               |
-u_x = (epsilon/mu_solution)*(zeta*E_field);    % Volumetric Velocity [m3/s]     |
+u_x = (epsilon/mu_solution)*(zeta*E_field);       % Volumetric Velocity [m3/s]     |
+u_x1 = (epsilon/mu_solution)*(zeta*E_field_e);       % Volumetric Velocity [m3/s]     |
 u_c = ones(nx,nt);
-% u_C = ((1/tau^2)*u_x)*Z/(24*3600*Pe);        % Convection Velocity [m3/s]     |
-u_C = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta);     % Convection Velocity [m3/s]     |
+u_C = ((1/tau^2)*u_x)/(24000000*3600);         % Convection Velocity [m3/s]     |
+u_C1 = ((1/tau^2)*u_x1)/(24000000*3600);         % Convection Velocity [m3/s]     |
 u_c = u_c.*u_C;
-u_eo = ((epsilon*zeta)/mu_solution)*E_field;   % Electoosmotic Velocity [m3/s]  |
+u_c1 = u_c.*u_C1;
+u_eo = ((epsilon*zeta)/mu_solution)*E_field;      % Electoosmotic Velocity [m3/s]  |
+u_eo1 = ((epsilon*zeta)/mu_solution)*E_field_e;      % Electoosmotic Velocity [m3/s]  |
 u_s = n*u_c; %                                                                  |
 %                                                                               |
 % Species total velocity                                                        |
-u_t_C = (u_e_C + u_c)/n; %                                                      |
-u_t_H = (u_e_H + u_c)/n; %                                                      |
-u_t_OH = (u_e_OH + u_c)/n; %                                                    |
-u_t_HA = (u_e_HA + u_c)/n; %                                                    |
-u_t_BOH = (u_e_BOH + u_c)/n; %                                                  |
-u_t_A = (u_e_A + u_c)/n; %                                                      |
-u_t_B = (u_e_B + u_c)/n; %                                                      |
+u_t_C = (u_e_C + u_C1)/n; %                                                      |
+u_t_H = (u_e_H + u_c1)/n; %                                                      |
+u_t_OH = (u_e_OH + u_c1)/n; %                                                    |
+u_t_HA = (u_e_HA + u_c1)/n; %                                                    |
+u_t_BOH = (u_e_BOH + u_c1)/n; %                                                  |
+u_t_A = (u_e_A + u_c1)/n; %                                                      |
+u_t_B = (u_e_B + u_c1)/n; %                                                      |
 %                                                                               |
+u_t_C1 = (u_e_C1 + u_c)/n; %                                                      |
+u_t_H1 = (u_e_H1 + u_c)/n; %                                                      |
+u_t_OH1 = (u_e_OH1 + u_c)/n; %                                                    |
+u_t_HA1 = (u_e_HA1 + u_c)/n; %                                                    |
+u_t_BOH1 = (u_e_BOH1 + u_c)/n; %                                                  |
+u_t_A1 = (u_e_A1 + u_c)/n; %                                                      |
+u_t_B1 = (u_e_B1 + u_c)/n; %                                                      |
 % Velocity advection without coefficent                                         |
 beta_C = u_t_C*(dt/2*dx); %                                                     |
 beta_H = u_t_H*(dt/2*dx); %                                                     |
@@ -152,13 +182,13 @@ beta_A = u_t_A*(dt/2*dx); %                                                     
 beta_B = u_t_B*(dt/2*dx); %                                                     |
 %                                                                               |
 % Velocity advection with coefficent abberation                                 |
-beta_prime_C = coeff*u_t_C*(dt/2*dx); %                                         |
-beta_prime_H = coeff*u_t_H*(dt/2*dx); %                                         |
-beta_prime_OH = coeff*u_t_OH*(dt/2*dx); %                                       |
-beta_prime_HA = coeff*u_t_HA*(dt/2*dx); %                                       |
-beta_prime_BOH = coeff*u_t_BOH*(dt/2*dx); %                                     |
-beta_prime_A = coeff*u_t_A*(dt/2*dx); %                                         |
-beta_prime_B = coeff*u_t_B*(dt/2*dx); %                                         |
+beta_prime_C = u_t_C1*(dt/2*dx); %                                         |
+beta_prime_H = u_t_H1*(dt/2*dx); %                                         |
+beta_prime_OH = u_t_OH1*(dt/2*dx); %                                       |
+beta_prime_HA = u_t_HA1*(dt/2*dx); %                                       |
+beta_prime_BOH = u_t_BOH1*(dt/2*dx); %                                     |
+beta_prime_A = u_t_A1*(dt/2*dx); %                                         |
+beta_prime_B = u_t_B1*(dt/2*dx); %                                         |
 %                                                                               |
 %-------------------------------------------------------------------------------
 
@@ -216,31 +246,31 @@ R_B = zeros(nx,nt);
 % --- Set IC and BC
 
 G_C(:,1)= 10000;
-
+G_C(:,2)= 10000;
 J_C(1,:)= (u_c(1,:) + u_e_C(1,:))*10000;
 
 G_H(:,1)= 10000;
-
+G_H(:,2)= 10000;
 J_H(1,:)= (u_c(1,:) + u_e_H(1,:))*10000;
 
 G_OH(:,1)= 10000;
-
+G_OH(:,2)= 10000;
 J_OH(1,:)= (u_c(1,:) + u_e_OH(1,:))*10000;
 
 G_HA(:,1)= 10000;
-
+G_HA(:,2)= 10000;
 J_HA(1,:)= (u_c(1,:) + u_e_HA(1,:))*10000;
 
 G_BOH(:,1)= 10000;
-
+G_BOH(:,2)= 10000;
 J_BOH(1,:)= (u_c(1,:) + u_e_BOH(1,:))*10000;
 
 G_A(:,1)= 10000;
-
+G_A(:,2)= 10000;
 J_A(1,:)= (u_c(1,:) + u_e_A(1,:))*10000;
 
 G_B(:,1)= 1000;
-
+G_B(:,2)= 1000;
 J_B(1,:)= (u_c(1,:) + u_e_B(1,:))*1000;
 
 R_C(:,1) = R_i*(dt)/n;
@@ -256,17 +286,30 @@ s_OH(:,1) = (z_OH^2)*v_OH*G_OH(:,1);
 s_C(:,1) = (z_C^2)*v_C*G_C(:,1);
 Sigma(:,1) = (F^2)*(s_H(:,1) + s_OH(:,1) + s_C(:,1));
 
-for m= 1:nt-1
+for m= 2:nt-1
 
     G_C(1,m) =J_C(1,m); %--- Upper boundary
-    G_H(1,m) =J_H(1,m); %--- Upper boundary
-    G_OH(1,m) =J_OH(1,m); %--- Upper boundary
-    G_HA(1,m) =J_HA(1,m); %--- Upper boundary
-    G_BOH(1,m) =J_BOH(1,m); %--- Upper boundary
-    G_A(1,m) =J_A(1,m); %--- Upper boundary
-    G_B(1,m) =J_B(1,m); %--- Upper boundary
+    G_C(end,m) = 0; %--- Lower boundary
 
+    G_H(1,m) =J_H(1,m); %--- Upper boundary
+    G_H(end,m) = 0; %--- Lower boundary
+
+    G_OH(1,m) =J_OH(1,m); %--- Upper boundary
+    G_OH(end,m) = 0; %--- Lower boundary
+
+    G_HA(1,m) =J_HA(1,m); %--- Upper boundary
+    G_HA(end,m) = 0; %--- Lower boundary
+
+    G_BOH(1,m) =J_BOH(1,m); %--- Upper boundary
+    G_BOH(end,m) = 0; %--- Lower boundary
+
+    G_A(1,m) =J_A(1,m); %--- Upper boundary
+    G_A(end,m) = 0; %--- Lower boundary
+
+    G_B(1,m) =J_B(1,m); %--- Upper boundary
+    G_B(end,m) = 0; %--- Lower boundary
     for i= 2:nx-1
+        
         
         G_C(i,m+1) = G_C(i,m) + alpha_C*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) + beta_C(i,m)*(G_C(i+1,m) - G_C(i-1,m)) + R_C(i,m)/R_D;
         G_H(i,m+1) = G_H(i,m) + alpha_H*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) + beta_H(i,m)*(G_H(i+1,m) - G_H(i-1,m)) + R_H(i,m)/R_D;
@@ -276,21 +319,13 @@ for m= 1:nt-1
         G_A(i,m+1) = G_A(i,m) + alpha_A*(G_A(i+1,m) -2*G_A(i,m) + G_A(i-1,m)) + beta_A(i,m)*(G_A(i+1,m) - G_A(i-1,m)) + R_A(i,m)/R_D;
         G_B(i,m+1) = G_B(i,m) + alpha_B*(G_B(i+1,m) -2*G_B(i,m) + G_B(i-1,m)) + beta_B(i,m)*(G_B(i+1,m) - G_B(i-1,m)) + R_B(i,m)/R_D;
 
-        J_C(i,m) = (u_c(i,m) + u_e_C(i,m))*G_C(i,m) - alpha_C*(G_C(i+1,m+1) - G_C(i-1,m+1));
-        J_H(i,m) = (u_c(i,m) + u_e_H(i,m))*G_H(i,m) - alpha_H*(G_H(i+1,m+1) - G_H(i-1,m+1));
+        J_C(i,m) = (u_c(i,m) + u_e_C(i,m))*G_C(i,m) - alpha_C*(G_C(i+1,m) - G_C(i-1,m));
+        J_H(i,m) = (u_c(i,m) + u_e_H(i,m))*G_H(i,m) - alpha_H*(G_H(i+1,m) - G_H(i-1,m));
         J_OH(i,m) = (u_c(i,m) + u_e_OH(i,m))*G_OH(i,m) - alpha_OH*(G_OH(i+1,m) - G_OH(i-1,m));
         J_HA(i,m) = (u_c(i,m) + u_e_HA(i,m))*G_HA(i,m) - alpha_HA*(G_HA(i+1,m) - G_HA(i-1,m));
         J_BOH(i,m) = (u_c(i,m) + u_e_BOH(i,m))*G_BOH(i,m) - alpha_BOH*(G_BOH(i+1,m) - G_BOH(i-1,m));
         J_A(i,m) = (u_c(i,m) + u_e_A(i,m))*G_A(i,m) - alpha_A*(G_A(i+1,m) - G_A(i-1,m));
         J_B(i,m) = (u_c(i,m) + u_e_B(i,m))*G_B(i,m) - alpha_B*(G_B(i+1,m) - G_B(i-1,m));
-        
-        G_C(end,m) = J_C(i,m); %--- Lower boundary
-        G_H(end,m) = J_H(i,m); %--- Lower boundary
-        G_OH(end,m) = J_OH(i,m); %--- Lower boundary
-        G_HA(end,m) = J_HA(i,m); %--- Lower boundary
-        G_BOH(end,m) = J_BOH(i,m); %--- Lower boundary
-        G_A(end,m) = J_A(i,m); %--- Lower boundary
-        G_B(end,m) = J_B(i,m); %--- Lower boundary
 
         s_H(i,m) = (z_H^2)*v_H*G_H(i,m);
         s_OH(i,m) = (z_OH^2)*v_OH*G_OH(i,m);
@@ -360,24 +395,31 @@ s_OH_B = zeros(nx,nt);
 % --- Set IC and BC
 
 G_C_B(:,1)= 10000;
+G_C_B(:,2)= 10000;
 J_C_B(1,:)= (u_c(1,:) + u_e_C(1,:))*10000;
 
 G_H_B(:,1)= 10000;
+G_H_B(:,2)= 10000;
 J_H_B(1,:)= (u_c(1,:) + u_e_H(1,:))*10000;
 
 G_OH_B(:,1)= 10000;
+G_OH_B(:,2)= 10000;
 J_OH_B(1,:)= (u_c(1,:) + u_e_OH(1,:))*10000;
 
 G_HA_B(:,1)= 10000;
+G_HA_B(:,2)= 10000;
 J_HA_B(1,:)= (u_c(1,:) + u_e_HA(1,:))*10000;
 
 G_BOH_B(:,1)= 10000;
+G_BOH_B(:,2)= 10000;
 J_BOH_B(1,:)= (u_c(1,:) + u_e_BOH(1,:))*10000;
 
 G_A_B(:,1)= 10000;
+G_A_B(:,2)= 10000;
 J_A_B(1,:)= (u_c(1,:) + u_e_A(1,:))*10000;
 
 G_B_B(:,1)= 1000;
+G_B_B(:,2)= 1000;
 G_B_B(1,:)= (u_c(1,:) + u_e_B(1,:))*1000;
 
 R_C_B(:,1) = R_i*coeff*(dt)/n;
@@ -393,42 +435,39 @@ s_OH_B(:,1) = (z_OH^2)*v_OH*G_OH_B(:,1);
 s_C_B(:,1) = (z_C^2)*v_C*G_C_B(:,1);
 Sigma_B(:,1) = (F^2)*(s_H_B(:,1) + s_OH_B(:,1) + s_C_B(:,1));
 
-for xx = 1:nx
-    for tt = 1:nt
-        M_g = exp(-K*(tt/1440)*Z*(Beta/Pe));
-        sub(xx,tt) = M_g;
-        % fixup(xx,tt) = 1/(-0.01*(tt/1440) + 1.61);
-        fixup(xx,tt) = 1/(-0.01*(tt/1440) + 0.61);
-    end
-end
-growth = sub.*fixup;
 
-for m= 1:nt-1
+for m= 2:nt-1
 
-    G_C_B(1,m) =J_C_B(1,m); %--- Upper boundary
+    G_C_B(1,m) =J_C(1,m); %--- Upper boundary
+    G_C_B(end,m) = 0; %--- Lower boundary
 
-    G_H_B(1,m) =J_H_B(1,m); %--- Upper boundary
+    G_H_B(1,m) =J_H(1,m); %--- Upper boundary
+    G_H_B(end,m) = 0; %--- Lower boundary
 
-    G_OH_B(1,m) =J_OH_B(1,m); %--- Upper boundary
+    G_OH_B(1,m) =J_OH(1,m); %--- Upper boundary
+    G_OH_B(end,m) = 0; %--- Lower boundary
 
-    G_HA_B(1,m) =J_HA_B(1,m); %--- Upper boundary
+    G_HA_B(1,m) =J_HA(1,m); %--- Upper boundary
+    G_HA_B(end,m) = 0; %--- Lower boundary
 
-    G_BOH_B(1,m) =J_BOH_B(1,m); %--- Upper boundary
+    G_BOH_B(1,m) =J_BOH(1,m); %--- Upper boundary
+    G_BOH_B(end,m) = 0; %--- Lower boundary
 
-    G_A_B(1,m) =J_A_B(1,m); %--- Upper boundary
+    G_A_B(1,m) =J_A(1,m); %--- Upper boundary
+    G_A_B(end,m) = 0; %--- Lower boundary
 
-    G_B_B(1,m) = J_B_B(1,m); %--- Upper boundary
-
+    G_B_B(1,m) = J_B(1,m); %--- Upper boundary
+    G_B_B(end,m) = 0; %--- Lower boundary
     for i= 2:nx-1
         
         
-        G_C_B(i,m+1) = G_C_B(i,m) + growth(i,m)*(alpha_prime_C*(G_C_B(i+1,m) -2*G_C_B(i,m) + G_C_B(i-1,m)) + beta_prime_C(i,m)*(G_C_B(i+1,m) - G_C_B(i-1,m)) + R_C_B(i,m)/R_D);
-        G_H_B(i,m+1) = G_H_B(i,m) + growth(i,m)*(alpha_prime_H*(G_H_B(i+1,m) -2*G_H_B(i,m) + G_H_B(i-1,m)) + beta_prime_H(i,m)*(G_H_B(i+1,m) - G_H_B(i-1,m)) + R_H_B(i,m)/R_D);
-        G_OH_B(i,m+1) = G_OH_B(i,m) + growth(i,m)*(alpha_prime_OH*(G_OH_B(i+1,m) -2*G_OH_B(i,m) + G_OH_B(i-1,m)) + beta_prime_OH(i,m)*(G_OH_B(i+1,m) - G_OH_B(i-1,m)) + R_OH_B(i,m)/R_D);
-        G_HA_B(i,m+1) = G_HA_B(i,m) + growth(i,m)*(alpha_prime_HA*(G_HA_B(i+1,m) -2*G_HA_B(i,m) + G_HA_B(i-1,m)) + beta_prime_HA(i,m)*(G_HA_B(i+1,m) - G_HA_B(i-1,m)) + R_HA_B(i,m)/R_D);
-        G_BOH_B(i,m+1) = G_BOH_B(i,m) + growth(i,m)*(alpha_prime_BOH*(G_BOH_B(i+1,m) -2*G_BOH_B(i,m) + G_BOH_B(i-1,m)) + beta_prime_BOH(i,m)*(G_BOH_B(i+1,m) - G_BOH_B(i-1,m)) + R_BOH_B(i,m)/R_D);
-        G_A_B(i,m+1) = G_A_B(i,m) + growth(i,m)*(alpha_prime_A*(G_A_B(i+1,m) -2*G_A_B(i,m) + G_A_B(i-1,m)) + beta_prime_A(i,m)*(G_A_B(i+1,m) - G_A_B(i-1,m)) + R_A_B(i,m)/R_D);
-        G_B_B(i,m+1) = G_B_B(i,m) + growth(i,m)*(alpha_prime_B*(G_B_B(i+1,m) -2*G_B_B(i,m) + G_B_B(i-1,m)) + beta_prime_B(i,m)*(G_B_B(i+1,m) - G_B_B(i-1,m)) + R_B_B(i,m)/R_D);
+        G_C_B(i,m+1) = G_C_B(i,m) + alpha_C*(G_C_B(i+1,m) -2*G_C_B(i,m) + G_C_B(i-1,m)) + beta_prime_C(i,m)*(G_C_B(i+1,m) - G_C_B(i-1,m)) + R_C_B(i,m)/R_D;
+        G_H_B(i,m+1) = G_H_B(i,m) + alpha_H*(G_H_B(i+1,m) -2*G_H_B(i,m) + G_H_B(i-1,m)) + beta_prime_H(i,m)*(G_H_B(i+1,m) - G_H_B(i-1,m)) + R_H_B(i,m)/R_D;
+        G_OH_B(i,m+1) = G_OH_B(i,m) + alpha_OH*(G_OH_B(i+1,m) -2*G_OH_B(i,m) + G_OH_B(i-1,m)) + beta_prime_OH(i,m)*(G_OH_B(i+1,m) - G_OH_B(i-1,m)) + R_OH_B(i,m)/R_D;
+        G_HA_B(i,m+1) = G_HA_B(i,m) + alpha_HA*(G_HA_B(i+1,m) -2*G_HA_B(i,m) + G_HA_B(i-1,m)) + beta_prime_HA(i,m)*(G_HA_B(i+1,m) - G_HA_B(i-1,m)) + R_HA_B(i,m)/R_D;
+        G_BOH_B(i,m+1) = G_BOH_B(i,m) + alpha_BOH*(G_BOH_B(i+1,m) -2*G_BOH_B(i,m) + G_BOH_B(i-1,m)) + beta_prime_BOH(i,m)*(G_BOH_B(i+1,m) - G_BOH_B(i-1,m)) + R_BOH_B(i,m)/R_D;
+        G_A_B(i,m+1) = G_A_B(i,m) + alpha_A*(G_A_B(i+1,m) -2*G_A_B(i,m) + G_A_B(i-1,m)) + beta_prime_A(i,m)*(G_A_B(i+1,m) - G_A_B(i-1,m)) + R_A_B(i,m)/R_D;
+        G_B_B(i,m+1) = G_B_B(i,m) + alpha_B*(G_B_B(i+1,m) -2*G_B_B(i,m) + G_B_B(i-1,m)) + beta_prime_B(i,m)*(G_B_B(i+1,m) - G_B_B(i-1,m)) + R_B_B(i,m)/R_D;
         
         J_C_B(i,m) = (u_c(i,m) + u_e_C(i,m))*G_C_B(i,m) - alpha_prime_C*(G_C_B(i+1,m) - G_C_B(i-1,m));
         J_H_B(i,m) = (u_c(i,m) + u_e_H(i,m))*G_H_B(i,m) - alpha_prime_H*(G_H_B(i+1,m) - G_H_B(i-1,m));
@@ -438,20 +477,12 @@ for m= 1:nt-1
         J_A_B(i,m) = (u_c(i,m) + u_e_A(i,m))*G_A_B(i,m) - alpha_prime_A*(G_A_B(i+1,m) - G_A_B(i-1,m));
         J_B_B(i,m) = (u_c(i,m) + u_e_B(i,m))*G_B_B(i,m) - alpha_prime_B*(G_B_B(i+1,m) - G_B_B(i-1,m));
 
-        G_C_B(end,m) = J_C_B(i,m); %--- Lower boundary
-        G_H_B(end,m) = J_H_B(i,m); %--- Lower boundary
-        G_OH_B(end,m) = J_OH_B(i,m); %--- Lower boundary
-        G_HA_B(end,m) = J_HA_B(i,m); %--- Lower boundary
-        G_BOH_B(end,m) = J_BOH_B(i,m); %--- Lower boundary
-        G_A_B(end,m) = J_A_B(i,m); %--- Lower boundary
-        G_B_B(end,m) = J_B_B(i,m); %--- Lower boundary
-
         s_H_B(i,m) = (z_H^2)*v_H*G_H_B(i,m);
         s_OH_B(i,m) = (z_OH^2)*v_OH*G_OH_B(i,m);
         s_C_B(i,m) = (z_C^2)*v_H*G_C_B(i,m);
         Sigma_B(i,m) = (F^2)*(s_C_B(i,m) + s_H_B(i,m) + s_OH_B(i,m)) + Sigma_ref(i,m);
         
-        i_z_B(i,m) = (-1*Sigma_B(i,m)*E_field(i,m) - F*((z_C*D_C*(G_C_B(i+1,m) - G_C(i-1,m))) + (z_H*D_H*(G_H_B(i+1,m) - G_H_B(i-1,m))) + (z_OH*D_OH*(G_OH_B(i+1,m) - G_OH_B(i-1,m)))))/(tau^2);
+        i_z_B(i,m) = (-1*Sigma_B(i,m)*E_field_e(i,m) - F*((z_C*D_C*(G_C_B(i+1,m) - G_C(i-1,m))) + (z_H*D_H*(G_H_B(i+1,m) - G_H_B(i-1,m))) + (z_OH*D_OH*(G_OH_B(i+1,m) - G_OH_B(i-1,m)))))/(tau^2);
         if i == 2
             R_prime_H_B = i_z_B(i,m)/F;
             R_H_B(i,m) = -1*R_prime_H_B;
@@ -483,20 +514,13 @@ yl = [10000,7900,7100,6000,5700,5500,5400,5100];
 figure(1);
 hold on;
 
-plot(t, G_C(10,:), '-', 'DisplayName', 'Hydrocarbon (EKR)');
-plot(t, G_C_B(10,:), '--', 'DisplayName', 'Hydrocarbon (BKR)');
+plot(t, G_C(10,:), '-', 'DisplayName', 'Hydrocarbon (Line E file)');
+plot(t, G_C_B(10,:), '--', 'DisplayName', 'Hydrocarbon (Log E field)');
 
-plot(t, G_B(10,:), '-', 'DisplayName', 'Base (EKR)');
-plot(t, G_B_B(10,:), '-', 'DisplayName', 'Base (BKR)');
+plot(t, G_H(10,:), '-', 'DisplayName', 'H+ (Line E file)');
+plot(t, G_H_B(10,:), '-', 'DisplayName', 'H+ (Log E file)');
 
-% plot(t, G_OH(10,:), '-', 'DisplayName', 'Hydroxid (EKR)');
-% plot(t, G_OH_B(10,:), '--', 'DisplayName', 'Hydroxid (BKR)');
 
-% plot(t, G_BOH(10,:), '-', 'DisplayName', 'Base (EKR)');
-% plot(t, G_BOH_B(10,:), '--', 'DisplayName', 'Base (BKR)');
-
-% plot(t, G_HA(10,:), '-', 'DisplayName', 'Acid (EKR)');
-% plot(t, G_HA_B(10,:), '--', 'DisplayName', 'Acid (BKR)');
 
 scatter(xl, yl, 'DisplayName', 'Experiment Data');
 
@@ -521,6 +545,8 @@ legend();
 
 figure
 plot(x_scale,E_field(:,50400),'--','DisplayName', 'dEdx')
+hold on;
+plot(x_scale,E_field_e(:,50400),'--','DisplayName', 'dEdx')
 xlabel('Length (cm)');
 ylabel('E field');
 legend();
