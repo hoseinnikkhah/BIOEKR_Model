@@ -116,18 +116,21 @@ v_A = (D_A/(R*T));                             % mobility [A]                   
 v_B = (D_B/(R*T));                             % mobility [B]                   |
 %                                                                               |
 % Species electromigration velocity                                             |
-u_e_H = (v_H*z_H*F*dEdx)/(tau^2);              % electromigration [Hydrogen]    |
-u_e_OH = (v_OH*z_OH*F*dEdx)/(tau^2);           % electromigration [Hydroxid]    |
-u_e_C = (v_C*z_C*F*dEdx)/(tau^2);              % electromigration [Carbon]      |
-u_e_HA = (v_HA*z_HA*F*dEdx)/(tau^2);           % electromigration [Acid]        |
-u_e_BOH = (v_BOH*z_BOH*F*dEdx)/(tau^2);        % electromigration [Base]        |
-u_e_A = (v_A*z_A*F*dEdx)/(tau^2);              % electromigration [A]           |
-u_e_B = (v_B*z_B*F*dEdx)/(tau^2);              % electromigration [B]           |
+u_e_H = (v_H*z_H*F*E_field)/(tau^2);           % electromigration [Hydrogen]    |
+u_e_OH = (v_OH*z_OH*F*E_field)/(tau^2);        % electromigration [Hydroxid]    |
+u_e_C = (v_C*z_C*F*E_field)/(tau^2);           % electromigration [Carbon]      |
+u_e_HA = (v_HA*z_HA*F*E_field)/(tau^2);        % electromigration [Acid]        |
+u_e_BOH = (v_BOH*z_BOH*F*E_field)/(tau^2);     % electromigration [Base]        |
+u_e_A = (v_A*z_A*F*E_field)/(tau^2);           % electromigration [A]           |
+u_e_B = (v_B*z_B*F*E_field)/(tau^2);           % electromigration [B]           |
 %                                                                               |
 % domain velocity                                                               |
-u_x = (epsilon/mu_solution)*(zeta*dEdx);       % Volumetric Velocity [m3/s]     |
-u_c = ((1/tau^2)*u_x)/(24000000*3600);         % Convection Velocity [m3/s]     |
-u_eo = ((epsilon*zeta)/mu_solution)*dEdx;      % Electoosmotic Velocity [m3/s]  |
+u_x = (epsilon/mu_solution)*(zeta*E_field);    % Volumetric Velocity [m3/s]     |
+u_c = ones(nx,nt);%                                                             |
+% u_C = ((1/tau^2)*u_x)*Z/(24*3600*Pe);        % Convection Velocity [m3/s]     |
+u_C = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta);     % Convection Velocity [m3/s]     |
+u_c = u_c.*u_C;%                                                                |
+u_eo = ((epsilon*zeta)/mu_solution)*E_field;   % Electoosmotic Velocity [m3/s]  |
 u_s = n*u_c; %                                                                  |
 %                                                                               |
 % Species total velocity                                                        |
@@ -151,14 +154,13 @@ beta_B = u_t_B*(dt/2*dx); %                                                     
 % Velocity advection with coefficent abberation                                 |
 beta_prime_C = coeff*u_t_C*(dt/2*dx); %                                         |
 beta_prime_H = coeff*u_t_H*(dt/2*dx); %                                         |
-beta_prime_OH = coeff*u_t_OH*(dt/2*dx); %                                       |
+beta_prime_OH = coeff*u_t_OH_f*(dt/2*dx); %                                     |
 beta_prime_HA = coeff*u_t_HA*(dt/2*dx); %                                       |
 beta_prime_BOH = coeff*u_t_BOH*(dt/2*dx); %                                     |
 beta_prime_A = coeff*u_t_A*(dt/2*dx); %                                         |
 beta_prime_B = coeff*u_t_B*(dt/2*dx); %                                         |
 %                                                                               |
 %-------------------------------------------------------------------------------
-
 R_D = coeff*(dt)/n;              % Reaction rate Dimensionless factor
 % Double layer
 % D_l = sqrt((epsilon*R*T)/2*(z^2)*(F^2)*c)
