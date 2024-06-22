@@ -243,26 +243,14 @@ Sigma(:,1) = (F^2)*(s_H(:,1) + s_OH(:,1) + s_C(:,1));
 
 for m= 2:nt-1
 
-    G_C(1,m) =J_C(1,m); %--- Upper boundary
-    G_C(end,m) = 0; %--- Lower boundary
-
-    G_H(1,m) =J_H(1,m); %--- Upper boundary
-    G_H(end,m) = 0; %--- Lower boundary
-
-    G_OH(1,m) =J_OH(1,m); %--- Upper boundary
-    G_OH(end,m) = 0; %--- Lower boundary
-
-    G_HA(1,m) =J_HA(1,m); %--- Upper boundary
-    G_HA(end,m) = 0; %--- Lower boundary
-
+    G_C(1,m) =J_C(1,m);     %--- Upper boundary
+    G_H(1,m) =J_H(1,m);     %--- Upper boundary
+    G_OH(1,m) =J_OH(1,m);   %--- Upper boundary
+    G_HA(1,m) =J_HA(1,m);   %--- Upper boundary
     G_BOH(1,m) =J_BOH(1,m); %--- Upper boundary
-    G_BOH(end,m) = 0; %--- Lower boundary
+    G_A(1,m) =J_A(1,m);     %--- Upper boundary
+    G_B(1,m) =J_B(1,m);     %--- Upper boundary
 
-    G_A(1,m) =J_A(1,m); %--- Upper boundary
-    G_A(end,m) = 0; %--- Lower boundary
-
-    G_B(1,m) =J_B(1,m); %--- Upper boundary
-    G_B(end,m) = 0; %--- Lower boundary
     for i= 2:nx-1
         
         
@@ -273,7 +261,23 @@ for m= 2:nt-1
         G_BOH(i,m+1) = G_BOH(i,m) + alpha_BOH*(G_BOH(i+1,m) -2*G_BOH(i,m) + G_BOH(i-1,m)) + beta_BOH*(G_BOH(i+1,m) - G_BOH(i-1,m)) + R_BOH(i,m)/R_D;
         G_A(i,m+1) = G_A(i,m) + alpha_A*(G_A(i+1,m) -2*G_A(i,m) + G_A(i-1,m)) + beta_A*(G_A(i+1,m) - G_A(i-1,m)) + R_A(i,m)/R_D;
         G_B(i,m+1) = G_B(i,m) + alpha_B*(G_B(i+1,m) -2*G_B(i,m) + G_B(i-1,m)) + beta_B*(G_B(i+1,m) - G_B(i-1,m)) + R_B(i,m)/R_D;
-        
+
+        J_C(i,m) = (u_c(i,m) + u_e_C(i,m))*G_C(i,m) - alpha_C*(G_C(i+1,m) - G_C(i,m));
+        J_H(i,m) = (u_c(i,m) + u_e_H(i,m))*G_H(i,m) - alpha_H*(G_H(i+1,m) - G_H(i,m));
+        J_OH(i,m) = (u_c(i,m) + u_e_OH(i,m))*G_OH(i,m) - alpha_OH*(G_OH(i,m) - G_OH(i-1,m));
+        J_HA(i,m) = (u_c(i,m) + u_e_HA(i,m))*G_HA(i,m) - alpha_HA*(G_HA(i,m) - G_HA(i-1,m));
+        J_BOH(i,m) = (u_c(i,m) + u_e_BOH(i,m))*G_BOH(i,m) - alpha_BOH*(G_BOH(i,m) - G_BOH(i-1,m));
+        J_A(i,m) = (u_c(i,m) + u_e_A(i,m))*G_A(i,m) - alpha_A*(G_A(i+1,m) - G_A(i,m));
+        J_B(i,m) = (u_c(i,m) + u_e_B(i,m))*G_B(i,m) - alpha_B*(G_B(i+1,m) - G_B(i,m));
+
+        G_C(end,m) = J_C(i,m); %--- Lower boundary
+        G_H(end,m) = J_H(i,m); %--- Lower boundary
+        G_OH(end,m) = J_OH(i,m); %--- Lower boundary
+        G_HA(end,m) = J_HA(i,m); %--- Lower boundary
+        G_BOH(end,m) = J_BOH(i,m); %--- Lower boundary
+        G_A(end,m) = J_A(i,m); %--- Lower boundary
+        G_B(end,m) = J_B(i,m); %--- Lower boundary
+
         s_H(i,m) = (z_H^2)*v_H*G_H(i,m);
         s_OH(i,m) = (z_OH^2)*v_OH*G_OH(i,m);
         s_C(i,m) = (z_C^2)*v_H*G_C(i,m);
