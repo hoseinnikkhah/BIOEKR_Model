@@ -241,7 +241,7 @@ s_OH(:,1) = (z_OH^2)*v_OH*G_OH(:,1);
 s_C(:,1) = (z_C^2)*v_C*G_C(:,1);
 Sigma(:,1) = (F^2)*(s_H(:,1) + s_OH(:,1) + s_C(:,1));
 
-for m= 2:nt-1
+for m= 1:nt-1
 
     G_C(1,m) =J_C(1,m);     %--- Upper boundary
     G_H(1,m) =J_H(1,m);     %--- Upper boundary
