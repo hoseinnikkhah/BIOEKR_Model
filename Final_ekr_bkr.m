@@ -32,6 +32,12 @@ Pe = 47;
 Z = 0.049;
 Beta = 967;
 
+E_field = ones(nx,nt);
+M = linspace(dEdx,0,nx);
+for timestep = 1:nt
+    E_field(:,timestep) = M;
+end
+
 % Species Valency
 z_H = 1;
 z_OH = -1;
