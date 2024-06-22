@@ -162,13 +162,6 @@ beta_prime_B = coeff*u_t_B*(dt/2*dx); %                                         
 %                                                                               |
 %-------------------------------------------------------------------------------
 R_D = coeff*(dt)/n;              % Reaction rate Dimensionless factor
-% Double layer
-% D_l = sqrt((epsilon*R*T)/2*(z^2)*(F^2)*c)
-% this formulas exits to confirm there is a dl here, it is not used in anywhere in model
-
-% Flux properties
-
-%J0 = J0/100;
 
 % --- Create arrays to save data for export
 x = linspace(0,L,nx);
