@@ -8,23 +8,24 @@ dt = tmax/(nt-1);
 
 
 % Physical info
-T = 25 + 273;                     % Temperature [K]
-R = 8.314;                        % Gas constant [J/mol.K]
-n = 0.64;                         % Porosity
-F = 96485;                        % Faraady constant [C/mol]
-phi = 25;                         % Electric field [V]
-tau = 1.25;                       % Tortuosity
-dzdx = 1/tau;                     % divertion field
-dEdx = phi/L;                     % Electric field in lenght [V/m]
-epsilon = 7*10^10;                % Electrical permitivity [F/m]
-mu_oil = 510*24*3600;             % Oil viscosity [kg/(m.day)]
-mu_solution = 0.001*24*3600;      % Solution viscosity [kg/(m.day)]
-zeta = -0.0027;                   % Zeta potential [V]
-K = 0.02;                         % Exprimental Microbal constant
-K_A = 1.75*10^-5;                 % Dissociation constant [mol/m3]
-k_i = 0.075;                      % Exprimental constant
-coeff = 1/(1+k_i);                % Adsorbing coefficent
-R_i = (0.693/53.2);               % Initial Reaction flow rate
+T = 25 + 273;                   % Temperature [K]
+R = 8.314;                      % Gas constant [J/mol.K]
+n = 0.64;                       % Porosity
+F = 96485;                      % Faraady constant [C/mol]
+phi = 25;                       % Electric field [V]
+phi_end = 0;                    % Electric field at end[V]
+tau = 1.25;                     % Tortuosity
+dzdx = 1/tau;                   % divertion field
+dEdx = phi/L;                   % Electric field in lenght [V/m]
+epsilon = 7*10^10;              % Electrical permitivity [F/m]
+mu_oil = 510*24*3600;           % Oil viscosity [kg/(m.day)]
+mu_solution = 0.001*24*3600;    % Solution viscosity [kg/(m.day)]
+zeta = -0.0027;                 % Zeta potential [V]
+K = 0.02;                       % Exprimental Microbal constant
+K_A = 1.75*10^-5;               % Dissociation constant [mol/m3]
+k_i = 0.075;                    % Exprimental constant
+coeff = 1/(1+k_i);              % Adsorbing coefficent
+R_i = (0.693/53.2);             % Initial Reaction flow rate
 
 % Dimensionless parameters
 Pe = 47;
