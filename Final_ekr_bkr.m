@@ -363,8 +363,8 @@ J_BOH_B(:,1)= (u_c + u_e_BOH)*10000;
 G_A_B(:,1)= 10000;
 J_A_B(1,:)= (u_c + u_e_A)*10000;
 
-G_B_B(:,1)= 1000;
-G_B_B(1,:)= (u_c + u_e_B)*1000;
+G_B_B(:,1)= 10000;
+G_B_B(1,:)= (u_c + u_e_B)*10000;
 
 R_C_B(:,1) = R_i*coeff*(dt)/n;
 R_OH_B(:,1) = R_i*coeff*(dt)/n;
@@ -381,8 +381,9 @@ Sigma_B(:,1) = (F^2)*(s_H_B(:,1) + s_OH_B(:,1) + s_C_B(:,1));
 
 for xx = 1:nx
     for tt = 1:nt
-        M_g = exp(-K*(tt/1440));
+        M_g = exp(-K*(tt/1440)*Z*(Beta/Pe));
         sub(xx,tt) = M_g;
+        % fixup(xx,tt) = 1/(-0.01*(tt/1440) + 1.61);
         fixup(xx,tt) = 1/(-0.01*(tt/1440) + 0.61);
     end
 end
