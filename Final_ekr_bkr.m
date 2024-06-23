@@ -464,24 +464,12 @@ pH_B = log10(G_H_B);
 pH_scale = linspace(1,40,41);
 xl = [0,5,10,15,20,25,30,35];
 yl = [10000,7900,7100,6000,5700,5500,5400,5100];
-figure;
 
+figure(1);
 hold on;
 
 plot(t,G_C(10,:),'-','DisplayName', 'Hydrocarbon (EKR)');
 plot(t,G_C_B(10,:),'--','DisplayName', 'Hydrocarbon (BKR)');
-
-plot(t,G_B(10,:),'-','DisplayName', 'Base (EKR)');
-plot(t,G_B_B(10,:),'-','DisplayName', 'Base (BKR)');
-
-%plot(t,G_OH(10,:),'-','DisplayName', 'Hydroxid (EKR)');
-%plot(t,G_OH_B(10,:),'--','DisplayName', 'Hydroxid (BKR)');
-
-%plot(t,G_BOH(10,:),'-','DisplayName', 'Base (EKR)');
-%plot(t,G_BOH_B(10,:),'--','DisplayName', 'Base (BKR)');
-
-%plot(t,G_HA(10,:),'-','DisplayName', 'Acid (EKR)');
-%plot(t,G_HA_B(10,:),'--','DisplayName', 'Acid (BKR)');
 
 scatter(xl,yl, 'DisplayName', 'Expriment Data');
 
@@ -489,14 +477,41 @@ xlabel('Time');
 ylabel('Conc(mg/kg)');
 
 legend();
+hold off;
 
+% Plot for figure 2
+figure(2);
+gif_filename = 'pH_change_animation.gif';
 
-figure;
+figure(2);
 hold on;
-plot(pH_scale,pH(:,50400),'--','DisplayName', 'pH (EKR)')
-plot(pH_scale,pH_B(:,50400),'-','DisplayName', 'pH (BKR)')
 
-xlabel('Length (cm)');
-ylabel('pH level');
+fig1 = plot(pH_scale, pH(:,1), 'DisplayName', 'pH change in EKR');
+fig2 = plot(pH_scale, pH_B(:,1), 'DisplayName', 'pH change in BKR');
 
-legend();
+xlabel('Distance (cm)');
+ylabel('pH Level');
+
+for h = 1:50401
+    set(fig1, 'XData', pH_scale, 'YData', pH(:,h)');
+    set(fig2, 'XData', pH_scale, 'YData', pH_B(:,h)');
+
+    h2 = h / 1440;
+    title(['pH Change - Day: ', sprintf('%.2f', h2)]);
+    
+    frame = getframe(gcf);
+    im = frame2im(frame);
+    [imind, cm] = rgb2ind(im, 256);
+    
+    if h == 1
+        imwrite(imind, cm, gif_filename, 'gif', 'Loopcount', inf, 'DelayTime', 0.01);
+    else
+        imwrite(imind, cm, gif_filename, 'gif', 'WriteMode', 'append', 'DelayTime', 0.01);
+    end
+    
+    pause(0.00001);
+end
+
+legend;
+hold off;
+
