@@ -515,3 +515,10 @@ end
 legend;
 hold off;
 
+% Plot for figure 2
+figure(3)
+plot(x_scale,E_field(:,50400),'--','DisplayName', 'dEdx')
+xlabel('Length (cm)');
+ylabel('E field');
+title('Electric feild gradient')
+legend();
