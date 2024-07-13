@@ -9,9 +9,19 @@ nt = 50401;                    % number of time steps
 dx = L/(nx-1);
 dt = tmax/(nt-1);
 
+% Refrence x directions        [m]
+x = (0:dx:(nx-1)*dx)';      
+x_ref = repmat(x,1,nt);
 
 % Physical info 
 V = 25;                        % Voltage [V]
+
+E_field = ones(nx,nt);         % Voltage [V]
+M = linspace(V,0,nx);
+for timestep = 1:nt
+    E_field(:,timestep) = M;
+end
+
 dVdx = V/L;                    % Voltage gradient [V/m]
 dVdx_cm = V/L_cm;              % Voltage gradient [V/cm]
 T = 37 + 273;                  % Tempature [K]
@@ -25,10 +35,11 @@ tau = 1.25;                    % Tortuosity
 
 % Acetic acid
 sigma_surface = 0.0013;        % Surface conductivit [mhos/m]
-K_a = 1.75/100000;             % dissociation constant [mol/m3]
+K_a = 1.75*10^-6;              % dissociation constant [mol/m3]
 mu_a = 0.001;                  % Solution viscosity [kg/m.s]
 epsilon = 7*10^10;             % Electrical permittivity [F/m]
 zeta = -0.0027;                % Zeta Potential [V]
+zeta_0 = 2.6205e-23;           % Refrence Zeta Potential [V]
 
 % Dimentionless 
 Peclet = 47;
@@ -108,5 +119,36 @@ u_e_H_upp = -v_H_upp*z_H*F*dvdx*(1/tau^2);
 u_e_OH_upp = -v_OH_upp*z_OH*F*dvdx*(1/tau^2);
 u_e_C_upp = -v_C_upp*z_C*F*dvdx*(1/tau^2);
 
+% Refrence velocity                             [m/s]
+u_0 = (1/tau^2)*((epsilon*zeta)/mu_a)*dvdx;
+
+% Dimensionless x directions
+x_up = x_ref/L;
+
+% Dimensionless Voltage 
+phi_bar = E_field/V;
+
+dphidx = phi_bar/x_up;
+% Dimensionless Electroelectromigration Velocities
+
+% Dimensionless Z
+
+Z = (R*T*epsilon*zeta-0)/(D0*F*mu_a);
 
 
+
+u_e_HA_upp
+u_e_A_upp
+u_e_Na_upp
+u_e_Cl_upp
+u_e_H_upp
+u_e_OH_upp
+u_e_C_upp
+
+
+% Convection velocity                           [m/s]
+u_x = (epsilon/mu_a)*(zeta*dvdx);
+u_c = u_x/(tau^2);              % Convection velocity
+
+% Initial concentration                         [mol/m3]
+c_0 = 500; 
