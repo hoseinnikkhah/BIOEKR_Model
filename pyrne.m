@@ -155,6 +155,7 @@ alpha = u_0/(c_0*k_0);
 x_array = linspace(0,L,nx);
 t_array = linspace(0,tmax,nt);
 
+% Flux arrays
 J_HA = zeros(nx,nt);
 J_A = zeros(nx,nt);
 J_Na = zeros(nx,nt);
@@ -163,6 +164,7 @@ J_H = zeros(nx,nt);
 J_OH = zeros(nx,nt);
 J_C = zeros(nx,nt);
 
+% concentration arrays
 G_HA = zeros(nx,nt);
 G_A = zeros(nx,nt);
 G_Na = zeros(nx,nt);
@@ -171,24 +173,29 @@ G_H = zeros(nx,nt);
 G_OH = zeros(nx,nt);
 G_C = zeros(nx,nt);
 
+% Sigma arrays
 Sigma = zeros(nx,nt);
 Sigma_ref = ones(nx,nt);
 sigma_ref = Sigma_ref*sigma_surface;
 
+% Current array
 i_z = zeros(nx, nt);
 
+% species sigma
 s_H = zeros(nx,nt);
 s_C = zeros(nx,nt);
 s_OH = zeros(nx,nt);
 
+% SpeciesConstants
 K_H2O = zeros(nx,nt);
 K_a = zeros(nx,nt);
 K_b = zeros(nx,nt);
 
-R_C = zeros(nx,nt);
+% Rate arrays
+R_HA = zeros(nx,nt);
+R_A = zeros(nx,nt);
+R_Na = zeros(nx,nt);
+R_Cl = zeros(nx,nt);
 R_H = zeros(nx,nt);
 R_OH = zeros(nx,nt);
-R_HA = zeros(nx,nt);
-R_BOH = zeros(nx,nt);
-R_A = zeros(nx,nt);
-R_B = zeros(nx,nt);
+R_C = zeros(nx,nt);
