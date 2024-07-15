@@ -104,16 +104,16 @@ v_C_upp = D_C_upp/(R*T);
 v_i_upp = [v_HA_upp, v_A_upp, v_Na_upp, v_Cl_upp, v_H_upp, v_OH_upp, v_C_upp];
 
 % Electroelectromigration velocity (Normal)     [m/s]
-u_e_HA = -v_HA*z_HA*F*dvdx*(1/tau^2);
-u_e_A = -v_A*z_A*F*dvdx*(1/tau^2);
-u_e_Na = -v_Na*z_Na*F*dvdx*(1/tau^2);
-u_e_Cl = -v_Cl*z_Cl*F*dvdx*(1/tau^2);
-u_e_H = -v_H*z_H*F*dvdx*(1/tau^2);
-u_e_OH = -v_OH*z_OH*F*dvdx*(1/tau^2);
-u_e_C = -v_C*z_C*F*dvdx*(1/tau^2);
+u_e_HA = -v_HA*z_HA*F*E_field*(1/tau^2);
+u_e_A = -v_A*z_A*F*E_field*(1/tau^2);
+u_e_Na = -v_Na*z_Na*F*E_field*(1/tau^2);
+u_e_Cl = -v_Cl*z_Cl*F*E_field*(1/tau^2);
+u_e_H = -v_H*z_H*F*E_field*(1/tau^2);
+u_e_OH = -v_OH*z_OH*F*E_field*(1/tau^2);
+u_e_C = -v_C*z_C*F*E_field*(1/tau^2);
 
 % Refrence velocity                             [m/s]
-u_0 = (1/tau^2)*((epsilon*zeta)/mu_a)*dVdx;
+u_0 = (1/tau^2)*((epsilon*zeta)/mu_a)*E_field;
 
 % Dimensionless x directions
 x_up = x_ref/L;
@@ -138,9 +138,13 @@ u_e_C_upp = (-1/Z_calculated)*D_C_upp*z_C*dphidx;
 
 
 % Convection velocity          [m/s]
-u_x = (epsilon/mu_a)*(zeta*dvdx);
+u_x = (epsilon/mu_a)*(zeta*E_field);
 u_c = u_x/(tau^2);              % Convection velocity
 u_c_up = -(zeta/zeta_0)*dphidx;
+
+% Toatal velocity term
+u_t_H = (u_e_H + u_c);
+
 % Initial concentration        [mol/m3]
 c_0 = 500; 
 
@@ -199,3 +203,16 @@ R_Cl = zeros(nx,nt);
 R_H = zeros(nx,nt);
 R_OH = zeros(nx,nt);
 R_C = zeros(nx,nt);
+
+% --- Set IC and BC
+G_H(:,1) = c_0;
+J_H(1,;) = u_t_H(1,:)*c_0;
+
+for m=1:nt-1
+    G_H(1,m) =J_H(1,m); %--- Upper boundary
+    for i=2:nx-1
+        G_H(i,m+1) = G_H (i,m) + ((D_H/(tau^2))*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m))*((n*dt)/(dx^2))) - (u_t_H(i+1,m) - u_t_H(i-1,m))*((G_H(i+1,m) - G_H(i-1,m))*((n*dt)/dx));
+        J_H(i,m) = (u_t_H(i,m))*G_H(i,m) - (D_H/(tau^2))*((G_H(i+1,m) - G_H(i,m))*((dt)/dx));
+    end
+end
+
