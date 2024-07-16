@@ -141,7 +141,7 @@ u_e_C_upp = (-1/Z_calculated)*D_C_upp*z_C*dphidx;
 % Convection velocity          [m/s]
 u_x = (epsilon/mu_a)*(zeta*E_field);
 u_c = u_x/((tau^2)*10^14);              % Convection velocity
-u_c_up = -((zeta/zeta_0)*dphidx)*10^-18;
+u_c_up = -((zeta/zeta_0)*dphidx)*10^-22;
 
 % Toatal velocity term (Normal)
 u_t_HA = (u_e_HA + u_c);
@@ -193,6 +193,15 @@ G_H = zeros(nx,nt);
 G_OH = zeros(nx,nt);
 G_C = zeros(nx,nt);
 
+% concentration arrays [remapped]
+G_HA_up = zeros(nx,nt);
+G_A_up = zeros(nx,nt);
+G_Na_up = zeros(nx,nt);
+G_Cl_up = zeros(nx,nt);
+G_H_up = zeros(nx,nt);
+G_OH_up = zeros(nx,nt);
+G_C_up = zeros(nx,nt);
+
 % Sigma arrays
 Sigma = zeros(nx,nt);
 Sigma_ref = ones(nx,nt);
@@ -221,30 +230,39 @@ R_OH = zeros(nx,nt);
 R_C = zeros(nx,nt);
 
 % --- Set IC and BC
-%G_HA(:,1) = c_0;
-% J_H(1,:) = u_t_H(1,:)*c_0;
-
-%for m=1:nt-1
-
-%    for i=2:nx-1
-%        G_HA(1,m) = (u_t_H(1,m)*c_0) - (D_HA/(tau^2))*((G_HA(i,m) - G_HA(i-1,m))*(dt/(n*dx)));        %--- z = 0 boundary
-%        G_HA(end,m) = (u_t_H(1,m)*c_0) - (D_HA/(tau^2))*((G_HA(i,m) - G_HA(i-1,m))*(dt/(n*dx)));      %--- z = L boundary
-%        G_HA(i,m+1) = G_HA(i,m) + coeff*((D_HA/(tau^2))*((G_HA(i+1,m) -2*G_HA(i,m) + G_HA(i-1,m))*(dt/(n*(dx^2)))) - (((u_t_HA(i+1,m) - u_t_HA(i-1,m))*(dt/(n*2*dx))) * ((G_HA(i+1,m) - G_HA(i-1,m))*(dt/(n*2*dx)))));
-        %G_H(i,m+1) = G_H(i,m) + coeff*((D_H/(tau^2))*((G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m))*(dt/(n*(dx^2)))) - ((u_t_H(i+1,m) - u_t_H(i-1,m))*(G_H(i+1,m) - G_H(i-1,m)))*(dt/(n*2*dx)));
-        
-%    end
-%end
-
-
-
-
-G_HA_up = zeros(nx,nt);
 
 for m=1:nt-1
+    % --- Set IC and BC
     G_HA_up(1,m) = 1;
     G_HA_up(end,m) = 0;
+
+    G_A_up(1,m) = 1;
+    G_A_up(end,m) = 0;
+
+    G_Na_up(1,m) = 1;
+    G_Na_up(end,m) = 0;
+
+    G_Cl_up(1,m) = 1;
+    G_Cl_up(end,m) = 0;
+
+    G_H_up(1,m) = 1;
+    G_H_up(end,m) = 0;        
+
+    G_OH_up(1,m) = 1;
+    G_OH_up(end,m) = 0;
+
+    G_C_up(1,m) = 1;
+    G_C_up(end,m) = 0;
+
     for i=2:nx-1
-        G_HA_up(i,m+1) = G_HA_up(i,m) + (D_HA_upp/(Peclet_calculated))*((G_HA_up(i+1,m) -2*G_HA_up(i,m) + G_HA_up(i-1,m))*(dt/((x_up(i,m))^2))) - (((u_t_HA(i+1,m) - u_t_HA(i-1,m))*(dt/(n*2*dx))) * ((G_HA(i+1,m) - G_HA(i-1,m))*(dt/(n*2*dx))));
+        G_HA_up(i,m+1) = G_HA_up(i,m) + (D_HA_upp/(Peclet_calculated))*((G_HA_up(i+1,m) -2*G_HA_up(i,m) + G_HA_up(i-1,m))*(dt/((x_up(i,m))^2))) - (((u_t_HA_up(i+1,m) - u_t_HA_up(i,m))*(dt/(n*dx))) * ((G_HA_up(i+1,m) - G_HA_up(i,m))*(dt/(n*dx))));
+        G_A_up(i,m+1) = G_A_up(i,m) + (D_A_upp/(Peclet_calculated))*((G_A_up(i+1,m) -2*G_A_up(i,m) + G_A_up(i-1,m))*(dt/((x_up(i,m))^2))) - (((u_t_A_up(i+1,m) - u_t_A_up(i,m))*(dt/(n*2*dx))) * ((G_A_up(i+1,m) - G_A_up(i,m))*(dt/(n*dx))));
+        G_Na_up(i,m+1) = G_Na_up(i,m) + (D_Na_upp/(Peclet_calculated))*((G_Na_up(i+1,m) -2*G_Na_up(i,m) + G_Na_up(i-1,m))*(dt/((x_up(i,m))^2))) - (((u_t_Na_up(i+1,m) - u_t_Na_up(i,m))*(dt/(n*dx))) * ((G_Na_up(i+1,m) - G_Na_up(i,m))*(dt/(n*dx))));
+        G_Cl_up(i,m+1) = G_Cl_up(i,m) + (D_Cl_upp/(Peclet_calculated))*((G_Cl_up(i+1,m) -2*G_Cl_up(i,m) + G_Cl_up(i-1,m))*(dt/((x_up(i,m))^2))) - (((u_t_Cl_up(i+1,m) - u_t_Cl_up(i,m))*(dt/(n*dx))) * ((G_Cl_up(i+1,m) - G_Cl_up(i,m))*(dt/(n*dx))));
+        G_H_up(i,m+1) = G_H_up(i,m) + (D_H_upp/(Peclet_calculated))*((G_H_up(i+1,m) -2*G_H_up(i,m) + G_H_up(i-1,m))*(dt/((x_up(i,m))^2))) - (((u_t_H_up(i+1,m) - u_t_H_up(i,m))*(dt/(n*dx))) * ((G_H_up(i+1,m) - G_H_up(i,m))*(dt/(n*dx))));
+        G_OH_up(i,m+1) = G_OH_up(i,m) + (D_OH_upp/(Peclet_calculated))*((G_OH_up(i+1,m) -2*G_OH_up(i,m) + G_OH_up(i-1,m))*(dt/((x_up(i,m))^2))) - (((u_t_OH_up(i+1,m) - u_t_OH_up(i,m))*(dt/(n*dx))) * ((G_OH_up(i+1,m) - G_OH_up(i,m))*(dt/(n*dx))));
+        G_C_up(i,m+1) = G_C_up(i,m) + (D_C_upp/(Peclet_calculated))*((G_C_up(i+1,m) -2*G_C_up(i,m) + G_C_up(i-1,m))*(dt/((x_up(i,m))^2))) - (((u_t_C_up(i+1,m) - u_t_C_up(i,m))*(dt/(n*dx))) * ((G_C_up(i+1,m) - G_C_up(i,m))*(dt/(n*dx))));
+        
     end
 end
 
