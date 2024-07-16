@@ -10,7 +10,7 @@ dx = L/(nx-1);
 dt = tmax/(nt-1);
 
 % Refrence x directions        [m]
-x = (dx:dx:(nx)*dx);
+x = (10^-5:dx:(nx)*dx);
 x = transpose(x);
 x_ref = repmat(x,1,nt);
 
@@ -141,7 +141,7 @@ u_e_C_upp = (-1/Z_calculated)*D_C_upp*z_C*dphidx;
 % Convection velocity          [m/s]
 u_x = (epsilon/mu_a)*(zeta*E_field);
 u_c = u_x/((tau^2)*10^14);              % Convection velocity
-u_c_up = -(zeta/zeta_0)*dphidx;
+u_c_up = -((zeta/zeta_0)*dphidx)*10^-18;
 
 % Toatal velocity term (Normal)
 u_t_HA = (u_e_HA + u_c);
@@ -152,7 +152,15 @@ u_t_H = (u_e_H + u_c);
 u_t_OH = (u_e_OH + u_c);
 u_t_C = (u_e_C + u_c);
 
-u_t_H_up = (u_e_H_upp + u_c_up)*10^-22;
+% Toatal velocity term (Rmapped)
+u_t_HA_up = (u_e_HA_upp + u_c_up);
+u_t_A_up = (u_e_A_upp + u_c_up);
+u_t_Na_up = (u_e_Na_upp + u_c_up);
+u_t_Cl_up = (u_e_Cl_upp + u_c_up);
+u_t_H_up = (u_e_H_upp + u_c_up);
+u_t_OH_up = (u_e_OH_upp + u_c_up);
+u_t_C_up = (u_e_C_upp + u_c_up);
+
 % Initial concentration        [mol/m3]
 c_0 = 500; 
 
@@ -230,8 +238,15 @@ R_C = zeros(nx,nt);
 
 
 
-G_HA = zeros(nx,nt);
-G_HA_up(i,m+1) = G_HA_up(i,m) + (D_HA_upp/(Peclet_calculated))*((G_HA(i+1,m) -2*G_HA(i,m) + G_HA(i-1,m))*(dt/(n*(dx^2)))) - (((u_t_HA(i+1,m) - u_t_HA(i-1,m))*(dt/(n*2*dx))) * ((G_HA(i+1,m) - G_HA(i-1,m))*(dt/(n*2*dx))));
+G_HA_up = zeros(nx,nt);
+
+for m=1:nt-1
+    G_HA_up(1,m) = 1;
+    G_HA_up(end,m) = 0;
+    for i=2:nx-1
+        G_HA_up(i,m+1) = G_HA_up(i,m) + (D_HA_upp/(Peclet_calculated))*((G_HA_up(i+1,m) -2*G_HA_up(i,m) + G_HA_up(i-1,m))*(dt/((x_up(i,m))^2))) - (((u_t_HA(i+1,m) - u_t_HA(i-1,m))*(dt/(n*2*dx))) * ((G_HA(i+1,m) - G_HA(i-1,m))*(dt/(n*2*dx))));
+    end
+end
 
 pH = log10(G_H);
 
@@ -242,5 +257,5 @@ figure;
 
 hold on;
 
-plot(t_array,G_HA(10,:),'-','DisplayName', 'Hydrocarbon (EKR)');
+plot(t_array,G_HA_up(10,:),'-','DisplayName', 'Hydrocarbon (EKR)');
 
