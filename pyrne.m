@@ -42,6 +42,7 @@ epsilon = 7*10^10;             % Electrical permittivity [F/m]
 zeta = -0.0027;                % Zeta Potential [V]
 zeta_0 = 2.6205e-23;           % Refrence Zeta Potential [V]
 
+coeff = 1/(1+K_a);
 % Dimentionless     [Dimentionless]
 Peclet = 47;
 Z = 0.049;
@@ -142,9 +143,16 @@ u_x = (epsilon/mu_a)*(zeta*E_field);
 u_c = u_x/((tau^2)*10^14);              % Convection velocity
 u_c_up = -(zeta/zeta_0)*dphidx;
 
-% Toatal velocity term
+% Toatal velocity term (Normal)
+u_t_HA = (u_e_HA + u_c);
+u_t_A = (u_e_A + u_c);
+u_t_Na = (u_e_Na + u_c);
+u_t_Cl = (u_e_Cl + u_c);
 u_t_H = (u_e_H + u_c);
+u_t_OH = (u_e_OH + u_c);
+u_t_C = (u_e_C + u_c);
 
+u_t_H_up = (u_e_H_upp + u_c_up)*10^-22;
 % Initial concentration        [mol/m3]
 c_0 = 500; 
 
@@ -205,17 +213,25 @@ R_OH = zeros(nx,nt);
 R_C = zeros(nx,nt);
 
 % --- Set IC and BC
-G_H(:,1) = c_0;
+%G_HA(:,1) = c_0;
 % J_H(1,:) = u_t_H(1,:)*c_0;
 
-for m=1:nt-1
-    G_H(1,m) = u_t_H(1,m)*c_0; %--- Upper boundary
-    G_H(end,m) = 0; %--- Lower boundary
-    for i=2:nx-1
-        G_H(i,m+1) = G_H(i,m) + (D_H/(tau^2))*((G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m))*(dt/(n*(dx^2)))) - ((u_t_H(i+1,m) - u_t_H(i-1,m))*(G_H(i+1,m) - G_H(i-1,m)))*(dt/(n*2*dx));
-        %G_H(i,m+1) = G_H(i,m) + (alpha_H*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) + beta_H*(G_H(i+1,m) - G_H(i-1,m)) + R_H(i,m)/R_D);
-    end
-end
+%for m=1:nt-1
+
+%    for i=2:nx-1
+%        G_HA(1,m) = (u_t_H(1,m)*c_0) - (D_HA/(tau^2))*((G_HA(i,m) - G_HA(i-1,m))*(dt/(n*dx)));        %--- z = 0 boundary
+%        G_HA(end,m) = (u_t_H(1,m)*c_0) - (D_HA/(tau^2))*((G_HA(i,m) - G_HA(i-1,m))*(dt/(n*dx)));      %--- z = L boundary
+%        G_HA(i,m+1) = G_HA(i,m) + coeff*((D_HA/(tau^2))*((G_HA(i+1,m) -2*G_HA(i,m) + G_HA(i-1,m))*(dt/(n*(dx^2)))) - (((u_t_HA(i+1,m) - u_t_HA(i-1,m))*(dt/(n*2*dx))) * ((G_HA(i+1,m) - G_HA(i-1,m))*(dt/(n*2*dx)))));
+        %G_H(i,m+1) = G_H(i,m) + coeff*((D_H/(tau^2))*((G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m))*(dt/(n*(dx^2)))) - ((u_t_H(i+1,m) - u_t_H(i-1,m))*(G_H(i+1,m) - G_H(i-1,m)))*(dt/(n*2*dx)));
+        
+%    end
+%end
+
+
+
+
+G_HA = zeros(nx,nt);
+G_HA_up(i,m+1) = G_HA_up(i,m) + (D_HA_upp/(Peclet_calculated))*((G_HA(i+1,m) -2*G_HA(i,m) + G_HA(i-1,m))*(dt/(n*(dx^2)))) - (((u_t_HA(i+1,m) - u_t_HA(i-1,m))*(dt/(n*2*dx))) * ((G_HA(i+1,m) - G_HA(i-1,m))*(dt/(n*2*dx))));
 
 pH = log10(G_H);
 
@@ -226,4 +242,5 @@ figure;
 
 hold on;
 
-plot(t_array,G_H(10,:),'-','DisplayName', 'Hydrocarbon (EKR)');
+plot(t_array,G_HA(10,:),'-','DisplayName', 'Hydrocarbon (EKR)');
+
