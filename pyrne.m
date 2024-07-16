@@ -276,4 +276,9 @@ figure;
 hold on;
 
 plot(t_array,G_HA_up(10,:),'-','DisplayName', 'Hydrocarbon (EKR)');
-
+%plot(t_array,G_A_up(10,:),'-','DisplayName', 'Hydrocarbon (EKR)');
+%plot(t_array,G_Na_up(10,:),'-','DisplayName', 'Hydrocarbon (EKR)');
+%plot(t_array,G_Cl_up(10,:),'-','DisplayName', 'Hydrocarbon (EKR)');
+%plot(t_array,G_H_up(10,:),'-','DisplayName', 'Hydrocarbon (EKR)');
+%plot(t_array,G_OH_up(10,:),'-','DisplayName', 'Hydrocarbon (EKR)');
+%plot(t_array,G_C_up(10,:),'-','DisplayName', 'Hydrocarbon (EKR)');
