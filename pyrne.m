@@ -139,7 +139,7 @@ u_e_C_upp = (-1/Z_calculated)*D_C_upp*z_C*dphidx;
 
 % Convection velocity          [m/s]
 u_x = (epsilon/mu_a)*(zeta*E_field);
-u_c = u_x/(tau^2);              % Convection velocity
+u_c = u_x/((tau^2)*10^14);              % Convection velocity
 u_c_up = -(zeta/zeta_0)*dphidx;
 
 % Toatal velocity term
@@ -206,13 +206,24 @@ R_C = zeros(nx,nt);
 
 % --- Set IC and BC
 G_H(:,1) = c_0;
-J_H(1,;) = u_t_H(1,:)*c_0;
+% J_H(1,:) = u_t_H(1,:)*c_0;
 
 for m=1:nt-1
-    G_H(1,m) =J_H(1,m); %--- Upper boundary
+    G_H(1,m) = u_t_H(1,m)*c_0; %--- Upper boundary
+    G_H(end,m) = 0; %--- Lower boundary
     for i=2:nx-1
-        G_H(i,m+1) = G_H (i,m) + ((D_H/(tau^2))*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m))*((n*dt)/(dx^2))) - (u_t_H(i+1,m) - u_t_H(i-1,m))*((G_H(i+1,m) - G_H(i-1,m))*((n*dt)/dx));
-        J_H(i,m) = (u_t_H(i,m))*G_H(i,m) - (D_H/(tau^2))*((G_H(i+1,m) - G_H(i,m))*((dt)/dx));
+        G_H(i,m+1) = G_H(i,m) + (D_H/(tau^2))*((G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m))*(dt/(n*(dx^2)))) - ((u_t_H(i+1,m) - u_t_H(i-1,m))*(G_H(i+1,m) - G_H(i-1,m)))*(dt/(n*2*dx));
+        %G_H(i,m+1) = G_H(i,m) + (alpha_H*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) + beta_H*(G_H(i+1,m) - G_H(i-1,m)) + R_H(i,m)/R_D);
     end
 end
 
+pH = log10(G_H);
+
+pH_scale = linspace(1,40,41);
+xl = [0,5,10,15,20,25,30,35];
+yl = [10000,7900,7100,6000,5700,5500,5400,5100];
+figure;
+
+hold on;
+
+plot(t_array,G_H(10,:),'-','DisplayName', 'Hydrocarbon (EKR)');
