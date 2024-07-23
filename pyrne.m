@@ -323,14 +323,14 @@ for m=1:nt-1
         G_H_ads(i,m+1) = G_H_ads(i,m) + coeff*(alpha_H*((G_H_ads(i+1,m) -2*G_H_ads(i,m) + G_H_ads(i-1,m))*((dt/n)/(dx^2))) - (((u_t_H(i+1,m) - u_t_H(i,m))*((dt/n)/dx)) * ((G_H_ads(i+1,m) - G_H_ads(i,m))*((dt/n)/dx))));
         G_A_ads(i,m+1) = G_A_ads(i,m) + coeff*(alpha_A*((G_A_ads(i+1,m) -2*G_A_ads(i,m) + G_A_ads(i-1,m))*((dt/n)/(dx^2))) - (((u_t_A(i+1,m) - u_t_A(i,m))*((dt/n)/dx)) * ((G_A_ads(i+1,m) - G_A_ads(i,m))*((dt/n)/dx))));
         G_C_ads(i,m+1) = G_C_ads(i,m) + coeff*(alpha_C*((G_C_ads(i+1,m) -2*G_C_ads(i,m) + G_C_ads(i-1,m))*((dt/n)/(dx^2))) - (((u_t_C(i+1,m) - u_t_C(i,m))*((dt/n)/dx)) * ((G_C_ads(i+1,m) - G_C_ads(i,m))*((dt/n)/dx))));
-
         G_HA_ads(i,m+1) = G_HA_ads(i,m) + coeff*(alpha_HA*((G_HA_ads(i+1,m) -2*G_HA_ads(i,m) + G_HA_ads(i-1,m))*((dt/n)/(dx^2))) - (((u_t_HA(i+1,m) - u_t_HA(i,m))*((dt/n)/dx)) * ((G_HA_ads(i+1,m) - G_HA_ads(i,m))*((dt/n)/dx))));
-        G_Na_ads(i,m+1) = G_Na_ads(i,m) + coeff*(alpha_H*((G_Na_ads(i+1,m) -2*G_Na_ads(i,m) + G_Na_ads(i-1,m))*((dt/n)/(dx^2))) - (((u_t_H(i+1,m) - u_t_H(i,m))*((dt/n)/dx)) * ((G_Na_ads(i+1,m) - G_Na_ads(i,m))*((dt/n)/dx))));
-        G_Cl_ads(i,m+1) = G_Cl_ads(i,m) + coeff*(alpha_H*((G_Cl_ads(i+1,m) -2*G_Cl_ads(i,m) + G_Cl_ads(i-1,m))*((dt/n)/(dx^2))) - (((u_t_H(i+1,m) - u_t_H(i,m))*((dt/n)/dx)) * ((G_Cl_ads(i+1,m) - G_Cl_ads(i,m))*((dt/n)/dx))));
-        G_OH_ads(i,m+1) = G_OH_ads(i,m) + coeff*(alpha_H*((G_OH_ads(i+1,m) -2*G_OH_ads(i,m) + G_OH_ads(i-1,m))*((dt/n)/(dx^2))) - (((u_t_H(i+1,m) - u_t_H(i,m))*((dt/n)/dx)) * ((G_OH_ads(i+1,m) - G_OH_ads(i,m))*((dt/n)/dx))));
-
-
+        G_Na_ads(i,m+1) = G_Na_ads(i,m) + coeff*(alpha_Na*((G_Na_ads(i+1,m) -2*G_Na_ads(i,m) + G_Na_ads(i-1,m))*((dt/n)/(dx^2))) - (((u_t_Na(i+1,m) - u_t_Na(i,m))*((dt/n)/dx)) * ((G_Na_ads(i+1,m) - G_Na_ads(i,m))*((dt/n)/dx))));
+        G_Cl_ads(i,m+1) = G_Cl_ads(i,m) + coeff*(alpha_Cl*((G_Cl_ads(i+1,m) -2*G_Cl_ads(i,m) + G_Cl_ads(i-1,m))*((dt/n)/(dx^2))) - (((u_t_Cl(i+1,m) - u_t_Cl(i,m))*((dt/n)/dx)) * ((G_Cl_ads(i+1,m) - G_Cl_ads(i,m))*((dt/n)/dx))));
+        G_OH_ads(i,m+1) = G_OH_ads(i,m) + coeff*(alpha_OH*((G_OH_ads(i+1,m) -2*G_OH_ads(i,m) + G_OH_ads(i-1,m))*((dt/n)/(dx^2))) - (((u_t_OH(i+1,m) - u_t_OH(i,m))*((dt/n)/dx)) * ((G_OH_ads(i+1,m) - G_OH_ads(i,m))*((dt/n)/dx))));
+        
         R_H_ads(i,m+1) = G_H_ads(i,m+1);
+        R_H_ads(i,m+1) = G_H_ads(i,m+1);
+
         R_H(i,m+1) = R_H_ads(i,m+1)/((c_0*k_0)*10000);
 
         %G_HA_up(i,m+1) = G_HA_up(i,m) + (D_HA_upp/(Peclet_calculated))*((G_HA_up(i+1,m) -2*G_HA_up(i,m) + G_HA_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_HA_up(i+1,m) - u_t_HA_up(i,m))*((t_step/n)/x_step)) * ((G_HA_up(i+1,m) - G_HA_up(i,m))*((t_step/n)/x_step)));
