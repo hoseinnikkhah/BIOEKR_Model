@@ -355,18 +355,32 @@ for m=1:nt-1
         R_Cl_ads(i,m+1) = G_Cl_ads(i,m+1);
         R_OH_ads(i,m+1) = G_OH_ads(i,m+1);
 
+        % the 10^5 is a fixing factor in H and can be different in other Species
         R_H(i,m+1) = R_H_ads(i,m+1)/((c_0*k_0)*10000);
-
-        %G_HA_up(i,m+1) = G_HA_up(i,m) + (D_HA_upp/(Peclet_calculated))*((G_HA_up(i+1,m) -2*G_HA_up(i,m) + G_HA_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_HA_up(i+1,m) - u_t_HA_up(i,m))*((t_step/n)/x_step)) * ((G_HA_up(i+1,m) - G_HA_up(i,m))*((t_step/n)/x_step)));
-        %G_Na_up(i,m+1) = G_Na_up(i,m) + (D_Na_upp/(Peclet_calculated))*((G_Na_up(i+1,m) -2*G_Na_up(i,m) + G_Na_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_Na_up(i+1,m) - u_t_Na_up(i,m))*((t_step/n)/x_step)) * ((G_Na_up(i+1,m) - G_Na_up(i,m))*((t_step/n)/x_step)));
-        %G_Cl_up(i,m+1) = G_Cl_up(i,m) + (D_Cl_upp/(Peclet_calculated))*((G_Cl_up(i+1,m) -2*G_Cl_up(i,m) + G_Cl_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_Cl_up(i+1,m) - u_t_Cl_up(i,m))*((t_step/n)/x_step)) * ((G_Cl_up(i+1,m) - G_Cl_up(i,m))*((t_step/n)/x_step)));
-        %G_OH_up(i,m+1) = G_OH_up(i,m) + (D_OH_upp/(Peclet_calculated))*((G_OH_up(i+1,m) -2*G_OH_up(i,m) + G_OH_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_OH_up(i+1,m) - u_t_OH_up(i,m))*((t_step/n)/x_step)) * ((G_OH_up(i+1,m) - G_OH_up(i,m))*((t_step/n)/x_step)));
+        R_A(i,m+1) = R_A_ads(i,m+1)/((c_0*k_0)*10000);
+        R_C(i,m+1) = R_C_ads(i,m+1)/((c_0*k_0)*10000);
+        R_HA(i,m+1) = R_HA_ads(i,m+1)/((c_0*k_0)*10000);
+        R_Na(i,m+1) = R_Na_ads(i,m+1)/((c_0*k_0)*10000);
+        R_Cl(i,m+1) = R_Cl_ads(i,m+1)/((c_0*k_0)*10000);
+        R_OH(i,m+1) = R_OH_ads(i,m+1)/((c_0*k_0)*10000);
+        
+        G_HA_up(i,m+1) = G_HA_up(i,m) + (D_HA_upp/(Peclet_calculated))*((G_HA_up(i+1,m) -2*G_HA_up(i,m) + G_HA_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_HA_up(i+1,m) - u_t_HA_up(i,m))*((t_step/n)/x_step)) * ((G_HA_up(i+1,m) - G_HA_up(i,m))*((t_step/n)/x_step)));
+        G_Na_up(i,m+1) = G_Na_up(i,m) + (D_Na_upp/(Peclet_calculated))*((G_Na_up(i+1,m) -2*G_Na_up(i,m) + G_Na_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_Na_up(i+1,m) - u_t_Na_up(i,m))*((t_step/n)/x_step)) * ((G_Na_up(i+1,m) - G_Na_up(i,m))*((t_step/n)/x_step)));
+        G_Cl_up(i,m+1) = G_Cl_up(i,m) + (D_Cl_upp/(Peclet_calculated))*((G_Cl_up(i+1,m) -2*G_Cl_up(i,m) + G_Cl_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_Cl_up(i+1,m) - u_t_Cl_up(i,m))*((t_step/n)/x_step)) * ((G_Cl_up(i+1,m) - G_Cl_up(i,m))*((t_step/n)/x_step)));
+        G_OH_up(i,m+1) = G_OH_up(i,m) + (D_OH_upp/(Peclet_calculated))*((G_OH_up(i+1,m) -2*G_OH_up(i,m) + G_OH_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_OH_up(i+1,m) - u_t_OH_up(i,m))*((t_step/n)/x_step)) * ((G_OH_up(i+1,m) - G_OH_up(i,m))*((t_step/n)/x_step)));
         G_A_up(i,m+1) = G_A_up(i,m) + (D_A_upp/(Peclet_calculated))*((G_A_up(i+1,m) -2*G_A_up(i,m) + G_A_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_A_up(i+1,m) - u_t_A_up(i,m))*((t_step/n)/x_step)) * ((G_A_up(i+1,m) - G_A_up(i,m))*((t_step/n)/x_step)));
         G_H_up(i,m+1) = G_H_up(i,m) + (D_H_upp/(Peclet_calculated))*((G_H_up(i+1,m) -2*G_H_up(i,m) + G_H_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_H_up(i+1,m) - u_t_H_up(i,m))*((t_step/n)/x_step)) * ((G_H_up(i+1,m) - G_H_up(i,m))*((t_step/n)/x_step))) + (1/alpha(i,m+1))*R_H(i,m+1);        
         G_C_up(i,m+1) = G_C_up(i,m) + (D_C_upp/(Peclet_calculated))*((G_C_up(i+1,m) -2*G_C_up(i,m) + G_C_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_C_up(i+1,m) - u_t_C_up(i,m))*((t_step/n)/x_step)) * ((G_C_up(i+1,m) - G_C_up(i,m))*((t_step/n)/x_step)));
          
         
         sum_H(i,m) = z_H*D_H_upp*G_H_up(i,m);
+        sum_A(i,m) = z_A*D_H_upp*G_A_up(i,m);
+        sum_C(i,m) = z_C*D_H_upp*G_C_up(i,m);
+        sum_HA(i,m) = z_HA*D_H_upp*G_HA_up(i,m);
+        sum_Na(i,m) = z_Na*D_H_upp*G_Na_up(i,m);
+        sum_Cl(i,m) = z_Cl*D_H_upp*G_Cl_up(i,m);
+        sum_OH(i,m) = z_OH*D_H_upp*G_OH_up(i,m);
+
         sum_total(i,m) = sum_H(i,m);
         sigma_bar(i,m) = (1/(tau^2))*sum_total(i,m);
         i_z(i,m) = sigma_bar(i,m)*dphidx(i,m) - (1/Beta_calculated)*(D_H_upp*z_H*((G_H_up(i+1,m) - G_H_up(i,m))*((t_step/n)/x_step)));
