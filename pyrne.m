@@ -338,7 +338,7 @@ for m=1:nt-1
     G_C_ads(end,m) = 0;  
 
     for i=2:nx-1
-          
+        % Adsorbed concentration is used for rate of reaction in each term  
         G_H_ads(i,m+1) = G_H_ads(i,m) + coeff*(alpha_H*((G_H_ads(i+1,m) -2*G_H_ads(i,m) + G_H_ads(i-1,m))*((dt/n)/(dx^2))) - (((u_t_H(i+1,m) - u_t_H(i,m))*((dt/n)/dx)) * ((G_H_ads(i+1,m) - G_H_ads(i,m))*((dt/n)/dx))));
         G_A_ads(i,m+1) = G_A_ads(i,m) + coeff*(alpha_A*((G_A_ads(i+1,m) -2*G_A_ads(i,m) + G_A_ads(i-1,m))*((dt/n)/(dx^2))) - (((u_t_A(i+1,m) - u_t_A(i,m))*((dt/n)/dx)) * ((G_A_ads(i+1,m) - G_A_ads(i,m))*((dt/n)/dx))));
         G_C_ads(i,m+1) = G_C_ads(i,m) + coeff*(alpha_C*((G_C_ads(i+1,m) -2*G_C_ads(i,m) + G_C_ads(i-1,m))*((dt/n)/(dx^2))) - (((u_t_C(i+1,m) - u_t_C(i,m))*((dt/n)/dx)) * ((G_C_ads(i+1,m) - G_C_ads(i,m))*((dt/n)/dx))));
@@ -348,7 +348,12 @@ for m=1:nt-1
         G_OH_ads(i,m+1) = G_OH_ads(i,m) + coeff*(alpha_OH*((G_OH_ads(i+1,m) -2*G_OH_ads(i,m) + G_OH_ads(i-1,m))*((dt/n)/(dx^2))) - (((u_t_OH(i+1,m) - u_t_OH(i,m))*((dt/n)/dx)) * ((G_OH_ads(i+1,m) - G_OH_ads(i,m))*((dt/n)/dx))));
         
         R_H_ads(i,m+1) = G_H_ads(i,m+1);
-        R_H_ads(i,m+1) = G_H_ads(i,m+1);
+        R_A_ads(i,m+1) = G_A_ads(i,m+1);
+        R_C_ads(i,m+1) = G_C_ads(i,m+1);
+        R_HA_ads(i,m+1) = G_HA_ads(i,m+1);
+        R_Na_ads(i,m+1) = G_Na_ads(i,m+1);
+        R_Cl_ads(i,m+1) = G_Cl_ads(i,m+1);
+        R_OH_ads(i,m+1) = G_OH_ads(i,m+1);
 
         R_H(i,m+1) = R_H_ads(i,m+1)/((c_0*k_0)*10000);
 
