@@ -176,6 +176,7 @@ c_p = 200;
 c_Na = c_p;
 c_Cl = c_Na;
 
+% H
 % Sigma refrence               [S/m]
 sigma_0 = ((F^2)*D0*c_0*(tau^2))/(R*T);
 
@@ -413,6 +414,14 @@ for m=1:nt-1
         R_H(1,m) = (i_z(2,m)/F)*1000;
         R_OH(end,m) = (i_z(end,m)/F)*1000;
 
+
+        if i == 41
+            R_OH(i,m) = (i_z(2,m)/F)*(Beta/(Peclet*Z)) + 0.1;
+        end
+        if i == 1
+            R_H(i,m) = (i_z(2,m)/F)*(Beta/(Peclet*Z)) + 0.1;
+        end
+
         for ii=1:nx
             if m == 1
                 R_H(ii,m) = (i_z(2,m)/F)*(Beta/(Peclet*Z)) + 0.1;
@@ -423,11 +432,17 @@ for m=1:nt-1
     end
 end
 
+% Convert concentration to mol/m3
+G_HA_converted = G_HA_up*c_0;
+G_A_converted = G_A_up*c_0;
+G_Na_converted = G_Na_up*c_Na;
+G_Cl_converted = G_Cl_up*c_Cl;
+G_H_converted = G_H_up*c_0;
+G_OH_converted = G_OH_up*c_0;
+G_C_converted = G_C_up*c_0;
 
 
-
-
-pH = log10(G_H);
+pH = log10(G_H_converted);
 
 pH_scale = linspace(1,40,41);
 xl = [0,5,10,15,20,25,30,35];
@@ -438,13 +453,14 @@ figure(1);
 hold on;
 
 
-%plot(t_array,G_HA_up(10,:),'-','DisplayName', 'HA');
-%plot(t_array,G_A_up(10,:),'-','DisplayName', 'A-');
-%plot(t_array,G_Na_up(10,:),'-','DisplayName', 'Na+');
-%plot(t_array,G_Cl_up(10,:),'-','DisplayName', 'Cl');
-%plot(t_array,G_H_up(10,:),'-','DisplayName', 'H+ ');
+%plot(t_array,G_HA_converted(10,:),'-','DisplayName', 'HA');
+%plot(t_array,G_A_converted(10,:),'-','DisplayName', 'A-');
+%plot(t_array,G_Na_converted(10,:),'-','DisplayName', 'Na+');
+%plot(t_array,G_Cl_converted(10,:),'-','DisplayName', 'Cl');
+plot(t_array,G_H_converted(10,:),'-','DisplayName', 'H+ ');
+%plot(t_array,G_OH_converted(10,:),'-','DisplayName', 'OH- ');
+%plot(t_array,G_C_converted(10,:),'-','DisplayName', 'Hydrocarbon');
+
 %plot(t_array,R_H(10,:),'-','DisplayName', 'H+++ ');
-plot(t_array,G_OH_up(10,:),'-','DisplayName', 'OH- ');
-%plot(t_array,G_C_up(10,:),'-','DisplayName', 'Hydrocarbon');
 
 legend();
