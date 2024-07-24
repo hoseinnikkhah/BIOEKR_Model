@@ -452,7 +452,7 @@ hold on;
 %plot(t_array,G_Cl_up(10,:),'-','DisplayName', 'Cl');
 %plot(t_array,G_H_up(10,:),'-','DisplayName', 'H+ ');
 %plot(t_array,R_H(10,:),'-','DisplayName', 'H+++ ');
-plot(t_array,G_OH_up(10,:),'-','DisplayName', 'OH- ');
+%plot(t_array,G_OH_up(10,:),'-','DisplayName', 'OH- ');
 %plot(t_array,G_C_up(10,:),'-','DisplayName', 'Hydrocarbon');
 
 legend();
