@@ -322,10 +322,10 @@ for m=1:nt-1
     G_A_ads(1,m) = u_t_H(1,m)*c_0;
     G_A_ads(end,m) = 0;  
     
-    G_Na_ads(1,m) = u_t_H(1,m)*c_0;
+    G_Na_ads(1,m) = u_t_H(1,m)*c_Na;
     G_Na_ads(end,m) = 0;  
     
-    G_Cl_ads(1,m) = u_t_H(1,m)*c_0;
+    G_Cl_ads(1,m) = u_t_H(1,m)*c_Cl;
     G_Cl_ads(end,m) = 0;  
 
     G_H_ads(1,m) = u_t_H(1,m)*c_0;
