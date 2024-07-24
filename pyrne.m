@@ -316,8 +316,27 @@ for m=1:nt-1
     G_C_up(end,m) = 0;
 
 
+    G_HA_ads(1,m) = u_t_H(1,m)*c_0;
+    G_HA_ads(end,m) = 0;
+    
+    G_A_ads(1,m) = u_t_H(1,m)*c_0;
+    G_A_ads(end,m) = 0;  
+    
+    G_Na_ads(1,m) = u_t_H(1,m)*c_0;
+    G_Na_ads(end,m) = 0;  
+    
+    G_Cl_ads(1,m) = u_t_H(1,m)*c_0;
+    G_Cl_ads(end,m) = 0;  
+
     G_H_ads(1,m) = u_t_H(1,m)*c_0;
-    G_H_ads(end,m) = 0;      
+    G_H_ads(end,m) = 0;  
+
+    G_OH_ads(1,m) = u_t_H(1,m)*c_0;
+    G_OH_ads(end,m) = 0;
+
+    G_C_ads(1,m) = u_t_H(1,m)*c_0;
+    G_C_ads(end,m) = 0;  
+
     for i=2:nx-1
           
         G_H_ads(i,m+1) = G_H_ads(i,m) + coeff*(alpha_H*((G_H_ads(i+1,m) -2*G_H_ads(i,m) + G_H_ads(i-1,m))*((dt/n)/(dx^2))) - (((u_t_H(i+1,m) - u_t_H(i,m))*((dt/n)/dx)) * ((G_H_ads(i+1,m) - G_H_ads(i,m))*((dt/n)/dx))));
