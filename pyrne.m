@@ -416,6 +416,7 @@ for m=1:nt-1
         for ii=1:nx
             if m == 1
                 R_H(ii,m) = (i_z(2,m)/F)*(Beta/(Peclet*Z)) + 0.1;
+                R_OH(ii,m) = (i_z(2,m)/F)*(Beta/(Peclet*Z)) + 0.1;
             end
         end
       
@@ -441,8 +442,8 @@ hold on;
 %plot(t_array,G_A_up(10,:),'-','DisplayName', 'A-');
 %plot(t_array,G_Na_up(10,:),'-','DisplayName', 'Na+');
 %plot(t_array,G_Cl_up(10,:),'-','DisplayName', 'Cl'); $
-plot(t_array,G_H_up(10,:),'-','DisplayName', 'H+ ');
-%plot(t_array,R_H(10,:),'-','DisplayName', 'H+++ ');
+%plot(t_array,G_H_up(10,:),'-','DisplayName', 'H+ ');
+plot(t_array,R_H(10,:),'-','DisplayName', 'H+++ ');
 %plot(t_array,G_OH_up(10,:),'-','DisplayName', 'OH- ');
 %plot(t_array,G_C_up(10,:),'-','DisplayName', 'Hydrocarbon');
 
