@@ -168,7 +168,7 @@ u_t_Na_up = (u_e_Na_upp + u_c_up);
 u_t_Cl_up = (u_e_Cl_upp + u_c_up);
 u_t_H_up = (u_e_H_upp + u_c_up)*10^-5;
 u_t_OH_up = (u_e_OH_upp + u_c_up);
-u_t_C_up = (u_e_C_upp + u_c_up);
+u_t_C_up = -(u_e_C_upp + u_c_up)*10^-1;
 
 % Initial concentration        [mol/m3]
 c_0 = 500; 
@@ -181,10 +181,10 @@ c_C_TPH = 10000;
 
 % Hydrocarbon properties
 API = 29.6;
-MW = (6048/(API-29.6));                    [g/mol]
-rho = 1760;                                [kg/(m3)]
-bolian = 10^-3;                            [g/mg]
-c_C = ((c_C_TPH*rho*bolian)/MW);           [mol/m3]
+MW = (6048/(API-5.9));                   % [g/mol]
+rho = 1760;                              % [kg/(m3)]
+bolian = 10^-3;                          % [g/mg]
+c_C = ((c_C_TPH*rho*bolian)/MW);         % [mol/m3]
 
 
 % Sigma refrence               [S/m]
@@ -320,25 +320,25 @@ alpha_C = (D_C/(tau^2))*10^5;
 
 for m=1:nt-1
     % --- Set IC and BC
-    G_HA_up(1,m) = u_t_HA_up(1,m)*c_0;
+    G_HA_up(1,m) = u_t_HA_up(1,m);
     G_HA_up(end,m) = 0;
 
-    G_A_up(1,m) = u_t_A_up(1,m)*c_0;
+    G_A_up(1,m) = u_t_A_up(1,m);
     G_A_up(end,m) = 0;
 
-    G_Na_up(1,m) = u_t_Na_up(1,m)*c_Na;
+    G_Na_up(1,m) = u_t_Na_up(1,m);
     G_Na_up(end,m) = 0;
 
-    G_Cl_up(1,m) = u_t_Cl_up(1,m)*c_Cl;
+    G_Cl_up(1,m) = u_t_Cl_up(1,m);
     G_Cl_up(end,m) = 0;
 
-    G_H_up(1,m) = u_t_H_up(1,m)*c_0;
+    G_H_up(1,m) = u_t_H_up(1,m);
     G_H_up(end,m) = 0;        
 
-    G_OH_up(1,m) = u_t_OH_up(1,m)*c_0;
+    G_OH_up(1,m) = u_t_OH_up(1,m);
     G_OH_up(end,m) = 0;
 
-    G_C_up(1,m) = u_t_C_up(1,m)*c_C;
+    G_C_up(1,m) = u_t_C_up(1,m);
     G_C_up(end,m) = 0;
     % ---
     G_HA_ads(1,m) = u_t_H(1,m)*c_0;
@@ -451,6 +451,7 @@ G_H_converted = G_H_up*c_0;
 G_OH_converted = G_OH_up*c_0;
 G_C_converted = G_C_up*c_C;
 
+G_C_TPH_f = G_C_converted*(MW/(rho*bolian));
 
 pH = log10(G_H_converted);
 
@@ -467,9 +468,9 @@ hold on;
 %plot(t_array,G_A_converted(10,:),'-','DisplayName', 'A-');
 %plot(t_array,G_Na_converted(10,:),'-','DisplayName', 'Na+');
 %plot(t_array,G_Cl_converted(10,:),'-','DisplayName', 'Cl');
-plot(t_array,G_H_converted(10,:),'-','DisplayName', 'H+ ');
+%plot(t_array,G_H_converted(10,:),'-','DisplayName', 'H+ ');
 %plot(t_array,G_OH_converted(10,:),'-','DisplayName', 'OH- ');
-%plot(t_array,G_C_converted(10,:),'-','DisplayName', 'Hydrocarbon');
+plot(t_array,G_C_TPH_f(10,:),'-','DisplayName', 'Hydrocarbon');
 
 %plot(t_array,R_H(10,:),'-','DisplayName', 'H+++ ');
 
