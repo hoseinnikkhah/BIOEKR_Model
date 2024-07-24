@@ -299,7 +299,13 @@ G_OH_ads(:,1) = K_ads*c_0;
 G_C_ads(:,1) = K_ads*c_0;
 
 % Fixing alpha advection
+alpha_HA = (D_HA/(tau^2))*10^5;
+alpha_A = (D_A/(tau^2))*10^5;
+alpha_Na = (D_Na/(tau^2))*10^5;
+alpha_Cl = (D_Cl/(tau^2))*10^5;
 alpha_H = (D_H/(tau^2))*10^5;
+alpha_OH = (D_OH/(tau^2))*10^5;
+alpha_C = (D_C/(tau^2))*10^5;
 
 for m=1:nt-1
     % --- Set IC and BC
