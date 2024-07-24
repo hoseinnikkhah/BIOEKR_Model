@@ -291,7 +291,7 @@ G_Na(:,1) = c_Na;
 G_Cl(:,1) = c_Cl;
 G_H(:,1) = c_0;
 G_OH(:,1) = c_0;
-G_C(:,1) = c_0;
+G_C(:,1) = c_C;
 
 G_HA_up(:,1) = G_HA(:,1)/c_0;
 G_A_up(:,1) = G_A(:,1)/c_0;
@@ -299,7 +299,7 @@ G_Na_up(:,1) = G_Na(:,1)/c_Na;
 G_Cl_up(:,1) = G_Cl(:,1)/c_Cl;
 G_H_up(:,1) = G_H(:,1)/c_0;
 G_OH_up(:,1) = G_OH(:,1)/c_0;
-G_C_up(:,1) = G_C(:,1)/c_0;
+G_C_up(:,1) = G_C(:,1)/c_C;
 
 G_HA_ads(:,1) = K_ads*c_0;
 G_A_ads(:,1) = K_ads*c_0;
@@ -307,7 +307,7 @@ G_Na_ads(:,1) = K_ads*c_Na;
 G_Cl_ads(:,1) = K_ads*c_Cl;
 G_H_ads(:,1) = K_ads*c_0;
 G_OH_ads(:,1) = K_ads*c_0;
-G_C_ads(:,1) = K_ads*c_0;
+G_C_ads(:,1) = K_ads*c_C;
 
 % Fixing alpha advection
 alpha_HA = (D_HA/(tau^2))*10^5;
@@ -315,30 +315,30 @@ alpha_A = (D_A/(tau^2))*10^5;
 alpha_Na = (D_Na/(tau^2))*10^5;
 alpha_Cl = (D_Cl/(tau^2))*10^5;
 alpha_H = (D_H/(tau^2))*10^5;
-alpha_OH = (D_OH/(tau^2))*10^1;
+alpha_OH = (D_OH/(tau^2))*10^5;
 alpha_C = (D_C/(tau^2))*10^5;
 
 for m=1:nt-1
     % --- Set IC and BC
-    G_HA_up(1,m) = u_t_HA_up(1,m);
+    G_HA_up(1,m) = u_t_HA_up(1,m)*c_0;
     G_HA_up(end,m) = 0;
 
-    G_A_up(1,m) = u_t_A_up(1,m);
+    G_A_up(1,m) = u_t_A_up(1,m)*c_0;
     G_A_up(end,m) = 0;
 
-    G_Na_up(1,m) = u_t_Na_up(1,m);
+    G_Na_up(1,m) = u_t_Na_up(1,m)*c_Na;
     G_Na_up(end,m) = 0;
 
-    G_Cl_up(1,m) = u_t_Cl_up(1,m);
+    G_Cl_up(1,m) = u_t_Cl_up(1,m)*c_Cl;
     G_Cl_up(end,m) = 0;
 
-    G_H_up(1,m) = u_t_H_up(1,m);
+    G_H_up(1,m) = u_t_H_up(1,m)*c_0;
     G_H_up(end,m) = 0;        
 
-    G_OH_up(1,m) = u_t_OH_up(1,m);
+    G_OH_up(1,m) = u_t_OH_up(1,m)*c_0;
     G_OH_up(end,m) = 0;
 
-    G_C_up(1,m) = u_t_C_up(1,m);
+    G_C_up(1,m) = u_t_C_up(1,m)*c_C;
     G_C_up(end,m) = 0;
     % ---
     G_HA_ads(1,m) = u_t_H(1,m)*c_0;
@@ -359,7 +359,7 @@ for m=1:nt-1
     G_OH_ads(1,m) = u_t_H(1,m)*c_0;
     G_OH_ads(end,m) = 0;
 
-    G_C_ads(1,m) = u_t_H(1,m)*c_0;
+    G_C_ads(1,m) = u_t_H(1,m)*c_C;
     G_C_ads(end,m) = 0;  
 
     for i=2:nx-1
@@ -383,10 +383,10 @@ for m=1:nt-1
         % the 10^5 is a fixing factor in H and can be different in other Species
         R_H(i,m+1) = R_H_ads(i,m+1)/((c_0*k_0)*10000);
         R_A(i,m+1) = R_A_ads(i,m+1)/((c_0*k_0)*10000);
-        R_C(i,m+1) = R_C_ads(i,m+1)/((c_0*k_0)*10000);
+        R_C(i,m+1) = R_C_ads(i,m+1)/((c_C*k_0)*10000);
         R_HA(i,m+1) = R_HA_ads(i,m+1)/((c_0*k_0)*10000);
-        R_Na(i,m+1) = R_Na_ads(i,m+1)/((c_0*k_0)*10000);
-        R_Cl(i,m+1) = R_Cl_ads(i,m+1)/((c_0*k_0)*10000);
+        R_Na(i,m+1) = R_Na_ads(i,m+1)/((c_Na*k_0)*10000);
+        R_Cl(i,m+1) = R_Cl_ads(i,m+1)/((c_Cl*k_0)*10000);
         R_OH(i,m+1) = R_OH_ads(i,m+1)/((c_0*k_0)*10000);
         
         G_HA_up(i,m+1) = G_HA_up(i,m) + (D_HA_upp/(Peclet_calculated))*((G_HA_up(i+1,m) -2*G_HA_up(i,m) + G_HA_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_HA_up(i+1,m) - u_t_HA_up(i,m))*((t_step/n)/x_step)) * ((G_HA_up(i+1,m) - G_HA_up(i,m))*((t_step/n)/x_step)));
@@ -449,7 +449,7 @@ G_Na_converted = G_Na_up*c_Na;
 G_Cl_converted = G_Cl_up*c_Cl;
 G_H_converted = G_H_up*c_0;
 G_OH_converted = G_OH_up*c_0;
-G_C_converted = G_C_up*c_0;
+G_C_converted = G_C_up*c_C;
 
 
 pH = log10(G_H_converted);
