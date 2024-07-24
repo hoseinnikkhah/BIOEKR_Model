@@ -400,6 +400,13 @@ for m=1:nt-1
         sigma_bar(i,m) = (1/(tau^2))*sum_total(i,m);
 
         C_H (i,m) = (G_H_up(i+1,m) - G_H_up(i,m))*((t_step/n)/x_step);
+        C_A (i,m) = (G_A_up(i+1,m) - G_A_up(i,m))*((t_step/n)/x_step);
+        C_C (i,m) = (G_C_up(i+1,m) - G_C_up(i,m))*((t_step/n)/x_step);
+        C_HA (i,m) = (G_HA_up(i+1,m) - G_HA_up(i,m))*((t_step/n)/x_step);
+        C_Na (i,m) = (G_Na_up(i+1,m) - G_Na_up(i,m))*((t_step/n)/x_step);
+        C_Cl (i,m) = (G_Cl_up(i+1,m) - G_Cl_up(i,m))*((t_step/n)/x_step);
+        C_OH (i,m) = (G_OH_up(i+1,m) - G_OH_up(i,m))*((t_step/n)/x_step);
+
         i_z(i,m) = sigma_bar(i,m)*dphidx(i,m) - (1/Beta_calculated)*(D_H_upp*z_H* C_H (i,m));
         R_H(1,m) = (i_z(2,m)/F)*1000;
         for ii=1:nx
