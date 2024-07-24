@@ -176,6 +176,10 @@ c_p = 200;
 c_Na = c_p;
 c_Cl = c_Na;
 
+% Initial Hydrocarbon concentration        [mg/kg]
+c_C = 10000;
+
+
 % Sigma refrence               [S/m]
 sigma_0 = ((F^2)*D0*c_0*(tau^2))/(R*T);
 
