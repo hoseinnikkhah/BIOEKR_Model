@@ -236,7 +236,14 @@ sum_OH = zeros(nx,nt);
 sum_C = zeros(nx,nt);
 sum_total = zeros(nx,nt);
 
-
+C_HA = zeros(nx,nt);
+C_A = zeros(nx,nt);
+C_Na = zeros(nx,nt);
+C_Cl = zeros(nx,nt);
+C_H = zeros(nx,nt);
+C_OH = zeros(nx,nt);
+C_C = zeros(nx,nt);
+C_total = zeros(nx,nt);
 
 % SpeciesConstants
 K_H2O_m = ones(nx,nt);
@@ -386,8 +393,8 @@ for m=1:nt-1
         sum_total(i,m) = sum_H(i,m) + sum_A(i,m) + sum_C(i,m) + sum_HA(i,m) + sum_Na(i,m) + sum_Cl(i,m) + sum_OH(i,m);
         sigma_bar(i,m) = (1/(tau^2))*sum_total(i,m);
 
-        
-        i_z(i,m) = sigma_bar(i,m)*dphidx(i,m) - (1/Beta_calculated)*(D_H_upp*z_H*((G_H_up(i+1,m) - G_H_up(i,m))*((t_step/n)/x_step)));
+        C_H (i,m) = (G_H_up(i+1,m) - G_H_up(i,m))*((t_step/n)/x_step);
+        i_z(i,m) = sigma_bar(i,m)*dphidx(i,m) - (1/Beta_calculated)*(D_H_upp*z_H* C_H (i,m));
         R_H(1,m) = (i_z(2,m)/F)*1000;
         for ii=1:nx
             if m == 1
