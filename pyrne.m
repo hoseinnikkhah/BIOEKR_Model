@@ -304,7 +304,7 @@ alpha_A = (D_A/(tau^2))*10^5;
 alpha_Na = (D_Na/(tau^2))*10^5;
 alpha_Cl = (D_Cl/(tau^2))*10^5;
 alpha_H = (D_H/(tau^2))*10^5;
-alpha_OH = (D_OH/(tau^2))*10^5;
+alpha_OH = (D_OH/(tau^2))*10^1;
 alpha_C = (D_C/(tau^2))*10^5;
 
 for m=1:nt-1
@@ -411,15 +411,23 @@ for m=1:nt-1
         i_z(i,m) = sigma_bar(i,m)*dphidx(i,m) - (1/Beta_calculated)*(C_total(i,m));
         
         R_H(1,m) = (i_z(2,m)/F)*1000;
-        R_OH(1,m) = (i_z(2,m)/F)*1000;
+        R_OH(end,m) = (i_z(end,m)/F)*1000;
+
+
+        if i == 41
+            R_OH(i,m) = (i_z(2,m)/F)*(Beta/(Peclet*Z)) + 0.1;
+        end
+        if i == 1
+            R_H(i,m) = (i_z(2,m)/F)*(Beta/(Peclet*Z)) + 0.1;
+        end
 
         for ii=1:nx
             if m == 1
                 R_H(ii,m) = (i_z(2,m)/F)*(Beta/(Peclet*Z)) + 0.1;
-                R_OH(ii,m) = (i_z(2,m)/F)*(Beta/(Peclet*Z)) + 0.1;
+                R_H(ii,m) = (i_z(2,m)/F)*(Beta/(Peclet*Z)) + 0.1;
             end
         end
-      
+
     end
 end
 
@@ -441,10 +449,10 @@ hold on;
 %plot(t_array,G_HA_up(10,:),'-','DisplayName', 'HA');
 %plot(t_array,G_A_up(10,:),'-','DisplayName', 'A-');
 %plot(t_array,G_Na_up(10,:),'-','DisplayName', 'Na+');
-%plot(t_array,G_Cl_up(10,:),'-','DisplayName', 'Cl'); $
+%plot(t_array,G_Cl_up(10,:),'-','DisplayName', 'Cl');
 %plot(t_array,G_H_up(10,:),'-','DisplayName', 'H+ ');
-plot(t_array,R_H(10,:),'-','DisplayName', 'H+++ ');
-%plot(t_array,G_OH_up(10,:),'-','DisplayName', 'OH- ');
+%plot(t_array,R_H(10,:),'-','DisplayName', 'H+++ ');
+plot(t_array,G_OH_up(10,:),'-','DisplayName', 'OH- ');
 %plot(t_array,G_C_up(10,:),'-','DisplayName', 'Hydrocarbon');
 
 legend();
