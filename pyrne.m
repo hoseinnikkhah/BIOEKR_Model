@@ -441,7 +441,7 @@ G_OH_converted = G_OH_up*c_0;
 G_C_converted = G_C_up*c_0;
 
 
-pH = log10(G_H);
+pH = log10(G_H_converted);
 
 pH_scale = linspace(1,40,41);
 xl = [0,5,10,15,20,25,30,35];
@@ -452,13 +452,14 @@ figure(1);
 hold on;
 
 
-%plot(t_array,G_HA_up(10,:),'-','DisplayName', 'HA');
-%plot(t_array,G_A_up(10,:),'-','DisplayName', 'A-');
-%plot(t_array,G_Na_up(10,:),'-','DisplayName', 'Na+');
-%plot(t_array,G_Cl_up(10,:),'-','DisplayName', 'Cl');
-%plot(t_array,G_H_up(10,:),'-','DisplayName', 'H+ ');
+%plot(t_array,G_HA_converted(10,:),'-','DisplayName', 'HA');
+%plot(t_array,G_A_converted(10,:),'-','DisplayName', 'A-');
+%plot(t_array,G_Na_converted(10,:),'-','DisplayName', 'Na+');
+%plot(t_array,G_Cl_converted(10,:),'-','DisplayName', 'Cl');
+plot(t_array,G_H_converted(10,:),'-','DisplayName', 'H+ ');
+%plot(t_array,G_OH_converted(10,:),'-','DisplayName', 'OH- ');
+%plot(t_array,G_C_converted(10,:),'-','DisplayName', 'Hydrocarbon');
+
 %plot(t_array,R_H(10,:),'-','DisplayName', 'H+++ ');
-%plot(t_array,G_OH_up(10,:),'-','DisplayName', 'OH- ');
-%plot(t_array,G_C_up(10,:),'-','DisplayName', 'Hydrocarbon');
 
 legend();
