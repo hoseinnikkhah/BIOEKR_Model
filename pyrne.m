@@ -406,9 +406,13 @@ for m=1:nt-1
         C_Na (i,m) = (G_Na_up(i+1,m) - G_Na_up(i,m))*((t_step/n)/x_step);
         C_Cl (i,m) = (G_Cl_up(i+1,m) - G_Cl_up(i,m))*((t_step/n)/x_step);
         C_OH (i,m) = (G_OH_up(i+1,m) - G_OH_up(i,m))*((t_step/n)/x_step);
-
-        i_z(i,m) = sigma_bar(i,m)*dphidx(i,m) - (1/Beta_calculated)*(D_H_upp*z_H* C_H (i,m));
+        C_total(i,m) = (D_H_upp*z_H*C_H(i,m) + D_A_upp*z_A*C_A(i,m) + D_C_upp*z_C*C_C(i,m) + D_HA_upp*z_H*C_HA(i,m) + D_Na_upp*z_Na*C_Na(i,m) + D_Cl_upp*z_Cl*C_Cl(i,m) + D_OH_upp*z_OH*C_OH(i,m));
+        
+        i_z(i,m) = sigma_bar(i,m)*dphidx(i,m) - (1/Beta_calculated)*(C_total(i,m));
+        
         R_H(1,m) = (i_z(2,m)/F)*1000;
+        R_OH(1,m) = (i_z(2,m)/F)*1000;
+
         for ii=1:nx
             if m == 1
                 R_H(ii,m) = (i_z(2,m)/F)*(Beta/(Peclet*Z)) + 0.1;
