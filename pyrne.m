@@ -431,8 +431,14 @@ for m=1:nt-1
     end
 end
 
-
-
+% Convert concentration to mol/m3
+G_HA_converted = G_HA_up*c_0;
+G_A_converted = G_A_up*c_0;
+G_Na_converted = G_Na_up*c_Na;
+G_Cl_converted = G_Cl_up*c_Cl;
+G_H_converted = G_H_up*c_0;
+G_OH_converted = G_OH_up*c_0;
+G_C_converted = G_C_up*c_0;
 
 
 pH = log10(G_H);
