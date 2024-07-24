@@ -177,7 +177,14 @@ c_Na = c_p;
 c_Cl = c_Na;
 
 % Initial Hydrocarbon concentration        [mg/kg]
-c_C = 10000;
+c_C_TPH = 10000;
+
+% Hydrocarbon properties
+API = 29.6;
+MW = (6048/(API-29.6));                    [g/mol]
+rho = 1760;                                [kg/(m3)]
+bolian = 10^-3;                            [g/mg]
+c_C = ((c_C_TPH*rho*bolian)/MW);           [mol/m3]
 
 
 % Sigma refrence               [S/m]
