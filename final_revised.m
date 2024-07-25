@@ -38,6 +38,8 @@ n = 0.64;                       % Porosity
 F = 96485;                      % Faraady constant [C/mol]
 tau = 1.25;                     % Tortuosity
 dzdx = 1/tau;                   % divertion field
+
+% Local physical info
 epsilon = 7*10^10;              % Electrical permitivity [F/m]
 mu_oil = 510*24*3600;           % Oil viscosity [kg/(m.day)]
 mu_solution = 0.001*24*3600;    % Solution viscosity [kg/(m.day)]
