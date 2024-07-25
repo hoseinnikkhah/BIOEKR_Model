@@ -49,6 +49,7 @@ K = 0.02;                       % Exprimental Microbal constant
 K_A = 1.75*10^-5;               % Dissociation constant [mol/m3]
 k_ads = 0.075;                  % Exprimental adsorbing constant
 coeff = 1/(1+k_ads);            % Adsorbing coefficent
+
 R_i = (0.693/53.2);             % Initial Reaction flow rate
 
 % Dimensionless parameters
@@ -73,16 +74,28 @@ i = F*(z_total);
 % Counductivity
 sigma_surface = 2.74*10^7;        % Conductivity [S/m]
 
+% Species diffusivities (remapped)  [Dimentionless]
+D_HA_upp = 1.2;          % Acetic Acid
+D_A_upp = 1.2;           % Acid Agent
+D_H_upp = 9.35;          % H+
+D_OH_upp = 2.00;         % OH-
+D_C_upp = 2.00;          % Carbon
+
+% Species diffusivities (Normal)    [m2/s]
+D_HA_0 = D_HA_upp*D0;    % Acetic Acid
+D_A_0 = D_A_upp*D0;      % Acid Agent
+D_H_0 = D_H_upp*D0;      % H+
+D_OH_0 = D_OH_upp*D0;    % OH-
+D_C_0 = D_C_upp*D0;      % Carbon
 
 %-------------------------------------------------------------------------------
 % Species Diffuision                                                            |
-D_H = 3.5447*10^-9*24*3600;       % Mass advection for Hydrogen [m^2/day]       |
-D_C = 2.063*10^-9*24*3600;        % Mass advection for Hydrocarbon [m^2/day]    |
-D_OH = 0.450*10^-8*24*3600;       % Mass advection for Hydroxid [m^2/day]       |
-D_HA = 1.2*10^-8*24*3600;         % Mass advection for Acid [m^2/day]           |
-D_A = 1.2*10^-8*24*3600;          % Mass advection for Acid agent [m^2/day]     |
-D_BOH = 1.2*10^-8*24*3600;        % Mass advection for Base [m^2/day]           |
-D_B = 1.34*10^-8*24*3600;         % Mass advection for Base agent [m^2/day]     |
+D_H = D_H_0*24*3600;              % Mass advection for Hydrogen [m^2/day]       |
+D_C = D_C_0*24*3600;              % Mass advection for Hydrocarbon [m^2/day]    |
+D_OH = D_OH_0*24*3600;            % Mass advection for Hydroxid [m^2/day]       |
+D_HA = D_HA_0*24*3600;            % Mass advection for Acid [m^2/day]           |
+D_A = D_A_0*24*3600;              % Mass advection for Acid agent [m^2/day]     |
+
 %                                                                               |
 % Species Diffuision abberation with coeff                                      |
 D_star_H = D_H*(dt/dx^2);                % Dimensionless of Diffusion           |
