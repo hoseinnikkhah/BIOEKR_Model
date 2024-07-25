@@ -6,8 +6,8 @@ L_cm = L*100;                  % length of domain in x direction [cm]
 tmax = 35;                     % end time [day]
 nx = 41;                       % number of nodes in x direction
 nt = 50401;                    % number of time steps
-dx = L/(nx-1);
-dt = tmax/(nt-1);
+dx = L/(nx-1);                 % [m]
+dt = tmax/(nt-1);              % [day]
 
 % Refrence x directions        [m]
 x = (10^-5:dx:(nx)*dx);
