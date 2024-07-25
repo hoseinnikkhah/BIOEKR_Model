@@ -50,7 +50,7 @@ epsilon = 7*10^10;             % Electrical permittivity [F/m]
 zeta = -0.0027;                % Zeta Potential [V]
 zeta_0 = 2.6205e-23;           % Refrence Zeta Potential [V]
 
-K_ads = 0.02;
+K_ads = 0.075;                 % Exprimental adsorbing constant
 coeff = 1/(1+K_ads);
 
 % Dimentionless     [Dimentionless]
