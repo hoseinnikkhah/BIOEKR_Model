@@ -51,13 +51,12 @@ k_ads = 0.075;                  % Exprimental adsorbing constant
 coeff = 1/(1+k_ads);            % Adsorbing coefficent
 
 R_i = (0.693/53.2);             % Initial Reaction flow rate
+D0 = 10^-9;                     % Reference diffusivity [m2/s]
 
 % Dimensionless parameters
 Pe = 47;
 Z = 0.049;
 Beta = 967;
-
-
 
 % Species Valency
 z_H = 1;
