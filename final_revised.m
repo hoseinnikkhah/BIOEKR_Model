@@ -128,19 +128,13 @@ alpha_coeff_BOH = D_coeff_BOH/(n*tau^2); % Diffusion Advection          |
 alpha_coeff_A = D_coeff_A/(n*tau^2);     % Diffusion Advection          |
 alpha_coeff_B = D_coeff_B/(n*tau^2);     % Diffusion Advection          |
 %-----------------------------------------------------------------------
-
-%-------------------------------------------------------------------------------
-% Species Velocities                                                            |
-%                                                                               |
-% Species Mobility                                                              |
-v_C = (D_C/(R*T));                             % mobility [Hydrocarbon]         |
-v_H = (D_H/(R*T));                             % mobility [Hydrogen]            |
-v_OH = (D_OH/(R*T));                           % mobility [Hydroxid]            |
-v_HA = (D_HA/(R*T));                           % mobility [Acid]                |
-v_BOH = (D_BOH/(R*T));                         % mobility [Base]                |
-v_A = (D_A/(R*T));                             % mobility [A]                   |
-v_B = (D_B/(R*T));                             % mobility [B]                   |
-%                                                                               |
+% Species Mobility [(m2.mol)/(s.J)]                                     |
+v_C = (D_C/(R*T));                       % mobility [Hydrocarbon]       |
+v_H = (D_H/(R*T));                       % mobility [Hydrogen]          |
+v_OH = (D_OH/(R*T));                     % mobility [Hydroxid]          |
+v_HA = (D_HA/(R*T));                     % mobility [Acid]              |
+v_A = (D_A/(R*T));                       % mobility [A]                 |
+%                                                                       |
 % Species electromigration velocity                                             |
 u_e_H = (v_H*z_H*F*E_field)/(tau^2);           % electromigration [Hydrogen]    |
 u_e_OH = (v_OH*z_OH*F*E_field)/(tau^2);        % electromigration [Hydroxid]    |
