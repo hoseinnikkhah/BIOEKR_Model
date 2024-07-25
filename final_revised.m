@@ -30,6 +30,7 @@ M = linspace(phi,0,nx);
 for timestep = 1:nt
     E_field(:,timestep) = M;
 end
+E_field_dx = E_field/L;         % Electric field in lenght [V/m]
 
 % Global Physical info
 T = 25 + 273;                   % Temperature [K]
@@ -124,14 +125,14 @@ alpha_coeff_OH = D_coeff_OH/(n*tau^2);   % Diffusion Advection                  
 alpha_coeff_HA = D_coeff_HA/(n*tau^2);   % Diffusion Advection                  |
 alpha_coeff_A = D_coeff_A/(n*tau^2);     % Diffusion Advection                  |
 %-------------------------------------------------------------------------------|
-% Species Mobility [(m2.mol)/(day.J)] or [day·mol/kg]                           |
+% Species Mobility                       [(m2.mol)/(day.J)] or [day·mol/kg]     |
 v_C = (D_C/(R*T));                       % mobility [Hydrocarbon]               |
 v_H = (D_H/(R*T));                       % mobility [Hydrogen]                  |
 v_OH = (D_OH/(R*T));                     % mobility [Hydroxid]                  |
 v_HA = (D_HA/(R*T));                     % mobility [Acid]                      |
 v_A = (D_A/(R*T));                       % mobility [A]                         |
 %                                                                               |
-% Species electromigration velocity                                             |
+% Species electromigration velocity      [m/s]                                  |
 u_e_H = (v_H*z_H*F*E_field)/(tau^2);     % electromigration [Hydrogen]          |
 u_e_OH = (v_OH*z_OH*F*E_field)/(tau^2);  % electromigration [Hydroxid]          |
 u_e_C = (v_C*z_C*F*E_field)/(tau^2);     % electromigration [Carbon]            |
