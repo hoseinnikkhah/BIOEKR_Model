@@ -89,55 +89,55 @@ D_H_0 = D_H_upp*D0;      % H+
 D_OH_0 = D_OH_upp*D0;    % OH-
 D_C_0 = D_C_upp*D0;      % Carbon
 
-%-------------------------------------------------------------------------------
-% Species Diffuision                     [m^2/day]                              |
-D_H = D_H_0*24*3600;                     % Mass advection for Hydrogen          |
-D_C = D_C_0*24*3600;                     % Mass advection for Hydrocarbon       |
-D_OH = D_OH_0*24*3600;                   % Mass advection for Hydroxid          |
-D_HA = D_HA_0*24*3600;                   % Mass advection for Acid              |
-D_A = D_A_0*24*3600;                     % Mass advection for Acid agent        |
-%                                                                               |
-% Species Diffuision abberation with standalone [Dimentionless]                 |
-D_standalone_H = D_H*(dt/dx^2);          % Dimensionless of Diffusion           |
-D_standalone_C = D_C*(dt/dx^2);          % Dimensionless of Diffusion           |
-D_standalone_OH = D_OH*(dt/dx^2);        % Dimensionless of Diffusion           |
-D_standalone_HA = D_HA*(dt/dx^2);        % Dimensionless of Diffusion           |
-D_standalone_A = D_A*(dt/dx^2);          % Dimensionless of Diffusion           |
-%                                                                               |
-% Species Diffuision abberation with coeff [Dimentionless]                      |
-D_coeff_H = D_H*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
-D_coeff_C = D_C*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
-D_coeff_OH = D_OH*coeff*(dt/dx^2);       % Dimensionless of Diffusion           |
-D_coeff_HA = D_HA*coeff*(dt/dx^2);       % Dimensionless of Diffusion           |
-D_coeff_A = D_A*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
-%                                                                               |
-% Species Diffusion advection standalone [Dimentionless]                        |
-alpha_H = D_standalone_H/(n*tau^2);      % Diffusion Advection                  |
-alpha_C = D_standalone_C/(n*tau^2);      % Diffusion Advection                  |
-alpha_OH = D_standalone_OH/(n*tau^2);    % Diffusion Advection                  |
-alpha_HA = D_standalone_HA/(n*tau^2);    % Diffusion Advection                  |
-alpha_A = D_standalone_A/(n*tau^2);      % Diffusion Advection                  |
-%                                                                               |
-% Species Diffusion advection with coeff [Dimentionless]                        |
-alpha_coeff_H = D_coeff_H/(n*tau^2);     % Diffusion Advection                  |
-alpha_coeff_C = D_coeff_C/(n*tau^2);     % Diffusion Advection                  |
-alpha_coeff_OH = D_coeff_OH/(n*tau^2);   % Diffusion Advection                  |
-alpha_coeff_HA = D_coeff_HA/(n*tau^2);   % Diffusion Advection                  |
-alpha_coeff_A = D_coeff_A/(n*tau^2);     % Diffusion Advection                  |
-%-------------------------------------------------------------------------------|
-% Species Mobility                       [(m2.mol)/(day.J)] or [day·mol/kg]     |
-v_C = (D_C/(R*T));                       % mobility [Hydrocarbon]               |
-v_H = (D_H/(R*T));                       % mobility [Hydrogen]                  |
-v_OH = (D_OH/(R*T));                     % mobility [Hydroxid]                  |
-v_HA = (D_HA/(R*T));                     % mobility [Acid]                      |
-v_A = (D_A/(R*T));                       % mobility [A]                         |
-%                                                                               |
-% Species electromigration velocity      [m/s]                                  |
-u_e_H = (v_H*z_H*F*E_field)/(tau^2);     % electromigration [Hydrogen]          |
-u_e_OH = (v_OH*z_OH*F*E_field)/(tau^2);  % electromigration [Hydroxid]          |
-u_e_C = (v_C*z_C*F*E_field)/(tau^2);     % electromigration [Carbon]            |
-u_e_HA = (v_HA*z_HA*F*E_field)/(tau^2);  % electromigration [Acid]              |
-u_e_A = (v_A*z_A*F*E_field)/(tau^2);     % electromigration [A]                 |
+%--------------------------------------------------------------------------------------
+% Species Diffuision                            [m^2/day]                              |
+D_H = D_H_0*24*3600;                            % Mass advection for Hydrogen          |
+D_C = D_C_0*24*3600;                            % Mass advection for Hydrocarbon       |
+D_OH = D_OH_0*24*3600;                          % Mass advection for Hydroxid          |
+D_HA = D_HA_0*24*3600;                          % Mass advection for Acid              |
+D_A = D_A_0*24*3600;                            % Mass advection for Acid agent        |
+%                                                                                      |
+% Species Diffuision abberation with standalone [Dimentionless]                        |
+D_standalone_H = D_H*(dt/dx^2);                 % Dimensionless of Diffusion           |
+D_standalone_C = D_C*(dt/dx^2);                 % Dimensionless of Diffusion           |
+D_standalone_OH = D_OH*(dt/dx^2);               % Dimensionless of Diffusion           |
+D_standalone_HA = D_HA*(dt/dx^2);               % Dimensionless of Diffusion           |
+D_standalone_A = D_A*(dt/dx^2);                 % Dimensionless of Diffusion           |
+%                                                                                      |
+% Species Diffuision abberation with coeff      [Dimentionless]                        |
+D_coeff_H = D_H*coeff*(dt/dx^2);                % Dimensionless of Diffusion           |
+D_coeff_C = D_C*coeff*(dt/dx^2);                % Dimensionless of Diffusion           |
+D_coeff_OH = D_OH*coeff*(dt/dx^2);              % Dimensionless of Diffusion           |
+D_coeff_HA = D_HA*coeff*(dt/dx^2);              % Dimensionless of Diffusion           |
+D_coeff_A = D_A*coeff*(dt/dx^2);                % Dimensionless of Diffusion           |
+%                                                                                      |
+% Species Diffusion advection standalone        [Dimentionless]                        |
+alpha_H = D_standalone_H/(n*tau^2);             % Diffusion Advection                  |
+alpha_C = D_standalone_C/(n*tau^2);             % Diffusion Advection                  |
+alpha_OH = D_standalone_OH/(n*tau^2);           % Diffusion Advection                  |
+alpha_HA = D_standalone_HA/(n*tau^2);           % Diffusion Advection                  |
+alpha_A = D_standalone_A/(n*tau^2);             % Diffusion Advection                  |
+%                                                                                      |
+% Species Diffusion advection with coeff        [Dimentionless]                        |
+alpha_coeff_H = D_coeff_H/(n*tau^2);            % Diffusion Advection                  |
+alpha_coeff_C = D_coeff_C/(n*tau^2);            % Diffusion Advection                  |
+alpha_coeff_OH = D_coeff_OH/(n*tau^2);          % Diffusion Advection                  |
+alpha_coeff_HA = D_coeff_HA/(n*tau^2);          % Diffusion Advection                  |
+alpha_coeff_A = D_coeff_A/(n*tau^2);            % Diffusion Advection                  |
+%--------------------------------------------------------------------------------------|
+% Species Mobility                              [(m2.mol)/(day.J)] or [day·mol/kg]     |
+v_C = (D_C/(R*T));                              % mobility [Hydrocarbon]               |
+v_H = (D_H/(R*T));                              % mobility [Hydrogen]                  |
+v_OH = (D_OH/(R*T));                            % mobility [Hydroxid]                  |
+v_HA = (D_HA/(R*T));                            % mobility [Acid]                      |
+v_A = (D_A/(R*T));                              % mobility [A]                         |
+%                                                                                      |
+% Species electromigration velocity             [m/s]                                  |
+u_e_H = (v_H*z_H*F*E_field_dx)/(tau^2);         % electromigration [Hydrogen]          |
+u_e_OH = (v_OH*z_OH*F*E_field_dx)/(tau^2);      % electromigration [Hydroxid]          |
+u_e_C = (v_C*z_C*F*E_field_dx)/(tau^2);         % electromigration [Carbon]            |
+u_e_HA = (v_HA*z_HA*F*E_field_dx)/(tau^2);      % electromigration [Acid]              |
+u_e_A = (v_A*z_A*F*E_field_dx)/(tau^2);         % electromigration [A]                 |
 %                                                                               |
 % domain velocity                                                               |
 u_x = (epsilon/mu_solution)*(zeta*E_field);    % Volumetric Velocity [m3/s]     |
