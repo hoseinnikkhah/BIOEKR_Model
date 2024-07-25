@@ -88,15 +88,14 @@ D_H_0 = D_H_upp*D0;      % H+
 D_OH_0 = D_OH_upp*D0;    % OH-
 D_C_0 = D_C_upp*D0;      % Carbon
 
-%-------------------------------------------------------------------------------
-% Species Diffuision                                                            |
-D_H = D_H_0*24*3600;              % Mass advection for Hydrogen [m^2/day]       |
-D_C = D_C_0*24*3600;              % Mass advection for Hydrocarbon [m^2/day]    |
-D_OH = D_OH_0*24*3600;            % Mass advection for Hydroxid [m^2/day]       |
-D_HA = D_HA_0*24*3600;            % Mass advection for Acid [m^2/day]           |
-D_A = D_A_0*24*3600;              % Mass advection for Acid agent [m^2/day]     |
-
-%                                                                               |
+%-----------------------------------------------------------------------
+% Species Diffuision              [m^2/day]                             |
+D_H = D_H_0*24*3600;              % Mass advection for Hydrogen         |
+D_C = D_C_0*24*3600;              % Mass advection for Hydrocarbon      |
+D_OH = D_OH_0*24*3600;            % Mass advection for Hydroxid         |
+D_HA = D_HA_0*24*3600;            % Mass advection for Acid             |
+D_A = D_A_0*24*3600;              % Mass advection for Acid agent       |
+%                                                                       |
 % Species Diffuision abberation with coeff                                      |
 D_star_H = D_H*(dt/dx^2);                % Dimensionless of Diffusion           |
 D_star_C = D_C*(dt/dx^2);                % Dimensionless of Diffusion           |
