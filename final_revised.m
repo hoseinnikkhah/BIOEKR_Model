@@ -135,9 +135,7 @@ u_e_H = (v_H*z_H*F*E_field)/(tau^2);           % electromigration [Hydrogen]    
 u_e_OH = (v_OH*z_OH*F*E_field)/(tau^2);        % electromigration [Hydroxid]    |
 u_e_C = (v_C*z_C*F*E_field)/(tau^2);           % electromigration [Carbon]      |
 u_e_HA = (v_HA*z_HA*F*E_field)/(tau^2);        % electromigration [Acid]        |
-u_e_BOH = (v_BOH*z_BOH*F*E_field)/(tau^2);     % electromigration [Base]        |
 u_e_A = (v_A*z_A*F*E_field)/(tau^2);           % electromigration [A]           |
-u_e_B = (v_B*z_B*F*E_field)/(tau^2);           % electromigration [B]           |
 %                                                                               |
 % domain velocity                                                               |
 u_x = (epsilon/mu_solution)*(zeta*E_field);    % Volumetric Velocity [m3/s]     |
@@ -154,17 +152,14 @@ u_t_C = (u_e_C + u_c)/n; %                                                      
 u_t_H = (u_e_H + u_c)/n; %                                                      |
 u_t_OH = (u_e_OH + u_c)/n; %                                                    |
 u_t_HA = (u_e_HA + u_c)/n; %                                                    |
-u_t_BOH = (u_e_BOH + u_c)/n; %                                                  |
 u_t_A = (u_e_A + u_c)/n; %                                                      |
-u_t_B = (u_e_B + u_c)/n; %                                                      |
+
 % Species total velocity                                                        |
 u_t_C_ekr = (u_e_C + u_c_ekr)/n; %                                              |
 u_t_H_ekr = (u_e_H + u_c_ekr)/n; %                                              |
 u_t_OH_ekr = (u_e_OH + u_c_ekr)/n; %                                            |
 u_t_HA_ekr = (u_e_HA + u_c_ekr)/n; %                                            |
-u_t_BOH_ekr = (u_e_BOH + u_c_ekr)/n; %                                          |
 u_t_A_ekr = (u_e_A + u_c_ekr)/n; %                                              |
-u_t_B_ekr = (u_e_B + u_c_ekr)/n; %                                              |
 %
 % Velocity advection without coefficent                                         |
 beta_C = u_t_C_ekr*(dt/2*dx); %                                                 |
