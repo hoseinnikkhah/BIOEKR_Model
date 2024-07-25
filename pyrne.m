@@ -19,6 +19,7 @@ t = (0:dt:(nt-1)*dt);
 t_ref = repmat(t,nx,1);
 t_up = t_ref/tmax;
 t_step = t_up(1,2) - t_up(1,1);
+
 % Physical info 
 V = 25;                        % Voltage [V]
 

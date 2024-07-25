@@ -9,6 +9,17 @@ nt = 50401;                    % number of time steps
 dx = L/(nx-1);
 dt = tmax/(nt-1);
 
+% Refrence x directions        [m]
+x = (10^-5:dx:(nx)*dx);
+x = transpose(x);
+x_ref = repmat(x,1,nt);
+
+% Refrence t directions        [m]
+t = (0:dt:(nt-1)*dt);
+t_ref = repmat(t,nx,1);
+t_up = t_ref/tmax;
+t_step = t_up(1,2) - t_up(1,1);
+
 % Physical info
 T = 25 + 273;                   % Temperature [K]
 R = 8.314;                      % Gas constant [J/mol.K]
