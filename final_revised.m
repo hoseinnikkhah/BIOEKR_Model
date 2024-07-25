@@ -138,9 +138,9 @@ u_e_OH = (v_OH*z_OH*F*E_field_dx)/(tau^2);      % electromigration [Hydroxid]   
 u_e_C = (v_C*z_C*F*E_field_dx)/(tau^2);         % electromigration [Carbon]            |
 u_e_HA = (v_HA*z_HA*F*E_field_dx)/(tau^2);      % electromigration [Acid]              |
 u_e_A = (v_A*z_A*F*E_field_dx)/(tau^2);         % electromigration [A]                 |
-%                                                                               |
-% domain velocity                                                               |
-u_x = (epsilon/mu_solution)*(zeta*E_field);    % Volumetric Velocity [m3/s]     |
+%                                                                                      |
+% domain velocity                                                                      |
+u_x = (epsilon/mu_solution)*(zeta*E_field);     % Volumetric Velocity [m3/s]           |
 u_c = ones(nx,nt);
 u_C = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta);          % Convection Velocity [m3/s]     |
 u_C_ekr = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta); % Convection Velocity [m3/s]     |
