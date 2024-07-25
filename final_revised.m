@@ -21,6 +21,14 @@ t_up = t_ref/tmax;
 t_step = t_up(1,2) - t_up(1,1);
 
 % Physical info
+V = 25;                        % Voltage [V]
+
+E_field = ones(nx,nt);
+M = linspace(dEdx,0,nx);
+for timestep = 1:nt
+    E_field(:,timestep) = M;
+end
+
 T = 25 + 273;                   % Temperature [K]
 R = 8.314;                      % Gas constant [J/mol.K]
 n = 0.64;                       % Porosity
@@ -45,11 +53,7 @@ Pe = 47;
 Z = 0.049;
 Beta = 967;
 
-E_field = ones(nx,nt);
-M = linspace(dEdx,0,nx);
-for timestep = 1:nt
-    E_field(:,timestep) = M;
-end
+
 
 % Species Valency
 z_H = 1;
