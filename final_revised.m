@@ -31,22 +31,20 @@ for timestep = 1:nt
     E_field(:,timestep) = M;
 end
 
+% Global Physical info
 T = 25 + 273;                   % Temperature [K]
 R = 8.314;                      % Gas constant [J/mol.K]
 n = 0.64;                       % Porosity
 F = 96485;                      % Faraady constant [C/mol]
-
-
 tau = 1.25;                     % Tortuosity
 dzdx = 1/tau;                   % divertion field
-
 epsilon = 7*10^10;              % Electrical permitivity [F/m]
 mu_oil = 510*24*3600;           % Oil viscosity [kg/(m.day)]
 mu_solution = 0.001*24*3600;    % Solution viscosity [kg/(m.day)]
 zeta = -0.0027;                 % Zeta potential [V]
 K = 0.02;                       % Exprimental Microbal constant
 K_A = 1.75*10^-5;               % Dissociation constant [mol/m3]
-k_i = 0.075;                    % Exprimental constant
+k_i = 0.075;                    % Exprimental adsorbing constant
 coeff = 1/(1+k_i);              % Adsorbing coefficent
 R_i = (0.693/53.2);             % Initial Reaction flow rate
 
