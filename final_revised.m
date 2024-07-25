@@ -44,10 +44,11 @@ epsilon = 7*10^10;              % Electrical permitivity [F/m]
 mu_oil = 510*24*3600;           % Oil viscosity [kg/(m.day)]
 mu_solution = 0.001*24*3600;    % Solution viscosity [kg/(m.day)]
 zeta = -0.0027;                 % Zeta potential [V]
+zeta_0 = 2.6205e-23;            % Refrence Zeta Potential [V]
 K = 0.02;                       % Exprimental Microbal constant
 K_A = 1.75*10^-5;               % Dissociation constant [mol/m3]
-k_i = 0.075;                    % Exprimental adsorbing constant
-coeff = 1/(1+k_i);              % Adsorbing coefficent
+k_ads = 0.075;                  % Exprimental adsorbing constant
+coeff = 1/(1+k_ads);            % Adsorbing coefficent
 R_i = (0.693/53.2);             % Initial Reaction flow rate
 
 % Dimensionless parameters
@@ -65,7 +66,7 @@ z_HA = 0;
 z_total = z_H + z_OH + z_C + z_HA;
 
 % Current density
-i = F*(z_H+z_OH+z_C+z_HA+z_BOH+z_A+);
+i = F*(z_total);
 % there is a flux term at the end as well but it is not calculated since sum of valencies are zero in this phenomena
 
 
