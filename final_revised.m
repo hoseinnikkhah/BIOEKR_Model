@@ -96,42 +96,38 @@ D_OH = D_OH_0*24*3600;            % Mass advection for Hydroxid         |
 D_HA = D_HA_0*24*3600;            % Mass advection for Acid             |
 D_A = D_A_0*24*3600;              % Mass advection for Acid agent       |
 %                                                                       |
-% Species Diffuision abberation with coeff                                      |
-D_star_H = D_H*(dt/dx^2);                % Dimensionless of Diffusion           |
-D_star_C = D_C*(dt/dx^2);                % Dimensionless of Diffusion           |
-D_star_OH = D_OH*(dt/dx^2);              % Dimensionless of Diffusion           |
-D_star_HA = D_HA*(dt/dx^2);              % Dimensionless of Diffusion           |
-D_star_BOH = D_BOH*(dt/dx^2);            % Dimensionless of Diffusion           |
-D_star_A = D_A*(dt/dx^2);                % Dimensionless of Diffusion           |
-D_star_B = D_B*(dt/dx^2);                % Dimensionless of Diffusion           |
-%                                                                               |
-% Species Diffuision abberation standalone                                      |
-D_prime_H = D_H*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
-D_prime_C = D_C*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
-D_prime_OH = D_OH*coeff*(dt/dx^2);       % Dimensionless of Diffusion           |
-D_prime_HA = D_HA*coeff*(dt/dx^2);       % Dimensionless of Diffusion           |
-D_prime_BOH = D_BOH*coeff*(dt/dx^2);     % Dimensionless of Diffusion           |
-D_prime_A = D_A*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
-D_prime_B = D_B*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
-%                                                                               |
-% Species Diffusion advection with coeff                                        |
-alpha_H = D_star_H/(n*tau^2);            % Diffusion Advection                  |
-alpha_C = D_star_C/(n*tau^2);            % Diffusion Advection                  |
-alpha_OH = D_star_OH/(n*tau^2);          % Diffusion Advection                  |
-alpha_HA = D_star_HA/(n*tau^2);          % Diffusion Advection                  |
-alpha_BOH = D_star_BOH/(n*tau^2);        % Diffusion Advection                  |
-alpha_A = D_star_A/(n*tau^2);            % Diffusion Advection                  |
-alpha_B = D_star_B/(n*tau^2);            % Diffusion Advection                  |
-%                                                                               |
-% Species Diffusion advection standalone                                        |
-alpha_prime_H = D_prime_H/(n*tau^2);     % Diffusion Advection                  |
-alpha_prime_C = D_prime_C/(n*tau^2);     % Diffusion Advection                  |
-alpha_prime_OH = D_prime_OH/(n*tau^2);   % Diffusion Advection                  |
-alpha_prime_HA = D_prime_HA/(n*tau^2);   % Diffusion Advection                  |
-alpha_prime_BOH = D_prime_BOH/(n*tau^2); % Diffusion Advection                  |
-alpha_prime_A = D_prime_A/(n*tau^2);     % Diffusion Advection                  |
-alpha_prime_B = D_prime_B/(n*tau^2);     % Diffusion Advection                  |
-%-------------------------------------------------------------------------------
+% Species Diffuision abberation with standalone [Dimentionless]         |
+D_standalone_H = D_H*(dt/dx^2);          % Dimensionless of Diffusion   |
+D_standalone_C = D_C*(dt/dx^2);          % Dimensionless of Diffusion   |
+D_standalone_OH = D_OH*(dt/dx^2);        % Dimensionless of Diffusion   |
+D_standalone_HA = D_HA*(dt/dx^2);        % Dimensionless of Diffusion   |
+D_standalone_A = D_A*(dt/dx^2);          % Dimensionless of Diffusion   |
+%                                                                       |
+% Species Diffuision abberation with coeff [Dimentionless]              |
+D_coeff_H = D_H*coeff*(dt/dx^2);         % Dimensionless of Diffusion   |
+D_coeff_C = D_C*coeff*(dt/dx^2);         % Dimensionless of Diffusion   |
+D_coeff_OH = D_OH*coeff*(dt/dx^2);       % Dimensionless of Diffusion   |
+D_coeff_HA = D_HA*coeff*(dt/dx^2);       % Dimensionless of Diffusion   |
+D_coeff_A = D_A*coeff*(dt/dx^2);         % Dimensionless of Diffusion   |
+%                                                                       |
+% Species Diffusion advection standalone [Dimentionless]                |
+alpha_H = D_standalone_H/(n*tau^2);      % Diffusion Advection          |
+alpha_C = D_standalone_C/(n*tau^2);      % Diffusion Advection          |
+alpha_OH = D_standalone_OH/(n*tau^2);    % Diffusion Advection          |
+alpha_HA = D_standalone_HA/(n*tau^2);    % Diffusion Advection          |
+alpha_BOH = D_standalone_BOH/(n*tau^2);  % Diffusion Advection          |
+alpha_A = D_standalone_A/(n*tau^2);      % Diffusion Advection          |
+alpha_B = D_standalone_B/(n*tau^2);      % Diffusion Advection          |
+%                                                                       |
+% Species Diffusion advection with coeff [Dimentionless]                |
+alpha_coeff_H = D_coeff_H/(n*tau^2);     % Diffusion Advection          |
+alpha_coeff_C = D_coeff_C/(n*tau^2);     % Diffusion Advection          |
+alpha_coeff_OH = D_coeff_OH/(n*tau^2);   % Diffusion Advection          |
+alpha_coeff_HA = D_coeff_HA/(n*tau^2);   % Diffusion Advection          |
+alpha_coeff_BOH = D_coeff_BOH/(n*tau^2); % Diffusion Advection          |
+alpha_coeff_A = D_coeff_A/(n*tau^2);     % Diffusion Advection          |
+alpha_coeff_B = D_coeff_B/(n*tau^2);     % Diffusion Advection          |
+%-----------------------------------------------------------------------
 
 %-------------------------------------------------------------------------------
 % Species Velocities                                                            |
