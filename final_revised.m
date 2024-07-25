@@ -114,18 +114,14 @@ alpha_H = D_standalone_H/(n*tau^2);      % Diffusion Advection          |
 alpha_C = D_standalone_C/(n*tau^2);      % Diffusion Advection          |
 alpha_OH = D_standalone_OH/(n*tau^2);    % Diffusion Advection          |
 alpha_HA = D_standalone_HA/(n*tau^2);    % Diffusion Advection          |
-alpha_BOH = D_standalone_BOH/(n*tau^2);  % Diffusion Advection          |
 alpha_A = D_standalone_A/(n*tau^2);      % Diffusion Advection          |
-alpha_B = D_standalone_B/(n*tau^2);      % Diffusion Advection          |
 %                                                                       |
 % Species Diffusion advection with coeff [Dimentionless]                |
 alpha_coeff_H = D_coeff_H/(n*tau^2);     % Diffusion Advection          |
 alpha_coeff_C = D_coeff_C/(n*tau^2);     % Diffusion Advection          |
 alpha_coeff_OH = D_coeff_OH/(n*tau^2);   % Diffusion Advection          |
 alpha_coeff_HA = D_coeff_HA/(n*tau^2);   % Diffusion Advection          |
-alpha_coeff_BOH = D_coeff_BOH/(n*tau^2); % Diffusion Advection          |
 alpha_coeff_A = D_coeff_A/(n*tau^2);     % Diffusion Advection          |
-alpha_coeff_B = D_coeff_B/(n*tau^2);     % Diffusion Advection          |
 %-----------------------------------------------------------------------|
 % Species Mobility [(m2.mol)/(s.J)]                                     |
 v_C = (D_C/(R*T));                       % mobility [Hydrocarbon]       |
