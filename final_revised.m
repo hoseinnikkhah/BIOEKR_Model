@@ -61,9 +61,10 @@ Beta = 967;
 % Species Valency
 z_H = 1;
 z_OH = -1;
-z_C = 0;
 z_HA = 0;
-z_total = z_H + z_OH + z_C + z_HA;
+z_A = -1;
+z_C = 0;
+z_total = z_H + z_OH + z_C + z_HA + z_A;
 
 % Current density
 i = F*(z_total);
