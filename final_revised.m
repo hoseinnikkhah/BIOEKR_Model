@@ -88,43 +88,43 @@ D_H_0 = D_H_upp*D0;      % H+
 D_OH_0 = D_OH_upp*D0;    % OH-
 D_C_0 = D_C_upp*D0;      % Carbon
 
-%-----------------------------------------------------------------------
-% Species Diffuision              [m^2/day]                             |
-D_H = D_H_0*24*3600;              % Mass advection for Hydrogen         |
-D_C = D_C_0*24*3600;              % Mass advection for Hydrocarbon      |
-D_OH = D_OH_0*24*3600;            % Mass advection for Hydroxid         |
-D_HA = D_HA_0*24*3600;            % Mass advection for Acid             |
-D_A = D_A_0*24*3600;              % Mass advection for Acid agent       |
-%                                                                       |
-% Species Diffuision abberation with standalone [Dimentionless]         |
-D_standalone_H = D_H*(dt/dx^2);          % Dimensionless of Diffusion   |
-D_standalone_C = D_C*(dt/dx^2);          % Dimensionless of Diffusion   |
-D_standalone_OH = D_OH*(dt/dx^2);        % Dimensionless of Diffusion   |
-D_standalone_HA = D_HA*(dt/dx^2);        % Dimensionless of Diffusion   |
-D_standalone_A = D_A*(dt/dx^2);          % Dimensionless of Diffusion   |
-%                                                                       |
-% Species Diffuision abberation with coeff [Dimentionless]              |
-D_coeff_H = D_H*coeff*(dt/dx^2);         % Dimensionless of Diffusion   |
-D_coeff_C = D_C*coeff*(dt/dx^2);         % Dimensionless of Diffusion   |
-D_coeff_OH = D_OH*coeff*(dt/dx^2);       % Dimensionless of Diffusion   |
-D_coeff_HA = D_HA*coeff*(dt/dx^2);       % Dimensionless of Diffusion   |
-D_coeff_A = D_A*coeff*(dt/dx^2);         % Dimensionless of Diffusion   |
-%                                                                       |
-% Species Diffusion advection standalone [Dimentionless]                |
-alpha_H = D_standalone_H/(n*tau^2);      % Diffusion Advection          |
-alpha_C = D_standalone_C/(n*tau^2);      % Diffusion Advection          |
-alpha_OH = D_standalone_OH/(n*tau^2);    % Diffusion Advection          |
-alpha_HA = D_standalone_HA/(n*tau^2);    % Diffusion Advection          |
-alpha_A = D_standalone_A/(n*tau^2);      % Diffusion Advection          |
-%                                                                       |
-% Species Diffusion advection with coeff [Dimentionless]                |
-alpha_coeff_H = D_coeff_H/(n*tau^2);     % Diffusion Advection          |
-alpha_coeff_C = D_coeff_C/(n*tau^2);     % Diffusion Advection          |
-alpha_coeff_OH = D_coeff_OH/(n*tau^2);   % Diffusion Advection          |
-alpha_coeff_HA = D_coeff_HA/(n*tau^2);   % Diffusion Advection          |
-alpha_coeff_A = D_coeff_A/(n*tau^2);     % Diffusion Advection          |
-%-----------------------------------------------------------------------|
-% Species Mobility [(m2.mol)/(s.J)]                                     |
+%-------------------------------------------------------------------------------
+% Species Diffuision                     [m^2/day]                              |
+D_H = D_H_0*24*3600;                     % Mass advection for Hydrogen          |
+D_C = D_C_0*24*3600;                     % Mass advection for Hydrocarbon       |
+D_OH = D_OH_0*24*3600;                   % Mass advection for Hydroxid          |
+D_HA = D_HA_0*24*3600;                   % Mass advection for Acid              |
+D_A = D_A_0*24*3600;                     % Mass advection for Acid agent        |
+%                                                                               |
+% Species Diffuision abberation with standalone [Dimentionless]                 |
+D_standalone_H = D_H*(dt/dx^2);          % Dimensionless of Diffusion           |
+D_standalone_C = D_C*(dt/dx^2);          % Dimensionless of Diffusion           |
+D_standalone_OH = D_OH*(dt/dx^2);        % Dimensionless of Diffusion           |
+D_standalone_HA = D_HA*(dt/dx^2);        % Dimensionless of Diffusion           |
+D_standalone_A = D_A*(dt/dx^2);          % Dimensionless of Diffusion           |
+%                                                                               |
+% Species Diffuision abberation with coeff [Dimentionless]                      |
+D_coeff_H = D_H*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
+D_coeff_C = D_C*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
+D_coeff_OH = D_OH*coeff*(dt/dx^2);       % Dimensionless of Diffusion           |
+D_coeff_HA = D_HA*coeff*(dt/dx^2);       % Dimensionless of Diffusion           |
+D_coeff_A = D_A*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
+%                                                                               |
+% Species Diffusion advection standalone [Dimentionless]                        |
+alpha_H = D_standalone_H/(n*tau^2);      % Diffusion Advection                  |
+alpha_C = D_standalone_C/(n*tau^2);      % Diffusion Advection                  |
+alpha_OH = D_standalone_OH/(n*tau^2);    % Diffusion Advection                  |
+alpha_HA = D_standalone_HA/(n*tau^2);    % Diffusion Advection                  |
+alpha_A = D_standalone_A/(n*tau^2);      % Diffusion Advection                  |
+%                                                                               |
+% Species Diffusion advection with coeff [Dimentionless]                        |
+alpha_coeff_H = D_coeff_H/(n*tau^2);     % Diffusion Advection                  |
+alpha_coeff_C = D_coeff_C/(n*tau^2);     % Diffusion Advection                  |
+alpha_coeff_OH = D_coeff_OH/(n*tau^2);   % Diffusion Advection                  |
+alpha_coeff_HA = D_coeff_HA/(n*tau^2);   % Diffusion Advection                  |
+alpha_coeff_A = D_coeff_A/(n*tau^2);     % Diffusion Advection                  |
+%-------------------------------------------------------------------------------|
+% Species Mobility [(m2.mol)/(s.J)] or [s·mol/kg]                               |
 v_C = (D_C/(R*T));                       % mobility [Hydrocarbon]       |
 v_H = (D_H/(R*T));                       % mobility [Hydrogen]          |
 v_OH = (D_OH/(R*T));                     % mobility [Hydroxid]          |
