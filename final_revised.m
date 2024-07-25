@@ -20,11 +20,13 @@ t_ref = repmat(t,nx,1);
 t_up = t_ref/tmax;
 t_step = t_up(1,2) - t_up(1,1);
 
-% Physical info
-V = 25;                        % Voltage [V]
+% Electric info
+phi = 25;                       % Electric field [V]
+phi_end = 0;                    % Electric field [V]
+dEdx = phi/L;                   % Electric field in lenght [V/m]
 
-E_field = ones(nx,nt);
-M = linspace(dEdx,0,nx);
+E_field = ones(nx,nt);          % Electric field [V]
+M = linspace(phi,0,nx);
 for timestep = 1:nt
     E_field(:,timestep) = M;
 end
@@ -33,11 +35,11 @@ T = 25 + 273;                   % Temperature [K]
 R = 8.314;                      % Gas constant [J/mol.K]
 n = 0.64;                       % Porosity
 F = 96485;                      % Faraady constant [C/mol]
-phi = 25;                       % Electric field [V]
-phi_end = 0;
+
+
 tau = 1.25;                     % Tortuosity
 dzdx = 1/tau;                   % divertion field
-dEdx = phi/L;                   % Electric field in lenght [V/m]
+
 epsilon = 7*10^10;              % Electrical permitivity [F/m]
 mu_oil = 510*24*3600;           % Oil viscosity [kg/(m.day)]
 mu_solution = 0.001*24*3600;    % Solution viscosity [kg/(m.day)]
