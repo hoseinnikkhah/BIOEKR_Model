@@ -105,8 +105,6 @@ v_H = D_H/(R*T);
 v_OH = D_OH/(R*T);
 v_C = D_C/(R*T);
 
-v_i = [v_HA, v_A, v_Na, v_Cl, v_H, v_OH, v_C];
-
 % Mobility (remapped)      % [s·mol/kg]
 v_HA_upp = D_HA_upp/(R*T);
 v_A_upp = D_A_upp/(R*T);
@@ -115,8 +113,6 @@ v_Cl_upp = D_Cl_upp/(R*T);
 v_H_upp = D_H_upp/(R*T);
 v_OH_upp = D_OH_upp/(R*T);
 v_C_upp = D_C_upp/(R*T);
-
-v_i_upp = [v_HA_upp, v_A_upp, v_Na_upp, v_Cl_upp, v_H_upp, v_OH_upp, v_C_upp];
 
 % Electroelectromigration velocity (Normal)     [m/s]
 u_e_HA = -v_HA*z_HA*F*E_field*(1/tau^2);
@@ -133,6 +129,7 @@ u_0 = (1/tau^2)*((epsilon*zeta)/mu_a)*E_field;
 % Dimensionless x directions
 x_up = x_ref/L;
 x_step = 0.250;
+
 % Dimensionless Voltage     [Dimentionless]
 phi_bar = E_field/V;
 dphidx = phi_bar./x_up;
