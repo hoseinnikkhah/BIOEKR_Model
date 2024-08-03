@@ -20,17 +20,18 @@ t_ref = repmat(t,nx,1);
 t_up = t_ref/tmax;
 t_step = t_up(1,2) - t_up(1,1);
 
-% Physical info 
-V = 25;                        % Voltage [V]
+% Electric info
+V = 25;                        % Voltage at 1st cap [V]
+V_end = 0;                     % Voltage at 2nd cap [V]
+dVdx = V/L;                    % Voltage gradient [V/m]
 
-E_field = ones(nx,nt);         % Voltage [V]
+E_field = ones(nx,nt);         % Electric field [V]
 M = linspace(V,0,nx);
 for timestep = 1:nt
     E_field(:,timestep) = M;
 end
 
-dVdx = V/L;                    % Voltage gradient [V/m]
-dVdx_cm = V/L_cm;              % Voltage gradient [V/cm]
+
 T = 37 + 273;                  % Tempature [K]
 F = 96485;                     % Faraady constant [C/mol]
 R = 8.314;                     % Gas constant [J/mol.K]

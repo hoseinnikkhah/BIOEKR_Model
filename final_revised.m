@@ -21,9 +21,9 @@ t_up = t_ref/tmax;
 t_step = t_up(1,2) - t_up(1,1);
 
 % Electric info
-phi = 25;                       % Electric field [V]
-phi_end = 0;                    % Electric field [V]
-dEdx = phi/L;                   % Electric field in lenght [V/m]
+phi = 25;                       % Voltage at 1st cap [V]
+phi_end = 0;                    % Voltage at 2nd cap [V]
+dEdx = phi/L;                   % Voltage gradient [V/m]
 
 E_field = ones(nx,nt);          % Electric field [V]
 M = linspace(phi,0,nx);
