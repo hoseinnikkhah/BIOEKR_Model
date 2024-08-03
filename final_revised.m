@@ -118,11 +118,14 @@ v_C_Dless = D_C_Dless/(R*T);
 
 %--------------------------------------------------------------------------------------                                                                                      |
 % Species Diffuision abberation with standalone [Dimentionless]                        |
-D_standalone_H = D_H*(dt/dx^2);                 % Dimensionless of Diffusion           |
-D_standalone_C = D_C*(dt/dx^2);                 % Dimensionless of Diffusion           |
+% Converting [s] into [day] is needed otherwise calculated D_standalone is wrong       |
 D_standalone_OH = D_OH*(dt/dx^2);               % Dimensionless of Diffusion           |
 D_standalone_HA = D_HA*(dt/dx^2);               % Dimensionless of Diffusion           |
+D_standalone_Na = D_Na*(dt/dx^2);               % Dimensionless of Diffusion           |
+D_standalone_Cl = D_Cl*(dt/dx^2);               % Dimensionless of Diffusion           |
 D_standalone_A = D_A*(dt/dx^2);                 % Dimensionless of Diffusion           |
+D_standalone_H = D_H*(dt/dx^2);                 % Dimensionless of Diffusion           |
+D_standalone_C = D_C*(dt/dx^2);                 % Dimensionless of Diffusion           |
 %                                                                                      |
 % Species Diffuision abberation with coeff      [Dimentionless]                        |
 D_coeff_H = D_H*coeff*(dt/dx^2);                % Dimensionless of Diffusion           |
