@@ -44,32 +44,35 @@ n = 0.64;                       % Porosity
 tau = 1.25;                     % Tortuosity
 dzdx = 1/tau;                   % divertion field
 
-% Local physical info
+% Acetic acid info
+sigma_surface = 0.0013;         % Surface conductivit [mhos/m]
+K_a = 1.75*10^-6;               % dissociation constant [mol/m3]
+K_H2O = 10^-8;                  % dissociation constant [(mol/m3)2]
+K_b = 1.75*10^-6;               % dissociation constant [mol/m3]
+mu_a = 0.001;                   % Solution viscosity [kg/(m.day)]
 epsilon = 7*10^10;              % Electrical permitivity [F/m]
-mu_oil = 510*24*3600;           % Oil viscosity [kg/(m.day)]
-mu_solution = 0.001*24*3600;    % Solution viscosity [kg/(m.day)]
-zeta = -0.0027;                 % Zeta potential [V]
+zeta = -0.0027;                 % Zeta Potential [V]
 zeta_0 = 2.6205e-23;            % Refrence Zeta Potential [V]
-K = 0.02;                       % Exprimental Microbal constant
-K_A = 1.75*10^-5;               % Dissociation constant [mol/m3]
+
 k_ads = 0.075;                  % Exprimental adsorbing constant
 coeff = 1/(1+k_ads);            % Adsorbing coefficent
-
-R_i = (0.693/53.2);             % Initial Reaction flow rate
-D0 = 10^-9;                     % Reference diffusivity [m2/s]
-
+K = 0.02;                       % Exprimental Microbal constant
 % Dimensionless parameters
 Pe = 47;
 Z = 0.049;
 Beta = 967;
+k_0 = K_a;
 
-% Species Valency
-z_H = 1;
-z_OH = -1;
+% Valecy            [Dimentionless]
 z_HA = 0;
 z_A = -1;
+z_Na = 1;
+z_Cl = -1;
+z_H = 1;
+z_OH = -1;
 z_C = 0;
-z_total = z_H + z_OH + z_C + z_HA + z_A;
+
+z_total = z_HA + z_A + z_Na + z_Cl + z_H + z_OH + z_C;
 
 % Current density
 i = F*(z_total);

@@ -44,7 +44,7 @@ n = 0.64;                      % Porosity   [Dimentionless]
 tau = 1.25;                    % Tortuosity [Dimentionless]
 dzdx = 1/tau;                   % divertion field
 
-% Acetic acid
+% Acetic acid info
 sigma_surface = 0.0013;        % Surface conductivit [mhos/m]
 K_a = 1.75*10^-6;              % dissociation constant [mol/m3]
 K_H2O = 10^-8;                 % dissociation constant [(mol/m3)2]
