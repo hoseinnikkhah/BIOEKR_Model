@@ -80,7 +80,7 @@ D_H_cal = D_H_upp*D0;        % H+
 D_C_cal = D_C_upp*D0;        % Carbon
 
 % Counductivity
-sigma_surface = 2.74*10^7;        % Conductivity [S/m]
+sigma_surface = 2.74*10^7;   % Conductivity [S/m]
 %-------------------------------------------------------------------------------
 % Species Diffuision                    [m^2/day]
 D_H = D_H_cal*24*3600;                  % Mass advection for Hydrogen
@@ -100,24 +100,24 @@ D_star_A = D_A*(dt/dx^2);
 D_star_Na = D_Na*(dt/dx^2);              
 D_star_Cl = D_Cl*(dt/dx^2);
 
-% Species Diffuision abberation standalone                                      |
-D_prime_H = D_H*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
-D_prime_C = D_C*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
-D_prime_OH = D_OH*coeff*(dt/dx^2);       % Dimensionless of Diffusion           |
-D_prime_HA = D_HA*coeff*(dt/dx^2);       % Dimensionless of Diffusion           |
-D_prime_BOH = D_BOH*coeff*(dt/dx^2);     % Dimensionless of Diffusion           |
-D_prime_A = D_A*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
-D_prime_B = D_B*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
-%                                                                               |
-% Species Diffusion advection with coeff                                        |
-alpha_H = D_star_H/(n*tau^2);            % Diffusion Advection                  |
-alpha_C = D_star_C/(n*tau^2);            % Diffusion Advection                  |
-alpha_OH = D_star_OH/(n*tau^2);          % Diffusion Advection                  |
-alpha_HA = D_star_HA/(n*tau^2);          % Diffusion Advection                  |
-alpha_BOH = D_star_BOH/(n*tau^2);        % Diffusion Advection                  |
-alpha_A = D_star_A/(n*tau^2);            % Diffusion Advection                  |
-alpha_B = D_star_B/(n*tau^2);            % Diffusion Advection                  |
-%                                                                               |
+% Species Diffuision abberation
+D_prime_H = D_H*coeff*(dt/dx^2);
+D_prime_C = D_C*coeff*(dt/dx^2);
+D_prime_OH = D_OH*coeff*(dt/dx^2);
+D_prime_HA = D_HA*coeff*(dt/dx^2);
+D_prime_A = D_A*coeff*(dt/dx^2);
+D_prime_Na = D_Na*coeff*(dt/dx^2);
+D_prime_Cl = D_Cl*coeff*(dt/dx^2);
+
+% Species Diffusion advection without coeff                                        |
+alpha_H = D_star_H/(n*tau^2);
+alpha_C = D_star_C/(n*tau^2);
+alpha_OH = D_star_OH/(n*tau^2);
+alpha_HA = D_star_HA/(n*tau^2);
+alpha_A = D_star_A/(n*tau^2);
+alpha_Na = D_star_Na/(n*tau^2);
+alpha_Cl = D_star_B/(n*tau^2);
+
 % Species Diffusion advection standalone                                        |
 alpha_prime_H = D_prime_H/(n*tau^2);     % Diffusion Advection                  |
 alpha_prime_C = D_prime_C/(n*tau^2);     % Diffusion Advection                  |
