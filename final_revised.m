@@ -96,14 +96,25 @@ D_C = D_C_upp*D0;        % Carbon
 
 D_i = [D_HA, D_A, D_Na, D_Cl, D_H, D_OH, D_C];
 
-%--------------------------------------------------------------------------------------
-% Species Diffuision                            [m^2/day]                              |
-D_H = D_H_0*24*3600;                            % Mass advection for Hydrogen          |
-D_C = D_C_0*24*3600;                            % Mass advection for Hydrocarbon       |
-D_OH = D_OH_0*24*3600;                          % Mass advection for Hydroxid          |
-D_HA = D_HA_0*24*3600;                          % Mass advection for Acid              |
-D_A = D_A_0*24*3600;                            % Mass advection for Acid agent        |
-%                                                                                      |
+% Mobility (Normal)      % [s·mol/kg]
+v_HA = D_HA/(R*T);
+v_A = D_A/(R*T);
+v_Na = D_Na/(R*T);
+v_Cl = D_Cl/(R*T);
+v_H = D_H/(R*T);
+v_OH = D_OH/(R*T);
+v_C = D_C/(R*T);
+
+% Mobility (remapped)      % [s·mol/kg]
+v_HA_upp = D_HA_upp/(R*T);
+v_A_upp = D_A_upp/(R*T);
+v_Na_upp = D_Na_upp/(R*T);
+v_Cl_upp = D_Cl_upp/(R*T);
+v_H_upp = D_H_upp/(R*T);
+v_OH_upp = D_OH_upp/(R*T);
+v_C_upp = D_C_upp/(R*T);
+
+%--------------------------------------------------------------------------------------                                                                                      |
 % Species Diffuision abberation with standalone [Dimentionless]                        |
 D_standalone_H = D_H*(dt/dx^2);                 % Dimensionless of Diffusion           |
 D_standalone_C = D_C*(dt/dx^2);                 % Dimensionless of Diffusion           |
