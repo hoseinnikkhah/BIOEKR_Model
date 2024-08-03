@@ -57,6 +57,8 @@ zeta_0 = 2.6205e-23;            % Refrence Zeta Potential [V]
 k_ads = 0.075;                  % Exprimental adsorbing constant
 coeff = 1/(1+k_ads);            % Adsorbing coefficent
 K = 0.02;                       % Exprimental Microbal constant
+bolian = 24*3600;               % Time conversion cofactor
+
 % Dimensionless parameters
 Pe = 47;
 Z = 0.049;
