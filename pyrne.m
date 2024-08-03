@@ -31,15 +31,18 @@ for timestep = 1:nt
     E_field(:,timestep) = M;
 end
 
+E_field_dx = E_field/L;        % Electric field in lenght [V/m]
 
-T = 37 + 273;                  % Tempature [K]
-F = 96485;                     % Faraady constant [C/mol]
+% Global Physical info
+T = 25 + 273;                  % Tempature [K]
 R = 8.314;                     % Gas constant [J/mol.K]
+F = 96485;                     % Faraady constant [C/mol]
 D0 = 10^-9;                    % Reference diffusivity [m2/s]
 
 % Soil info
 n = 0.64;                      % Porosity   [Dimentionless]
 tau = 1.25;                    % Tortuosity [Dimentionless]
+dzdx = 1/tau;                   % divertion field
 
 % Acetic acid
 sigma_surface = 0.0013;        % Surface conductivit [mhos/m]

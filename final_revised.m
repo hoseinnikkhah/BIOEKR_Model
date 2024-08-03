@@ -30,13 +30,17 @@ M = linspace(phi,0,nx);
 for timestep = 1:nt
     E_field(:,timestep) = M;
 end
+
 E_field_dx = E_field/L;         % Electric field in lenght [V/m]
 
 % Global Physical info
 T = 25 + 273;                   % Temperature [K]
 R = 8.314;                      % Gas constant [J/mol.K]
-n = 0.64;                       % Porosity
 F = 96485;                      % Faraady constant [C/mol]
+D0 = 10^-9;                     % Reference diffusivity [m2/s]
+
+% Soil info
+n = 0.64;                       % Porosity
 tau = 1.25;                     % Tortuosity
 dzdx = 1/tau;                   % divertion field
 
