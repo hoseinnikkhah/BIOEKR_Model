@@ -164,24 +164,24 @@ u_x = (epsilon/mu_a)*(zeta*E_field);
 u_c = u_x/((tau^2)*10^19);
 u_c_up = -((zeta/zeta_0)*dphidx)*10^-18;
 
+% Toatal velocity term (Normal)
+u_t_HA = (u_e_HA + u_c);
+u_t_A = (u_e_A + u_c);
+u_t_Na = (u_e_Na + u_c);
+u_t_Cl = (u_e_Cl + u_c);
+u_t_H = (u_e_H + u_c);
+u_t_OH = (u_e_OH + u_c);
+u_t_C = (u_e_C + u_c);
 
-u_eo = ((epsilon*zeta)/mu_solution)*E_field;    % Electoosmotic Velocity [m3/s]        |
-u_s = n*u_c; %                                                                         |
-%                                                                                      |
-% Species total velocity                                                               |
-u_t_C = (u_e_C + u_c)/n; %                                                             |
-u_t_H = (u_e_H + u_c)/n; %                                                             |
-u_t_OH = (u_e_OH + u_c)/n; %                                                           |
-u_t_HA = (u_e_HA + u_c)/n; %                                                           |
-u_t_A = (u_e_A + u_c)/n; %                                                             |
+% Toatal velocity term (Rmapped)
+u_t_HA_up = (u_e_HA_upp + u_c_up);
+u_t_A_up = (u_e_A_upp + (u_c_up));
+u_t_Na_up = (u_e_Na_upp + u_c_up);
+u_t_Cl_up = (u_e_Cl_upp + u_c_up);
+u_t_H_up = (u_e_H_upp + u_c_up)*10^-5;
+u_t_OH_up = (u_e_OH_upp + u_c_up);
+u_t_C_up = -(u_e_C_upp + u_c_up)*10^-1;
 
-% Species total velocity                                                               |
-u_t_C_ekr = (u_e_C + u_c_ekr)/n; %                                                     |
-u_t_H_ekr = (u_e_H + u_c_ekr)/n; %                                                     |
-u_t_OH_ekr = (u_e_OH + u_c_ekr)/n; %                                                   |
-u_t_HA_ekr = (u_e_HA + u_c_ekr)/n; %                                                   |
-u_t_A_ekr = (u_e_A + u_c_ekr)/n; %                                                     |
-%
 % Velocity advection without coefficent                                                |
 beta_C = u_t_C_ekr*(dt/2*dx); %                                                        |
 beta_H = u_t_H_ekr*(dt/2*dx); %                                                        |
@@ -198,49 +198,153 @@ beta_prime_A = coeff*u_t_A*(dt/2*dx); %                                         
 %                                                                                      |
 %--------------------------------------------------------------------------------------
 
-R_D = coeff*(dt)/n;              % Reaction rate Dimensionless factor
+
+% Initial concentration        [mol/m3]
+c_0 = 500; 
+c_p = 200;
+c_Na = c_p;
+c_Cl = c_Na;
+
+% Initial Hydrocarbon concentration        [mg/kg]
+c_C_TPH = 10000;
+
+% Hydrocarbon properties
+API = 29.6;
+MW = (6048/(API-5.9));                   % [g/mol]
+rho = 1760;                              % [kg/(m3)]
+bolian = 10^-3;                          % [g/mg]
+c_C = ((c_C_TPH*rho*bolian)/MW);         % [mol/m3]
+
+% Sigma refrence               [S/m]
+sigma_0 = ((F^2)*D0*c_0*(tau^2))/(R*T);
+
+% Alpha advection
+alpha = u_0/(c_0*k_0);
 
 % --- Create arrays to save data for export
-x = linspace(0,L,nx);
-t = linspace(0,tmax,nt);
+x_array = linspace(0,L,nx);
+t_array = linspace(0,tmax,nt);
 
-J_C = zeros(nx,nt);
+% Flux arrays
+J_HA = zeros(nx,nt);
+J_A = zeros(nx,nt);
+J_Na = zeros(nx,nt);
+J_Cl = zeros(nx,nt);
 J_H = zeros(nx,nt);
 J_OH = zeros(nx,nt);
-J_HA = zeros(nx,nt);
-J_BOH = zeros(nx,nt);
-J_A = zeros(nx,nt);
-J_B = zeros(nx,nt);
+J_C = zeros(nx,nt);
 
-G_C = zeros(nx,nt);
+% concentration arrays
+G_HA = zeros(nx,nt);
+G_A = zeros(nx,nt);
+G_Na = zeros(nx,nt);
+G_Cl = zeros(nx,nt);
 G_H = zeros(nx,nt);
 G_OH = zeros(nx,nt);
-G_HA = zeros(nx,nt);
-G_BOH = zeros(nx,nt);
-G_A = zeros(nx,nt);
-G_B = zeros(nx,nt);
+G_C = zeros(nx,nt);
 
-Sigma = zeros(nx,nt);
-Sigma_ref = ones(nx,nt);
-sigma_ref = Sigma_ref*sigma_surface;
+% concentration arrays [remapped]
+G_HA_up = zeros(nx,nt);
+G_A_up = zeros(nx,nt);
+G_Na_up = zeros(nx,nt);
+G_Cl_up = zeros(nx,nt);
+G_H_up = zeros(nx,nt);
+G_OH_up = zeros(nx,nt);
+G_C_up = zeros(nx,nt);
 
+% adsorbed concentration arrays [remapped]
+G_HA_ads = zeros(nx,nt);
+G_A_ads = zeros(nx,nt);
+G_Na_ads = zeros(nx,nt);
+G_Cl_ads = zeros(nx,nt);
+G_H_ads = zeros(nx,nt);
+G_OH_ads = zeros(nx,nt);
+G_C_ads = zeros(nx,nt);
+
+% Current array
 i_z = zeros(nx, nt);
 
-s_H = zeros(nx,nt);
-s_C = zeros(nx,nt);
-s_OH = zeros(nx,nt);
+% Sigma array
+sigma_bar = zeros(nx,nt);
+sum_HA = zeros(nx,nt);
+sum_A = zeros(nx,nt);
+sum_Na = zeros(nx,nt);
+sum_Cl = zeros(nx,nt);
+sum_H = zeros(nx,nt);
+sum_OH = zeros(nx,nt);
+sum_C = zeros(nx,nt);
+sum_total = zeros(nx,nt);
 
-K_H2O = zeros(nx,nt);
-K_a = zeros(nx,nt);
-K_b = zeros(nx,nt);
+C_HA = zeros(nx,nt);
+C_A = zeros(nx,nt);
+C_Na = zeros(nx,nt);
+C_Cl = zeros(nx,nt);
+C_H = zeros(nx,nt);
+C_OH = zeros(nx,nt);
+C_C = zeros(nx,nt);
+C_total = zeros(nx,nt);
 
-R_C = zeros(nx,nt);
+% SpeciesConstants
+K_H2O_m = ones(nx,nt);
+K_H2O_m = K_H2O_m*K_H2O;
+
+K_a_m = ones(nx,nt);
+K_a_m = K_a_m*K_a;
+
+K_b_m = ones(nx,nt);
+K_b_m = K_b_m*K_b;
+
+% Rate arrays
+R_HA = zeros(nx,nt);
+R_A = zeros(nx,nt);
+R_Na = zeros(nx,nt);
+R_Cl = zeros(nx,nt);
 R_H = zeros(nx,nt);
 R_OH = zeros(nx,nt);
-R_HA = zeros(nx,nt);
-R_BOH = zeros(nx,nt);
-R_A = zeros(nx,nt);
-R_B = zeros(nx,nt);
+R_C = zeros(nx,nt);
+
+%Adsorbed Rate arrays
+R_HA_ads = zeros(nx,nt);
+R_A_ads = zeros(nx,nt);
+R_Na_ads = zeros(nx,nt);
+R_Cl_ads = zeros(nx,nt);
+R_H_ads = zeros(nx,nt);
+R_OH_ads = zeros(nx,nt);
+R_C_ads = zeros(nx,nt);
+
+% --- Set IC and BC
+G_HA(:,1) = c_0;
+G_A(:,1) = c_0;
+G_Na(:,1) = c_Na;
+G_Cl(:,1) = c_Cl;
+G_H(:,1) = c_0;
+G_OH(:,1) = c_0;
+G_C(:,1) = c_C;
+
+G_HA_up(:,1) = G_HA(:,1)/c_0;
+G_A_up(:,1) = G_A(:,1)/c_0;
+G_Na_up(:,1) = G_Na(:,1)/c_Na;
+G_Cl_up(:,1) = G_Cl(:,1)/c_Cl;
+G_H_up(:,1) = G_H(:,1)/c_0;
+G_OH_up(:,1) = G_OH(:,1)/c_0;
+G_C_up(:,1) = G_C(:,1)/c_C;
+
+G_HA_ads(:,1) = K_ads*c_0;
+G_A_ads(:,1) = K_ads*c_0;
+G_Na_ads(:,1) = K_ads*c_Na;
+G_Cl_ads(:,1) = K_ads*c_Cl;
+G_H_ads(:,1) = K_ads*c_0;
+G_OH_ads(:,1) = K_ads*c_0;
+G_C_ads(:,1) = K_ads*c_C;
+
+% Fixing alpha advection
+alpha_HA = (D_HA/(tau^2))*10^5;
+alpha_A = (D_A/(tau^2))*10^5;
+alpha_Na = (D_Na/(tau^2))*10^5;
+alpha_Cl = (D_Cl/(tau^2))*10^5;
+alpha_H = (D_H/(tau^2))*10^5;
+alpha_OH = (D_OH/(tau^2))*10^5;
+alpha_C = (D_C/(tau^2))*10^5;
 
 % --- Set IC and BC
 

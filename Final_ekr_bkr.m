@@ -127,7 +127,7 @@ u_e_B = (v_B*z_B*F*E_field)/(tau^2);           % electromigration [B]           
 % domain velocity                                                               |
 u_x = (epsilon/mu_solution)*(zeta*E_field);    % Volumetric Velocity [m3/s]     |
 u_c = ones(nx,nt);
-u_C = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta);     % Convection Velocity [m3/s]     |
+u_C = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta);          % Convection Velocity [m3/s]     |
 u_C_ekr = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta); % Convection Velocity [m3/s]     |
 u_c = u_c.*u_C;
 u_c_ekr = u_c.*u_C_ekr;
@@ -173,21 +173,24 @@ beta_prime_B = coeff*u_t_B*(dt/2*dx); %                                         
 R_D = coeff*(dt)/n;              % Reaction rate Dimensionless factor
 
 % --- Create arrays to save data for export
-x_array = linspace(0,L,nx);
-t_array = linspace(0,tmax,nt);
+x = linspace(0,L,nx);
+t = linspace(0,tmax,nt);
 
 J_C = zeros(nx,nt);
 J_H = zeros(nx,nt);
 J_OH = zeros(nx,nt);
 J_HA = zeros(nx,nt);
+J_BOH = zeros(nx,nt);
 J_A = zeros(nx,nt);
-
+J_B = zeros(nx,nt);
 
 G_C = zeros(nx,nt);
 G_H = zeros(nx,nt);
 G_OH = zeros(nx,nt);
 G_HA = zeros(nx,nt);
+G_BOH = zeros(nx,nt);
 G_A = zeros(nx,nt);
+G_B = zeros(nx,nt);
 
 Sigma = zeros(nx,nt);
 Sigma_ref = ones(nx,nt);

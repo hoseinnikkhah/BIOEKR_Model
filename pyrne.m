@@ -151,7 +151,9 @@ u_e_C_upp = (-1/Z_calculated)*D_C_upp*z_C*dphidx;
 
 % Convection velocity          [m/s]
 u_x = (epsilon/mu_a)*(zeta*E_field);
-u_c = u_x/((tau^2)*10^19);              % Convection velocity
+
+% Convection velocity (itself)
+u_c = u_x/((tau^2)*10^19);
 u_c_up = -((zeta/zeta_0)*dphidx)*10^-18;
 
 % Toatal velocity term (Normal)
