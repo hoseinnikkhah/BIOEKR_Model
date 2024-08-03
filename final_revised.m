@@ -74,27 +74,27 @@ z_C = 0;
 
 z_total = z_HA + z_A + z_Na + z_Cl + z_H + z_OH + z_C;
 
-% Current density
-i = F*(z_total);
-% there is a flux term at the end as well but it is not calculated since sum of valencies are zero in this phenomena
-
-
-% Counductivity
-sigma_surface = 2.74*10^7;        % Conductivity [S/m]
-
 % Species diffusivities (remapped)  [Dimentionless]
 D_HA_upp = 1.2;          % Acetic Acid
 D_A_upp = 1.2;           % Acid Agent
+D_Na_upp = 1.34;         % Na+
+D_Cl_upp = 2.05;         % Cl-
 D_H_upp = 9.35;          % H+
 D_OH_upp = 2.00;         % OH-
 D_C_upp = 2.00;          % Carbon
 
+D_i_upp = [D_HA_upp, D_A_upp, D_Na_upp, D_Cl_upp, D_H_upp, D_OH_upp, D_C_upp];
+
 % Species diffusivities (Normal)    [m2/s]
-D_HA_0 = D_HA_upp*D0;    % Acetic Acid
-D_A_0 = D_A_upp*D0;      % Acid Agent
-D_H_0 = D_H_upp*D0;      % H+
-D_OH_0 = D_OH_upp*D0;    % OH-
-D_C_0 = D_C_upp*D0;      % Carbon
+D_HA = D_HA_upp*D0;      % Acetic Acid
+D_A = D_A_upp*D0;        % Acid Agent
+D_Na = D_Na_upp*D0;      % Na+
+D_Cl = D_Cl_upp*D0;      % Cl-
+D_H = D_H_upp*D0;        % H+
+D_OH = D_OH_upp*D0;      % OH-
+D_C = D_C_upp*D0;        % Carbon
+
+D_i = [D_HA, D_A, D_Na, D_Cl, D_H, D_OH, D_C];
 
 %--------------------------------------------------------------------------------------
 % Species Diffuision                            [m^2/day]                              |
