@@ -165,13 +165,13 @@ u_x = (epsilon/mu_a)*(zeta*E_field);
 u_c = u_x/((tau^2)*10^19);
 
 % Toatal velocity term (Normal)
-u_t_HA = (u_e_HA + u_c);
-u_t_OH = (u_e_OH + u_c);
-u_t_Na = (u_e_Na + u_c);
-u_t_Cl = (u_e_Cl + u_c);
-u_t_A = (u_e_A + u_c);
-u_t_H = (u_e_H + u_c);
-u_t_C = (u_e_C + u_c);
+u_t_HA = (u_e_HA + u_c)/n;
+u_t_OH = (u_e_OH + u_c)/n;
+u_t_Na = (u_e_Na + u_c)/n;
+u_t_Cl = (u_e_Cl + u_c)/n;
+u_t_A = (u_e_A + u_c)/n;
+u_t_H = (u_e_H + u_c)/n;
+u_t_C = (u_e_C + u_c)/n;
 
 % Velocity advection without coefficent
 beta_OH = u_t_OH*bolian*(dt/(2*dx));
@@ -181,7 +181,6 @@ beta_Cl = u_t_Cl*bolian*(dt/(2*dx));
 beta_C = u_t_C*bolian*(dt/(2*dx));
 beta_H = u_t_H*bolian*(dt/(2*dx));
 beta_A = u_t_A*bolian*(dt/(2*dx));
-
 
 % Initial concentration        [mol/m3]
 c_0 = 500; 
