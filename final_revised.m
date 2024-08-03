@@ -96,14 +96,7 @@ D_C = D_C_upp*D0;        % Carbon
 
 D_i = [D_HA, D_A, D_Na, D_Cl, D_H, D_OH, D_C];
 
-% Mobility (Normal)      % [s·mol/kg]
-v_HA = D_HA/(R*T);
-v_A = D_A/(R*T);
-v_Na = D_Na/(R*T);
-v_Cl = D_Cl/(R*T);
-v_H = D_H/(R*T);
-v_OH = D_OH/(R*T);
-v_C = D_C/(R*T);
+
 
 % Mobility (remapped)      % [s·mol/kg]
 v_HA_upp = D_HA_upp/(R*T);
@@ -143,27 +136,35 @@ alpha_coeff_OH = D_coeff_OH/(n*tau^2);          % Diffusion Advection           
 alpha_coeff_HA = D_coeff_HA/(n*tau^2);          % Diffusion Advection                  |
 alpha_coeff_A = D_coeff_A/(n*tau^2);            % Diffusion Advection                  |
 %--------------------------------------------------------------------------------------|
-% Species Mobility                              [(m2.mol)/(day.J)] or [day·mol/kg]     |
-v_C = (D_C/(R*T));                              % mobility [Hydrocarbon]               |
-v_H = (D_H/(R*T));                              % mobility [Hydrogen]                  |
-v_OH = (D_OH/(R*T));                            % mobility [Hydroxid]                  |
-v_HA = (D_HA/(R*T));                            % mobility [Acid]                      |
-v_A = (D_A/(R*T));                              % mobility [A]                         |
-%                                                                                      |
-% Species electromigration velocity             [m/s]                                  |
-u_e_H = (v_H*z_H*F*E_field_dx)/(tau^2);         % electromigration [Hydrogen]          |
-u_e_OH = (v_OH*z_OH*F*E_field_dx)/(tau^2);      % electromigration [Hydroxid]          |
-u_e_C = (v_C*z_C*F*E_field_dx)/(tau^2);         % electromigration [Carbon]            |
-u_e_HA = (v_HA*z_HA*F*E_field_dx)/(tau^2);      % electromigration [Acid]              |
-u_e_A = (v_A*z_A*F*E_field_dx)/(tau^2);         % electromigration [A]                 |
-%                                                                                      |
-% domain velocity                                                                      |
-u_x = (epsilon/mu_solution)*(zeta*E_field);     % Volumetric Velocity [m3/s]           |
-u_c = ones(nx,nt);
-u_C = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta);      % Convection Velocity [m3/s]           |
-u_C_ekr = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta);  % Convection Velocity [m3/s]           |
-u_c = u_c.*u_C;
-u_c_ekr = u_c.*u_C_ekr;
+% Mobility (Normal)      % [s·mol/kg]
+v_HA = D_HA/(R*T);
+v_A = D_A/(R*T);
+v_Na = D_Na/(R*T);
+v_Cl = D_Cl/(R*T);
+v_H = D_H/(R*T);
+v_OH = D_OH/(R*T);
+v_C = D_C/(R*T);
+
+% Electroelectromigration velocity (Normal)     [m/s]
+u_e_HA = -v_HA*z_HA*F*E_field*(1/tau^2);
+u_e_A = -v_A*z_A*F*E_field*(1/tau^2);
+u_e_Na = -v_Na*z_Na*F*E_field*(1/tau^2);
+u_e_Cl = -v_Cl*z_Cl*F*E_field*(1/tau^2);
+u_e_H = -v_H*z_H*F*E_field*(1/tau^2);
+u_e_OH = -v_OH*z_OH*F*E_field*(1/tau^2);
+u_e_C = -v_C*z_C*F*E_field*(1/tau^2);
+
+% Refrence velocity                             [m/s]
+u_0 = (1/tau^2)*((epsilon*zeta)/mu_a)*E_field;
+
+% Convection velocity          [m/s]
+u_x = (epsilon/mu_a)*(zeta*E_field);
+
+% Convection velocity (itself)
+u_c = u_x/((tau^2)*10^19);
+u_c_up = -((zeta/zeta_0)*dphidx)*10^-18;
+
+
 u_eo = ((epsilon*zeta)/mu_solution)*E_field;    % Electoosmotic Velocity [m3/s]        |
 u_s = n*u_c; %                                                                         |
 %                                                                                      |
