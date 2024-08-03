@@ -116,56 +116,44 @@ v_A_Dless = D_A_Dless/(R*T);
 v_H_Dless = D_H_Dless/(R*T);
 v_C_Dless = D_C_Dless/(R*T);
 
-%--------------------------------------------------------------------------------------                                                                                      |
-% Species Diffuision abberation with standalone [Dimentionless]                        |
-% Converting [s] into [day] is needed otherwise calculated D_standalone is wrong       |
-D_standalone_OH = D_OH*(dt/dx^2);               % Dimensionless of Diffusion           |
-D_standalone_HA = D_HA*(dt/dx^2);               % Dimensionless of Diffusion           |
-D_standalone_Na = D_Na*(dt/dx^2);               % Dimensionless of Diffusion           |
-D_standalone_Cl = D_Cl*(dt/dx^2);               % Dimensionless of Diffusion           |
-D_standalone_A = D_A*(dt/dx^2);                 % Dimensionless of Diffusion           |
-D_standalone_H = D_H*(dt/dx^2);                 % Dimensionless of Diffusion           |
-D_standalone_C = D_C*(dt/dx^2);                 % Dimensionless of Diffusion           |
-%                                                                                      |
-% Species Diffuision abberation with coeff      [Dimentionless]                        |
-D_coeff_H = D_H*coeff*(dt/dx^2);                % Dimensionless of Diffusion           |
-D_coeff_C = D_C*coeff*(dt/dx^2);                % Dimensionless of Diffusion           |
-D_coeff_OH = D_OH*coeff*(dt/dx^2);              % Dimensionless of Diffusion           |
-D_coeff_HA = D_HA*coeff*(dt/dx^2);              % Dimensionless of Diffusion           |
-D_coeff_A = D_A*coeff*(dt/dx^2);                % Dimensionless of Diffusion           |
-%                                                                                      |
-% Species Diffusion advection standalone        [Dimentionless]                        |
-alpha_H = D_standalone_H/(n*tau^2);             % Diffusion Advection                  |
-alpha_C = D_standalone_C/(n*tau^2);             % Diffusion Advection                  |
-alpha_OH = D_standalone_OH/(n*tau^2);           % Diffusion Advection                  |
-alpha_HA = D_standalone_HA/(n*tau^2);           % Diffusion Advection                  |
-alpha_A = D_standalone_A/(n*tau^2);             % Diffusion Advection                  |
-%                                                                                      |
-% Species Diffusion advection with coeff        [Dimentionless]                        |
-alpha_coeff_H = D_coeff_H/(n*tau^2);            % Diffusion Advection                  |
-alpha_coeff_C = D_coeff_C/(n*tau^2);            % Diffusion Advection                  |
-alpha_coeff_OH = D_coeff_OH/(n*tau^2);          % Diffusion Advection                  |
-alpha_coeff_HA = D_coeff_HA/(n*tau^2);          % Diffusion Advection                  |
-alpha_coeff_A = D_coeff_A/(n*tau^2);            % Diffusion Advection                  |
-%--------------------------------------------------------------------------------------|
+%-------------------------------
+% Converting [s] into [day] is needed otherwise calculated D_standalone is wrong
+% Species Diffuision abberation standalone      [Dimentionless]
+D_standalone_OH = D_OH*bolian*(dt/dx^2);
+D_standalone_HA = D_HA*bolian*(dt/dx^2);
+D_standalone_Na = D_Na*bolian*(dt/dx^2);
+D_standalone_Cl = D_Cl*bolian*(dt/dx^2);
+D_standalone_A = D_A*bolian*(dt/dx^2);
+D_standalone_H = D_H*bolian*(dt/dx^2);
+D_standalone_C = D_C*bolian*(dt/dx^2);
+
+% Species Diffusion advection standalone        [Dimentionless]
+alpha_OH = D_standalone_OH/(n*tau^2);
+alpha_HA = D_standalone_HA/(n*tau^2);
+alpha_Na = D_standalone_Na/(n*tau^2);
+alpha_Cl = D_standalone_Cl/(n*tau^2);
+alpha_A = D_standalone_A/(n*tau^2);  
+alpha_H = D_standalone_H/(n*tau^2);
+alpha_C = D_standalone_C/(n*tau^2);
 
 % Mobility (Normal)      % [s·mol/kg]
 v_HA = D_HA/(R*T);
-v_A = D_A/(R*T);
+v_OH = D_OH/(R*T);
 v_Na = D_Na/(R*T);
 v_Cl = D_Cl/(R*T);
+v_A = D_A/(R*T);
 v_H = D_H/(R*T);
-v_OH = D_OH/(R*T);
 v_C = D_C/(R*T);
 
 % Electroelectromigration velocity (Normal)     [m/s]
 u_e_HA = -v_HA*z_HA*F*E_field*(1/tau^2);
-u_e_A = -v_A*z_A*F*E_field*(1/tau^2);
+u_e_OH = -v_OH*z_OH*F*E_field*(1/tau^2);
 u_e_Na = -v_Na*z_Na*F*E_field*(1/tau^2);
 u_e_Cl = -v_Cl*z_Cl*F*E_field*(1/tau^2);
+u_e_A = -v_A*z_A*F*E_field*(1/tau^2);
 u_e_H = -v_H*z_H*F*E_field*(1/tau^2);
-u_e_OH = -v_OH*z_OH*F*E_field*(1/tau^2);
 u_e_C = -v_C*z_C*F*E_field*(1/tau^2);
+
 
 % Refrence velocity                             [m/s]
 u_0 = (1/tau^2)*((epsilon*zeta)/mu_a)*E_field;
@@ -175,32 +163,22 @@ u_x = (epsilon/mu_a)*(zeta*E_field);
 
 % Convection velocity (itself)
 u_c = u_x/((tau^2)*10^19);
-u_c_up = -((zeta/zeta_0)*dphidx)*10^-18;
 
 % Toatal velocity term (Normal)
 u_t_HA = (u_e_HA + u_c);
-u_t_A = (u_e_A + u_c);
+u_t_OH = (u_e_OH + u_c);
 u_t_Na = (u_e_Na + u_c);
 u_t_Cl = (u_e_Cl + u_c);
+u_t_A = (u_e_A + u_c);
 u_t_H = (u_e_H + u_c);
-u_t_OH = (u_e_OH + u_c);
 u_t_C = (u_e_C + u_c);
 
-% Toatal velocity term (Rmapped)
-u_t_HA_up = (u_e_HA_Dless + u_c_up);
-u_t_A_up = (u_e_A_Dless + (u_c_up));
-u_t_Na_up = (u_e_Na_Dless + u_c_up);
-u_t_Cl_up = (u_e_Cl_Dless + u_c_up);
-u_t_H_up = (u_e_H_Dless + u_c_up)*10^-5;
-u_t_OH_up = (u_e_OH_Dless + u_c_up);
-u_t_C_up = -(u_e_C_Dless + u_c_up)*10^-1;
-
-% Velocity advection without coefficent                                                |
-beta_C = u_t_C_ekr*(dt/2*dx); %                                                        |
-beta_H = u_t_H_ekr*(dt/2*dx); %                                                        |
-beta_OH = u_t_OH_ekr*(dt/2*dx); %                                                      |
-beta_HA = u_t_HA_ekr*(dt/2*dx); %                                                      |
-beta_A = u_t_A_ekr*(dt/2*dx); %                                                        |
+% Velocity advection without coefficent
+beta_C = u_t_C_ekr*(dt/2*dx);
+beta_H = u_t_H_ekr*(dt/2*dx);
+beta_OH = u_t_OH_ekr*(dt/2*dx);
+beta_HA = u_t_HA_ekr*(dt/2*dx);
+beta_A = u_t_A_ekr*(dt/2*dx);
 %
 % Velocity advection with coefficent abberation                                        |
 beta_prime_C = coeff*u_t_C*(dt/2*dx); %                                                |
