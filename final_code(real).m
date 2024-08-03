@@ -60,6 +60,8 @@ z_HA = 0;
 z_H = 1;
 z_C = 0;
 z_A = -1;
+z_Na = 1;
+z_Cl = -1;
 
 % Species diffusivities (remapped)  [Dimentionless]
 D_HA_upp = 1.2;              % Acetic Acid
@@ -118,36 +120,33 @@ alpha_A = D_star_A/(n*tau^2);
 alpha_Na = D_star_Na/(n*tau^2);
 alpha_Cl = D_star_B/(n*tau^2);
 
-% Species Diffusion advection standalone
+% Species Diffusion advection abberation
 alpha_prime_H = D_prime_H/(n*tau^2);
 alpha_prime_C = D_prime_C/(n*tau^2);
 alpha_prime_OH = D_prime_OH/(n*tau^2);
 alpha_prime_HA = D_prime_HA/(n*tau^2);
-alpha_prime_BOH = D_prime_BOH/(n*tau^2);
 alpha_prime_A = D_prime_A/(n*tau^2);
-alpha_prime_B = D_prime_B/(n*tau^2);
-%-------------------------------------------------------------------------------
+alpha_prime_Na = D_prime_Na/(n*tau^2);
+alpha_prime_Cl = D_prime_Cl/(n*tau^2);
+%----------------------------
 
-%-------------------------------------------------------------------------------
-% Species Velocities                                                            |
-%                                                                               |
-% Species Mobility                                                              |
-v_C = (D_C/(R*T));                             % mobility [Hydrocarbon]         |
-v_H = (D_H/(R*T));                             % mobility [Hydrogen]            |
-v_OH = (D_OH/(R*T));                           % mobility [Hydroxid]            |
-v_HA = (D_HA/(R*T));                           % mobility [Acid]                |
-v_BOH = (D_BOH/(R*T));                         % mobility [Base]                |
-v_A = (D_A/(R*T));                             % mobility [A]                   |
-v_B = (D_B/(R*T));                             % mobility [B]                   |
-%                                                                               |
+% Species Mobility                             [s·mol/kg]
+v_C = (D_C/(R*T));                             % mobility [Hydrocarbon]
+v_H = (D_H/(R*T));                             % mobility [Hydrogen]
+v_OH = (D_OH/(R*T));                           % mobility [Hydroxid]
+v_HA = (D_HA/(R*T));                           % mobility [Acid]
+v_A = (D_A/(R*T));                             % mobility [A]
+v_Na = (D_Na/(R*T));                           % mobility [Na]
+v_Cl = (D_Cl/(R*T));                           % mobility [Cl]
+
 % Species electromigration velocity                                             |
-u_e_H = (v_H*z_H*F*E_field)/(tau^2);           % electromigration [Hydrogen]    |
-u_e_OH = (v_OH*z_OH*F*E_field)/(tau^2);        % electromigration [Hydroxid]    |
-u_e_C = (v_C*z_C*F*E_field)/(tau^2);           % electromigration [Carbon]      |
-u_e_HA = (v_HA*z_HA*F*E_field)/(tau^2);        % electromigration [Acid]        |
-u_e_BOH = (v_BOH*z_BOH*F*E_field)/(tau^2);     % electromigration [Base]        |
-u_e_A = (v_A*z_A*F*E_field)/(tau^2);           % electromigration [A]           |
-u_e_B = (v_B*z_B*F*E_field)/(tau^2);           % electromigration [B]           |
+u_e_H = (v_H*z_H*F*E_field)/(tau^2);
+u_e_OH = (v_OH*z_OH*F*E_field)/(tau^2);
+u_e_C = (v_C*z_C*F*E_field)/(tau^2);
+u_e_HA = (v_HA*z_HA*F*E_field)/(tau^2);
+u_e_A = (v_A*z_A*F*E_field)/(tau^2);
+u_e_Na = (v_BOH*z_Na*F*E_field)/(tau^2);
+u_e_Cl = (v_B*z_Cl*F*E_field)/(tau^2);
 %                                                                               |
 % domain velocity                                                               |
 u_x = (epsilon/mu_solution)*(zeta*E_field);    % Volumetric Velocity [m3/s]     |
