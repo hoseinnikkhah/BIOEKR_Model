@@ -208,41 +208,21 @@ alpha = u_0/(c_0*k_0);
 x_array = linspace(0,L,nx);
 t_array = linspace(0,tmax,nt);
 
-% Flux arrays
-J_HA = zeros(nx,nt);
-J_A = zeros(nx,nt);
-J_Na = zeros(nx,nt);
-J_Cl = zeros(nx,nt);
+J_C = zeros(nx,nt);
 J_H = zeros(nx,nt);
 J_OH = zeros(nx,nt);
-J_C = zeros(nx,nt);
+J_HA = zeros(nx,nt);
+J_BOH = zeros(nx,nt);
+J_A = zeros(nx,nt);
+J_B = zeros(nx,nt);
 
-% concentration arrays
-G_HA = zeros(nx,nt);
-G_A = zeros(nx,nt);
-G_Na = zeros(nx,nt);
-G_Cl = zeros(nx,nt);
+G_C = zeros(nx,nt);
 G_H = zeros(nx,nt);
 G_OH = zeros(nx,nt);
-G_C = zeros(nx,nt);
-
-% concentration arrays [remapped]
-G_HA_up = zeros(nx,nt);
-G_A_up = zeros(nx,nt);
-G_Na_up = zeros(nx,nt);
-G_Cl_up = zeros(nx,nt);
-G_H_up = zeros(nx,nt);
-G_OH_up = zeros(nx,nt);
-G_C_up = zeros(nx,nt);
-
-% adsorbed concentration arrays [remapped]
-G_HA_ads = zeros(nx,nt);
-G_A_ads = zeros(nx,nt);
-G_Na_ads = zeros(nx,nt);
-G_Cl_ads = zeros(nx,nt);
-G_H_ads = zeros(nx,nt);
-G_OH_ads = zeros(nx,nt);
-G_C_ads = zeros(nx,nt);
+G_HA = zeros(nx,nt);
+G_BOH = zeros(nx,nt);
+G_A = zeros(nx,nt);
+G_B = zeros(nx,nt);
 
 % Current array
 i_z = zeros(nx, nt);
@@ -286,48 +266,27 @@ R_H = zeros(nx,nt);
 R_OH = zeros(nx,nt);
 R_C = zeros(nx,nt);
 
-%Adsorbed Rate arrays
-R_HA_ads = zeros(nx,nt);
-R_A_ads = zeros(nx,nt);
-R_Na_ads = zeros(nx,nt);
-R_Cl_ads = zeros(nx,nt);
-R_H_ads = zeros(nx,nt);
-R_OH_ads = zeros(nx,nt);
-R_C_ads = zeros(nx,nt);
-
 % --- Set IC and BC
-G_HA(:,1) = c_0;
-G_A(:,1) = c_0;
-G_Na(:,1) = c_Na;
-G_Cl(:,1) = c_Cl;
-G_H(:,1) = c_0;
-G_OH(:,1) = c_0;
-G_C(:,1) = c_C;
+G_C(:,1)= 10000;
+J_C(1,:)= (u_c_ekr(1,:) + u_e_C(1,:))*10000;
 
-G_HA_up(:,1) = G_HA(:,1)/c_0;
-G_A_up(:,1) = G_A(:,1)/c_0;
-G_Na_up(:,1) = G_Na(:,1)/c_Na;
-G_Cl_up(:,1) = G_Cl(:,1)/c_Cl;
-G_H_up(:,1) = G_H(:,1)/c_0;
-G_OH_up(:,1) = G_OH(:,1)/c_0;
-G_C_up(:,1) = G_C(:,1)/c_C;
+G_H(:,1)= 10000;
+J_H(1,:)= (u_c_ekr(1,:) + u_e_H(1,:))*10000;
 
-G_HA_ads(:,1) = K_ads*c_0;
-G_A_ads(:,1) = K_ads*c_0;
-G_Na_ads(:,1) = K_ads*c_Na;
-G_Cl_ads(:,1) = K_ads*c_Cl;
-G_H_ads(:,1) = K_ads*c_0;
-G_OH_ads(:,1) = K_ads*c_0;
-G_C_ads(:,1) = K_ads*c_C;
+G_OH(:,1)= 10000;
+J_OH(1,:)= (u_c_ekr(1,:) + u_e_OH(1,:))*10000;
 
-% Fixing alpha advection
-alpha_HA = (D_HA/(tau^2))*10^5;
-alpha_A = (D_A/(tau^2))*10^5;
-alpha_Na = (D_Na/(tau^2))*10^5;
-alpha_Cl = (D_Cl/(tau^2))*10^5;
-alpha_H = (D_H/(tau^2))*10^5;
-alpha_OH = (D_OH/(tau^2))*10^5;
-alpha_C = (D_C/(tau^2))*10^5;
+G_HA(:,1)= 10000;
+J_HA(1,:)= (u_c_ekr(1,:) + u_e_HA(1,:))*10000;
+
+G_BOH(:,1)= 10000;
+J_BOH(1,:)= (u_c_ekr(1,:) + u_e_BOH(1,:))*10000;
+
+G_A(:,1)= 10000;
+J_A(1,:)= (u_c_ekr(1,:) + u_e_A(1,:))*10000;
+
+G_B(:,1)= 10000;
+J_B(1,:)= (u_c_ekr(1,:) + u_e_B(1,:))*10000;
 
 % --- Set IC and BC
 
