@@ -174,13 +174,13 @@ u_t_H = (u_e_H + u_c);
 u_t_C = (u_e_C + u_c);
 
 % Velocity advection without coefficent
-beta_OH = u_t_OH*(dt/2*dx);
-beta_HA = u_t_HA*(dt/2*dx);
-beta_Na = u_t_Na*(dt/2*dx);
-beta_Cl = u_t_Cl*(dt/2*dx);
-beta_C = u_t_C*(dt/2*dx);
-beta_H = u_t_H*(dt/2*dx);
-beta_A = u_t_A*(dt/2*dx);
+beta_OH = u_t_OH*bolian*(dt/(2*dx));
+beta_HA = u_t_HA*bolian*(dt/(2*dx));
+beta_Na = u_t_Na*bolian*(dt/(2*dx));
+beta_Cl = u_t_Cl*bolian*(dt/(2*dx));
+beta_C = u_t_C*bolian*(dt/(2*dx));
+beta_H = u_t_H*bolian*(dt/(2*dx));
+beta_A = u_t_A*bolian*(dt/(2*dx));
 
 
 % Initial concentration        [mol/m3]
