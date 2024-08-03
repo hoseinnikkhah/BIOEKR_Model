@@ -158,7 +158,7 @@ u_e_C = -v_C*z_C*F*E_field*(1/tau^2);
 % Refrence velocity                             [m/s]
 u_0 = (1/tau^2)*((epsilon*zeta)/mu_a)*E_field;
 
-% Convection velocity          [m/s]
+% Convection velocity                           [m/s]
 u_x = (epsilon/mu_a)*(zeta*E_field);
 
 % Convection velocity (itself)
@@ -174,11 +174,13 @@ u_t_H = (u_e_H + u_c);
 u_t_C = (u_e_C + u_c);
 
 % Velocity advection without coefficent
-beta_C = u_t_C_ekr*(dt/2*dx);
-beta_H = u_t_H_ekr*(dt/2*dx);
-beta_OH = u_t_OH_ekr*(dt/2*dx);
-beta_HA = u_t_HA_ekr*(dt/2*dx);
-beta_A = u_t_A_ekr*(dt/2*dx);
+beta_OH = u_t_OH*(dt/2*dx);
+beta_HA = u_t_HA*(dt/2*dx);
+beta_Na = u_t_Na*(dt/2*dx);
+beta_Cl = u_t_Cl*(dt/2*dx);
+beta_C = u_t_C*(dt/2*dx);
+beta_H = u_t_H*(dt/2*dx);
+beta_A = u_t_A*(dt/2*dx);
 %
 % Velocity advection with coefficent abberation                                        |
 beta_prime_C = coeff*u_t_C*(dt/2*dx); %                                                |
