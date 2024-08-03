@@ -33,6 +33,7 @@ epsilon = 7*10^10;              % Electrical permitivity [F/m]
 mu_oil = 510*24*3600;           % Oil viscosity [kg/(m.day)]
 mu_solution = 0.001*24*3600;    % Solution viscosity [kg/(m.day)]
 zeta = -0.0027;                 % Zeta potential [V]
+zeta_0 = 2.6205e-23;            % Refrence Zeta Potential [V]
 K = 0.02;                       % Exprimental Microbal constant
 K_A = 1.75*10^-5;               % Dissociation constant [mol/m3]
 k_i = 0.075;                    % Exprimental constant
@@ -54,42 +55,51 @@ end
 E_field_dx = E_field/L;        % Electric field in lenght [V/m]
 
 % Species Valency
-z_H = 1;
 z_OH = -1;
-z_C = 0;
 z_HA = 0;
-z_BOH = 0;
+z_H = 1;
+z_C = 0;
 z_A = -1;
-z_B = 1;
 
-% Current density
-i = F*(z_H+z_OH+z_C+z_HA+z_BOH+z_A+z_B);
-% there is a flux term at the end as well but it is not calculated since sum of valencies are zero in this phenomena
+% Species diffusivities (remapped)  [Dimentionless]
+D_HA_upp = 1.2;              % Acetic Acid
+D_OH_upp = 2.00;             % OH-
+D_Na_upp = 1.34;             % Na+
+D_Cl_upp = 2.05;             % Cl-
+D_A_upp = 1.2;               % Acid Agent
+D_H_upp = 9.35;              % H+
+D_C_upp = 2.00;              % Carbon
 
+% Species diffusivities (Normal)    [m2/s]
+D_HA_cal = D_HA_upp*D0;      % Acetic Acid
+D_OH_cal = D_OH_upp*D0;      % OH-
+D_Na_cal = D_Na_upp*D0;      % Na+
+D_Cl_cal = D_Cl_upp*D0;      % Cl-
+D_A_cal = D_A_upp*D0;        % Acid Agent
+D_H_cal = D_H_upp*D0;        % H+
+D_C_cal = D_C_upp*D0;        % Carbon
 
 % Counductivity
 sigma_surface = 2.74*10^7;        % Conductivity [S/m]
-
-
 %-------------------------------------------------------------------------------
-% Species Diffuision                                                            |
-D_H = 3.5447*10^-9*24*3600;       % Mass advection for Hydrogen [m^2/day]       |
-D_C = 2.063*10^-9*24*3600;        % Mass advection for Hydrocarbon [m^2/day]    |
-D_OH = 0.450*10^-8*24*3600;       % Mass advection for Hydroxid [m^2/day]       |
-D_HA = 1.2*10^-8*24*3600;         % Mass advection for Acid [m^2/day]           |
-D_A = 1.2*10^-8*24*3600;          % Mass advection for Acid agent [m^2/day]     |
-D_BOH = 1.2*10^-8*24*3600;        % Mass advection for Base [m^2/day]           |
-D_B = 1.34*10^-8*24*3600;         % Mass advection for Base agent [m^2/day]     |
-%                                                                               |
-% Species Diffuision abberation with coeff                                      |
-D_star_H = D_H*(dt/dx^2);                % Dimensionless of Diffusion           |
-D_star_C = D_C*(dt/dx^2);                % Dimensionless of Diffusion           |
-D_star_OH = D_OH*(dt/dx^2);              % Dimensionless of Diffusion           |
-D_star_HA = D_HA*(dt/dx^2);              % Dimensionless of Diffusion           |
-D_star_BOH = D_BOH*(dt/dx^2);            % Dimensionless of Diffusion           |
-D_star_A = D_A*(dt/dx^2);                % Dimensionless of Diffusion           |
-D_star_B = D_B*(dt/dx^2);                % Dimensionless of Diffusion           |
-%                                                                               |
+% Species Diffuision                    [m^2/day]
+D_H = D_H_cal*24*3600;                  % Mass advection for Hydrogen
+D_C = D_C_cal*24*3600;                  % Mass advection for Hydrocarbon
+D_OH = D_OH_cal*24*3600;                % Mass advection for Hydroxid
+D_HA = D_HA_cal*24*3600;                % Mass advection for Acid
+D_A = D_A_cal*24*3600;                  % Mass advection for Acid agent
+D_Na = D_Na_cal*24*3600;                % Mass advection for NA
+D_Cl = D_Cl_cal*24*3600;                % Mass advection for Cl
+
+% Species Diffuision without coeff      [Dimentionless]
+D_star_H = D_H*(dt/dx^2);
+D_star_C = D_C*(dt/dx^2);
+D_star_OH = D_OH*(dt/dx^2);
+D_star_HA = D_HA*(dt/dx^2);
+D_star_A = D_A*(dt/dx^2);
+D_star_Na = D_Na*(dt/dx^2);              
+D_star_Cl = D_Cl*(dt/dx^2);
+
 % Species Diffuision abberation standalone                                      |
 D_prime_H = D_H*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
 D_prime_C = D_C*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
