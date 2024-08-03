@@ -75,37 +75,44 @@ z_C = 0;
 z_total = z_HA + z_A + z_Na + z_Cl + z_H + z_OH + z_C;
 
 % Species diffusivities (remapped)  [Dimentionless]
-D_HA_upp = 1.2;          % Acetic Acid
-D_A_upp = 1.2;           % Acid Agent
-D_Na_upp = 1.34;         % Na+
-D_Cl_upp = 2.05;         % Cl-
-D_H_upp = 9.35;          % H+
-D_OH_upp = 2.00;         % OH-
-D_C_upp = 2.00;          % Carbon
+D_HA_Dless = 1.2;          % Acetic Acid
+D_A_Dless = 1.2;           % Acid Agent
+D_Na_Dless = 1.34;         % Na+
+D_Cl_Dless = 2.05;         % Cl-
+D_H_Dless = 9.35;          % H+
+D_OH_Dless = 2.00;         % OH-
+D_C_Dless = 2.00;          % Carbon
 
-D_i_upp = [D_HA_upp, D_A_upp, D_Na_upp, D_Cl_upp, D_H_upp, D_OH_upp, D_C_upp];
+D_i_Dless = [D_HA_Dless, D_A_Dless, D_Na_Dless, D_Cl_Dless, D_H_Dless, D_OH_Dless, D_C_Dless];
 
 % Species diffusivities (Normal)    [m2/s]
-D_HA = D_HA_upp*D0;      % Acetic Acid
-D_A = D_A_upp*D0;        % Acid Agent
-D_Na = D_Na_upp*D0;      % Na+
-D_Cl = D_Cl_upp*D0;      % Cl-
-D_H = D_H_upp*D0;        % H+
-D_OH = D_OH_upp*D0;      % OH-
-D_C = D_C_upp*D0;        % Carbon
+D_HA = D_HA_Dless*D0;      % Acetic Acid
+D_A = D_A_Dless*D0;        % Acid Agent
+D_Na = D_Na_Dless*D0;      % Na+
+D_Cl = D_Cl_Dless*D0;      % Cl-
+D_H = D_H_Dless*D0;        % H+
+D_OH = D_OH_Dless*D0;      % OH-
+D_C = D_C_Dless*D0;        % Carbon
 
 D_i = [D_HA, D_A, D_Na, D_Cl, D_H, D_OH, D_C];
 
-
+% Mobility (Normal)        % [s·mol/kg]
+v_HA = D_HA/(R*T);
+v_Na = D_Na/(R*T);
+v_Cl = D_Cl/(R*T);
+v_OH = D_OH/(R*T);
+v_A = D_A/(R*T);
+v_H = D_H/(R*T);
+v_C = D_C/(R*T);
 
 % Mobility (remapped)      % [s·mol/kg]
-v_HA_upp = D_HA_upp/(R*T);
-v_A_upp = D_A_upp/(R*T);
-v_Na_upp = D_Na_upp/(R*T);
-v_Cl_upp = D_Cl_upp/(R*T);
-v_H_upp = D_H_upp/(R*T);
-v_OH_upp = D_OH_upp/(R*T);
-v_C_upp = D_C_upp/(R*T);
+v_HA_Dless = D_HA_Dless/(R*T);
+v_Na_Dless = D_Na_Dless/(R*T);
+v_Cl_Dless = D_Cl_Dless/(R*T);
+v_OH_Dless = D_OH_Dless/(R*T);
+v_A_Dless = D_A_Dless/(R*T);
+v_H_Dless = D_H_Dless/(R*T);
+v_C_Dless = D_C_Dless/(R*T);
 
 %--------------------------------------------------------------------------------------                                                                                      |
 % Species Diffuision abberation with standalone [Dimentionless]                        |
@@ -136,6 +143,7 @@ alpha_coeff_OH = D_coeff_OH/(n*tau^2);          % Diffusion Advection           
 alpha_coeff_HA = D_coeff_HA/(n*tau^2);          % Diffusion Advection                  |
 alpha_coeff_A = D_coeff_A/(n*tau^2);            % Diffusion Advection                  |
 %--------------------------------------------------------------------------------------|
+
 % Mobility (Normal)      % [s·mol/kg]
 v_HA = D_HA/(R*T);
 v_A = D_A/(R*T);
@@ -174,13 +182,13 @@ u_t_OH = (u_e_OH + u_c);
 u_t_C = (u_e_C + u_c);
 
 % Toatal velocity term (Rmapped)
-u_t_HA_up = (u_e_HA_upp + u_c_up);
-u_t_A_up = (u_e_A_upp + (u_c_up));
-u_t_Na_up = (u_e_Na_upp + u_c_up);
-u_t_Cl_up = (u_e_Cl_upp + u_c_up);
-u_t_H_up = (u_e_H_upp + u_c_up)*10^-5;
-u_t_OH_up = (u_e_OH_upp + u_c_up);
-u_t_C_up = -(u_e_C_upp + u_c_up)*10^-1;
+u_t_HA_up = (u_e_HA_Dless + u_c_up);
+u_t_A_up = (u_e_A_Dless + (u_c_up));
+u_t_Na_up = (u_e_Na_Dless + u_c_up);
+u_t_Cl_up = (u_e_Cl_Dless + u_c_up);
+u_t_H_up = (u_e_H_Dless + u_c_up)*10^-5;
+u_t_OH_up = (u_e_OH_Dless + u_c_up);
+u_t_C_up = -(u_e_C_Dless + u_c_up)*10^-1;
 
 % Velocity advection without coefficent                                                |
 beta_C = u_t_C_ekr*(dt/2*dx); %                                                        |
