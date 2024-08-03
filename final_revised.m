@@ -181,15 +181,6 @@ beta_Cl = u_t_Cl*(dt/2*dx);
 beta_C = u_t_C*(dt/2*dx);
 beta_H = u_t_H*(dt/2*dx);
 beta_A = u_t_A*(dt/2*dx);
-%
-% Velocity advection with coefficent abberation                                        |
-beta_prime_C = coeff*u_t_C*(dt/2*dx); %                                                |
-beta_prime_H = coeff*u_t_H*(dt/2*dx); %                                                |
-beta_prime_OH = coeff*u_t_OH*(dt/2*dx); %                                              |
-beta_prime_HA = coeff*u_t_HA*(dt/2*dx); %                                              |
-beta_prime_A = coeff*u_t_A*(dt/2*dx); %                                                |
-%                                                                                      |
-%--------------------------------------------------------------------------------------
 
 
 % Initial concentration        [mol/m3]
