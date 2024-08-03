@@ -7,13 +7,25 @@ dx = L/(nx-1);
 dt = tmax/(nt-1);
 
 
+% Refrence x directions        [m]
+x = (10^-5:dx:(nx)*dx);
+x = transpose(x);
+x_ref = repmat(x,1,nt);
+
+% Refrence t directions        [m]
+t = (0:dt:(nt-1)*dt);
+t_ref = repmat(t,nx,1);
+t_up = t_ref/tmax;
+t_step = t_up(1,2) - t_up(1,1);
+
+
 % Physical info
 T = 25 + 273;                   % Temperature [K]
 R = 8.314;                      % Gas constant [J/mol.K]
 n = 0.64;                       % Porosity
 F = 96485;                      % Faraady constant [C/mol]
-phi = 25;                       % Electric field [V]
-phi_end = 0;
+phi = 25;                       % Voltage at 1st cap [V]
+phi_end = 0;                    % Voltage at 2nd cap [V]
 tau = 1.25;                     % Tortuosity
 dzdx = 1/tau;                   % divertion field
 dEdx = phi/L;                   % Electric field in lenght [V/m]
@@ -26,6 +38,7 @@ K_A = 1.75*10^-5;               % Dissociation constant [mol/m3]
 k_i = 0.075;                    % Exprimental constant
 coeff = 1/(1+k_i);              % Adsorbing coefficent
 R_i = (0.693/53.2);             % Initial Reaction flow rate
+D0 = 10^-9;                     % Reference diffusivity [m2/s]
 
 % Dimensionless parameters
 Pe = 47;
@@ -37,6 +50,8 @@ M = linspace(dEdx,0,nx);
 for timestep = 1:nt
     E_field(:,timestep) = M;
 end
+
+E_field_dx = E_field/L;        % Electric field in lenght [V/m]
 
 % Species Valency
 z_H = 1;
