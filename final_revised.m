@@ -142,45 +142,44 @@ u_e_A = (v_A*z_A*F*E_field_dx)/(tau^2);         % electromigration [A]          
 % domain velocity                                                                      |
 u_x = (epsilon/mu_solution)*(zeta*E_field);     % Volumetric Velocity [m3/s]           |
 u_c = ones(nx,nt);
-u_C = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta);          % Convection Velocity [m3/s]     |
-u_C_ekr = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta); % Convection Velocity [m3/s]     |
+u_C = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta);      % Convection Velocity [m3/s]           |
+u_C_ekr = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta);  % Convection Velocity [m3/s]           |
 u_c = u_c.*u_C;
 u_c_ekr = u_c.*u_C_ekr;
-u_eo = ((epsilon*zeta)/mu_solution)*E_field;   % Electoosmotic Velocity [m3/s]  |
-u_s = n*u_c; %                                                                  |
-%                                                                               |
-% Species total velocity                                                        |
-u_t_C = (u_e_C + u_c)/n; %                                                      |
-u_t_H = (u_e_H + u_c)/n; %                                                      |
-u_t_OH = (u_e_OH + u_c)/n; %                                                    |
-u_t_HA = (u_e_HA + u_c)/n; %                                                    |
-u_t_A = (u_e_A + u_c)/n; %                                                      |
+u_eo = ((epsilon*zeta)/mu_solution)*E_field;    % Electoosmotic Velocity [m3/s]        |
+u_s = n*u_c; %                                                                         |
+%                                                                                      |
+% Species total velocity                                                               |
+u_t_C = (u_e_C + u_c)/n; %                                                             |
+u_t_H = (u_e_H + u_c)/n; %                                                             |
+u_t_OH = (u_e_OH + u_c)/n; %                                                           |
+u_t_HA = (u_e_HA + u_c)/n; %                                                           |
+u_t_A = (u_e_A + u_c)/n; %                                                             |
 
-% Species total velocity                                                        |
-u_t_C_ekr = (u_e_C + u_c_ekr)/n; %                                              |
-u_t_H_ekr = (u_e_H + u_c_ekr)/n; %                                              |
-u_t_OH_ekr = (u_e_OH + u_c_ekr)/n; %                                            |
-u_t_HA_ekr = (u_e_HA + u_c_ekr)/n; %                                            |
-u_t_A_ekr = (u_e_A + u_c_ekr)/n; %                                              |
+% Species total velocity                                                               |
+u_t_C_ekr = (u_e_C + u_c_ekr)/n; %                                                     |
+u_t_H_ekr = (u_e_H + u_c_ekr)/n; %                                                     |
+u_t_OH_ekr = (u_e_OH + u_c_ekr)/n; %                                                   |
+u_t_HA_ekr = (u_e_HA + u_c_ekr)/n; %                                                   |
+u_t_A_ekr = (u_e_A + u_c_ekr)/n; %                                                     |
 %
-% Velocity advection without coefficent                                         |
-beta_C = u_t_C_ekr*(dt/2*dx); %                                                 |
-beta_H = u_t_H_ekr*(dt/2*dx); %                                                 |
-beta_OH = u_t_OH_ekr*(dt/2*dx); %                                               |
-beta_HA = u_t_HA_ekr*(dt/2*dx); %                                               |
-beta_BOH = u_t_BOH_ekr*(dt/2*dx); %                                             |
-beta_A = u_t_A_ekr*(dt/2*dx); %                                                 |
-beta_B = u_t_B_ekr*(dt/2*dx); %                                                 |
-% Velocity advection with coefficent abberation                                 |
-beta_prime_C = coeff*u_t_C*(dt/2*dx); %                                         |
-beta_prime_H = coeff*u_t_H*(dt/2*dx); %                                         |
-beta_prime_OH = coeff*u_t_OH*(dt/2*dx); %                                       |
-beta_prime_HA = coeff*u_t_HA*(dt/2*dx); %                                       |
-beta_prime_BOH = coeff*u_t_BOH*(dt/2*dx); %                                     |
-beta_prime_A = coeff*u_t_A*(dt/2*dx); %                                         |
-beta_prime_B = coeff*u_t_B*(dt/2*dx); %                                         |
-%                                                                               |
-%-------------------------------------------------------------------------------
+% Velocity advection without coefficent                                                |
+beta_C = u_t_C_ekr*(dt/2*dx); %                                                        |
+beta_H = u_t_H_ekr*(dt/2*dx); %                                                        |
+beta_OH = u_t_OH_ekr*(dt/2*dx); %                                                      |
+beta_HA = u_t_HA_ekr*(dt/2*dx); %                                                      |
+beta_A = u_t_A_ekr*(dt/2*dx); %                                                        |
+%
+% Velocity advection with coefficent abberation                                        |
+beta_prime_C = coeff*u_t_C*(dt/2*dx); %                                                |
+beta_prime_H = coeff*u_t_H*(dt/2*dx); %                                                |
+beta_prime_OH = coeff*u_t_OH*(dt/2*dx); %                                              |
+beta_prime_HA = coeff*u_t_HA*(dt/2*dx); %                                              |
+beta_prime_BOH = coeff*u_t_BOH*(dt/2*dx); %                                            |
+beta_prime_A = coeff*u_t_A*(dt/2*dx); %                                                |
+beta_prime_B = coeff*u_t_B*(dt/2*dx); %                                                |
+%                                                                                      |
+%--------------------------------------------------------------------------------------
 
 R_D = coeff*(dt)/n;              % Reaction rate Dimensionless factor
 
