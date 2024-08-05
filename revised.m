@@ -156,6 +156,13 @@ u_c_ekr = u_c.*u_C_ekr;
 u_eo = ((epsilon*zeta)/mu_solution)*E_field;   % Electoosmotic Velocity [m3/s]
 u_s = n*u_c;
 
+e_r = 7.5;                  % relative permittivity of clay [F/m]
+e_0 = 8.854*10^-12;         % permittivity of free space [F/m]
+
+k_eo = (epsilon*zeta)/(mu*epsilon_oil);         % Electroosmotic mobility [m^2/V.s] Based on epsilon of both crude oil and clay, might be true form
+k_eo1 = (e_0*zeta*recip)/(mu*(1-n)*(n^3));      % Electroosmotic mobility [m^2/V.s] Based on debye
+k_eo2 = ((-7*10^-10)*zeta*n)/(mu*(tau^2));      % Electroosmotic mobility [m^2/V.s] Based on a journal (exact one)
+
 % Species total velocity
 u_t_OH = (u_e_OH + u_c)/n;
 u_t_HA = (u_e_HA + u_c)/n;
