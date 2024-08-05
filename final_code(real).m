@@ -130,16 +130,16 @@ alpha_prime_Na = D_prime_Na/(n*tau^2);
 alpha_prime_Cl = D_prime_Cl/(n*tau^2);
 %----------------------------
 
-% Species Mobility                             [s·mol/kg]
-v_C = (D_C/(R*T));                             % mobility [Hydrocarbon]
-v_H = (D_H/(R*T));                             % mobility [Hydrogen]
-v_OH = (D_OH/(R*T));                           % mobility [Hydroxid]
-v_HA = (D_HA/(R*T));                           % mobility [Acid]
-v_A = (D_A/(R*T));                             % mobility [A]
-v_Na = (D_Na/(R*T));                           % mobility [Na]
-v_Cl = (D_Cl/(R*T));                           % mobility [Cl]
+% Species Mobility                              [s·mol/kg]
+v_C = (D_C/(R*T));
+v_H = (D_H/(R*T));
+v_OH = (D_OH/(R*T));
+v_HA = (D_HA/(R*T));
+v_A = (D_A/(R*T));
+v_Na = (D_Na/(R*T));
+v_Cl = (D_Cl/(R*T));
 
-% Species electromigration velocity
+% Electroelectromigration velocity (Normal)     [m/s]
 u_e_HA = (v_HA*z_HA*F*E_field_dx)/(tau^2);
 u_e_OH = (v_OH*z_OH*F*E_field_dx)/(tau^2);
 u_e_Na = (v_Na*z_Na*F*E_field_dx)/(tau^2);
@@ -153,19 +153,22 @@ u_e_A = (v_A*z_A*F*E_field_dx)/(tau^2);
 u_c = ones(nx,nt);
 u_x = (epsilon/mu_solution)*(zeta*E_field);    % Volumetric Velocity [m3/s]
 
-u_con = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta);   % Convection Velocity [m3/s]
-
-u_c = u_c.*u_con;
+u_C = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta);   % Convection Velocity [m3/s]
+u_c = u_c.*u_C;
 
 u_eo = ((epsilon*zeta)/mu_solution)*E_field;   % Electoosmotic Velocity [m3/s]
 u_s = n*u_c;
 
+% Dimensionless x directions
+x_up = x_ref/L;
+x_step = 0.250;
+
 % Species total velocity
 u_t_C = (u_e_C + u_c)/n; 
 u_t_H = (u_e_H + u_c)/n;
+u_t_A = (u_e_A + u_c)/n;
 u_t_OH = (u_e_OH + u_c)/n;
 u_t_HA = (u_e_HA + u_c)/n;
-u_t_A = (u_e_A + u_c)/n;
 u_t_Na = (u_e_Na + u_c)/n;
 u_t_Cl = (u_e_Cl + u_c)/n;
 
