@@ -38,6 +38,8 @@ for timestep = 1:nt
     E_field(:,timestep) = M;
 end
 
+E_field_dx = E_field/L;
+
 % Species Valency
 z_H = 1;
 z_OH = -1;
@@ -122,25 +124,26 @@ alpha_prime_BOH = D_prime_BOH/(n*tau^2);
 alpha_prime_A = D_prime_A/(n*tau^2);
 alpha_prime_B = D_prime_B/(n*tau^2);
 
-% Species Mobility                                                              |
-v_C = (D_C/(R*T));                             % mobility [Hydrocarbon]         |
-v_H = (D_H/(R*T));                             % mobility [Hydrogen]            |
-v_OH = (D_OH/(R*T));                           % mobility [Hydroxid]            |
-v_HA = (D_HA/(R*T));                           % mobility [Acid]                |
-v_BOH = (D_BOH/(R*T));                         % mobility [Base]                |
-v_A = (D_A/(R*T));                             % mobility [A]                   |
-v_B = (D_B/(R*T));                             % mobility [B]                   |
-%                                                                               |
-% Species electromigration velocity                                             |
-u_e_H = (v_H*z_H*F*E_field)/(tau^2);           % electromigration [Hydrogen]    |
-u_e_OH = (v_OH*z_OH*F*E_field)/(tau^2);        % electromigration [Hydroxid]    |
-u_e_C = (v_C*z_C*F*E_field)/(tau^2);           % electromigration [Carbon]      |
-u_e_HA = (v_HA*z_HA*F*E_field)/(tau^2);        % electromigration [Acid]        |
-u_e_BOH = (v_BOH*z_BOH*F*E_field)/(tau^2);     % electromigration [Base]        |
-u_e_A = (v_A*z_A*F*E_field)/(tau^2);           % electromigration [A]           |
-u_e_B = (v_B*z_B*F*E_field)/(tau^2);           % electromigration [B]           |
-%                                                                               |
-% domain velocity                                                               |
+% Species Mobility                      [s·mol/kg]
+v_OH = (D_OH/(R*T));
+v_HA = (D_HA/(R*T));
+v_Na = (D_Na/(R*T));
+v_Cl = (D_Cl/(R*T));
+v_C = (D_C/(R*T));
+v_H = (D_H/(R*T));
+v_A = (D_A/(R*T));
+
+% Species electromigration velocity     [m/s] 
+u_e_OH = (v_OH*z_OH*F*E_field_dx)/(tau^2);
+u_e_HA = (v_HA*z_HA*F*E_field_dx)/(tau^2);
+u_e_Na = (v_Na*z_Na*F*E_field_dx)/(tau^2);
+u_e_Cl = (v_Cl*z_Cl*F*E_field_dx)/(tau^2);
+u_e_H = (v_H*z_H*F*E_field_dx)/(tau^2); 
+u_e_C = (v_C*z_C*F*E_field_dx)/(tau^2);
+u_e_A = (v_A*z_A*F*E_field_dx)/(tau^2);
+% note: E_field_dx is needed as it is dEdx in main formula
+
+% domain velocity
 u_x = (epsilon/mu_solution)*(zeta*E_field);    % Volumetric Velocity [m3/s]     |
 u_c = ones(nx,nt);
 u_C = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta);          % Convection Velocity [m3/s]     |
