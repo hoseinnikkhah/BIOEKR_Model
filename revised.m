@@ -45,12 +45,12 @@ z_H = 1;
 z_OH = -1;
 z_C = 0;
 z_HA = 0;
-z_BOH = 0;
+z_Na = 0;
 z_A = -1;
-z_B = 1;
+z_Cl = 1;
 
 % Current density
-i = F*(z_H+z_OH+z_C+z_HA+z_BOH+z_A+z_B);
+i = F*(z_H+z_OH+z_C+z_HA+z_Na+z_A+z_Cl);
 % there is a flux term at the end as well but it is not calculated since sum of valencies are zero in this phenomena
 
 
@@ -120,9 +120,9 @@ alpha_prime_H = D_prime_H/(n*tau^2);
 alpha_prime_C = D_prime_C/(n*tau^2);
 alpha_prime_OH = D_prime_OH/(n*tau^2);
 alpha_prime_HA = D_prime_HA/(n*tau^2);
-alpha_prime_BOH = D_prime_BOH/(n*tau^2);
+alpha_prime_Na = D_prime_Na/(n*tau^2);
 alpha_prime_A = D_prime_A/(n*tau^2);
-alpha_prime_B = D_prime_B/(n*tau^2);
+alpha_prime_Cl = D_prime_Cl/(n*tau^2);
 
 % Species Mobility                      [s·mol/kg]
 v_OH = (D_OH/(R*T));
@@ -273,7 +273,7 @@ R_Na(:,1) = R_i*(dt)/n;
 R_Cl(:,1) = R_i*(dt)/n;
 R_H(:,1) = R_i*(dt)/n;
 R_C(:,1) = R_i*(dt)/n;
-R_B(:,1) = R_i*(dt)/n;
+R_Cl(:,1) = R_i*(dt)/n;
 
 s_H(:,1) = (z_H^2)*v_H*G_H(:,1);
 s_OH(:,1) = (z_OH^2)*v_OH*G_OH(:,1);
@@ -292,29 +292,32 @@ for m= 1:nt-1
     
     for i= 2:nx-1
         
-        G_C(i,m+1) = G_C(i,m) + alpha_C*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) + beta_C(i,m)*(G_C(i+1,m) - G_C(i-1,m)) + R_C(i,m)/R_D;
-        G_H(i,m+1) = G_H(i,m) + alpha_H*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) + beta_H(i,m)*(G_H(i+1,m) - G_H(i-1,m)) + R_H(i,m)/R_D;
         G_OH(i,m+1) = G_OH(i,m) + alpha_OH*(G_OH(i+1,m) -2*G_OH(i,m) + G_OH(i-1,m)) + beta_OH(i,m)*(G_OH(i+1,m) - G_OH(i-1,m)) + R_OH(i,m)/R_D;
         G_HA(i,m+1) = G_HA(i,m) + alpha_HA*(G_HA(i+1,m) -2*G_HA(i,m) + G_HA(i-1,m)) + beta_HA(i,m)*(G_HA(i+1,m) - G_HA(i-1,m)) + R_HA(i,m)/R_D;
-        G_BOH(i,m+1) = G_BOH(i,m) + alpha_BOH*(G_BOH(i+1,m) -2*G_BOH(i,m) + G_BOH(i-1,m)) + beta_BOH(i,m)*(G_BOH(i+1,m) - G_BOH(i-1,m)) + R_BOH(i,m)/R_D;
+        G_Na(i,m+1) = G_Na(i,m) + alpha_Na*(G_Na(i+1,m) -2*G_Na(i,m) + G_Na(i-1,m)) + beta_Na(i,m)*(G_Na(i+1,m) - G_Na(i-1,m)) + R_Na(i,m)/R_D;
+        G_Cl(i,m+1) = G_Cl(i,m) + alpha_Cl*(G_Cl(i+1,m) -2*G_Cl(i,m) + G_Cl(i-1,m)) + beta_Cl(i,m)*(G_Cl(i+1,m) - G_Cl(i-1,m)) + R_Cl(i,m)/R_D;        
+        G_C(i,m+1) = G_C(i,m) + alpha_C*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) + beta_C(i,m)*(G_C(i+1,m) - G_C(i-1,m)) + R_C(i,m)/R_D;
+        G_H(i,m+1) = G_H(i,m) + alpha_H*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) + beta_H(i,m)*(G_H(i+1,m) - G_H(i-1,m)) + R_H(i,m)/R_D;
         G_A(i,m+1) = G_A(i,m) + alpha_A*(G_A(i+1,m) -2*G_A(i,m) + G_A(i-1,m)) + beta_A(i,m)*(G_A(i+1,m) - G_A(i-1,m)) + R_A(i,m)/R_D;
-        G_B(i,m+1) = G_B(i,m) + alpha_B*(G_B(i+1,m) -2*G_B(i,m) + G_B(i-1,m)) + beta_B(i,m)*(G_B(i+1,m) - G_B(i-1,m)) + R_B(i,m)/R_D;
+        
 
-        J_C(i,m) = (u_c_ekr(i,m) + u_e_C(i,m))*G_C(i,m) - alpha_C*(G_C(i+1,m) - G_C(i,m));
-        J_H(i,m) = (u_c_ekr(i,m) + u_e_H(i,m))*G_H(i,m) - alpha_H*(G_H(i+1,m) - G_H(i,m));
         J_OH(i,m) = (u_c_ekr(i,m) + u_e_OH(i,m))*G_OH(i,m) - alpha_OH*(G_OH(i,m) - G_OH(i-1,m));
         J_HA(i,m) = (u_c_ekr(i,m) + u_e_HA(i,m))*G_HA(i,m) - alpha_HA*(G_HA(i,m) - G_HA(i-1,m));
-        J_BOH(i,m) = (u_c_ekr(i,m) + u_e_BOH(i,m))*G_BOH(i,m) - alpha_BOH*(G_BOH(i,m) - G_BOH(i-1,m));
+        J_Na(i,m) = (u_c_ekr(i,m) + u_e_Na(i,m))*G_Na(i,m) - alpha_Na*(G_Na(i,m) - G_Na(i-1,m));
+        J_Cl(i,m) = (u_c_ekr(i,m) + u_e_Cl(i,m))*G_Cl(i,m) - alpha_Cl*(G_Cl(i+1,m) - G_Cl(i,m));
+        J_C(i,m) = (u_c_ekr(i,m) + u_e_C(i,m))*G_C(i,m) - alpha_C*(G_C(i+1,m) - G_C(i,m));
+        J_H(i,m) = (u_c_ekr(i,m) + u_e_H(i,m))*G_H(i,m) - alpha_H*(G_H(i+1,m) - G_H(i,m));
         J_A(i,m) = (u_c_ekr(i,m) + u_e_A(i,m))*G_A(i,m) - alpha_A*(G_A(i+1,m) - G_A(i,m));
-        J_B(i,m) = (u_c_ekr(i,m) + u_e_B(i,m))*G_B(i,m) - alpha_B*(G_B(i+1,m) - G_B(i,m));
         
-        G_C(end,m) = J_C(i,m); %--- Lower boundary
-        G_H(end,m) = J_H(i,m); %--- Lower boundary
-        G_OH(end,m) = J_OH(i,m); %--- Lower boundary
-        G_HA(end,m) = J_HA(i,m); %--- Lower boundary
-        G_BOH(end,m) = J_BOH(i,m); %--- Lower boundary
-        G_A(end,m) = J_A(i,m); %--- Lower boundary
-        G_B(end,m) = J_B(i,m); %--- Lower boundary
+        
+        G_OH(end,m) = J_OH(i,m);    %--- Lower boundary
+        G_HA(end,m) = J_HA(i,m);    %--- Lower boundary
+        G_Na(end,m) = J_Na(i,m);    %--- Lower boundary
+        G_Cl(end,m) = J_Cl(i,m);    %--- Lower boundary
+        G_C(end,m) = J_C(i,m);      %--- Lower boundary
+        G_H(end,m) = J_H(i,m);      %--- Lower boundary
+        G_A(end,m) = J_A(i,m);      %--- Lower boundary
+        
 
         s_H(i,m) = (z_H^2)*v_H*G_H(i,m);
         s_OH(i,m) = (z_OH^2)*v_OH*G_OH(i,m);
@@ -332,10 +335,10 @@ for m= 1:nt-1
         end
         K_H2O(i,m) = G_H(i,m)*G_OH(i,m);
         K_a(i,m) = (G_H(i,m)*G_A(i,m))/G_HA(i,m);
-        K_b(i,m) = (G_B(i,m)*G_OH(i,m))/G_BOH(i,m);
+        K_b(i,m) = (G_Cl(i,m)*G_OH(i,m))/G_Na(i,m);
         R_H(i,m) = (K_H2O(i,m)*G_H(i,m)) + (K_a(i,m)*G_HA(i,m));
-        R_OH(i,m) = (K_H2O(i,m)*G_OH(i,m)) + (K_b(i,m)*G_BOH(i,m));
-        R_B(i,m) = (K_b(i,m)*G_BOH(i,m));
+        R_OH(i,m) = (K_H2O(i,m)*G_OH(i,m)) + (K_b(i,m)*G_Na(i,m));
+        R_Cl(i,m) = (K_b(i,m)*G_Na(i,m));
         R_A(i,m) = (K_a(i,m)*G_HA(i,m));
         R_C(i,m) = R_i*(dt)/n;
         
