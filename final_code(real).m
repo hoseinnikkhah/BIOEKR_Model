@@ -173,13 +173,13 @@ u_t_Na = (u_e_Na + u_c)/n;
 u_t_Cl = (u_e_Cl + u_c)/n;
 
 % Velocity advection without coefficent
-beta_C = u_t_C_ekr*(dt/2*dx);
-beta_H = u_t_H_ekr*(dt/2*dx);
-beta_OH = u_t_OH_ekr*(dt/2*dx);
-beta_HA = u_t_HA_ekr*(dt/2*dx);
-beta_BOH = u_t_BOH_ekr*(dt/2*dx);
-beta_A = u_t_A_ekr*(dt/2*dx);
-beta_B = u_t_B_ekr*(dt/2*dx);
+beta_C = u_t_C*(dt/2*dx);
+beta_H = u_t_H*(dt/2*dx);
+beta_A = u_t_A*(dt/2*dx);
+beta_OH = u_t_OH*(dt/2*dx);
+beta_HA = u_t_HA*(dt/2*dx);
+beta_Na = u_t_Na*(dt/2*dx);
+beta_Cl = u_t_Cl*(dt/2*dx);
 
 % Velocity advection with coefficent abberation                                 |
 beta_prime_C = coeff*u_t_C*(dt/2*dx); %                                         |
