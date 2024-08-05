@@ -144,20 +144,20 @@ u_e_A = (v_A*z_A*F*E_field_dx)/(tau^2);
 % note: E_field_dx is needed as it is dEdx in main formula
 
 % domain velocity
-u_x = (epsilon/mu_solution)*(zeta*E_field);    % Volumetric Velocity [m/s]
+u_x = (epsilon/mu_solution)*(zeta*E_field);     % Volumetric Velocity [m/s]
 
 u_c = ones(nx,nt);
-u_C = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta);     % Convection Velocity [m/s]
-u_C_ekr = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta); % Convection Velocity [m/s]
+u_C = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta);      % Convection Velocity [m/s]
+u_C_ekr = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta);  % Convection Velocity [m/s]
 
 u_c = u_c.*u_C;
 u_c_ekr = u_c.*u_C_ekr;
 
-u_eo = ((epsilon*zeta)/mu_solution)*E_field;   % Electoosmotic Velocity [m3/s]
+u_eo = ((epsilon*zeta)/mu_solution)*E_field;    % Electoosmotic Velocity [m3/s]
 u_s = n*u_c;
 
-e_r = 7.5;                  % relative permittivity of clay [F/m]
-e_0 = 8.854*10^-12;         % permittivity of free space [F/m]
+e_r = 7.5;                                      % relative permittivity of clay [F/m]
+e_0 = 8.854*10^-12;                             % permittivity of free space [F/m]
 
 k_eo = (epsilon*zeta)/(mu*epsilon_oil);         % Electroosmotic mobility [m^2/V.s] Based on epsilon of both crude oil and clay, might be true form
 k_eo1 = (e_0*zeta*recip)/(mu*(1-n)*(n^3));      % Electroosmotic mobility [m^2/V.s] Based on debye
@@ -182,7 +182,7 @@ u_t_C_ekr = (u_e_C + u_c_ekr)/n;
 u_t_H_ekr = (u_e_H + u_c_ekr)/n;
 u_t_A_ekr = (u_e_A + u_c_ekr)/n;
 
-% Velocity advection without coefficent
+% Velocity advection without coefficent     [Dimentionless]
 beta_OH = u_t_OH_ekr*(dt/2*dx);
 beta_HA = u_t_HA_ekr*(dt/2*dx);
 beta_Na = u_t_Na_ekr*(dt/2*dx);
@@ -191,16 +191,14 @@ beta_C = u_t_C_ekr*(dt/2*dx);
 beta_H = u_t_H_ekr*(dt/2*dx);
 beta_A = u_t_A_ekr*(dt/2*dx);
 
-% Velocity advection with coefficent abberation                                 |
-beta_prime_C = coeff*u_t_C*(dt/2*dx); %                                         |
-beta_prime_H = coeff*u_t_H*(dt/2*dx); %                                         |
-beta_prime_OH = coeff*u_t_OH*(dt/2*dx); %                                       |
-beta_prime_HA = coeff*u_t_HA*(dt/2*dx); %                                       |
-beta_prime_BOH = coeff*u_t_BOH*(dt/2*dx); %                                     |
-beta_prime_A = coeff*u_t_A*(dt/2*dx); %                                         |
-beta_prime_B = coeff*u_t_B*(dt/2*dx); %                                         |
-%                                                                               |
-%-------------------------------------------------------------------------------
+% Velocity advection with coefficent        [Dimentionless]
+beta_prime_OH = coeff*u_t_OH*(dt/2*dx);
+beta_prime_HA = coeff*u_t_HA*(dt/2*dx);
+beta_prime_Na = coeff*u_t_Na*(dt/2*dx);
+beta_prime_Cl = coeff*u_t_Cl*(dt/2*dx);
+beta_prime_C = coeff*u_t_C*(dt/2*dx); 
+beta_prime_H = coeff*u_t_H*(dt/2*dx);
+beta_prime_A = coeff*u_t_A*(dt/2*dx);
 
 R_D = coeff*(dt)/n;              % Reaction rate Dimensionless factor
 
