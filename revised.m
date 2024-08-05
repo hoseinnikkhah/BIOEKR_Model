@@ -104,28 +104,24 @@ D_prime_H = D_H*coeff*(dt/dx^2);
 D_prime_C = D_C*coeff*(dt/dx^2);
 D_prime_A = D_A*coeff*(dt/dx^2);
 
-% Species Diffusion advection with coeff                                        |
-alpha_H = D_star_H/(n*tau^2);            % Diffusion Advection                  |
-alpha_C = D_star_C/(n*tau^2);            % Diffusion Advection                  |
-alpha_OH = D_star_OH/(n*tau^2);          % Diffusion Advection                  |
-alpha_HA = D_star_HA/(n*tau^2);          % Diffusion Advection                  |
-alpha_BOH = D_star_BOH/(n*tau^2);        % Diffusion Advection                  |
-alpha_A = D_star_A/(n*tau^2);            % Diffusion Advection                  |
-alpha_B = D_star_B/(n*tau^2);            % Diffusion Advection                  |
-%                                                                               |
-% Species Diffusion advection standalone                                        |
-alpha_prime_H = D_prime_H/(n*tau^2);     % Diffusion Advection                  |
-alpha_prime_C = D_prime_C/(n*tau^2);     % Diffusion Advection                  |
-alpha_prime_OH = D_prime_OH/(n*tau^2);   % Diffusion Advection                  |
-alpha_prime_HA = D_prime_HA/(n*tau^2);   % Diffusion Advection                  |
-alpha_prime_BOH = D_prime_BOH/(n*tau^2); % Diffusion Advection                  |
-alpha_prime_A = D_prime_A/(n*tau^2);     % Diffusion Advection                  |
-alpha_prime_B = D_prime_B/(n*tau^2);     % Diffusion Advection                  |
-%-------------------------------------------------------------------------------
+% Species Diffusion advection without coeff     [Dimentionless]
+alpha_OH = D_star_OH/(n*tau^2);
+alpha_HA = D_star_HA/(n*tau^2);
+alpha_Na = D_star_Na/(n*tau^2);
+alpha_Cl = D_star_Cl/(n*tau^2);
+alpha_H = D_star_H/(n*tau^2);
+alpha_C = D_star_C/(n*tau^2);
+alpha_A = D_star_A/(n*tau^2);
 
-%-------------------------------------------------------------------------------
-% Species Velocities                                                            |
-%                                                                               |
+% Species Diffusion advection with coeff       [Dimentionless]
+alpha_prime_H = D_prime_H/(n*tau^2);
+alpha_prime_C = D_prime_C/(n*tau^2);
+alpha_prime_OH = D_prime_OH/(n*tau^2);
+alpha_prime_HA = D_prime_HA/(n*tau^2);
+alpha_prime_BOH = D_prime_BOH/(n*tau^2);
+alpha_prime_A = D_prime_A/(n*tau^2);
+alpha_prime_B = D_prime_B/(n*tau^2);
+
 % Species Mobility                                                              |
 v_C = (D_C/(R*T));                             % mobility [Hydrocarbon]         |
 v_H = (D_H/(R*T));                             % mobility [Hydrogen]            |
