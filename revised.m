@@ -144,24 +144,24 @@ u_e_A = (v_A*z_A*F*E_field_dx)/(tau^2);
 % note: E_field_dx is needed as it is dEdx in main formula
 
 % domain velocity
-u_x = (epsilon/mu_solution)*(zeta*E_field);     % Volumetric Velocity [m/s]
+u_x = (epsilon/mu_solution)*(zeta*E_field);         % Volumetric Velocity [m/s]
 
 u_c = ones(nx,nt);
-u_C = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta);      % Convection Velocity [m/s]
-u_C_ekr = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta);  % Convection Velocity [m/s]
+u_C = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta);          % Convection Velocity [m/s]
+u_C_ekr = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta);      % Convection Velocity [m/s]
 
 u_c = u_c.*u_C;
 u_c_ekr = u_c.*u_C_ekr;
 
-u_eo = ((epsilon*zeta)/mu_solution)*E_field;    % Electoosmotic Velocity [m3/s]
+u_eo = ((epsilon*zeta)/mu_solution)*E_field_dx;     % Electoosmotic Velocity [m3/s]
 u_s = n*u_c;
 
-e_r = 7.5;                                      % relative permittivity of clay [F/m]
-e_0 = 8.854*10^-12;                             % permittivity of free space [F/m]
+e_r = 7.5;                                          % relative permittivity of clay [F/m]
+e_0 = 8.854*10^-12;                                 % permittivity of free space [F/m]
 
-k_eo = (epsilon*zeta)/(mu*epsilon_oil);         % Electroosmotic mobility [m^2/V.s] Based on epsilon of both crude oil and clay, might be true form
-k_eo1 = (e_0*zeta*recip)/(mu*(1-n)*(n^3));      % Electroosmotic mobility [m^2/V.s] Based on debye
-k_eo2 = ((-7*10^-10)*zeta*n)/(mu*(tau^2));      % Electroosmotic mobility [m^2/V.s] Based on a journal (exact one)
+k_eo = (epsilon*zeta)/(mu_solution*epsilon_oil);    % Electroosmotic mobility [m^2/V.s] Based on epsilon of both crude oil and clay, might be true form
+k_eo1 = (e_0*zeta*recip)/(mu_solution*(1-n)*(n^3)); % Electroosmotic mobility [m^2/V.s] Based on debye
+k_eo2 = ((-7*10^-10)*zeta*n)/(mu_solution*(tau^2)); % Electroosmotic mobility [m^2/V.s] Based on a journal (exact one)
 
 % Species total velocity
 u_t_OH = (u_e_OH + u_c)/n;
