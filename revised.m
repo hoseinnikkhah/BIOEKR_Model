@@ -144,32 +144,37 @@ u_e_A = (v_A*z_A*F*E_field_dx)/(tau^2);
 % note: E_field_dx is needed as it is dEdx in main formula
 
 % domain velocity
-u_x = (epsilon/mu_solution)*(zeta*E_field);    % Volumetric Velocity [m3/s]     |
+u_x = (epsilon/mu_solution)*(zeta*E_field);    % Volumetric Velocity [m/s]
+
 u_c = ones(nx,nt);
-u_C = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta);          % Convection Velocity [m3/s]     |
-u_C_ekr = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta); % Convection Velocity [m3/s]     |
+u_C = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta);     % Convection Velocity [m/s]
+u_C_ekr = ((1/tau^2)*u_x)*Z/(24*3600*Pe*Beta); % Convection Velocity [m/s]
+
 u_c = u_c.*u_C;
 u_c_ekr = u_c.*u_C_ekr;
-u_eo = ((epsilon*zeta)/mu_solution)*E_field;   % Electoosmotic Velocity [m3/s]  |
-u_s = n*u_c; %                                                                  |
-%                                                                               |
-% Species total velocity                                                        |
-u_t_C = (u_e_C + u_c)/n; %                                                      |
-u_t_H = (u_e_H + u_c)/n; %                                                      |
-u_t_OH = (u_e_OH + u_c)/n; %                                                    |
-u_t_HA = (u_e_HA + u_c)/n; %                                                    |
-u_t_BOH = (u_e_BOH + u_c)/n; %                                                  |
-u_t_A = (u_e_A + u_c)/n; %                                                      |
-u_t_B = (u_e_B + u_c)/n; %                                                      |
-% Species total velocity                                                        |
-u_t_C_ekr = (u_e_C + u_c_ekr)/n; %                                              |
-u_t_H_ekr = (u_e_H + u_c_ekr)/n; %                                              |
-u_t_OH_ekr = (u_e_OH + u_c_ekr)/n; %                                            |
-u_t_HA_ekr = (u_e_HA + u_c_ekr)/n; %                                            |
-u_t_BOH_ekr = (u_e_BOH + u_c_ekr)/n; %                                          |
-u_t_A_ekr = (u_e_A + u_c_ekr)/n; %                                              |
-u_t_B_ekr = (u_e_B + u_c_ekr)/n; %                                              |
-%
+
+u_eo = ((epsilon*zeta)/mu_solution)*E_field;   % Electoosmotic Velocity [m3/s]
+u_s = n*u_c;
+
+% Species total velocity
+u_t_OH = (u_e_OH + u_c)/n;
+u_t_HA = (u_e_HA + u_c)/n;
+u_t_Na = (u_e_Na + u_c)/n;
+u_t_Cl = (u_e_Cl + u_c)/n;
+u_t_C = (u_e_C + u_c)/n;
+u_t_H = (u_e_H + u_c)/n;
+u_t_A = (u_e_A + u_c)/n;
+
+
+% Species total velocity
+u_t_OH_ekr = (u_e_OH + u_c_ekr)/n;
+u_t_HA_ekr = (u_e_HA + u_c_ekr)/n;
+u_t_Na_ekr = (u_e_Na + u_c_ekr)/n;
+u_t_Cl_ekr = (u_e_Cl + u_c_ekr)/n;
+u_t_C_ekr = (u_e_C + u_c_ekr)/n;
+u_t_H_ekr = (u_e_H + u_c_ekr)/n;
+u_t_A_ekr = (u_e_A + u_c_ekr)/n;
+
 % Velocity advection without coefficent                                         |
 beta_C = u_t_C_ekr*(dt/2*dx); %                                                 |
 beta_H = u_t_H_ekr*(dt/2*dx); %                                                 |
