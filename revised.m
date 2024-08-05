@@ -222,7 +222,6 @@ G_C = zeros(nx,nt);
 G_H = zeros(nx,nt);
 G_A = zeros(nx,nt);
 
-
 Sigma = zeros(nx,nt);
 Sigma_ref = ones(nx,nt);
 sigma_ref = Sigma_ref*sigma_surface;
@@ -237,21 +236,15 @@ K_H2O = zeros(nx,nt);
 K_a = zeros(nx,nt);
 K_b = zeros(nx,nt);
 
-R_C = zeros(nx,nt);
-R_H = zeros(nx,nt);
 R_OH = zeros(nx,nt);
 R_HA = zeros(nx,nt);
-R_BOH = zeros(nx,nt);
+R_Na = zeros(nx,nt);
+R_Cl = zeros(nx,nt);
+R_C = zeros(nx,nt);
+R_H = zeros(nx,nt);
 R_A = zeros(nx,nt);
-R_B = zeros(nx,nt);
 
 % --- Set IC and BC
-
-G_C(:,1)= 10000;
-J_C(1,:)= (u_c_ekr(1,:) + u_e_C(1,:))*10000;
-
-G_H(:,1)= 10000;
-J_H(1,:)= (u_c_ekr(1,:) + u_e_H(1,:))*10000;
 
 G_OH(:,1)= 10000;
 J_OH(1,:)= (u_c_ekr(1,:) + u_e_OH(1,:))*10000;
@@ -259,22 +252,28 @@ J_OH(1,:)= (u_c_ekr(1,:) + u_e_OH(1,:))*10000;
 G_HA(:,1)= 10000;
 J_HA(1,:)= (u_c_ekr(1,:) + u_e_HA(1,:))*10000;
 
-G_BOH(:,1)= 10000;
-J_BOH(1,:)= (u_c_ekr(1,:) + u_e_BOH(1,:))*10000;
+G_Na(:,1)= 10000;
+J_Na(1,:)= (u_c_ekr(1,:) + u_e_Na(1,:))*10000;
+
+G_Cl(:,1)= 10000;
+J_Cl(1,:)= (u_c_ekr(1,:) + u_e_Cl(1,:))*10000;
+
+G_C(:,1)= 10000;
+J_C(1,:)= (u_c_ekr(1,:) + u_e_C(1,:))*10000;
+
+G_H(:,1)= 10000;
+J_H(1,:)= (u_c_ekr(1,:) + u_e_H(1,:))*10000;
 
 G_A(:,1)= 10000;
 J_A(1,:)= (u_c_ekr(1,:) + u_e_A(1,:))*10000;
 
-G_B(:,1)= 10000;
-J_B(1,:)= (u_c_ekr(1,:) + u_e_B(1,:))*10000;
-
-R_C(:,1) = R_i*(dt)/n;
 R_OH(:,1) = R_i*(dt)/n;
-R_H(:,1) = R_i*(dt)/n;
 R_HA(:,1) = R_i*(dt)/n;
-R_BOH(:,1) = R_i*(dt)/n;
+R_Na(:,1) = R_i*(dt)/n;
+R_Cl(:,1) = R_i*(dt)/n;
+R_H(:,1) = R_i*(dt)/n;
+R_C(:,1) = R_i*(dt)/n;
 R_B(:,1) = R_i*(dt)/n;
-R_A(:,1) = R_i*(dt)/n;
 
 s_H(:,1) = (z_H^2)*v_H*G_H(:,1);
 s_OH(:,1) = (z_OH^2)*v_OH*G_OH(:,1);
@@ -283,14 +282,14 @@ Sigma(:,1) = (F^2)*(s_H(:,1) + s_OH(:,1) + s_C(:,1));
 
 for m= 1:nt-1
 
-    G_C(1,m) =J_C(1,m); %--- Upper boundary
-    G_H(1,m) =J_H(1,m); %--- Upper boundary
-    G_OH(1,m) =J_OH(1,m); %--- Upper boundary
-    G_HA(1,m) =J_HA(1,m); %--- Upper boundary
-    G_BOH(1,m) =J_BOH(1,m); %--- Upper boundary
-    G_A(1,m) =J_A(1,m); %--- Upper boundary
-    G_B(1,m) =J_B(1,m); %--- Upper boundary
-
+    G_OH(1,m) =J_OH(1,m);   %--- Upper boundary
+    G_HA(1,m) =J_HA(1,m);   %--- Upper boundary
+    G_Na(1,m) =J_Na(1,m);   %--- Upper boundary
+    G_Cl(1,m) =J_Cl(1,m);   %--- Upper boundary
+    G_C(1,m) =J_C(1,m);     %--- Upper boundary
+    G_H(1,m) =J_H(1,m);     %--- Upper boundary
+    G_A(1,m) =J_A(1,m);     %--- Upper boundary
+    
     for i= 2:nx-1
         
         G_C(i,m+1) = G_C(i,m) + alpha_C*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) + beta_C(i,m)*(G_C(i+1,m) - G_C(i-1,m)) + R_C(i,m)/R_D;
