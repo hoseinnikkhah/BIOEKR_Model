@@ -140,13 +140,14 @@ v_Na = (D_Na/(R*T));                           % mobility [Na]
 v_Cl = (D_Cl/(R*T));                           % mobility [Cl]
 
 % Species electromigration velocity
-u_e_H = (v_H*z_H*F*E_field_dx)/(tau^2);
-u_e_OH = (v_OH*z_OH*F*E_field_dx)/(tau^2);
-u_e_C = (v_C*z_C*F*E_field_dx)/(tau^2);
 u_e_HA = (v_HA*z_HA*F*E_field_dx)/(tau^2);
-u_e_A = (v_A*z_A*F*E_field_dx)/(tau^2);
-u_e_Na = (v_BOH*z_Na*F*E_field_dx)/(tau^2);
+u_e_OH = (v_OH*z_OH*F*E_field_dx)/(tau^2);
+u_e_Na = (v_Na*z_Na*F*E_field_dx)/(tau^2);
 u_e_Cl = (v_B*z_Cl*F*E_field_dx)/(tau^2);
+u_e_C = (v_C*z_C*F*E_field_dx)/(tau^2);
+u_e_H = (v_H*z_H*F*E_field_dx)/(tau^2);
+u_e_A = (v_A*z_A*F*E_field_dx)/(tau^2);
+
 
 % domain velocity   
 u_c = ones(nx,nt);
