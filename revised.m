@@ -17,7 +17,7 @@ phi_end = 0;
 tau = 1.25;                     % Tortuosity
 dzdx = 1/tau;                   % divertion field
 dEdx = phi/L;                   % Electric field in lenght [V/m]
-epsilon = 7*10^10;              % Electrical permitivity [F/m]
+epsilon = 7*10^-10;             % Electrical permitivity [F/m]
 mu_oil = 510*24*3600;           % Oil viscosity [kg/(m.day)]
 mu_solution = 0.001*24*3600;    % Solution viscosity [kg/(m.day)]
 zeta = -0.0027;                 % Zeta potential [V]
@@ -158,6 +158,8 @@ u_s = n*u_c;
 
 e_r = 7.5;                                          % relative permittivity of clay [F/m]
 e_0 = 8.854*10^-12;                                 % permittivity of free space [F/m]
+epsilon_oil = 2.2;          % Crude oil permittivity [F/m]
+
 
 k_eo = (epsilon*zeta)/(mu_solution*epsilon_oil);    % Electroosmotic mobility [m^2/V.s] Based on epsilon of both crude oil and clay, might be true form
 k_eo1 = (e_0*zeta*recip)/(mu_solution*(1-n)*(n^3)); % Electroosmotic mobility [m^2/V.s] Based on debye
