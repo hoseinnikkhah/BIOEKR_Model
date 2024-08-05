@@ -60,42 +60,50 @@ D0 = 10^-9;
 
 % Species diffusivities (remapped)  [Dimentionless]
 D_HA_less = 1.2;          % Acetic Acid
-D_A_less = 1.2;           % Acid Agent
+D_OH_less = 2.00;         % OH-
 D_Na_less = 1.34;         % Na+
 D_Cl_less = 2.05;         % Cl-
+D_A_less = 1.2;           % Acid Agent
 D_H_less = 9.35;          % H+
-D_OH_less = 2.00;         % OH-
 D_C_less = 2.00;          % Carbon
 
 
 % Species diffusivities (Normal)    [m2/s]
 D_HA = D_HA_less*D0;      % Acetic Acid
-D_A = D_A_less*D0;        % Acid Agent
+D_OH = D_OH_less*D0;      % OH-
 D_Na = D_Na_less*D0;      % Na+
 D_Cl = D_Cl_less*D0;      % Cl-
+D_A = D_A_less*D0;        % Acid Agent
 D_H = D_H_less*D0;        % H+
-D_OH = D_OH_less*D0;      % OH-
 D_C = D_C_less*D0;        % Carbon
 
+% Species diffusivities (Normal)    [m^2/day]
+D_HA = D_HA*24*3600;      % Acetic Acid
+D_OH = D_OH*24*3600;      % OH-
+D_Na = D_Na*24*3600;      % Na+
+D_Cl = D_Cl*24*3600;      % Cl-
+D_A = D_A*24*3600;        % Acid Agent
+D_H = D_H*24*3600;        % H+
+D_C = D_C*24*3600;        % Carbon
 
-% Species Diffuision abberation with coeff
+% Species Diffuision abberation without coeff   [Dimentionless]
+D_star_HA = D_HA*(dt/dx^2);
+D_star_OH = D_OH*(dt/dx^2);
+D_star_Na = D_Na*(dt/dx^2);
+D_star_Cl = D_Cl*(dt/dx^2);
 D_star_H = D_H*(dt/dx^2);
 D_star_C = D_C*(dt/dx^2);
-D_star_OH = D_OH*(dt/dx^2);
-D_star_HA = D_HA*(dt/dx^2);
-D_star_BOH = D_BOH*(dt/dx^2);
 D_star_A = D_A*(dt/dx^2);
-D_star_B = D_B*(dt/dx^2);      
-%                                                                               |
-% Species Diffuision abberation standalone                                      |
-D_prime_H = D_H*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
-D_prime_C = D_C*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
-D_prime_OH = D_OH*coeff*(dt/dx^2);       % Dimensionless of Diffusion           |
-D_prime_HA = D_HA*coeff*(dt/dx^2);       % Dimensionless of Diffusion           |
-D_prime_BOH = D_BOH*coeff*(dt/dx^2);     % Dimensionless of Diffusion           |
-D_prime_A = D_A*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
-D_prime_B = D_B*coeff*(dt/dx^2);         % Dimensionless of Diffusion           |
-%                                                                               |
+    
+% Species Diffuision abberation with coeff      [Dimentionless]
+D_prime_HA = D_HA*coeff*(dt/dx^2);
+D_prime_OH = D_OH*coeff*(dt/dx^2);
+D_prime_Na = D_Na*coeff*(dt/dx^2);
+D_prime_Cl = D_Cl*coeff*(dt/dx^2);
+D_prime_H = D_H*coeff*(dt/dx^2);
+D_prime_C = D_C*coeff*(dt/dx^2);
+D_prime_A = D_A*coeff*(dt/dx^2);
+
 % Species Diffusion advection with coeff                                        |
 alpha_H = D_star_H/(n*tau^2);            % Diffusion Advection                  |
 alpha_C = D_star_C/(n*tau^2);            % Diffusion Advection                  |
