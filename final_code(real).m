@@ -181,22 +181,20 @@ beta_HA = u_t_HA*(dt/2*dx);
 beta_Na = u_t_Na*(dt/2*dx);
 beta_Cl = u_t_Cl*(dt/2*dx);
 
-% Velocity advection with coefficent abberation                                 |
-beta_prime_C = coeff*u_t_C*(dt/2*dx); %                                         |
-beta_prime_H = coeff*u_t_H*(dt/2*dx); %                                         |
-beta_prime_OH = coeff*u_t_OH*(dt/2*dx); %                                       |
-beta_prime_HA = coeff*u_t_HA*(dt/2*dx); %                                       |
-beta_prime_BOH = coeff*u_t_BOH*(dt/2*dx); %                                     |
-beta_prime_A = coeff*u_t_A*(dt/2*dx); %                                         |
-beta_prime_B = coeff*u_t_B*(dt/2*dx); %                                         |
-%                                                                               |
-%-------------------------------------------------------------------------------
+% Velocity advection with coefficent abberation
+beta_prime_C = coeff*u_t_C*(dt/2*dx);
+beta_prime_H = coeff*u_t_H*(dt/2*dx);
+beta_prime_OH = coeff*u_t_OH*(dt/2*dx);
+beta_prime_HA = coeff*u_t_HA*(dt/2*dx);
+beta_prime_BOH = coeff*u_t_BOH*(dt/2*dx);
+beta_prime_A = coeff*u_t_A*(dt/2*dx);
+beta_prime_B = coeff*u_t_B*(dt/2*dx);
 
 R_D = coeff*(dt)/n;              % Reaction rate Dimensionless factor
 
 % --- Create arrays to save data for export
-x = linspace(0,L,nx);
-t = linspace(0,tmax,nt);
+x_array = linspace(0,L,nx);
+t_array = linspace(0,tmax,nt);
 
 J_C = zeros(nx,nt);
 J_H = zeros(nx,nt);
