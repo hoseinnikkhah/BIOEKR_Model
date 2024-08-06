@@ -13,7 +13,7 @@ x = (10^-5:dx:(nx)*dx);
 x = transpose(x);
 x_ref = repmat(x,1,nt);
 
-% Refrence t directions        [m]
+% Refrence t directions        [day]
 t = (0:dt:(nt-1)*dt);
 t_ref = repmat(t,nx,1);
 t_up = t_ref/tmax;
@@ -22,7 +22,7 @@ t_step = t_up(1,2) - t_up(1,1);
 % Electric info
 V = 25;                        % Voltage at 1st cap [V]
 V_end = 0;                     % Voltage at 2nd cap [V]
-dVdx = V/L;                    % Voltage gradient [V/m]
+dVdx = (V-V_end)/L;            % Voltage gradient [V/m]
 
 E_field = ones(nx,nt);         % Electric field [V]
 M = linspace(V,0,nx);
@@ -41,7 +41,7 @@ D0 = 10^-9;                    % Reference diffusivity [m2/s]
 % Soil info
 n = 0.64;                      % Porosity   [Dimentionless]
 tau = 1.25;                    % Tortuosity [Dimentionless]
-dzdx = 1/tau;                   % divertion field
+dzdx = 1/tau;                  % divertion field
 
 % Acetic acid info
 sigma_surface = 0.0013;        % Surface conductivit [mhos/m]
@@ -64,14 +64,12 @@ k_0 = K_a;
 
 % Valecy            [Dimentionless]
 z_HA = 0;
-z_A = -1;
+z_OH =-1;
 z_Na = 1;
-z_Cl = -1;
+z_Cl =-1;
+z_A = -1;
 z_H = 1;
-z_OH = -1;
 z_C = 0;
-
-z_i = [z_HA, z_A, z_Na, z_Cl, z_H, z_OH,z_C];
 
 % Species diffusivities (remapped)  [Dimentionless]
 D_HA_upp = 1.2;          % Acetic Acid
