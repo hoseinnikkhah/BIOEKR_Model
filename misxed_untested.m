@@ -29,7 +29,8 @@ M = linspace(V,0,nx);
 for timestep = 1:nt
     E_field(:,timestep) = M;
 end
-E_field_less = E_field/(V-V_end);
+
+phi_bar = E_field/(V-V_end);   % Dimensionless E_field [Dimentionless]
 E_field_dx = E_field/L;        % Electric field in lenght [V/m]
 
 % Global Physical info
