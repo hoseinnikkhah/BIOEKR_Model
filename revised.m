@@ -381,9 +381,9 @@ yl = [10000,7900,7100,6000,5700,5500,5400,5100];
 figure(1);
 hold on;
 
-plot(t_array,G_C(10,:),'-','DisplayName', 'Hydrocarbon (EKR)');
+plot(t_array,G_C_TPH_plot(10,:),'-','DisplayName', 'Hydrocarbon (EKR)');
 
-%scatter(xl,yl, 'DisplayName', 'Expriment Data');
+scatter(xl,yl, 'DisplayName', 'Expriment Data');
 
 xlabel('Time');
 ylabel('Conc(mg/kg)');
