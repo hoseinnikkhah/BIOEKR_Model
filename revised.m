@@ -21,6 +21,7 @@ epsilon = 7*10^-10;             % Electrical permitivity [F/m]
 mu_oil = 510*24*3600;           % Oil viscosity [kg/(m.day)]
 mu_solution = 0.001*24*3600;    % Solution viscosity [kg/(m.day)]
 zeta = -0.0027;                 % Zeta potential [V]
+zeta_0 = 2.6205e-23;            % Refrence Zeta Potential [V]
 K = 0.02;                       % Exprimental Microbal constant
 K_A = 1.75*10^-5;               % Dissociation constant [mol/m3]
 k_i = 0.075;                    % Exprimental constant
@@ -225,6 +226,11 @@ beta_prime_A = coeff*u_t_A*(dt/2*dx);
 
 R_D = coeff*(dt)/n;              % Reaction rate Dimensionless factor
 
+% Dimentionless Calculated     [Dimentionless]
+Peclet_calculated = (epsilon*zeta_0*phi)/((mu_solution/(24*3600))*D0);
+Beta_calculated = (F*phi)/(R*T);
+Z_calculated = (R*T*epsilon*zeta_0)/(D0*F*(mu_solution/(24*3600)));
+
 % --- EKR Model
 
 % --- Create arrays to save data for export
@@ -418,7 +424,7 @@ s_OH_B = zeros(nx,nt);
 G_A_B(:,1)= c_0;
 J_A_B(1,:)= (u_c(1,:) + u_e_A(1,:))*c_0;
 
-G_C_B(:,1)= c_0;
+G_C_B(:,1)= c_C;
 J_C_B(1,:)= (u_c(1,:) + u_e_C(1,:))*c_C;
 
 G_H_B(:,1)= c_0;
@@ -449,6 +455,9 @@ s_H_B(:,1) = (z_H^2)*v_H*G_H_B(:,1);
 s_OH_B(:,1) = (z_OH^2)*v_OH*G_OH_B(:,1);
 s_C_B(:,1) = (z_C^2)*v_C*G_C_B(:,1);
 Sigma_B(:,1) = (F^2)*(s_H_B(:,1) + s_OH_B(:,1) + s_C_B(:,1));
+
+sub = zeros(nx,nt);
+fixup = zeros(nx,nt);
 
 for xx = 1:nx
     for tt = 1:nt
