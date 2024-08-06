@@ -126,8 +126,7 @@ u_e_OH = -v_OH*z_OH*F*E_field*(1/tau^2);
 u_e_C = -v_C*z_C*F*E_field*(1/tau^2);
 
 % Refrence velocity                             [m/s]
-u_0 = (1/tau^2)*((epsilon*zeta)/mu_a)*E_field;
-
+u_0 = (1/tau^2)*((epsilon*zeta_0)/mu_a)*(V/L);
 
 % Dimentionless Calculated     [Dimentionless]
 Peclet_calculated = (epsilon*zeta_0*V)/(mu_a*D0);
@@ -145,12 +144,13 @@ u_e_C_less = (-1/Z_calculated)*D_C_less*z_C*dphidx;
 
 
 % Convection velocity          [m/s]
-u_eo = ((epsilon*zeta)/mu_a)*E_field_dx; 
+u_eo = ((epsilon*zeta)/mu_a)*E_field_dx;
 u_x = (epsilon/mu_a)*(zeta*E_field_dx);
 
 % Convection velocity (itself)
-u_c = (1/tau^2)*(epsilon/mu_a)*(zeta*E_field_dx);
+%u_c = (1/tau^2)*(epsilon/mu_a)*(zeta*E_field_dx);
 u_c = u_x/((tau^2)*10^19);
+
 u_c_up = -((zeta/zeta_0)*dphidx)*10^-18;
 
 % Toatal velocity term (Normal)
