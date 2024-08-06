@@ -19,6 +19,10 @@ t_ref = repmat(t,nx,1);
 t_up = t_ref/tmax;
 t_step = t_up(1,2) - t_up(1,1);
 
+% Dimensionless x directions
+x_less = x_ref/L;
+x_step = 0.250;
+
 % Electric info
 V = 25;                        % Voltage at 1st cap [V]
 V_end = 0;                     % Voltage at 2nd cap [V]
@@ -30,7 +34,12 @@ for timestep = 1:nt
     E_field(:,timestep) = M;
 end
 
-phi_bar = E_field/(V-V_end);   % Dimensionless E_field [Dimentionless]
+
+% Dimensionless Voltage     [Dimentionless]
+phi_bar = E_field/(V-V_end);
+dphidx = phi_bar./x_less;
+
+
 E_field_dx = E_field/L;        % Electric field in lenght [V/m]
 
 % Global Physical info
@@ -120,13 +129,6 @@ u_e_C = -v_C*z_C*F*E_field*(1/tau^2);
 % Refrence velocity                             [m/s]
 u_0 = (1/tau^2)*((epsilon*zeta)/mu_a)*E_field;
 
-% Dimensionless x directions
-x_up = x_ref/L;
-x_step = 0.250;
-
-% Dimensionless Voltage     [Dimentionless]
-phi_bar = E_field/V;
-dphidx = phi_bar./x_up;
 
 % Dimentionless Calculated     [Dimentionless]
 Peclet_calculated = (epsilon*zeta_0*V)/(mu_a*D0);
@@ -144,9 +146,11 @@ u_e_C_less = (-1/Z_calculated)*D_C_less*z_C*dphidx;
 
 
 % Convection velocity          [m/s]
+u_eo = ((epsilon*zeta)/mu_a)*E_field_dx; 
 u_x = (epsilon/mu_a)*(zeta*E_field_dx);
 
 % Convection velocity (itself)
+u_c = (1/tau^2)*(epsilon/mu_a)*(zeta*E_field_dx);
 u_c = u_x/((tau^2)*10^19);
 u_c_up = -((zeta/zeta_0)*dphidx)*10^-18;
 
