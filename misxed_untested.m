@@ -62,7 +62,7 @@ Z = 0.049;
 Beta = 967;
 k_0 = K_a;
 
-% Valecy            [Dimentionless]
+% Valency            [Dimentionless]
 z_HA = 0;
 z_OH =-1;
 z_Na = 1;
@@ -72,26 +72,22 @@ z_H = 1;
 z_C = 0;
 
 % Species diffusivities (remapped)  [Dimentionless]
-D_HA_upp = 1.2;          % Acetic Acid
-D_A_upp = 1.2;           % Acid Agent
-D_Na_upp = 1.34;         % Na+
-D_Cl_upp = 2.05;         % Cl-
-D_H_upp = 9.35;          % H+
-D_OH_upp = 2.00;         % OH-
-D_C_upp = 2.00;          % Carbon
-
-D_i_upp = [D_HA_upp, D_A_upp, D_Na_upp, D_Cl_upp, D_H_upp, D_OH_upp, D_C_upp];
+D_HA_less = 1.2;          % Acetic Acid
+D_OH_less = 2.00;         % OH-
+D_Na_less = 1.34;         % Na+
+D_Cl_less = 2.05;         % Cl-
+D_A_less = 1.2;           % Acid Agent
+D_H_less = 9.35;          % H+
+D_C_less = 2.00;          % Carbon
 
 % Species diffusivities (Normal)    [m2/s]
-D_HA = D_HA_upp*D0;      % Acetic Acid
-D_A = D_A_upp*D0;        % Acid Agent
-D_Na = D_Na_upp*D0;      % Na+
-D_Cl = D_Cl_upp*D0;      % Cl-
-D_H = D_H_upp*D0;        % H+
-D_OH = D_OH_upp*D0;      % OH-
-D_C = D_C_upp*D0;        % Carbon
-
-D_i = [D_HA, D_A, D_Na, D_Cl, D_H, D_OH, D_C];
+D_HA = D_HA_less*D0;      % Acetic Acid
+D_OH = D_OH_less*D0;      % OH-
+D_Na = D_Na_less*D0;      % Na+
+D_Cl = D_Cl_less*D0;      % Cl-
+D_A = D_A_less*D0;        % Acid Agent
+D_H = D_H_less*D0;        % H+
+D_C = D_C_less*D0;        % Carbon
 
 % Mobility (Normal)      % [s·mol/kg]
 v_HA = D_HA/(R*T);
@@ -103,13 +99,13 @@ v_OH = D_OH/(R*T);
 v_C = D_C/(R*T);
 
 % Mobility (remapped)      % [s·mol/kg]
-v_HA_upp = D_HA_upp/(R*T);
-v_A_upp = D_A_upp/(R*T);
-v_Na_upp = D_Na_upp/(R*T);
-v_Cl_upp = D_Cl_upp/(R*T);
-v_H_upp = D_H_upp/(R*T);
-v_OH_upp = D_OH_upp/(R*T);
-v_C_upp = D_C_upp/(R*T);
+v_HA_less = D_HA_less/(R*T);
+v_A_less = D_A_less/(R*T);
+v_Na_less = D_Na_less/(R*T);
+v_Cl_less = D_Cl_less/(R*T);
+v_H_less = D_H_less/(R*T);
+v_OH_less = D_OH_less/(R*T);
+v_C_less = D_C_less/(R*T);
 
 % Electroelectromigration velocity (Normal)     [m/s]
 u_e_HA = -v_HA*z_HA*F*E_field*(1/tau^2);
@@ -137,13 +133,13 @@ Beta_calculated = (F*V)/(R*T);
 Z_calculated = (R*T*epsilon*zeta_0)/(D0*F*mu_a);
 
 % Electroelectromigration velocity (remapped)        [Dimentionless]
-u_e_HA_upp = (-1/Z_calculated)*D_HA_upp*z_HA*dphidx;
-u_e_A_upp = (-1/Z_calculated)*D_A_upp*z_A*dphidx;
-u_e_Na_upp = (-1/Z_calculated)*D_Na_upp*z_Na*dphidx;
-u_e_Cl_upp = (-1/Z_calculated)*D_Cl_upp*z_Cl*dphidx;
-u_e_H_upp = (-1/Z_calculated)*D_H_upp*z_H*dphidx;
-u_e_OH_upp = (-1/Z_calculated)*D_OH_upp*z_OH*dphidx;
-u_e_C_upp = (-1/Z_calculated)*D_C_upp*z_C*dphidx;
+u_e_HA_less = (-1/Z_calculated)*D_HA_less*z_HA*dphidx;
+u_e_A_less = (-1/Z_calculated)*D_A_less*z_A*dphidx;
+u_e_Na_less = (-1/Z_calculated)*D_Na_less*z_Na*dphidx;
+u_e_Cl_less = (-1/Z_calculated)*D_Cl_less*z_Cl*dphidx;
+u_e_H_less = (-1/Z_calculated)*D_H_less*z_H*dphidx;
+u_e_OH_less = (-1/Z_calculated)*D_OH_less*z_OH*dphidx;
+u_e_C_less = (-1/Z_calculated)*D_C_less*z_C*dphidx;
 
 
 % Convection velocity          [m/s]
@@ -163,13 +159,13 @@ u_t_OH = (u_e_OH + u_c);
 u_t_C = (u_e_C + u_c);
 
 % Toatal velocity term (Rmapped)
-u_t_HA_up = (u_e_HA_upp + u_c_up);
-u_t_A_up = (u_e_A_upp + (u_c_up));
-u_t_Na_up = (u_e_Na_upp + u_c_up);
-u_t_Cl_up = (u_e_Cl_upp + u_c_up);
-u_t_H_up = (u_e_H_upp + u_c_up)*10^-5;
-u_t_OH_up = (u_e_OH_upp + u_c_up);
-u_t_C_up = -(u_e_C_upp + u_c_up)*10^-1;
+u_t_HA_up = (u_e_HA_less + u_c_up);
+u_t_A_up = (u_e_A_less + (u_c_up));
+u_t_Na_up = (u_e_Na_less + u_c_up);
+u_t_Cl_up = (u_e_Cl_less + u_c_up);
+u_t_H_up = (u_e_H_less + u_c_up)*10^-5;
+u_t_OH_up = (u_e_OH_less + u_c_up);
+u_t_C_up = -(u_e_C_less + u_c_up)*10^-1;
 
 % Initial concentration        [mol/m3]
 c_0 = 500; 
@@ -390,22 +386,22 @@ for m=1:nt-1
         R_Cl(i,m+1) = R_Cl_ads(i,m+1)/((c_Cl*k_0)*10000);
         R_OH(i,m+1) = R_OH_ads(i,m+1)/((c_0*k_0)*10000);
         
-        G_HA_up(i,m+1) = G_HA_up(i,m) + (D_HA_upp/(Peclet_calculated))*((G_HA_up(i+1,m) -2*G_HA_up(i,m) + G_HA_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_HA_up(i+1,m) - u_t_HA_up(i,m))*((t_step/n)/x_step)) * ((G_HA_up(i+1,m) - G_HA_up(i,m))*((t_step/n)/x_step)));
-        G_Na_up(i,m+1) = G_Na_up(i,m) + (D_Na_upp/(Peclet_calculated))*((G_Na_up(i+1,m) -2*G_Na_up(i,m) + G_Na_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_Na_up(i+1,m) - u_t_Na_up(i,m))*((t_step/n)/x_step)) * ((G_Na_up(i+1,m) - G_Na_up(i,m))*((t_step/n)/x_step)));
-        G_Cl_up(i,m+1) = G_Cl_up(i,m) + (D_Cl_upp/(Peclet_calculated))*((G_Cl_up(i+1,m) -2*G_Cl_up(i,m) + G_Cl_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_Cl_up(i+1,m) - u_t_Cl_up(i,m))*((t_step/n)/x_step)) * ((G_Cl_up(i+1,m) - G_Cl_up(i,m))*((t_step/n)/x_step)));
-        G_OH_up(i,m+1) = G_OH_up(i,m) + (D_OH_upp/(Peclet_calculated))*((G_OH_up(i+1,m) -2*G_OH_up(i,m) + G_OH_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_OH_up(i+1,m) - u_t_OH_up(i,m))*((t_step/n)/x_step)) * ((G_OH_up(i+1,m) - G_OH_up(i,m))*((t_step/n)/x_step)));
-        G_A_up(i,m+1) = G_A_up(i,m) + (D_A_upp/(Peclet_calculated))*((G_A_up(i+1,m) -2*G_A_up(i,m) + G_A_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_A_up(i+1,m) - u_t_A_up(i,m))*((t_step/n)/x_step)) * ((G_A_up(i+1,m) - G_A_up(i,m))*((t_step/n)/x_step)));
-        G_H_up(i,m+1) = G_H_up(i,m) + (D_H_upp/(Peclet_calculated))*((G_H_up(i+1,m) -2*G_H_up(i,m) + G_H_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_H_up(i+1,m) - u_t_H_up(i,m))*((t_step/n)/x_step)) * ((G_H_up(i+1,m) - G_H_up(i,m))*((t_step/n)/x_step))) + (1/alpha(i,m+1))*R_H(i,m+1);        
-        G_C_up(i,m+1) = G_C_up(i,m) + (D_C_upp/(Peclet_calculated))*((G_C_up(i+1,m) -2*G_C_up(i,m) + G_C_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_C_up(i+1,m) - u_t_C_up(i,m))*((t_step/n)/x_step)) * ((G_C_up(i+1,m) - G_C_up(i,m))*((t_step/n)/x_step)));
+        G_HA_up(i,m+1) = G_HA_up(i,m) + (D_HA_less/(Peclet_calculated))*((G_HA_up(i+1,m) -2*G_HA_up(i,m) + G_HA_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_HA_up(i+1,m) - u_t_HA_up(i,m))*((t_step/n)/x_step)) * ((G_HA_up(i+1,m) - G_HA_up(i,m))*((t_step/n)/x_step)));
+        G_Na_up(i,m+1) = G_Na_up(i,m) + (D_Na_less/(Peclet_calculated))*((G_Na_up(i+1,m) -2*G_Na_up(i,m) + G_Na_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_Na_up(i+1,m) - u_t_Na_up(i,m))*((t_step/n)/x_step)) * ((G_Na_up(i+1,m) - G_Na_up(i,m))*((t_step/n)/x_step)));
+        G_Cl_up(i,m+1) = G_Cl_up(i,m) + (D_Cl_less/(Peclet_calculated))*((G_Cl_up(i+1,m) -2*G_Cl_up(i,m) + G_Cl_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_Cl_up(i+1,m) - u_t_Cl_up(i,m))*((t_step/n)/x_step)) * ((G_Cl_up(i+1,m) - G_Cl_up(i,m))*((t_step/n)/x_step)));
+        G_OH_up(i,m+1) = G_OH_up(i,m) + (D_OH_less/(Peclet_calculated))*((G_OH_up(i+1,m) -2*G_OH_up(i,m) + G_OH_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_OH_up(i+1,m) - u_t_OH_up(i,m))*((t_step/n)/x_step)) * ((G_OH_up(i+1,m) - G_OH_up(i,m))*((t_step/n)/x_step)));
+        G_A_up(i,m+1) = G_A_up(i,m) + (D_A_less/(Peclet_calculated))*((G_A_up(i+1,m) -2*G_A_up(i,m) + G_A_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_A_up(i+1,m) - u_t_A_up(i,m))*((t_step/n)/x_step)) * ((G_A_up(i+1,m) - G_A_up(i,m))*((t_step/n)/x_step)));
+        G_H_up(i,m+1) = G_H_up(i,m) + (D_H_less/(Peclet_calculated))*((G_H_up(i+1,m) -2*G_H_up(i,m) + G_H_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_H_up(i+1,m) - u_t_H_up(i,m))*((t_step/n)/x_step)) * ((G_H_up(i+1,m) - G_H_up(i,m))*((t_step/n)/x_step))) + (1/alpha(i,m+1))*R_H(i,m+1);        
+        G_C_up(i,m+1) = G_C_up(i,m) + (D_C_less/(Peclet_calculated))*((G_C_up(i+1,m) -2*G_C_up(i,m) + G_C_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_C_up(i+1,m) - u_t_C_up(i,m))*((t_step/n)/x_step)) * ((G_C_up(i+1,m) - G_C_up(i,m))*((t_step/n)/x_step)));
          
         
-        sum_H(i,m) = z_H*D_H_upp*G_H_up(i,m);
-        sum_A(i,m) = z_A*D_H_upp*G_A_up(i,m);
-        sum_C(i,m) = z_C*D_H_upp*G_C_up(i,m);
-        sum_HA(i,m) = z_HA*D_H_upp*G_HA_up(i,m);
-        sum_Na(i,m) = z_Na*D_H_upp*G_Na_up(i,m);
-        sum_Cl(i,m) = z_Cl*D_H_upp*G_Cl_up(i,m);
-        sum_OH(i,m) = z_OH*D_H_upp*G_OH_up(i,m);
+        sum_H(i,m) = z_H*D_H_less*G_H_up(i,m);
+        sum_A(i,m) = z_A*D_H_less*G_A_up(i,m);
+        sum_C(i,m) = z_C*D_H_less*G_C_up(i,m);
+        sum_HA(i,m) = z_HA*D_H_less*G_HA_up(i,m);
+        sum_Na(i,m) = z_Na*D_H_less*G_Na_up(i,m);
+        sum_Cl(i,m) = z_Cl*D_H_less*G_Cl_up(i,m);
+        sum_OH(i,m) = z_OH*D_H_less*G_OH_up(i,m);
 
         % Sigma calculations
         sum_total(i,m) = sum_H(i,m) + sum_A(i,m) + sum_C(i,m) + sum_HA(i,m) + sum_Na(i,m) + sum_Cl(i,m) + sum_OH(i,m);
@@ -418,7 +414,7 @@ for m=1:nt-1
         C_Na (i,m) = (G_Na_up(i+1,m) - G_Na_up(i,m))*((t_step/n)/x_step);
         C_Cl (i,m) = (G_Cl_up(i+1,m) - G_Cl_up(i,m))*((t_step/n)/x_step);
         C_OH (i,m) = (G_OH_up(i+1,m) - G_OH_up(i,m))*((t_step/n)/x_step);
-        C_total(i,m) = (D_H_upp*z_H*C_H(i,m) + D_A_upp*z_A*C_A(i,m) + D_C_upp*z_C*C_C(i,m) + D_HA_upp*z_H*C_HA(i,m) + D_Na_upp*z_Na*C_Na(i,m) + D_Cl_upp*z_Cl*C_Cl(i,m) + D_OH_upp*z_OH*C_OH(i,m));
+        C_total(i,m) = (D_H_less*z_H*C_H(i,m) + D_A_less*z_A*C_A(i,m) + D_C_less*z_C*C_C(i,m) + D_HA_less*z_H*C_HA(i,m) + D_Na_less*z_Na*C_Na(i,m) + D_Cl_less*z_Cl*C_Cl(i,m) + D_OH_less*z_OH*C_OH(i,m));
         
         i_z(i,m) = sigma_bar(i,m)*dphidx(i,m) - (1/Beta_calculated)*(C_total(i,m));
         
