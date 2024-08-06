@@ -225,6 +225,8 @@ beta_prime_A = coeff*u_t_A*(dt/2*dx);
 
 R_D = coeff*(dt)/n;              % Reaction rate Dimensionless factor
 
+% --- EKR Model
+
 % --- Create arrays to save data for export
 x_array = linspace(0,L,nx);
 t_array = linspace(0,tmax,nt);
@@ -367,10 +369,166 @@ for m= 1:nt-1
         
     end
 end
+% --- End of EKR Model
+
+% --- BKR Model
+
+G_OH_B = zeros(nx,nt);
+G_HA_B = zeros(nx,nt);
+G_Na_B = zeros(nx,nt);
+G_Cl_B = zeros(nx,nt);
+G_C_B = zeros(nx,nt);
+G_H_B = zeros(nx,nt);
+G_A_B = zeros(nx,nt);
+
+J_OH_B = zeros(nx,nt);
+J_HA_B = zeros(nx,nt);
+J_Na_B = zeros(nx,nt);
+J_Cl_B = zeros(nx,nt);
+J_C_B = zeros(nx,nt);
+J_H_B = zeros(nx,nt);
+J_A_B = zeros(nx,nt);
 
 
-G_C_TPH_plot = G_C*(MW/(rho*bolian));
+K_H2O_B = zeros(nx,nt);
+K_a_B = zeros(nx,nt);
+K_b_B = zeros(nx,nt);
 
+R_OH_B = zeros(nx,nt);
+R_HA_B = zeros(nx,nt);
+R_Na_B = zeros(nx,nt);
+R_Cl_B = zeros(nx,nt);
+R_C_B = zeros(nx,nt);
+R_H_B = zeros(nx,nt);
+R_A_B = zeros(nx,nt);
+
+
+Sigma_B = zeros(nx,nt);
+Sigma_ref_B = ones(nx,nt);
+sigma_ref_B = Sigma_ref_B*sigma_surface;
+
+i_z_B = zeros(nx, nt);
+
+s_H_B = zeros(nx,nt);
+s_C_B = zeros(nx,nt);
+s_OH_B = zeros(nx,nt);
+
+% --- Set IC and BC
+
+G_A_B(:,1)= 10000;
+J_A_B(1,:)= (u_c(1,:) + u_e_A(1,:))*10000;
+
+G_C_B(:,1)= 10000;
+J_C_B(1,:)= (u_c(1,:) + u_e_C(1,:))*10000;
+
+G_H_B(:,1)= 10000;
+J_H_B(1,:)= (u_c(1,:) + u_e_H(1,:))*10000;
+
+G_OH_B(:,1)= 10000;
+J_OH_B(1,:)= (u_c(1,:) + u_e_OH(1,:))*10000;
+
+G_HA_B(:,1)= 10000;
+J_HA_B(1,:)= (u_c(1,:) + u_e_HA(1,:))*10000;
+
+G_Na_B(:,1)= 10000;
+J_Na_B(1,:)= (u_c(1,:) + u_e_Na(1,:))*10000;
+
+G_Cl_B(:,1)= 10000;
+G_Cl_B(1,:)= (u_c(1,:) + u_e_Cl(1,:))*10000;
+
+
+R_OH_B(:,1) = R_i*coeff*(dt)/n;
+R_HA_B(:,1) = R_i*coeff*(dt)/n;
+R_Na_B(:,1) = R_i*coeff*(dt)/n;
+R_Cl_B(:,1) = R_i*coeff*(dt)/n;
+R_C_B(:,1) = R_i*coeff*(dt)/n;
+R_H_B(:,1) = R_i*coeff*(dt)/n;
+R_A_B(:,1) = R_i*coeff*(dt)/n;
+
+s_H_B(:,1) = (z_H^2)*v_H*G_H_B(:,1);
+s_OH_B(:,1) = (z_OH^2)*v_OH*G_OH_B(:,1);
+s_C_B(:,1) = (z_C^2)*v_C*G_C_B(:,1);
+Sigma_B(:,1) = (F^2)*(s_H_B(:,1) + s_OH_B(:,1) + s_C_B(:,1));
+
+for xx = 1:nx
+    for tt = 1:nt
+        M_g = exp(-K*(tt/1440)*(Z*(Beta/Pe)));
+        sub(xx,tt) = M_g;
+        fixup(xx,tt) = 1/(-0.01*(tt/1440) + 0.61);
+        %fixup(xx,tt) = 1/(-0.01*(tt/1440) + 0.61);
+    end
+end
+growth = sub.*fixup;
+
+for m= 1:nt-1
+
+    G_OH_B(1,m) = J_OH_B(1,m);   %--- Upper boundary
+    G_HA_B(1,m) = J_HA_B(1,m);   %--- Upper boundary
+    G_Na_B(1,m) = J_Na_B(1,m);   %--- Upper boundary
+    G_Cl_B(1,m) = J_Cl_B(1,m);   %--- Upper boundary
+    G_C_B(1,m) = J_C_B(1,m);     %--- Upper boundary
+    G_H_B(1,m) = J_H_B(1,m);     %--- Upper boundary
+    G_A_B(1,m) = J_A_B(1,m);     %--- Upper boundary
+    
+
+    for i= 2:nx-1
+
+        G_OH_B(i,m+1) = G_OH_B(i,m) + growth(i,m)*(alpha_prime_OH*(G_OH_B(i+1,m) -2*G_OH_B(i,m) + G_OH_B(i-1,m)) + beta_prime_OH(i,m)*(G_OH_B(i+1,m) - G_OH_B(i-1,m)) + R_OH_B(i,m)/R_D);
+        G_HA_B(i,m+1) = G_HA_B(i,m) + growth(i,m)*(alpha_prime_HA*(G_HA_B(i+1,m) -2*G_HA_B(i,m) + G_HA_B(i-1,m)) + beta_prime_HA(i,m)*(G_HA_B(i+1,m) - G_HA_B(i-1,m)) + R_HA_B(i,m)/R_D);
+        G_Na_B(i,m+1) = G_Na_B(i,m) + growth(i,m)*(alpha_prime_Na*(G_Na_B(i+1,m) -2*G_Na_B(i,m) + G_Na_B(i-1,m)) + beta_prime_Na(i,m)*(G_Na_B(i+1,m) - G_Na_B(i-1,m)) + R_Na_B(i,m)/R_D);
+        G_Cl_B(i,m+1) = G_Cl_B(i,m) + growth(i,m)*(alpha_prime_Cl*(G_Cl_B(i+1,m) -2*G_Cl_B(i,m) + G_Cl_B(i-1,m)) + beta_prime_Cl(i,m)*(G_Cl_B(i+1,m) - G_Cl_B(i-1,m)) + R_Cl_B(i,m)/R_D);        
+        G_C_B(i,m+1) = G_C_B(i,m) + growth(i,m)*(alpha_prime_C*(G_C_B(i+1,m) -2*G_C_B(i,m) + G_C_B(i-1,m)) + beta_prime_C(i,m)*(G_C_B(i+1,m) - G_C_B(i-1,m)) + R_C_B(i,m)/R_D);
+        G_H_B(i,m+1) = G_H_B(i,m) + growth(i,m)*(alpha_prime_H*(G_H_B(i+1,m) -2*G_H_B(i,m) + G_H_B(i-1,m)) + beta_prime_H(i,m)*(G_H_B(i+1,m) - G_H_B(i-1,m)) + R_H_B(i,m)/R_D);
+        G_A_B(i,m+1) = G_A_B(i,m) + growth(i,m)*(alpha_prime_A*(G_A_B(i+1,m) -2*G_A_B(i,m) + G_A_B(i-1,m)) + beta_prime_A(i,m)*(G_A_B(i+1,m) - G_A_B(i-1,m)) + R_A_B(i,m)/R_D);
+        
+        
+        J_OH_B(i,m) = (u_c(i,m) + u_e_OH(i,m))*G_OH_B(i,m) - alpha_prime_OH*(G_OH_B(i,m) - G_OH_B(i-1,m));
+        J_HA_B(i,m) = (u_c(i,m) + u_e_HA(i,m))*G_HA_B(i,m) - alpha_prime_HA*(G_HA_B(i,m) - G_HA_B(i-1,m));
+        J_Na_B(i,m) = (u_c(i,m) + u_e_Na(i,m))*G_Na_B(i,m) - alpha_prime_Na*(G_Na_B(i,m) - G_Na_B(i-1,m));
+        J_Cl_B(i,m) = (u_c(i,m) + u_e_Cl(i,m))*G_Cl_B(i,m) - alpha_prime_Cl*(G_Cl_B(i,m) - G_Cl_B(i-1,m));       
+        J_C_B(i,m) = (u_c(i,m) + u_e_C(i,m))*G_C_B(i,m) - alpha_prime_C*(G_C_B(i+1,m) - G_C_B(i,m));
+        J_H_B(i,m) = (u_c(i,m) + u_e_H(i,m))*G_H_B(i,m) - alpha_prime_H*(G_H_B(i+1,m) - G_H_B(i,m));
+        J_A_B(i,m) = (u_c(i,m) + u_e_A(i,m))*G_A_B(i,m) - alpha_prime_A*(G_A_B(i,m) - G_A_B(i-1,m));
+        
+        G_OH_B(end,m) = J_OH_B(i,m);    %--- Lower boundary
+        G_HA_B(end,m) = J_HA_B(i,m);    %--- Lower boundary
+        G_Na_B(end,m) = J_Na_B(i,m);    %--- Lower boundary
+        G_Cl_B(end,m) = J_Cl_B(i,m);    %--- Lower boundary
+        G_C_B(end,m) = J_C_B(i,m);      %--- Lower boundary
+        G_H_B(end,m) = J_H_B(i,m);      %--- Lower boundary
+        G_A_B(end,m) = J_A_B(i,m);      %--- Lower boundary
+        
+
+        s_H_B(i,m) = (z_H^2)*v_H*G_H_B(i,m);
+        s_OH_B(i,m) = (z_OH^2)*v_OH*G_OH_B(i,m);
+        s_C_B(i,m) = (z_C^2)*v_H*G_C_B(i,m);
+        Sigma_B(i,m) = (F^2)*(s_C_B(i,m) + s_H_B(i,m) + s_OH_B(i,m)) + Sigma_ref(i,m);
+        
+        i_z_B(i,m) = (-1*Sigma_B(i,m)*E_field(i,m) - F*((z_C*D_C*(G_C_B(i+1,m) - G_C(i-1,m))) + (z_H*D_H*(G_H_B(i+1,m) - G_H_B(i-1,m))) + (z_OH*D_OH*(G_OH_B(i+1,m) - G_OH_B(i-1,m)))))/(tau^2);
+        if i == 2
+            R_prime_H_B = i_z_B(i,m)/F;
+            R_H_B(i,m) = -1*R_prime_H_B;
+        end
+        if i == nx-1
+            R_prime_OH_B = i_z_B(i,m)/F;
+            R_OH_B(i,m) = -1*R_prime_OH_B;
+        end
+        K_H2O_B(i,m) = G_H_B(i,m)*G_OH_B(i,m);
+        K_a_B(i,m) = (G_H_B(i,m)*G_A_B(i,m))/G_HA_B(i,m);
+        K_b_B(i,m) = (G_B_B(i,m)*G_OH_B(i,m))/G_Na_B(i,m);
+        R_H_B(i,m) = (K_H2O(i,m)*G_H_B(i,m)) + (K_a(i,m)*G_HA_B(i,m));
+        R_OH_B(i,m) = (K_H2O(i,m)*G_OH_B(i,m)) + (K_b(i,m)*G_Na_B(i,m));
+        R_Cl_B(i,m) = (K_b(i,m)*G_Na_B(i,m));
+        R_A_B(i,m) = (K_a(i,m)*G_HA_B(i,m));
+        R_C_B(i,m) = R_i*coeff*(dt)/n;
+        
+    end
+end
+
+
+% TPH conversion
+G_C_TPH_EKR = G_C*(MW/(rho*bolian));
+G_C_TPH_BKR = G_C_B*(MW/(rho*bolian));
 
 pH = log10(G_H);
 %pH_B = log10(G_H_B);
@@ -381,7 +539,8 @@ yl = [10000,7900,7100,6000,5700,5500,5400,5100];
 figure(1);
 hold on;
 
-plot(t_array,G_C_TPH_plot(10,:),'-','DisplayName', 'Hydrocarbon (EKR)');
+plot(t_array,G_C_TPH_EKR(10,:),'-','DisplayName', 'Hydrocarbon (EKR)');
+plot(t_array,G_C_TPH_BKR(10,:),'-','DisplayName', 'Hydrocarbon (BKR)');
 
 scatter(xl,yl, 'DisplayName', 'Expriment Data');
 
