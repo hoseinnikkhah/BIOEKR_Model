@@ -29,7 +29,7 @@ M = linspace(V,0,nx);
 for timestep = 1:nt
     E_field(:,timestep) = M;
 end
-
+E_field_less = E_field/(V-V_end);
 E_field_dx = E_field/L;        % Electric field in lenght [V/m]
 
 % Global Physical info
@@ -89,7 +89,7 @@ D_A = D_A_less*D0;        % Acid Agent
 D_H = D_H_less*D0;        % H+
 D_C = D_C_less*D0;        % Carbon
 
-% Mobility (Normal)      % [s·mol/kg]
+% Mobility (Normal)       % [s·mol/kg]
 v_HA = D_HA/(R*T);
 v_A = D_A/(R*T);
 v_Na = D_Na/(R*T);
