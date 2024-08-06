@@ -144,7 +144,7 @@ u_e_C_less = (-1/Z_calculated)*D_C_less*z_C*dphidx;
 
 
 % Convection velocity          [m/s]
-u_x = (epsilon/mu_a)*(zeta*E_field);
+u_x = (epsilon/mu_a)*(zeta*E_field_dx);
 
 % Convection velocity (itself)
 u_c = u_x/((tau^2)*10^19);
