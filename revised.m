@@ -270,25 +270,25 @@ R_A = zeros(nx,nt);
 % --- Set IC and BC
 
 G_OH(:,1)= 10000;
-J_OH(1,:)= (u_c_ekr(1,:) + u_e_OH(1,:))*10000;
+J_OH(1,:)= (u_c_ekr(1,:) + u_e_OH(1,:))*c_0;
 
 G_HA(:,1)= 10000;
-J_HA(1,:)= (u_c_ekr(1,:) + u_e_HA(1,:))*10000;
+J_HA(1,:)= (u_c_ekr(1,:) + u_e_HA(1,:))*c_0;
 
 G_Na(:,1)= 10000;
-J_Na(1,:)= (u_c_ekr(1,:) + u_e_Na(1,:))*10000;
+J_Na(1,:)= (u_c_ekr(1,:) + u_e_Na(1,:))*c_Na;
 
 G_Cl(:,1)= 10000;
-J_Cl(1,:)= (u_c_ekr(1,:) + u_e_Cl(1,:))*10000;
+J_Cl(1,:)= (u_c_ekr(1,:) + u_e_Cl(1,:))*c_Cl;
 
 G_C(:,1)= 10000;
-J_C(1,:)= (u_c_ekr(1,:) + u_e_C(1,:))*10000;
+J_C(1,:)= (u_c_ekr(1,:) + u_e_C(1,:))*c_C;
 
 G_H(:,1)= 10000;
-J_H(1,:)= (u_c_ekr(1,:) + u_e_H(1,:))*10000;
+J_H(1,:)= (u_c_ekr(1,:) + u_e_H(1,:))*c_0;
 
 G_A(:,1)= 10000;
-J_A(1,:)= (u_c_ekr(1,:) + u_e_A(1,:))*10000;
+J_A(1,:)= (u_c_ekr(1,:) + u_e_A(1,:))*c_0;
 
 R_OH(:,1) = R_i*(dt)/n;
 R_HA(:,1) = R_i*(dt)/n;
@@ -367,6 +367,10 @@ for m= 1:nt-1
         
     end
 end
+
+
+G_C_TPH_plot = G_C*(MW/(rho*bolian));
+
 
 pH = log10(G_H);
 %pH_B = log10(G_H_B);
