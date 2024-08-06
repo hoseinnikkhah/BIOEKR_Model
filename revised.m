@@ -179,7 +179,7 @@ rho = 1760;                              % [kg/(m3)]
 bolian = 10^-3;                          % [g/mg]
 c_C = ((c_C_TPH*rho*bolian)/MW);         % [mol/m3]
 
-Debye = sqrt((epsilon*T)/(2*F*(z^2)*c_C));          % Debye length
+Debye = sqrt((epsilon*T)/(2*F*(z_C^2)*c_C));        % Debye length (for Carbon)
 recip = 1/Debye;                                    % reciprocal of the Debye length
 
 k_eo = (epsilon*zeta)/(mu_solution*epsilon_oil);    % Electroosmotic mobility [m^2/V.s] Based on epsilon of both crude oil and clay, might be true form
