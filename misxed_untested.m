@@ -34,13 +34,12 @@ for timestep = 1:nt
     E_field(:,timestep) = M;
 end
 
-
 % Dimensionless Voltage     [Dimentionless]
 phi_bar = E_field/(V-V_end);
 dphidx = phi_bar./x_less;
 
-
-E_field_dx = E_field/L;        % Electric field in lenght [V/m]
+% Voltage gradient          [V/m]
+E_field_dx = E_field/L;
 
 % Global Physical info
 T = 25 + 273;                  % Tempature [K]
