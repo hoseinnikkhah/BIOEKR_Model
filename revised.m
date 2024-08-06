@@ -6,7 +6,6 @@ nt = 50401;                     % number of time steps
 dx = L/(nx-1);
 dt = tmax/(nt-1);
 
-
 % Physical info
 T = 25 + 273;                   % Temperature [K]
 R = 8.314;                      % Gas constant [J/mol.K]
