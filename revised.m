@@ -163,6 +163,25 @@ epsilon_calculated = e_0*e_r;                       % permittivity of clay [F/m]
 epsilon_oil = 2.2;                                  % Crude oil permittivity [F/m]
 
 
+% Initial concentration        [mol/m3]
+c_0 = 500; 
+c_p = 200;
+c_Na = c_p;
+c_Cl = c_Na;
+
+% Initial Hydrocarbon concentration        [mg/kg]
+c_C_TPH = 10000;
+
+% Hydrocarbon properties
+API = 29.6;
+MW = (6048/(API-5.9));                   % [g/mol]
+rho = 1760;                              % [kg/(m3)]
+bolian = 10^-3;                          % [g/mg]
+c_C = ((c_C_TPH*rho*bolian)/MW);         % [mol/m3]
+
+Debye = sqrt((epsilon*T)/(2*F*(z^2)*c_C));          % Debye length
+recip = 1/Debye;                                    % reciprocal of the Debye length
+
 k_eo = (epsilon*zeta)/(mu_solution*epsilon_oil);    % Electroosmotic mobility [m^2/V.s] Based on epsilon of both crude oil and clay, might be true form
 k_eo1 = (e_0*zeta*recip)/(mu_solution*(1-n)*(n^3)); % Electroosmotic mobility [m^2/V.s] Based on debye
 k_eo2 = ((-7*10^-10)*zeta*n)/(mu_solution*(tau^2)); % Electroosmotic mobility [m^2/V.s] Based on a journal (exact one)
