@@ -515,7 +515,7 @@ for m= 1:nt-1
         end
         K_H2O_B(i,m) = G_H_B(i,m)*G_OH_B(i,m);
         K_a_B(i,m) = (G_H_B(i,m)*G_A_B(i,m))/G_HA_B(i,m);
-        K_b_B(i,m) = (G_B_B(i,m)*G_OH_B(i,m))/G_Na_B(i,m);
+        K_b_B(i,m) = (G_Cl_B(i,m)*G_Na_B(i,m))/G_Na_B(i,m);
         R_H_B(i,m) = (K_H2O(i,m)*G_H_B(i,m)) + (K_a(i,m)*G_HA_B(i,m));
         R_OH_B(i,m) = (K_H2O(i,m)*G_OH_B(i,m)) + (K_b(i,m)*G_Na_B(i,m));
         R_Cl_B(i,m) = (K_b(i,m)*G_Na_B(i,m));
