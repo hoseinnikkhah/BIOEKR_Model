@@ -71,7 +71,7 @@ Beta = 967;
 Z = 0.049;
 k_0 = K_a;
 
-% Valency            [Dimentionless]
+% Valency           [Dimentionless]
 z_HA = 0;
 z_OH =-1;
 z_Na = 1;
@@ -87,7 +87,7 @@ D_Na_less = 1.34;         % Na+
 D_Cl_less = 2.05;         % Cl-
 D_A_less = 1.2;           % Acid Agent
 D_H_less = 9.35;          % H+
-D_C_less = 2.00;          % Carbon
+D_C_less = 2.09;          % Carbon
 
 % Species diffusivities (Normal)    [m2/s]
 D_HA = D_HA_less*D0;      % Acetic Acid
