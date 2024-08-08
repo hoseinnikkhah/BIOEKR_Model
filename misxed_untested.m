@@ -107,7 +107,7 @@ v_H = D_H/(R*T);
 v_OH = D_OH/(R*T);
 v_C = D_C/(R*T);
 
-% Mobility (remapped)      % [s·mol/kg]
+% Mobility (remapped)      % [s·mol/kg]  $$$
 v_HA_less = D_HA_less/(R*T);
 v_A_less = D_A_less/(R*T);
 v_Na_less = D_Na_less/(R*T);
@@ -117,13 +117,13 @@ v_OH_less = D_OH_less/(R*T);
 v_C_less = D_C_less/(R*T);
 
 % Electroelectromigration velocity (Normal)     [m/s]
-u_e_HA = -v_HA*z_HA*F*E_field*(1/tau^2);
-u_e_OH = -v_OH*z_OH*F*E_field*(1/tau^2);
-u_e_Na = -v_Na*z_Na*F*E_field*(1/tau^2);
-u_e_Cl = -v_Cl*z_Cl*F*E_field*(1/tau^2);
-u_e_A = -v_A*z_A*F*E_field*(1/tau^2);
-u_e_H = -v_H*z_H*F*E_field*(1/tau^2);
-u_e_C = -v_C*z_C*F*E_field*(1/tau^2);
+u_e_HA = -v_HA*z_HA*F*E_field_dx*(1/tau^2);
+u_e_OH = -v_OH*z_OH*F*E_field_dx*(1/tau^2);
+u_e_Na = -v_Na*z_Na*F*E_field_dx*(1/tau^2);
+u_e_Cl = -v_Cl*z_Cl*F*E_field_dx*(1/tau^2);
+u_e_A = -v_A*z_A*F*E_field_dx*(1/tau^2);
+u_e_H = -v_H*z_H*F*E_field_dx*(1/tau^2);
+u_e_C = -v_C*z_C*F*E_field_dx*(1/tau^2);
 
 
 % Dimentionless Calculated     [Dimentionless]
