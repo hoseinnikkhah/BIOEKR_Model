@@ -118,30 +118,21 @@ v_C_less = D_C_less/(R*T);
 
 % Electroelectromigration velocity (Normal)     [m/s]
 u_e_HA = -v_HA*z_HA*F*E_field*(1/tau^2);
-u_e_A = -v_A*z_A*F*E_field*(1/tau^2);
+u_e_OH = -v_OH*z_OH*F*E_field*(1/tau^2);
 u_e_Na = -v_Na*z_Na*F*E_field*(1/tau^2);
 u_e_Cl = -v_Cl*z_Cl*F*E_field*(1/tau^2);
+u_e_A = -v_A*z_A*F*E_field*(1/tau^2);
 u_e_H = -v_H*z_H*F*E_field*(1/tau^2);
-u_e_OH = -v_OH*z_OH*F*E_field*(1/tau^2);
 u_e_C = -v_C*z_C*F*E_field*(1/tau^2);
 
-% Refrence velocity                             [m/s]
-u_0 = (1/tau^2)*((epsilon*zeta_0)/mu_a)*(V/L);
 
 % Dimentionless Calculated     [Dimentionless]
 Peclet_calculated = (epsilon*zeta_0*V)/(mu_a*D0);
 Beta_calculated = (F*V)/(R*T);
 Z_calculated = (R*T*epsilon*zeta_0)/(D0*F*mu_a);
 
-% Electroelectromigration velocity (remapped)        [Dimentionless]
-u_e_HA_less = (-1/Z_calculated)*D_HA_less*z_HA*dphidx;
-u_e_A_less = (-1/Z_calculated)*D_A_less*z_A*dphidx;
-u_e_Na_less = (-1/Z_calculated)*D_Na_less*z_Na*dphidx;
-u_e_Cl_less = (-1/Z_calculated)*D_Cl_less*z_Cl*dphidx;
-u_e_H_less = (-1/Z_calculated)*D_H_less*z_H*dphidx;
-u_e_OH_less = (-1/Z_calculated)*D_OH_less*z_OH*dphidx;
-u_e_C_less = (-1/Z_calculated)*D_C_less*z_C*dphidx;
-
+% Refrence velocity            [m/s]
+u_0 = (1/tau^2)*((epsilon*zeta_0)/mu_a)*(V/L);
 
 % Convection velocity          [m/s]
 u_eo = ((epsilon*zeta)/mu_a)*E_field_dx;
@@ -152,6 +143,15 @@ u_x = (epsilon/mu_a)*(zeta*E_field_dx);
 u_c = u_x/((tau^2)*10^19);
 
 u_c_up = -((zeta/zeta_0)*dphidx)*10^-18;
+
+% Electroelectromigration velocity (remapped)        [Dimentionless]
+u_e_HA_less = (-1/Z_calculated)*D_HA_less*z_HA*dphidx;
+u_e_OH_less = (-1/Z_calculated)*D_OH_less*z_OH*dphidx;
+u_e_Na_less = (-1/Z_calculated)*D_Na_less*z_Na*dphidx;
+u_e_Cl_less = (-1/Z_calculated)*D_Cl_less*z_Cl*dphidx;
+u_e_A_less = (-1/Z_calculated)*D_A_less*z_A*dphidx;
+u_e_H_less = (-1/Z_calculated)*D_H_less*z_H*dphidx;
+u_e_C_less = (-1/Z_calculated)*D_C_less*z_C*dphidx;
 
 % Toatal velocity term (Normal)
 u_t_HA = (u_e_HA + u_c);
