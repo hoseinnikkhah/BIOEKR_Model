@@ -145,6 +145,10 @@ u_c2 = u_x/((tau^2));
 u_c_up = -((zeta/zeta_0)*dphidx);
 u_c_up1 = u_c/u_0;
 
+% Testing new abberation
+u_c_up1 = u_c_up1*10^-19;
+u_c_up = u_c_up*10^-19;
+
 % Electroelectromigration velocity (1st)  [Dimentionless]
 u_e_HA_less = (-1/Z_calculated)*D_HA_less*z_HA*dphidx;
 u_e_OH_less = (-1/Z_calculated)*D_OH_less*z_OH*dphidx;
@@ -154,7 +158,7 @@ u_e_A_less = (-1/Z_calculated)*D_A_less*z_A*dphidx;
 u_e_H_less = (-1/Z_calculated)*D_H_less*z_H*dphidx;
 u_e_C_less = (-1/Z_calculated)*D_C_less*z_C*dphidx;
 
-% Electroelectromigration velocity (12nd)  [Dimentionless]
+% Electroelectromigration velocity (2nd)  [Dimentionless]
 u_e_HA_less1 = u_e_HA/u_0;
 u_e_OH_less1 = u_e_OH/u_0;
 u_e_Na_less1 = u_e_Na/u_0;
@@ -166,21 +170,30 @@ u_e_C_less1 = u_e_C/u_0;
 
 % Toatal velocity term (Normal)
 u_t_HA = (u_e_HA + u_c);
-u_t_A = (u_e_A + u_c);
+u_t_OH = (u_e_OH + u_c);
 u_t_Na = (u_e_Na + u_c);
 u_t_Cl = (u_e_Cl + u_c);
 u_t_H = (u_e_H + u_c);
-u_t_OH = (u_e_OH + u_c);
+u_t_A = (u_e_A + u_c);
 u_t_C = (u_e_C + u_c);
 
-% Toatal velocity term (Rmapped)
+% Toatal velocity term (1st)
 u_t_HA_up = (u_e_HA_less + u_c_up);
-u_t_A_up = (u_e_A_less + (u_c_up));
+u_t_OH_up = (u_e_OH_less + u_c_up);
 u_t_Na_up = (u_e_Na_less + u_c_up);
 u_t_Cl_up = (u_e_Cl_less + u_c_up);
-u_t_H_up = (u_e_H_less + u_c_up)*10^-5;
-u_t_OH_up = (u_e_OH_less + u_c_up);
-u_t_C_up = -(u_e_C_less + u_c_up)*10^-1;
+u_t_A_up = (u_e_A_less + u_c_up);
+u_t_H_up = (u_e_H_less + u_c_up);
+u_t_C_up = (u_e_C_less + u_c_up);
+
+% Toatal velocity term (2nd)
+u_t_HA_up1 = (u_e_HA_less1 + u_c_up1);
+u_t_OH_up1 = (u_e_OH_less1 + u_c_up1);
+u_t_Na_up1 = (u_e_Na_less1 + u_c_up1);
+u_t_Cl_up1 = (u_e_Cl_less1 + u_c_up1);
+u_t_A_up1 = (u_e_A_less1 + u_c_up1);
+u_t_H_up1 = (u_e_H_less1 + u_c_up1);
+u_t_C_up1 = (u_e_C_less1 + u_c_up1);
 
 % Initial concentration        [mol/m3]
 c_0 = 500; 
