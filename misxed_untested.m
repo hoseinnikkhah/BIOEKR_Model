@@ -125,7 +125,6 @@ u_e_A = -v_A*z_A*F*E_field_dx*(1/tau^2);
 u_e_H = -v_H*z_H*F*E_field_dx*(1/tau^2);
 u_e_C = -v_C*z_C*F*E_field_dx*(1/tau^2);
 
-
 % Dimentionless Calculated     [Dimentionless]
 Peclet_calculated = (epsilon*zeta_0*V)/(mu_a*D0);
 Beta_calculated = (F*V)/(R*T);
@@ -144,7 +143,7 @@ u_c = u_x/((tau^2)*10^19);
 
 u_c_up = -((zeta/zeta_0)*dphidx)*10^-18;
 
-% Electroelectromigration velocity (remapped)        [Dimentionless]
+% Electroelectromigration velocity (1st)  [Dimentionless]
 u_e_HA_less = (-1/Z_calculated)*D_HA_less*z_HA*dphidx;
 u_e_OH_less = (-1/Z_calculated)*D_OH_less*z_OH*dphidx;
 u_e_Na_less = (-1/Z_calculated)*D_Na_less*z_Na*dphidx;
@@ -152,6 +151,15 @@ u_e_Cl_less = (-1/Z_calculated)*D_Cl_less*z_Cl*dphidx;
 u_e_A_less = (-1/Z_calculated)*D_A_less*z_A*dphidx;
 u_e_H_less = (-1/Z_calculated)*D_H_less*z_H*dphidx;
 u_e_C_less = (-1/Z_calculated)*D_C_less*z_C*dphidx;
+
+% Electroelectromigration velocity (1st)  [Dimentionless]
+u_e_HA_less = u_e_HA/u_0;
+u_e_OH_less = u_e_OH/u_0;
+u_e_Na_less = u_e_Na/u_0;
+u_e_Cl_less = u_e_Cl/u_0;
+u_e_A_less = u_e_A/u_0;
+u_e_H_less = u_e_H/u_0;
+u_e_C_less = u_e_C/u_0;
 
 % Toatal velocity term (Normal)
 u_t_HA = (u_e_HA + u_c);
