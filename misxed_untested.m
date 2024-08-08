@@ -223,6 +223,8 @@ alpha = u_0/(c_0*k_0);
 x_array = linspace(0,L,nx);
 t_array = linspace(0,tmax,nt);
 
+
+% --- Start of EKR (defualt)
 % Flux arrays
 J_HA = zeros(nx,nt);
 J_OH = zeros(nx,nt);
@@ -274,11 +276,11 @@ sum_C = zeros(nx,nt);
 sum_total = zeros(nx,nt);
 
 C_HA = zeros(nx,nt);
-C_A = zeros(nx,nt);
+C_OH = zeros(nx,nt);
 C_Na = zeros(nx,nt);
 C_Cl = zeros(nx,nt);
+C_A = zeros(nx,nt);
 C_H = zeros(nx,nt);
-C_OH = zeros(nx,nt);
 C_C = zeros(nx,nt);
 C_total = zeros(nx,nt);
 
@@ -294,54 +296,54 @@ K_b_m = K_b_m*K_b;
 
 % Rate arrays
 R_HA = zeros(nx,nt);
-R_A = zeros(nx,nt);
+R_OH = zeros(nx,nt);
 R_Na = zeros(nx,nt);
 R_Cl = zeros(nx,nt);
+R_A = zeros(nx,nt);
 R_H = zeros(nx,nt);
-R_OH = zeros(nx,nt);
 R_C = zeros(nx,nt);
 
 %Adsorbed Rate arrays
 R_HA_ads = zeros(nx,nt);
-R_A_ads = zeros(nx,nt);
+R_OH_ads = zeros(nx,nt);
 R_Na_ads = zeros(nx,nt);
 R_Cl_ads = zeros(nx,nt);
+R_A_ads = zeros(nx,nt);
 R_H_ads = zeros(nx,nt);
-R_OH_ads = zeros(nx,nt);
 R_C_ads = zeros(nx,nt);
 
 % --- Set IC and BC
 G_HA(:,1) = c_0;
-G_A(:,1) = c_0;
+G_OH(:,1) = c_0;
 G_Na(:,1) = c_Na;
 G_Cl(:,1) = c_Cl;
+G_A(:,1) = c_0;
 G_H(:,1) = c_0;
-G_OH(:,1) = c_0;
 G_C(:,1) = c_C;
 
 G_HA_up(:,1) = G_HA(:,1)/c_0;
-G_A_up(:,1) = G_A(:,1)/c_0;
+G_OH_up(:,1) = G_OH(:,1)/c_0;
 G_Na_up(:,1) = G_Na(:,1)/c_Na;
 G_Cl_up(:,1) = G_Cl(:,1)/c_Cl;
+G_A_up(:,1) = G_A(:,1)/c_0;
 G_H_up(:,1) = G_H(:,1)/c_0;
-G_OH_up(:,1) = G_OH(:,1)/c_0;
 G_C_up(:,1) = G_C(:,1)/c_C;
 
 G_HA_ads(:,1) = K_ads*c_0;
-G_A_ads(:,1) = K_ads*c_0;
+G_OH_ads(:,1) = K_ads*c_0;
 G_Na_ads(:,1) = K_ads*c_Na;
 G_Cl_ads(:,1) = K_ads*c_Cl;
+G_A_ads(:,1) = K_ads*c_0;
 G_H_ads(:,1) = K_ads*c_0;
-G_OH_ads(:,1) = K_ads*c_0;
 G_C_ads(:,1) = K_ads*c_C;
 
 % Fixing alpha advection
 alpha_HA = (D_HA/(tau^2))*10^5;
-alpha_A = (D_A/(tau^2))*10^5;
+alpha_OH = (D_OH/(tau^2))*10^5;
 alpha_Na = (D_Na/(tau^2))*10^5;
 alpha_Cl = (D_Cl/(tau^2))*10^5;
+alpha_A = (D_A/(tau^2))*10^5;
 alpha_H = (D_H/(tau^2))*10^5;
-alpha_OH = (D_OH/(tau^2))*10^5;
 alpha_C = (D_C/(tau^2))*10^5;
 
 for m=1:nt-1
@@ -366,6 +368,7 @@ for m=1:nt-1
 
     G_C_up(1,m) = u_t_C_up(1,m);
     G_C_up(end,m) = 0;
+    
     % ---
     G_HA_ads(1,m) = u_t_H(1,m)*c_0;
     G_HA_ads(end,m) = 0;
