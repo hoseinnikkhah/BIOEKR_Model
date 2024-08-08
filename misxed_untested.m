@@ -67,8 +67,8 @@ coeff = 1/(1+K_ads);
 
 % Dimentionless     [Dimentionless]
 Peclet = 47;
-Z = 0.049;
 Beta = 967;
+Z = 0.049;
 k_0 = K_a;
 
 % Valency            [Dimentionless]
@@ -146,8 +146,9 @@ u_c_up = -((zeta/zeta_0)*dphidx);
 u_c_up1 = u_c/u_0;
 
 % Testing new abberation
-u_c_up1 = u_c_up1*10^-19;
-u_c_up = u_c_up*10^-19;
+u_c = u_c*10^-18;
+u_c_up1 = u_c_up1*10^-18;
+u_c_up = u_c_up*10^-18;
 
 % Electroelectromigration velocity (1st)  [Dimentionless]
 u_e_HA_less = (-1/Z_calculated)*D_HA_less*z_HA*dphidx;
