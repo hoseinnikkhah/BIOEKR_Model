@@ -225,38 +225,38 @@ t_array = linspace(0,tmax,nt);
 
 % Flux arrays
 J_HA = zeros(nx,nt);
-J_A = zeros(nx,nt);
+J_OH = zeros(nx,nt);
 J_Na = zeros(nx,nt);
 J_Cl = zeros(nx,nt);
+J_A = zeros(nx,nt);
 J_H = zeros(nx,nt);
-J_OH = zeros(nx,nt);
 J_C = zeros(nx,nt);
 
 % concentration arrays
 G_HA = zeros(nx,nt);
-G_A = zeros(nx,nt);
+G_OH = zeros(nx,nt);
 G_Na = zeros(nx,nt);
 G_Cl = zeros(nx,nt);
+G_A = zeros(nx,nt);
 G_H = zeros(nx,nt);
-G_OH = zeros(nx,nt);
 G_C = zeros(nx,nt);
 
 % concentration arrays [remapped]
 G_HA_up = zeros(nx,nt);
-G_A_up = zeros(nx,nt);
+G_OH_up = zeros(nx,nt);
 G_Na_up = zeros(nx,nt);
 G_Cl_up = zeros(nx,nt);
+G_A_up = zeros(nx,nt);
 G_H_up = zeros(nx,nt);
-G_OH_up = zeros(nx,nt);
 G_C_up = zeros(nx,nt);
 
 % adsorbed concentration arrays [remapped]
 G_HA_ads = zeros(nx,nt);
-G_A_ads = zeros(nx,nt);
+G_OH_ads = zeros(nx,nt);
 G_Na_ads = zeros(nx,nt);
 G_Cl_ads = zeros(nx,nt);
+G_A_ads = zeros(nx,nt);
 G_H_ads = zeros(nx,nt);
-G_OH_ads = zeros(nx,nt);
 G_C_ads = zeros(nx,nt);
 
 % Current array
@@ -265,11 +265,11 @@ i_z = zeros(nx, nt);
 % Sigma array
 sigma_bar = zeros(nx,nt);
 sum_HA = zeros(nx,nt);
-sum_A = zeros(nx,nt);
+sum_OH = zeros(nx,nt);
 sum_Na = zeros(nx,nt);
 sum_Cl = zeros(nx,nt);
-sum_H = zeros(nx,nt);
-sum_OH = zeros(nx,nt);
+sum_A = zeros(nx,nt);
+sum_H = zeros(nx,nt)
 sum_C = zeros(nx,nt);
 sum_total = zeros(nx,nt);
 
