@@ -271,7 +271,7 @@ sum_OH = zeros(nx,nt);
 sum_Na = zeros(nx,nt);
 sum_Cl = zeros(nx,nt);
 sum_A = zeros(nx,nt);
-sum_H = zeros(nx,nt)
+sum_H = zeros(nx,nt);
 sum_C = zeros(nx,nt);
 sum_total = zeros(nx,nt);
 
