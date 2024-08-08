@@ -138,10 +138,12 @@ u_eo = ((epsilon*zeta)/mu_a)*E_field_dx;
 u_x = (epsilon/mu_a)*(zeta*E_field_dx);
 
 % Convection velocity (itself)
-%u_c = (1/tau^2)*(epsilon/mu_a)*(zeta*E_field_dx);
-u_c = u_x/((tau^2)*10^19);
+u_c = (1/tau^2)*(epsilon/mu_a)*(zeta*E_field_dx);
+u_c2 = u_x/((tau^2));
+% both are same and are here for assumptions
 
-u_c_up = -((zeta/zeta_0)*dphidx)*10^-18;
+u_c_up = -((zeta/zeta_0)*dphidx);
+u_c_up1 = u_c/u_0;
 
 % Electroelectromigration velocity (1st)  [Dimentionless]
 u_e_HA_less = (-1/Z_calculated)*D_HA_less*z_HA*dphidx;
@@ -152,14 +154,15 @@ u_e_A_less = (-1/Z_calculated)*D_A_less*z_A*dphidx;
 u_e_H_less = (-1/Z_calculated)*D_H_less*z_H*dphidx;
 u_e_C_less = (-1/Z_calculated)*D_C_less*z_C*dphidx;
 
-% Electroelectromigration velocity (1st)  [Dimentionless]
-u_e_HA_less = u_e_HA/u_0;
-u_e_OH_less = u_e_OH/u_0;
-u_e_Na_less = u_e_Na/u_0;
-u_e_Cl_less = u_e_Cl/u_0;
-u_e_A_less = u_e_A/u_0;
-u_e_H_less = u_e_H/u_0;
-u_e_C_less = u_e_C/u_0;
+% Electroelectromigration velocity (12nd)  [Dimentionless]
+u_e_HA_less1 = u_e_HA/u_0;
+u_e_OH_less1 = u_e_OH/u_0;
+u_e_Na_less1 = u_e_Na/u_0;
+u_e_Cl_less1 = u_e_Cl/u_0;
+u_e_A_less1 = u_e_A/u_0;
+u_e_H_less1 = u_e_H/u_0;
+u_e_C_less1 = u_e_C/u_0;
+% These two need tests as they are different as result there are two total flux
 
 % Toatal velocity term (Normal)
 u_t_HA = (u_e_HA + u_c);
