@@ -423,7 +423,7 @@ for m=1:nt-1
         G_Cl_up(i,m+1) = G_Cl_up(i,m) + (D_Cl_less/(Peclet_calculated))*((G_Cl_up(i+1,m) -2*G_Cl_up(i,m) + G_Cl_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_Cl_up(i+1,m) - u_t_Cl_up(i,m))*((t_step/n)/x_step)) * ((G_Cl_up(i+1,m) - G_Cl_up(i,m))*((t_step/n)/x_step)));
         G_OH_up(i,m+1) = G_OH_up(i,m) + (D_OH_less/(Peclet_calculated))*((G_OH_up(i+1,m) -2*G_OH_up(i,m) + G_OH_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_OH_up(i+1,m) - u_t_OH_up(i,m))*((t_step/n)/x_step)) * ((G_OH_up(i+1,m) - G_OH_up(i,m))*((t_step/n)/x_step)));
         G_A_up(i,m+1) = G_A_up(i,m) + (D_A_less/(Peclet_calculated))*((G_A_up(i+1,m) -2*G_A_up(i,m) + G_A_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_A_up(i+1,m) - u_t_A_up(i,m))*((t_step/n)/x_step)) * ((G_A_up(i+1,m) - G_A_up(i,m))*((t_step/n)/x_step)));
-        G_H_up(i,m+1) = G_H_up(i,m) + (D_H_less/(Peclet_calculated))*((G_H_up(i+1,m) -2*G_H_up(i,m) + G_H_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_H_up(i+1,m) - u_t_H_up(i,m))*((t_step/n)/x_step)) * ((G_H_up(i+1,m) - G_H_up(i,m))*((t_step/n)/x_step))) + (1/alpha(i,m+1))*R_H(i,m+1);        
+        G_H_up(i,m+1) = G_H_up(i,m) + (D_H_less/(Peclet_calculated))*((G_H_up(i+1,m) -2*G_H_up(i,m) + G_H_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_H_up(i+1,m) - u_t_H_up(i,m))*((t_step/n)/x_step)) * ((G_H_up(i+1,m) - G_H_up(i,m))*((t_step/n)/x_step)));        
         G_C_up(i,m+1) = G_C_up(i,m) + (D_C_less/(Peclet_calculated))*((G_C_up(i+1,m) -2*G_C_up(i,m) + G_C_up(i-1,m))*((t_step/n)/(x_step^2))) - (((u_t_C_up(i+1,m) - u_t_C_up(i,m))*((t_step/n)/x_step)) * ((G_C_up(i+1,m) - G_C_up(i,m))*((t_step/n)/x_step)));
          
         
