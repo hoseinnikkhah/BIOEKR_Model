@@ -122,6 +122,15 @@ D_A = D_A_less*D0;        % Acid Agent
 D_H = D_H_less*D0;        % H+
 D_C = D_C_less*D0;        % Carbon
 
+% Species diffusivities (Normal)    [m2/day]      
+D_HA = D_HA*24*3600;      % Acetic Acid
+D_OH = D_OH*24*3600;      % OH-
+D_Na = D_Na*24*3600;      % Na+
+D_Cl = D_Cl*24*3600;      % Cl-
+D_A = D_A*24*3600;        % Acid Agent
+D_H = D_H*24*3600;        % H+
+D_C = D_C*24*3600;        % Carbon
+
 % $$$
 % Mobility (Normal)       % [s·mol/kg]
 v_HA = D_HA/(R*T);
@@ -417,7 +426,7 @@ for m=1:nt-1
     G_A(1,m) = u_t_A(1,m)*c_0;
     G_A(end,m) = 0;
 
-    G_H(1,m) = c_0;
+    G_H(1,m) = u_t_H(1,m)*c_0;
     G_H(end,m) = 0;        
 
     G_C(1,m) = u_t_C(1,m)*c_C;
@@ -431,7 +440,7 @@ for m=1:nt-1
         G_A(i,m+1) = G_A(i,m) + ((D_A*h2)/tau^2)*(G_A(i+1,m) -2*G_A(i,m) + G_A(i-1,m)) - h1*((u_t_A(i+1,m) - u_t_A(i,m))*(G_A(i+1,m) - G_A(i,m)));
         G_H(i,m+1) = G_H(i,m) + ((D_H*h2)/tau^2)*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) - h1*((u_t_H(i+1,m) - u_t_H(i,m))*(G_H(i+1,m) - G_H(i,m)));
         G_C(i,m+1) = G_C(i,m) + ((D_C*h2)/tau^2)*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C(i+1,m) - G_C(i,m)));
-
+        
     end
 end
 % Convert concentration to mol/m3
