@@ -7,28 +7,32 @@
 % These comments will be held on top and end of each section
 % ---
 
-
-% Geomesh info                 $$$
+% $$$
+% Geomesh info
 L = 0.4;                       % length of domain in x direction [m]
 
-% Nodes                        $$$
+% $$$
+% Nodes
 tmax = 35;                     % end time [day]
 nx = 41;                       % number of nodes in x direction
 nt = 50401;                    % number of time steps
 dx = L/(nx-1);
 dt = tmax/(nt-1);
 
+% $$$
 % Refrence x directions        [m]      $$$
 x = (10^-5:dx:(nx)*dx);
 x = transpose(x);
 x_ref = repmat(x,1,nt);
 
+% !!!
 % Refrence t directions        [day]
 t = (0:dt:(nt-1)*dt);
 t_ref = repmat(t,nx,1);
 t_up = t_ref/tmax;
 t_step = t_up(1,2) - t_up(1,1);
 
+% $$$
 % Dimensionless x directions
 x_less = x_ref/L;
 x_step = 0.250;
@@ -45,7 +49,7 @@ for timestep = 1:nt
     E_field(:,timestep) = M;
 end
 
-% $$$
+% ###
 % Setting inital value at t=0 and for all z (or x)
 E_field(:,1) = (V-V_end);
 
@@ -148,7 +152,7 @@ u_e_A = -v_A*z_A*F*E_field_dx*(1/tau^2);
 u_e_H = -v_H*z_H*F*E_field_dx*(1/tau^2);
 u_e_C = -v_C*z_C*F*E_field_dx*(1/tau^2);
 
-
+% $$$
 % Dimentionless Calculated     [Dimentionless]
 Peclet_calculated = (epsilon*zeta_0*V)/(mu_a*D0);
 Beta_calculated = (F*V)/(R*T);
@@ -169,6 +173,8 @@ u_c = (1/tau^2)*(epsilon/mu_a)*(zeta*E_field_dx);
 u_c1 = u_x/((tau^2));
 % both are same and are here for assumptions
 
+% $$$
+% Convection velocity [Dimentionless]
 u_c_up = -((zeta/zeta_0)*dphidx);
 u_c_up1 = u_c/u_0;
 
@@ -177,6 +183,7 @@ u_c = u_c*10^-18;
 u_c_up1 = u_c_up1*10^-18;
 u_c_up = u_c_up*10^-18;
 
+% $$$
 % Electroelectromigration velocity (1st)  [Dimentionless]
 u_e_HA_less = (-1/Z_calculated)*D_HA_less*z_HA*dphidx;
 u_e_OH_less = (-1/Z_calculated)*D_OH_less*z_OH*dphidx;
@@ -186,6 +193,7 @@ u_e_A_less = (-1/Z_calculated)*D_A_less*z_A*dphidx;
 u_e_H_less = (-1/Z_calculated)*D_H_less*z_H*dphidx;
 u_e_C_less = (-1/Z_calculated)*D_C_less*z_C*dphidx;
 
+% $$$
 % Electroelectromigration velocity (2nd)  [Dimentionless]
 u_e_HA_less1 = u_e_HA/u_0;
 u_e_OH_less1 = u_e_OH/u_0;
