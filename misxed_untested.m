@@ -170,7 +170,7 @@ u_c_up1 = u_c/u_0;
 
 % ###
 % Testing new abberation
-u_c = u_c*10^-18;
+u_c = u_c*10^-17;
 u_c_up1 = u_c_up1*10^-18;
 u_c_up = u_c_up*10^-18;
 
@@ -417,7 +417,7 @@ for m=1:nt-1
     G_A(1,m) = u_t_A(1,m)*c_0;
     G_A(end,m) = 0;
 
-    G_H(1,m) = u_t_H(1,m)*c_0;
+    G_H(1,m) = c_0;
     G_H(end,m) = 0;        
 
     G_C(1,m) = u_t_C(1,m)*c_C;
