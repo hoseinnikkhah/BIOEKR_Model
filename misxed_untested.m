@@ -398,49 +398,27 @@ alpha_C = (D_C/(tau^2))*10^5;
 
 for m=1:nt-1
     % --- Set IC and BC
-    G_HA_up(1,m) = u_t_HA_up(1,m);
-    G_HA_up(end,m) = 0;
+    G_HA(1,m) = u_t_HA(1,m);
+    G_HA(end,m) = 0;
 
-    G_A_up(1,m) = u_t_A_up(1,m);
-    G_A_up(end,m) = 0;
+    G_OH(1,m) = u_t_OH(1,m);
+    G_OH(end,m) = 0;
 
-    G_Na_up(1,m) = u_t_Na_up(1,m);
-    G_Na_up(end,m) = 0;
+    G_Na(1,m) = u_t_Na(1,m);
+    G_Na(end,m) = 0;
 
-    G_Cl_up(1,m) = u_t_Cl_up(1,m);
-    G_Cl_up(end,m) = 0;
+    G_Cl(1,m) = u_t_Cl(1,m);
+    G_Cl(end,m) = 0;
 
-    G_H_up(1,m) = u_t_H_up(1,m);
-    G_H_up(end,m) = 0;        
+    G_A(1,m) = u_t_A(1,m);
+    G_A(end,m) = 0;
 
-    G_OH_up(1,m) = u_t_OH_up(1,m);
-    G_OH_up(end,m) = 0;
+    G_H(1,m) = u_t_H(1,m);
+    G_H(end,m) = 0;        
 
-    G_C_up(1,m) = u_t_C_up(1,m);
-    G_C_up(end,m) = 0;
+    G_C(1,m) = u_t_C(1,m);
+    G_C(end,m) = 0;
     
-    % ---
-    G_HA_ads(1,m) = u_t_H(1,m)*c_0;
-    G_HA_ads(end,m) = 0;
-    
-    G_A_ads(1,m) = u_t_H(1,m)*c_0;
-    G_A_ads(end,m) = 0;  
-    
-    G_Na_ads(1,m) = u_t_H(1,m)*c_Na;
-    G_Na_ads(end,m) = 0;  
-    
-    G_Cl_ads(1,m) = u_t_H(1,m)*c_Cl;
-    G_Cl_ads(end,m) = 0;  
-
-    G_H_ads(1,m) = u_t_H(1,m)*c_0;
-    G_H_ads(end,m) = 0;  
-
-    G_OH_ads(1,m) = u_t_H(1,m)*c_0;
-    G_OH_ads(end,m) = 0;
-
-    G_C_ads(1,m) = u_t_H(1,m)*c_C;
-    G_C_ads(end,m) = 0;  
-
     for i=2:nx-1
 
 % Convert concentration to mol/m3
