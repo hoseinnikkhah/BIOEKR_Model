@@ -464,13 +464,13 @@ for m=1:nt-1
         
         G_H(i,m+1) = G_H(i,m) + ((D_H_day*h2)/tau^2)*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) - h1*((u_t_H(i,m))*(G_H(i+1,m) - G_H(i,m)));
 
-        G_HA(end,m) = 0;
-        G_OH(end,m) = 0;
-        G_Na(end,m) = 0;
-        G_Cl(end,m) = 0;
-        G_A(end,m) = 0;
-        G_H(end,m) = 0;
-        G_C(end,m) = 0;
+        G_HA(end,m) = J_HA(i,m);    %--- Lower boundary
+        G_OH(end,m) = J_OH(i,m);    %--- Lower boundary
+        G_Na(end,m) = J_Na(i,m);    %--- Lower boundary
+        G_Cl(end,m) = J_Cl(i,m);    %--- Lower boundary
+        G_A(end,m) = J_A(i,m);      %--- Lower boundary
+        G_H(end,m) = J_H(i,m);      %--- Lower boundary
+        G_C(end,m) = J_C(i,m);      %--- Lower boundary
 
 
     
