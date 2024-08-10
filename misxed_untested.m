@@ -424,13 +424,13 @@ for m=1:nt-1
     G_C(end,m) = 0;
     
     for i=2:nx-1
-        G_HA(i,m+1) = G_HA(i,m) + ((D_HA*h2)/tau^2)*(G_HA(i+1,m) -2*G_HA(i,m) + G_HA(i-1,m)) - h1*((u_t_HA(i,1,m) - u_t_HA(i,m))*(G_HA(i+1,m) - G_HA(i,m)));
-        G_Na(i,m+1) = G_Na(i,m) + ((D_Na*h2)/tau^2)*(G_Na(i+1,m) -2*G_Na(i,m) + G_Na(i-1,m)) - h1*((u_t_Na(i,1,m) - u_t_Na(i,m))*(G_Na(i+1,m) - G_Na(i,m)));
-        G_Cl(i,m+1) = G_Cl(i,m) + ((D_Cl*h2)/tau^2)*(G_Cl(i+1,m) -2*G_Cl(i,m) + G_Cl(i-1,m)) - h1*((u_t_Cl(i,1,m) - u_t_Cl(i,m))*(G_Cl(i+1,m) - G_Cl(i,m)));
-        G_OH(i,m+1) = G_OH(i,m) + ((D_OH*h2)/tau^2)*(G_OH(i+1,m) -2*G_OH(i,m) + G_OH(i-1,m)) - h1*((u_t_OH(i,1,m) - u_t_OH(i,m))*(G_OH(i+1,m) - G_OH(i,m)));
-        G_A(i,m+1) = G_A(i,m) + ((D_A*h2)/tau^2)*(G_A(i+1,m) -2*G_A(i,m) + G_A(i-1,m)) - h1*((u_t_A(i,1,m) - u_t_A(i,m))*(G_A(i+1,m) - G_A(i,m)));
-        G_H(i,m+1) = G_H(i,m) + ((D_H*h2)/tau^2)*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) - h1*((u_t_H(i,1,m) - u_t_H(i,m))*(G_H(i+1,m) - G_H(i,m)));
-        G_C(i,m+1) = G_C(i,m) + ((D_C*h2)/tau^2)*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) - h1*((u_t_C(i,1,m) - u_t_C(i,m))*(G_C(i+1,m) - G_C(i,m)));
+        G_HA(i,m+1) = G_HA(i,m) + ((D_HA*h2)/tau^2)*(G_HA(i+1,m) -2*G_HA(i,m) + G_HA(i-1,m)) - h1*((u_t_HA(i+1,m) - u_t_HA(i,m))*(G_HA(i+1,m) - G_HA(i,m)));
+        G_Na(i,m+1) = G_Na(i,m) + ((D_Na*h2)/tau^2)*(G_Na(i+1,m) -2*G_Na(i,m) + G_Na(i-1,m)) - h1*((u_t_Na(i+1,m) - u_t_Na(i,m))*(G_Na(i+1,m) - G_Na(i,m)));
+        G_Cl(i,m+1) = G_Cl(i,m) + ((D_Cl*h2)/tau^2)*(G_Cl(i+1,m) -2*G_Cl(i,m) + G_Cl(i-1,m)) - h1*((u_t_Cl(i+1,m) - u_t_Cl(i,m))*(G_Cl(i+1,m) - G_Cl(i,m)));
+        G_OH(i,m+1) = G_OH(i,m) + ((D_OH*h2)/tau^2)*(G_OH(i+1,m) -2*G_OH(i,m) + G_OH(i-1,m)) - h1*((u_t_OH(i+1,m) - u_t_OH(i,m))*(G_OH(i+1,m) - G_OH(i,m)));
+        G_A(i,m+1) = G_A(i,m) + ((D_A*h2)/tau^2)*(G_A(i+1,m) -2*G_A(i,m) + G_A(i-1,m)) - h1*((u_t_A(i+1,m) - u_t_A(i,m))*(G_A(i+1,m) - G_A(i,m)));
+        G_H(i,m+1) = G_H(i,m) + ((D_H*h2)/tau^2)*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) - h1*((u_t_H(i+1,m) - u_t_H(i,m))*(G_H(i+1,m) - G_H(i,m)));
+        G_C(i,m+1) = G_C(i,m) + ((D_C*h2)/tau^2)*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C(i+1,m) - G_C(i,m)));
 
     end
 end
