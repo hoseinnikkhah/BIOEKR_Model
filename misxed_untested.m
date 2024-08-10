@@ -462,7 +462,7 @@ for m=1:nt-1
        %G_H(i,m+1) = G_H(i,m) + ((D_H*h2)/tau^2)*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) - h1*((u_t_H(i+1,m) - u_t_H(i,m))*(G_H(i+1,m) - G_H(i,m)));
         G_C(i,m+1) = G_C(i,m) + ((D_C*h2)/tau^2)*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C(i+1,m) - G_C(i,m)));
         
-        G_H(i,m+1) = G_H(i,m) + ((D_H_day*h2)/tau^2)*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) - h1*((u_t_H(i,m))*(G_H(i+1,m) - G_H(i,m)));
+        G_H(i,m+1) = G_H(i,m) + ((D_H_day*h2)/tau^2)*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) - h1*((u_t_H_day(i+1,m) - u_t_H_day(i,m))*(G_H(i+1,m) - G_H(i,m)));
 
         G_HA(end,m) = J_HA(i,m);    %--- Lower boundary
         G_OH(end,m) = J_OH(i,m);    %--- Lower boundary
@@ -502,7 +502,7 @@ hold on;
 %plot(t_array,G_A_converted(10,:),'-','DisplayName', 'A-');
 %plot(t_array,G_Na_converted(10,:),'-','DisplayName', 'Na+');
 %plot(t_array,G_Cl_converted(10,:),'-','DisplayName', 'Cl');
-plot(t_array,G_H_converted(10,:),'-','DisplayName', 'H+ ');
+plot(t_array,G_H(10,:),'-','DisplayName', 'H+ ');
 %plot(t_array,G_OH_converted(10,:),'-','DisplayName', 'OH- ');
 %plot(t_array,G_C_TPH_f(10,:),'-','DisplayName', 'Hydrocarbon');
 
