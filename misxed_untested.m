@@ -33,9 +33,10 @@ t_step = t_up(1,2) - t_up(1,1);
 x_less = x_ref/L;
 x_step = 0.250;
 
+% $$$
 % Electric info
-V = 25;                        % Voltage at 1st cap [V]
-V_end = 0;                     % Voltage at 2nd cap [V]
+V = 25;                        % Voltage at z = 0 [V]
+V_end = 0;                     % Voltage at z = L [V]
 dVdx = (V-V_end)/L;            % Voltage gradient [V/m]
 
 E_field = ones(nx,nt);         % Electric field [V]
@@ -44,10 +45,17 @@ for timestep = 1:nt
     E_field(:,timestep) = M;
 end
 
+% $$$
+% Setting inital value at t=0 and for all z (or x)
+E_field(:,1) = (V-V_end);
+
+% !!!
 % Dimensionless Voltage     [Dimentionless]
 phi_bar = E_field/(V-V_end);
 dphidx = phi_bar./x_less;
+dphidx(1,:) = 40; % Fixing damping value
 
+# $$$
 % Voltage gradient          [V/m]
 E_field_dx = E_field/L;
 
@@ -130,6 +138,7 @@ v_H_less = D_H_less/(R*T);
 v_C_less = D_C_less/(R*T);
 v_A_less = D_A_less/(R*T);
 
+% $$$
 % Electroelectromigration velocity (Normal)     [m/s]
 u_e_HA = -v_HA*z_HA*F*E_field_dx*(1/tau^2);
 u_e_OH = -v_OH*z_OH*F*E_field_dx*(1/tau^2);
@@ -139,21 +148,25 @@ u_e_A = -v_A*z_A*F*E_field_dx*(1/tau^2);
 u_e_H = -v_H*z_H*F*E_field_dx*(1/tau^2);
 u_e_C = -v_C*z_C*F*E_field_dx*(1/tau^2);
 
+
 % Dimentionless Calculated     [Dimentionless]
 Peclet_calculated = (epsilon*zeta_0*V)/(mu_a*D0);
 Beta_calculated = (F*V)/(R*T);
 Z_calculated = (R*T*epsilon*zeta_0)/(D0*F*mu_a);
 
+% $$$
 % Refrence velocity            [m/s]
-u_0 = (1/tau^2)*((epsilon*zeta_0)/mu_a)*(V/L);
+u_0 = (1/tau^2)*((epsilon*zeta_0)/mu_a)*((V-V_end)/L);
 
+% $$$
 % Convection velocity          [m/s]
 u_eo = ((epsilon*zeta)/mu_a)*E_field_dx;
 u_x = (epsilon/mu_a)*(zeta*E_field_dx);
 
+% $$$
 % Convection velocity (itself)
 u_c = (1/tau^2)*(epsilon/mu_a)*(zeta*E_field_dx);
-u_c2 = u_x/((tau^2));
+u_c1 = u_x/((tau^2));
 % both are same and are here for assumptions
 
 u_c_up = -((zeta/zeta_0)*dphidx);
