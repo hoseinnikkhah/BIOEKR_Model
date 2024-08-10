@@ -206,7 +206,7 @@ u_e_C_less1 = u_e_C/u_0;
 % These two need tests as they are different as result there are two total flux
 
 % $$$
-% Toatal velocity term (Normal)
+% Toatal velocity term (Normal)           [m/s]
 u_t_HA = (u_e_HA + u_c);
 u_t_OH = (u_e_OH + u_c);
 u_t_Na = (u_e_Na + u_c);
@@ -214,6 +214,16 @@ u_t_Cl = (u_e_Cl + u_c);
 u_t_H = (u_e_H + u_c);
 u_t_A = (u_e_A + u_c);
 u_t_C = (u_e_C + u_c);
+
+% $$$
+% Toatal velocity term (Normal)           [m/day]
+u_t_HA_day = (u_e_HA + u_c)*24*3600;
+u_t_OH_day = (u_e_OH + u_c)*24*3600;
+u_t_Na_day = (u_e_Na + u_c)*24*3600;
+u_t_Cl_day = (u_e_Cl + u_c)*24*3600;
+u_t_H_day = (u_e_H + u_c)*24*3600;
+u_t_A_day = (u_e_A + u_c)*24*3600;
+u_t_C_day = (u_e_C + u_c)*24*3600;
 
 % $$$
 % Toatal velocity term (1st)
