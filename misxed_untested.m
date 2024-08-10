@@ -420,30 +420,40 @@ alpha_A = (D_A/(tau^2))*10^5;
 alpha_H = (D_H/(tau^2))*10^5;
 alpha_C = (D_C/(tau^2))*10^5;
 
+% --- Set IC
+G_HA(:,1) = c_0;
+J_HA(1,:) = u_t_HA(1,:)*c_0;
+
+G_OH(:,1) = c_0;
+J_OH(1,:) = u_t_OH(1,:)*c_0;
+
+G_Na(:,1) = c_0;
+J_Na(1,:) = u_t_Na(1,:)*c_Na;
+
+G_Cl(:,1) = c_0;
+J_Cl(1,:) = u_t_Cl(1,:)*c_Cl;
+
+G_A(:,1) = c_0;
+J_A(1,:) = u_t_A(1,:)*c_0;
+
+G_H(:,1) = c_0;
+J_H(1,:) = u_t_H(1,:)*c_0;
+
+G_C(:,1) = c_0;
+J_C(1,:) = u_t_C(1,:)*c_C;
+
 for m=1:nt-1
-    % --- Set IC and BC
-    G_HA(1,m) = u_t_HA(1,m)*c_0;
-    G_HA(end,m) = 0;
+    % --- Set BC
+    G_OH(1,m) = J_OH(1,m);   %--- Upper boundary
+    G_HA(1,m) = J_HA(1,m);   %--- Upper boundary
+    G_Na(1,m) = J_Na(1,m);   %--- Upper boundary
+    G_Cl(1,m) = J_Cl(1,m);   %--- Upper boundary
+    G_C(1,m) = J_C(1,m);     %--- Upper boundary
+    G_H(1,m) = J_H(1,m);     %--- Upper boundary
+    G_A(1,m) = J_A(1,m);     %--- Upper boundary
 
-    G_OH(1,m) = u_t_OH(1,m)*c_0;
-    G_OH(end,m) = 0;
-
-    G_Na(1,m) = u_t_Na(1,m)*c_Na;
-    G_Na(end,m) = 0;
-
-    G_Cl(1,m) = u_t_Cl(1,m)*c_Cl;
-    G_Cl(end,m) = 0;
-
-    G_A(1,m) = u_t_A(1,m)*c_0;
-    G_A(end,m) = 0;
-
-    G_H(1,m) = u_t_H(1,m)*c_0;
-    G_H(end,m) = 0;        
-
-    G_C(1,m) = u_t_C(1,m)*c_C;
-    G_C(end,m) = 0;
-    
     for i=2:nx-1
+
         G_HA(i,m+1) = G_HA(i,m) + ((D_HA*h2)/tau^2)*(G_HA(i+1,m) -2*G_HA(i,m) + G_HA(i-1,m)) - h1*((u_t_HA(i+1,m) - u_t_HA(i,m))*(G_HA(i+1,m) - G_HA(i,m)));
         G_Na(i,m+1) = G_Na(i,m) + ((D_Na*h2)/tau^2)*(G_Na(i+1,m) -2*G_Na(i,m) + G_Na(i-1,m)) - h1*((u_t_Na(i+1,m) - u_t_Na(i,m))*(G_Na(i+1,m) - G_Na(i,m)));
         G_Cl(i,m+1) = G_Cl(i,m) + ((D_Cl*h2)/tau^2)*(G_Cl(i+1,m) -2*G_Cl(i,m) + G_Cl(i-1,m)) - h1*((u_t_Cl(i+1,m) - u_t_Cl(i,m))*(G_Cl(i+1,m) - G_Cl(i,m)));
@@ -453,6 +463,17 @@ for m=1:nt-1
         G_C(i,m+1) = G_C(i,m) + ((D_C*h2)/tau^2)*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C(i+1,m) - G_C(i,m)));
         
         G_H(i,m+1) = G_H(i,m) + ((D_H_day*h2)/tau^2)*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) - h1*((u_t_H(i,m))*(G_H(i+1,m) - G_H(i,m)));
+
+        G_HA(end,m) = 0;
+        G_OH(end,m) = 0;
+        G_Na(end,m) = 0;
+        G_Cl(end,m) = 0;
+        G_A(end,m) = 0;
+        G_H(end,m) = 0;
+        G_C(end,m) = 0;
+
+
+    
     end
 end
 % Convert concentration to mol/m3
