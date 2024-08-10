@@ -8,17 +8,17 @@
 % ---
 
 
-% Geomesh info
+% Geomesh info                 $$$
 L = 0.4;                       % length of domain in x direction [m]
 
-% Nodes
+% Nodes                        $$$
 tmax = 35;                     % end time [day]
 nx = 41;                       % number of nodes in x direction
 nt = 50401;                    % number of time steps
 dx = L/(nx-1);
 dt = tmax/(nt-1);
 
-% Refrence x directions        [m]
+% Refrence x directions        [m]      $$$
 x = (10^-5:dx:(nx)*dx);
 x = transpose(x);
 x_ref = repmat(x,1,nt);
@@ -81,7 +81,7 @@ Beta = 967;
 Z = 0.049;
 k_0 = K_a;
 
-% Valency           [Dimentionless]
+% Valency           [Dimentionless]     $$$
 z_HA = 0;
 z_OH =-1;
 z_Na = 1;
@@ -90,6 +90,7 @@ z_A = -1;
 z_H = 1;
 z_C = 0;
 
+% $$$
 % Species diffusivities (remapped)  [Dimentionless]
 D_HA_less = 1.2;          % Acetic Acid
 D_OH_less = 2.00;         % OH-
@@ -99,7 +100,8 @@ D_A_less = 1.2;           % Acid Agent
 D_H_less = 9.35;          % H+
 D_C_less = 2.09;          % Carbon
 
-% Species diffusivities (Normal)    [m2/s]
+% $$$
+% Species diffusivities (Normal)    [m2/s]      
 D_HA = D_HA_less*D0;      % Acetic Acid
 D_OH = D_OH_less*D0;      % OH-
 D_Na = D_Na_less*D0;      % Na+
