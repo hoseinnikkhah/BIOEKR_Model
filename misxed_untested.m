@@ -132,16 +132,6 @@ v_A = D_A/(R*T);
 v_H = D_H/(R*T);
 v_C = D_C/(R*T);
 
-% ### it is not confirmed if these are needed
-% Mobility (remapped)      % [s·mol/kg]
-v_HA_less = D_HA_less/(R*T);
-v_OH_less = D_OH_less/(R*T);
-v_Na_less = D_Na_less/(R*T);
-v_Cl_less = D_Cl_less/(R*T);
-v_H_less = D_H_less/(R*T);
-v_C_less = D_C_less/(R*T);
-v_A_less = D_A_less/(R*T);
-
 % $$$
 % Electroelectromigration velocity (Normal)     [m/s]
 u_e_HA = -v_HA*z_HA*F*E_field_dx*(1/tau^2);
