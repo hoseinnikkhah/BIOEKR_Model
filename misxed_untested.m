@@ -398,25 +398,25 @@ alpha_C = (D_C/(tau^2))*10^5;
 
 for m=1:nt-1
     % --- Set IC and BC
-    G_HA(1,m) = u_t_HA(1,m);
+    G_HA(1,m) = u_t_HA(1,m)*c_0;
     G_HA(end,m) = 0;
 
-    G_OH(1,m) = u_t_OH(1,m);
+    G_OH(1,m) = u_t_OH(1,m)*c_0;
     G_OH(end,m) = 0;
 
-    G_Na(1,m) = u_t_Na(1,m);
+    G_Na(1,m) = u_t_Na(1,m)*c_Na;
     G_Na(end,m) = 0;
 
-    G_Cl(1,m) = u_t_Cl(1,m);
+    G_Cl(1,m) = u_t_Cl(1,m)*c_Cl;
     G_Cl(end,m) = 0;
 
-    G_A(1,m) = u_t_A(1,m);
+    G_A(1,m) = u_t_A(1,m)*c_0;
     G_A(end,m) = 0;
 
-    G_H(1,m) = u_t_H(1,m);
+    G_H(1,m) = u_t_H(1,m)*c_0;
     G_H(end,m) = 0;        
 
-    G_C(1,m) = u_t_C(1,m);
+    G_C(1,m) = u_t_C(1,m)*c_C;
     G_C(end,m) = 0;
     
     for i=2:nx-1
