@@ -122,14 +122,15 @@ D_A = D_A_less*D0;        % Acid Agent
 D_H = D_H_less*D0;        % H+
 D_C = D_C_less*D0;        % Carbon
 
+% $$$
 % Species diffusivities (Normal)    [m2/day]      
-D_HA = D_HA*24*3600;      % Acetic Acid
-D_OH = D_OH*24*3600;      % OH-
-D_Na = D_Na*24*3600;      % Na+
-D_Cl = D_Cl*24*3600;      % Cl-
-D_A = D_A*24*3600;        % Acid Agent
-D_H = D_H*24*3600;        % H+
-D_C = D_C*24*3600;        % Carbon
+D_HA_day = D_HA*24*3600;  % Acetic Acid
+D_OH_day = D_OH*24*3600;  % OH-
+D_Na_day = D_Na*24*3600;  % Na+
+D_Cl_day = D_Cl*24*3600;  % Cl-
+D_A_day = D_A*24*3600;    % Acid Agent
+D_H_day = D_H*24*3600;    % H+
+D_C_day = D_C*24*3600;    % Carbon
 
 % $$$
 % Mobility (Normal)       % [s·mol/kg]
