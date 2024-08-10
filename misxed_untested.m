@@ -59,7 +59,7 @@ phi_bar = E_field/(V-V_end);
 dphidx = phi_bar./x_less;
 dphidx(1,:) = 40; % Fixing damping value
 
-# $$$
+% $$$
 % Voltage gradient          [V/m]
 E_field_dx = E_field/L;
 
