@@ -1,3 +1,13 @@
+% Guide Book
+% ---
+% Each section is devided, and has 3 distinct states
+% $$$ == fully sophiscated Check
+% ### == not a sophiscated check
+% !!! == unchecked
+% These comments will be held on top and end of each section
+% ---
+
+
 % Geomesh info
 L = 0.4;                       % length of domain in x direction [m]
 
