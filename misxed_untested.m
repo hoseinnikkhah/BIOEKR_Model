@@ -178,6 +178,7 @@ u_c1 = u_x/((tau^2));
 u_c_up = -((zeta/zeta_0)*dphidx);
 u_c_up1 = u_c/u_0;
 
+% ###
 % Testing new abberation
 u_c = u_c*10^-18;
 u_c_up1 = u_c_up1*10^-18;
@@ -204,6 +205,7 @@ u_e_H_less1 = u_e_H/u_0;
 u_e_C_less1 = u_e_C/u_0;
 % These two need tests as they are different as result there are two total flux
 
+% $$$
 % Toatal velocity term (Normal)
 u_t_HA = (u_e_HA + u_c);
 u_t_OH = (u_e_OH + u_c);
@@ -213,6 +215,7 @@ u_t_H = (u_e_H + u_c);
 u_t_A = (u_e_A + u_c);
 u_t_C = (u_e_C + u_c);
 
+% $$$
 % Toatal velocity term (1st)
 u_t_HA_up = (u_e_HA_less + u_c_up);
 u_t_OH_up = (u_e_OH_less + u_c_up);
@@ -222,6 +225,7 @@ u_t_A_up = (u_e_A_less + u_c_up);
 u_t_H_up = (u_e_H_less + u_c_up);
 u_t_C_up = (u_e_C_less + u_c_up);
 
+% $$$
 % Toatal velocity term (2nd)
 u_t_HA_up1 = (u_e_HA_less1 + u_c_up1);
 u_t_OH_up1 = (u_e_OH_less1 + u_c_up1);
@@ -231,15 +235,18 @@ u_t_A_up1 = (u_e_A_less1 + u_c_up1);
 u_t_H_up1 = (u_e_H_less1 + u_c_up1);
 u_t_C_up1 = (u_e_C_less1 + u_c_up1);
 
+% $$$
 % Initial concentration        [mol/m3]
 c_0 = 500; 
 c_p = 200;
 c_Na = c_p;
 c_Cl = c_Na;
 
+% $$$
 % Initial Hydrocarbon concentration        [mg/kg]
 c_C_TPH = 10000;
 
+% $$$
 % Hydrocarbon properties
 API = 29.6;
 MW = (6048/(API-5.9));                   % [g/mol]
