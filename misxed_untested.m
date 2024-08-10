@@ -281,7 +281,7 @@ t_array = linspace(0,tmax,nt);
 % $$$
 % Erorr values for each finite step
 h1 = (dt/(2*dx));
-h2 = (dt/(dx^2));
+h2 = (dt/dx^2);
 
 % --- Start of EKR (defualt)
 
@@ -452,7 +452,7 @@ for m=1:nt-1
        %G_H(i,m+1) = G_H(i,m) + ((D_H*h2)/tau^2)*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) - h1*((u_t_H(i+1,m) - u_t_H(i,m))*(G_H(i+1,m) - G_H(i,m)));
         G_C(i,m+1) = G_C(i,m) + ((D_C*h2)/tau^2)*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C(i+1,m) - G_C(i,m)));
         
-        G_H(i,m+1) = G_H(i,m) + ((D_H_day*h2)/tau^2)*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) - h1*((u_t_H_day(i+1,m) - u_t_H_day(i,m))*(G_H(i+1,m) - G_H(i,m)));
+        G_H(i,m+1) = G_H(i,m) + ((D_H_day*h2)/tau^2)*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) - h1*((u_t_H(i,m))*(G_H(i+1,m) - G_H(i,m)));
     end
 end
 % Convert concentration to mol/m3
