@@ -258,6 +258,10 @@ alpha = u_0/(c_0*k_0);
 x_array = linspace(0,L,nx);
 t_array = linspace(0,tmax,nt);
 
+% $$$
+% Erorr values for each finite step
+h1 = (dt/(2*dx));
+h2 = (dt/(dx^2));
 
 % --- Start of EKR (defualt)
 
