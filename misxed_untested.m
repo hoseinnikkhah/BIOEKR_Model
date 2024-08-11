@@ -483,7 +483,7 @@ for m=1:nt-1
         G_H(i,m+1) = G_H(i,m) + ((D_H_day*h2)/tau^2)*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) - h1*((u_t_H(i+1,m) - u_t_H(i,m))*(G_H(i+1,m) - G_H(i,m)));
         G_C(i,m+1) = G_C(i,m) + ((D_C_day*h2)/tau^2)*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C(i+1,m) - G_C(i,m)));
         
-        % ###
+        % $$$
         % Sigma calculations
         sum_HA(i,m) = (z_HA^2)*D_HA*(G_HA(i,m));
         sum_Na(i,m) = (z_Na^2)*v_Na*G_Na(i,m);
@@ -495,6 +495,8 @@ for m=1:nt-1
         sum_total(i,m) =  sum_HA(i,m) + sum_Na(i,m) + sum_Cl(i,m) + sum_OH(i,m) + sum_A(i,m) + sum_H(i,m) + sum_C(i,m);
         sigma_total(i,m) = (F^2)*sum_total(i,m) + sigma_surface(i,m);
 
+        % $$$
+        % Sigma calculations (right hand)
         sum_HA_r(i,m) = (z_HA^2)*D_HA*((G_HA(i+1,m) - G_HA(i,m))/dx);
         sum_Na_r(i,m) = (z_Na^2)*D_Na*((G_Na(i+1,m) - G_Na(i,m))/dx);
         sum_Cl_r(i,m) = (z_Cl^2)*D_Cl*((G_Cl(i+1,m) - G_Cl(i,m))/dx);
@@ -503,9 +505,19 @@ for m=1:nt-1
         sum_H_r(i,m) = (z_H^2)*D_H*((G_H(i+1,m) - G_H(i,m))/dx);
         sum_C_r(i,m) = (z_C^2)*D_C*((G_C(i+1,m) - G_C(i,m))/dx);
         sum_total_r(i,m) = sum_HA_r(i,m) + sum_Na_r(i,m) + sum_Cl_r(i,m) + sum_OH_r(i,m) + sum_A_r(i,m) + sum_H_r(i,m) + sum_C_r(i,m);
-                
+
+        % $$$
         % Current calculations
         i_z(i,m) = (1/tau^2)*(-sigma_total(i,m) - F*sum_total_r(i,m));
+
+        % Start and End of cap rate values
+
+        if i == 41
+            R_OH(i,m) = (i_z(40,m)/F);
+        end
+        if i == 1
+            R_H(i,m) = (i_z(2,m)/F);
+        end
 
         % $$$
         G_HA(end,m) = J_HA(i,m);    %--- Lower boundary
