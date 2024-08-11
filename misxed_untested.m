@@ -512,10 +512,10 @@ for m=1:nt-1
 
         % Start and End of cap rate values
 
-        if i == 41
+        if i == 40
             R_OH(i,m) = (i_z(40,m)/F);
         end
-        if i == 1
+        if i == 2
             R_H(i,m) = (i_z(2,m)/F);
         end
 
