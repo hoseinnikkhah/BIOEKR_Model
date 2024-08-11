@@ -486,7 +486,7 @@ for m=1:nt-1
         % ###
         % Sigma calculations
         sum_HA(i,m) = (z_HA^2)*D_HA*(G_HA(i,m));
-        sum_Na(i,m) = (z_NA^2)*v_Na*G_Na(i,m);
+        sum_Na(i,m) = (z_Na^2)*v_Na*G_Na(i,m);
         sum_Cl(i,m) = (z_Cl^2)*v_Cl*G_Cl(i,m);
         sum_OH(i,m) = (z_OH^2)*v_OH*G_OH(i,m);
         sum_A(i,m) = (z_A^2)*v_A*G_A(i,m);
