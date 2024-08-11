@@ -427,10 +427,10 @@ J_HA(1,:) = u_t_HA(1,:)*c_0;
 G_OH(:,1) = c_0;
 J_OH(1,:) = u_t_OH(1,:)*c_0;
 
-G_Na(:,1) = c_0;
+G_Na(:,1) = c_Na;
 J_Na(1,:) = u_t_Na(1,:)*c_Na;
 
-G_Cl(:,1) = c_0;
+G_Cl(:,1) = c_Cl;
 J_Cl(1,:) = u_t_Cl(1,:)*c_Cl;
 
 G_A(:,1) = c_0;
@@ -439,7 +439,7 @@ J_A(1,:) = u_t_A(1,:)*c_0;
 G_H(:,1) = c_0;
 J_H(1,:) = u_t_H(1,:)*c_0;
 
-G_C(:,1) = c_0;
+G_C(:,1) = c_C;
 J_C(1,:) = u_t_C(1,:)*c_C;
 
 for m=1:nt-1
@@ -486,6 +486,8 @@ G_C_converted = G_C_up*c_C;
 
 G_C_TPH_f = G_C_converted*(MW/(rho*bolian));
 
+
+
 pH = log10(G_H_converted);
 
 pH_scale = linspace(1,40,41);
@@ -501,7 +503,7 @@ hold on;
 %plot(t_array,G_A_converted(10,:),'-','DisplayName', 'A-');
 %plot(t_array,G_Na_converted(10,:),'-','DisplayName', 'Na+');
 %plot(t_array,G_Cl_converted(10,:),'-','DisplayName', 'Cl');
-plot(t_array,G_OH(10,:),'-','DisplayName', 'H+ ');
+plot(t_array,G_H(10,:),'-','DisplayName', 'H+ ');
 %plot(t_array,G_OH_converted(10,:),'-','DisplayName', 'OH- ');
 %plot(t_array,G_C_TPH_f(10,:),'-','DisplayName', 'Hydrocarbon');
 
