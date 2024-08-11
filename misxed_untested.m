@@ -476,13 +476,13 @@ for m=1:nt-1
 
         % $$$
         % This for EKR only [Standard]
-        G_HA(i,m+1) = G_HA(i,m) + ((D_HA_day*h2)/tau^2)*(G_HA(i+1,m) -2*G_HA(i,m) + G_HA(i-1,m)) - h1*((u_t_HA(i+1,m) - u_t_HA(i,m))*(G_HA(i+1,m) - G_HA(i,m)));
-        G_Na(i,m+1) = G_Na(i,m) + ((D_Na_day*h2)/tau^2)*(G_Na(i+1,m) -2*G_Na(i,m) + G_Na(i-1,m)) - h1*((u_t_Na(i+1,m) - u_t_Na(i,m))*(G_Na(i+1,m) - G_Na(i,m)));
-        G_Cl(i,m+1) = G_Cl(i,m) + ((D_Cl_day*h2)/tau^2)*(G_Cl(i+1,m) -2*G_Cl(i,m) + G_Cl(i-1,m)) - h1*((u_t_Cl(i+1,m) - u_t_Cl(i,m))*(G_Cl(i+1,m) - G_Cl(i,m)));
-        G_OH(i,m+1) = G_OH(i,m) + ((D_OH_day*h2)/tau^2)*(G_OH(i+1,m) -2*G_OH(i,m) + G_OH(i-1,m)) - h1*((u_t_OH(i+1,m) - u_t_OH(i,m))*(G_OH(i+1,m) - G_OH(i,m)));
-        G_A(i,m+1) = G_A(i,m) + ((D_A_day*h2)/tau^2)*(G_A(i+1,m) -2*G_A(i,m) + G_A(i-1,m)) - h1*((u_t_A(i+1,m) - u_t_A(i,m))*(G_A(i+1,m) - G_A(i,m)));
-        G_H(i,m+1) = G_H(i,m) + ((D_H_day*h2)/tau^2)*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) - h1*((u_t_H(i+1,m) - u_t_H(i,m))*(G_H(i+1,m) - G_H(i,m)));
-        G_C(i,m+1) = G_C(i,m) + ((D_C_day*h2)/tau^2)*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C(i+1,m) - G_C(i,m)));
+        G_HA(i,m+1) = G_HA(i,m) + ((D_HA_day*h2)/tau^2)*(G_HA(i+1,m) -2*G_HA(i,m) + G_HA(i-1,m)) - h1*((u_t_HA(i+1,m) - u_t_HA(i,m))*(G_HA(i+1,m) - G_HA(i,m))) + R_HA(i,m)*dt;
+        G_Na(i,m+1) = G_Na(i,m) + ((D_Na_day*h2)/tau^2)*(G_Na(i+1,m) -2*G_Na(i,m) + G_Na(i-1,m)) - h1*((u_t_Na(i+1,m) - u_t_Na(i,m))*(G_Na(i+1,m) - G_Na(i,m))) + R_Na(i,m)*dt;
+        G_Cl(i,m+1) = G_Cl(i,m) + ((D_Cl_day*h2)/tau^2)*(G_Cl(i+1,m) -2*G_Cl(i,m) + G_Cl(i-1,m)) - h1*((u_t_Cl(i+1,m) - u_t_Cl(i,m))*(G_Cl(i+1,m) - G_Cl(i,m))) + R_Cl(i,m)*dt;
+        G_OH(i,m+1) = G_OH(i,m) + ((D_OH_day*h2)/tau^2)*(G_OH(i+1,m) -2*G_OH(i,m) + G_OH(i-1,m)) - h1*((u_t_OH(i+1,m) - u_t_OH(i,m))*(G_OH(i+1,m) - G_OH(i,m))) + R_OH(i,m)*dt;
+        G_A(i,m+1) = G_A(i,m) + ((D_A_day*h2)/tau^2)*(G_A(i+1,m) -2*G_A(i,m) + G_A(i-1,m)) - h1*((u_t_A(i+1,m) - u_t_A(i,m))*(G_A(i+1,m) - G_A(i,m))) + R_A(i,m)*dt;
+        G_H(i,m+1) = G_H(i,m) + ((D_H_day*h2)/tau^2)*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) - h1*((u_t_H(i+1,m) - u_t_H(i,m))*(G_H(i+1,m) - G_H(i,m))) + R_H(i,m)*dt;
+        G_C(i,m+1) = G_C(i,m) + ((D_C_day*h2)/tau^2)*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C(i+1,m) - G_C(i,m))) + R_C(i,m)*dt;
         
         % Adsorbed concentration
         G_HA_ads(i,m) = K_ads*G_HA(i,m);
