@@ -570,7 +570,6 @@ for m=1:nt-1
         end        
         R_Cl(i,m) = (K_NaCl(i,m)*G_Na(i,m));
         R_A(i,m) = (K_a(i,m)*G_HA(i,m));
-        R_C(i,m) = R_i*coeff*(dt)/n;
     end
 end
 
