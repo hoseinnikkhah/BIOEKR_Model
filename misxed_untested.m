@@ -306,7 +306,7 @@ G_H = zeros(nx,nt);
 G_C = zeros(nx,nt);
 
 % !!!
-% concentration arrays [remapped]
+% concentration arrays [Dimensionless]
 G_HA_up = zeros(nx,nt);
 G_OH_up = zeros(nx,nt);
 G_Na_up = zeros(nx,nt);
@@ -316,7 +316,7 @@ G_H_up = zeros(nx,nt);
 G_C_up = zeros(nx,nt);
 
 % !!!
-% adsorbed concentration arrays [remapped]
+% Adsorbed concentration arrays [remapped]
 G_HA_ads = zeros(nx,nt);
 G_OH_ads = zeros(nx,nt);
 G_Na_ads = zeros(nx,nt);
@@ -331,7 +331,9 @@ i_z = zeros(nx, nt);
 
 % !!!
 % Sigma array
+
 sigma_bar = zeros(nx,nt);
+Sigma = zeros(nx,nt);
 sum_HA = zeros(nx,nt);
 sum_OH = zeros(nx,nt);
 sum_Na = zeros(nx,nt);
@@ -465,6 +467,16 @@ for m=1:nt-1
         G_A(i,m+1) = G_A(i,m) + ((D_A_day*h2)/tau^2)*(G_A(i+1,m) -2*G_A(i,m) + G_A(i-1,m)) - h1*((u_t_A(i+1,m) - u_t_A(i,m))*(G_A(i+1,m) - G_A(i,m)));
         G_H(i,m+1) = G_H(i,m) + ((D_H_day*h2)/tau^2)*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) - h1*((u_t_H(i+1,m) - u_t_H(i,m))*(G_H(i+1,m) - G_H(i,m)));
         G_C(i,m+1) = G_C(i,m) + ((D_C_day*h2)/tau^2)*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C(i+1,m) - G_C(i,m)));
+        
+
+        sum_HA(i,m) = (z_HA^2)*v_HA*G_HA(i,m);
+        sum_Na(i,m) = (z_NA^2)*v_Na*G_Na(i,m);
+        sum_Cl(i,m) = (z_Cl^2)*v_Cl*G_Cl(i,m);
+        sum_OH(i,m) = (z_OH^2)*v_OH*G_OH(i,m);
+        sum_A(i,m) = (z_A^2)*v_A*G_A(i,m);
+        sum_H(i,m) = (z_H^2)*v_H*G_H(i,m);
+        sum_C(i,m) = (z_C^2)*v_C*G_C(i,m);
+        sum_total(i,m) =  sum_HA(i,m) + sum_Na(i,m) + sum_Cl(i,m) + sum_OH(i,m) + sum_A(i,m) + sum_H(i,m) + sum_Cl(i,m);
         
         % $$$
         G_HA(end,m) = J_HA(i,m);    %--- Lower boundary
