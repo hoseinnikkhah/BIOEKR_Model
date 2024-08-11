@@ -485,16 +485,25 @@ for m=1:nt-1
         
         % ###
         % Sigma calculations
-        sum_HA(i,m) = (z_HA^2)*v_HA*G_HA(i,m);
+        sum_HA(i,m) = (z_HA^2)*D_HA*(G_HA(i,m));
         sum_Na(i,m) = (z_NA^2)*v_Na*G_Na(i,m);
         sum_Cl(i,m) = (z_Cl^2)*v_Cl*G_Cl(i,m);
         sum_OH(i,m) = (z_OH^2)*v_OH*G_OH(i,m);
         sum_A(i,m) = (z_A^2)*v_A*G_A(i,m);
         sum_H(i,m) = (z_H^2)*v_H*G_H(i,m);
         sum_C(i,m) = (z_C^2)*v_C*G_C(i,m);
-        sum_total(i,m) =  sum_HA(i,m) + sum_Na(i,m) + sum_Cl(i,m) + sum_OH(i,m) + sum_A(i,m) + sum_H(i,m) + sum_Cl(i,m);
+        sum_total(i,m) =  sum_HA(i,m) + sum_Na(i,m) + sum_Cl(i,m) + sum_OH(i,m) + sum_A(i,m) + sum_H(i,m) + sum_C(i,m);
         sigma_total(i,m) = (F^2)*sum_total(i,m) + sigma_surface(i,m);
-        
+
+        sum_HA_r(i,m) = (z_HA^2)*D_HA*((G_HA(i+1,m) - G_HA(i,m))/dx);
+        sum_Na_r(i,m) = (z_Na^2)*D_Na*((G_Na(i+1,m) - G_Na(i,m))/dx);
+        sum_Cl_r(i,m) = (z_Cl^2)*D_Cl*((G_Cl(i+1,m) - G_Cl(i,m))/dx);
+        sum_OH_r(i,m) = (z_OH^2)*D_OH*((G_OH(i+1,m) - G_OH(i,m))/dx);
+        sum_A_r(i,m) = (z_A^2)*D_A*((G_A(i+1,m) - G_A(i,m))/dx);
+        sum_H_r(i,m) = (z_H^2)*D_H*((G_H(i+1,m) - G_H(i,m))/dx);
+        sum_C_r(i,m) = (z_C^2)*D_C*((G_C(i+1,m) - G_C(i,m))/dx);
+        sum_total_r(i,m) = sum_HA_r(i,m) + sum_Na_r(i,m) + sum_Cl_r(i,m) + sum_OH_r(i,m) + sum_A_r(i,m) + sum_H_r(i,m) + sum_C_r(i,m);
+                
         % Current calculations
         i_z(i,m) = (1/tau^2)*(-sigma_total(i,m) - F*) 
         % $$$
