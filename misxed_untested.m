@@ -325,11 +325,11 @@ G_A_ads = zeros(nx,nt);
 G_H_ads = zeros(nx,nt);
 G_C_ads = zeros(nx,nt);
 
-% !!!
+% $$$
 % Current array
 i_z = zeros(nx, nt);
 
-% ###
+% $$$
 % Sigma array
 sigma_total = zeros(nx,nt);
 sigma_bar = zeros(nx,nt);
@@ -419,13 +419,13 @@ G_H_up(:,1) = G_H(:,1)/c_0;
 G_C_up(:,1) = G_C(:,1)/c_C;
 
 % !!!
-G_HA_ads(:,1) = K_ads*c_0;
-G_OH_ads(:,1) = K_ads*c_0;
-G_Na_ads(:,1) = K_ads*c_Na;
-G_Cl_ads(:,1) = K_ads*c_Cl;
-G_A_ads(:,1) = K_ads*c_0;
-G_H_ads(:,1) = K_ads*c_0;
-G_C_ads(:,1) = K_ads*c_C;
+G_HA_ads(:,1) = K_ads*(G_HA(:,1) + G_A(:,1));
+G_OH_ads(:,1) = K_ads*(G_OH(:,1));
+G_Na_ads(:,1) = K_ads*(G_Na(:,1));
+G_Cl_ads(:,1) = K_ads*(G_Cl(:,1));
+G_A_ads(:,1) = K_ads*(G_A(:,1));
+G_H_ads(:,1) = K_ads*(G_H(:,1));
+G_C_ads(:,1) = K_ads*(G_C(:,1));
 
 % !!!
 % Fixing alpha advection
