@@ -329,11 +329,15 @@ G_C_ads = zeros(nx,nt);
 % Current array
 i_z = zeros(nx, nt);
 
-% !!!
+% ###
 % Sigma array
-
+sigma_total = zeros(nx,nt);
 sigma_bar = zeros(nx,nt);
-Sigma = zeros(nx,nt);
+Surface = ones(nx,nt);
+sigma_surface = sigma_surface*Surface; % Coverting sigma_surface to an array
+
+% $$$
+% sum values in sigma calculations
 sum_HA = zeros(nx,nt);
 sum_OH = zeros(nx,nt);
 sum_Na = zeros(nx,nt);
