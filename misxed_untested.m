@@ -541,9 +541,6 @@ for m=1:nt-1
         % Current calculations
         i_z(i,m) = (1/tau^2)*(-sigma_total(i,m) - F*sum_total_r(i,m));
 
-
-
-        
         % $$$
         G_HA(end,m) = J_HA(40,m);    %--- Lower boundary
         G_OH(end,m) = J_OH(40,m);    %--- Lower boundary
