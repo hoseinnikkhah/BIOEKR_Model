@@ -558,17 +558,14 @@ for m=1:nt-1
 
         K_H2O(i,m) = G_H(i,m)*G_OH(i,m);
         K_a(i,m) = (G_H(i,m)*G_A(i,m))/G_HA(i,m);
-        K_NaCl(i,m) = (G_Cl(i,m)*G_Na(i,m))/G_Na(i,m);
         R_H(i,m) = (K_H2O(i,m)*G_H(i,m)) + (K_a(i,m)*G_HA(i,m));
         % Start and End of cap rate values
         if i == 2
             R_H(i,m) = (i_z(2,m)/F);
         end
-        R_OH(i,m) = (K_H2O(i,m)*G_OH(i,m)) + (K_NaCl(i,m)*G_Na(i,m));
         if i == 40
             R_OH(i,m) = (i_z(40,m)/F);
         end        
-        R_Cl(i,m) = (K_NaCl(i,m)*G_Na(i,m));
         R_A(i,m) = (K_a(i,m)*G_HA(i,m));
     end
 end
