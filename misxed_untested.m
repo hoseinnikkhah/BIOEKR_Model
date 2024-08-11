@@ -470,7 +470,7 @@ for m=1:nt-1
     G_C(1,m) = J_C(1,m);     %--- Upper boundary
     G_H(1,m) = J_H(1,m);     %--- Upper boundary
     G_A(1,m) = J_A(1,m);     %--- Upper boundary
-
+    R_H(1,m) = J_H(1,m);
     for i=2:nx-1
 
         % $$$
@@ -510,8 +510,8 @@ for m=1:nt-1
         % Current calculations
         i_z(i,m) = (1/tau^2)*(-sigma_total(i,m) - F*sum_total_r(i,m));
 
+        % $$$
         % Start and End of cap rate values
-
         if i == 40
             R_OH(i,m) = (i_z(40,m)/F);
         end
@@ -519,13 +519,15 @@ for m=1:nt-1
             R_H(i,m) = (i_z(2,m)/F);
         end
 
+        
+        R_OH(end,m) = J_OH(i,m);
         % $$$
         G_HA(end,m) = J_HA(i,m);    %--- Lower boundary
         G_OH(end,m) = J_OH(i,m);    %--- Lower boundary
         G_Na(end,m) = J_Na(i,m);    %--- Lower boundary
         G_Cl(end,m) = J_Cl(i,m);    %--- Lower boundary
         G_A(end,m) = J_A(i,m);      %--- Lower boundary
-        G_H(end,m) = J_H(i,m);      %--- Lower boundary
+        G_H(end,m) = J_H(end,m);      %--- Lower boundary
         G_C(end,m) = J_C(i,m);      %--- Lower boundary
 
 
