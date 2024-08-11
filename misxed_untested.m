@@ -527,7 +527,7 @@ for m=1:nt-1
         G_Na(end,m) = J_Na(i,m);    %--- Lower boundary
         G_Cl(end,m) = J_Cl(i,m);    %--- Lower boundary
         G_A(end,m) = J_A(i,m);      %--- Lower boundary
-        G_H(end,m) = J_H(end,m);      %--- Lower boundary
+        G_H(end,m) = 0;      %--- Lower boundary
         G_C(end,m) = J_C(i,m);      %--- Lower boundary
 
 
