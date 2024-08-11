@@ -420,6 +420,7 @@ alpha_A = (D_A/(tau^2))*10^5;
 alpha_H = (D_H/(tau^2))*10^5;
 alpha_C = (D_C/(tau^2))*10^5;
 
+% $$$
 % --- Set IC
 G_HA(:,1) = c_0;
 J_HA(1,:) = u_t_HA(1,:)*c_0;
@@ -443,6 +444,7 @@ G_C(:,1) = c_C;
 J_C(1,:) = u_t_C(1,:)*c_C;
 
 for m=1:nt-1
+    % $$$
     % --- Set BC
     G_OH(1,m) = J_OH(1,m);   %--- Upper boundary
     G_HA(1,m) = J_HA(1,m);   %--- Upper boundary
@@ -454,6 +456,8 @@ for m=1:nt-1
 
     for i=2:nx-1
 
+        % $$$
+        % This for EKR only [Standard]
         G_HA(i,m+1) = G_HA(i,m) + ((D_HA_day*h2)/tau^2)*(G_HA(i+1,m) -2*G_HA(i,m) + G_HA(i-1,m)) - h1*((u_t_HA(i+1,m) - u_t_HA(i,m))*(G_HA(i+1,m) - G_HA(i,m)));
         G_Na(i,m+1) = G_Na(i,m) + ((D_Na_day*h2)/tau^2)*(G_Na(i+1,m) -2*G_Na(i,m) + G_Na(i-1,m)) - h1*((u_t_Na(i+1,m) - u_t_Na(i,m))*(G_Na(i+1,m) - G_Na(i,m)));
         G_Cl(i,m+1) = G_Cl(i,m) + ((D_Cl_day*h2)/tau^2)*(G_Cl(i+1,m) -2*G_Cl(i,m) + G_Cl(i-1,m)) - h1*((u_t_Cl(i+1,m) - u_t_Cl(i,m))*(G_Cl(i+1,m) - G_Cl(i,m)));
@@ -462,7 +466,7 @@ for m=1:nt-1
         G_H(i,m+1) = G_H(i,m) + ((D_H_day*h2)/tau^2)*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) - h1*((u_t_H(i+1,m) - u_t_H(i,m))*(G_H(i+1,m) - G_H(i,m)));
         G_C(i,m+1) = G_C(i,m) + ((D_C_day*h2)/tau^2)*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C(i+1,m) - G_C(i,m)));
         
-
+        % $$$
         G_HA(end,m) = J_HA(i,m);    %--- Lower boundary
         G_OH(end,m) = J_OH(i,m);    %--- Lower boundary
         G_Na(end,m) = J_Na(i,m);    %--- Lower boundary
