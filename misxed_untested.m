@@ -418,7 +418,7 @@ G_A_up(:,1) = G_A(:,1)/c_0;
 G_H_up(:,1) = G_H(:,1)/c_0;
 G_C_up(:,1) = G_C(:,1)/c_C;
 
-% !!!
+% ###
 G_HA_ads(:,1) = K_ads*(G_HA(:,1) + G_A(:,1));
 G_OH_ads(:,1) = K_ads*(G_OH(:,1));
 G_Na_ads(:,1) = K_ads*(G_Na(:,1));
@@ -484,6 +484,23 @@ for m=1:nt-1
         G_H(i,m+1) = G_H(i,m) + ((D_H_day*h2)/tau^2)*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) - h1*((u_t_H(i+1,m) - u_t_H(i,m))*(G_H(i+1,m) - G_H(i,m)));
         G_C(i,m+1) = G_C(i,m) + ((D_C_day*h2)/tau^2)*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C(i+1,m) - G_C(i,m)));
         
+        % Adsorbed concentration
+        G_HA_ads(i,m) = K_ads*G_HA(i,m);
+        G_Na_ads(i,m) = K_ads*G_Na(i,m);
+        G_Cl_ads(i,m) = K_ads*G_Cl(i,m);
+        G_OH_ads(i,m) = K_ads*G_OH(i,m);
+        G_A_ads(i,m) = K_ads*G_A(i,m);
+        G_H_ads(i,m) = K_ads*G_H(i,m);
+        G_C_ads(i,m) = K_ads*G_C(i,m);
+
+        % Rate values
+        R_HA(i,m) = G_HA_ads(i,m);
+        R_Na(i,m) = G_Na_ads(i,m);
+        R_Cl(i,m) = G_Cl_ads(i,m);
+        R_OH(i,m) = G_OH_ads(i,m);
+        R_A(i,m) = G_A_ads(i,m);
+        R_H(i,m) = G_H_ads(i,m);
+        R_C(i,m) = G_C_ads(i,m);
 
         J_HA(i,m) = G_HA(i-1,m);
         J_Na(i,m) = G_Na(i-1,m);
