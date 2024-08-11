@@ -505,7 +505,8 @@ for m=1:nt-1
         sum_total_r(i,m) = sum_HA_r(i,m) + sum_Na_r(i,m) + sum_Cl_r(i,m) + sum_OH_r(i,m) + sum_A_r(i,m) + sum_H_r(i,m) + sum_C_r(i,m);
                 
         % Current calculations
-        i_z(i,m) = (1/tau^2)*(-sigma_total(i,m) - F*) 
+        i_z(i,m) = (1/tau^2)*(-sigma_total(i,m) - F*sum_total_r(i,m));
+         
         % $$$
         G_HA(end,m) = J_HA(i,m);    %--- Lower boundary
         G_OH(end,m) = J_OH(i,m);    %--- Lower boundary
