@@ -484,7 +484,7 @@ for m=1:nt-1
         G_C(i,m+1) = G_C(i,m) + ((D_C_day*h2)/tau^2)*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C(i+1,m) - G_C(i,m)));
         
 
-        J_H(i,m) = G_H(i-1,m);
+        J_H(i+1,m) = G_H(i-1,m);
         % $$$
         % Sigma calculations
         sum_HA(i,m) = (z_HA^2)*D_HA*(G_HA(i,m));
