@@ -315,8 +315,8 @@ G_A_up = zeros(nx,nt);
 G_H_up = zeros(nx,nt);
 G_C_up = zeros(nx,nt);
 
-% !!!
-% Adsorbed concentration arrays [remapped]
+% $$$
+% Adsorbed concentration arrays
 G_HA_ads = zeros(nx,nt);
 G_OH_ads = zeros(nx,nt);
 G_Na_ads = zeros(nx,nt);
