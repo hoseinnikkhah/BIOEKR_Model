@@ -484,6 +484,7 @@ for m=1:nt-1
         G_H(i,m+1) = G_H(i,m) + ((D_H_day*h2)/tau^2)*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) - h1*((u_t_H(i+1,m) - u_t_H(i,m))*(G_H(i+1,m) - G_H(i,m))) + R_H(i,m)*dt;
         G_C(i,m+1) = G_C(i,m) + ((D_C_day*h2)/tau^2)*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C(i+1,m) - G_C(i,m))) + R_C(i,m)*dt;
         
+        % $$$
         % Adsorbed concentration
         G_HA_ads(i,m) = K_ads*G_HA(i,m);
         G_Na_ads(i,m) = K_ads*G_Na(i,m);
@@ -493,6 +494,7 @@ for m=1:nt-1
         G_H_ads(i,m) = K_ads*G_H(i,m);
         G_C_ads(i,m) = K_ads*G_C(i,m);
 
+        % ###
         % Rate values
         R_HA(i,m) = G_HA_ads(i,m);
         R_Na(i,m) = G_Na_ads(i,m);
@@ -502,6 +504,8 @@ for m=1:nt-1
         R_H(i,m) = G_H_ads(i,m);
         R_C(i,m) = G_C_ads(i,m);
 
+        % $$$
+        % Flux array corolation
         J_HA(i,m) = G_HA(i-1,m);
         J_Na(i,m) = G_Na(i-1,m);
         J_Cl(i,m) = G_Cl(i-1,m);
@@ -537,14 +541,8 @@ for m=1:nt-1
         % Current calculations
         i_z(i,m) = (1/tau^2)*(-sigma_total(i,m) - F*sum_total_r(i,m));
 
-        % $$$
-        % Start and End of cap rate values
-        if i == 40
-            R_OH(i,m) = (i_z(40,m)/F);
-        end
-        if i == 2
-            R_H(i,m) = (i_z(2,m)/F);
-        end
+
+
         
         % $$$
         G_HA(end,m) = J_HA(40,m);    %--- Lower boundary
@@ -557,7 +555,22 @@ for m=1:nt-1
 
         R_OH(end,m) = J_OH(40,m);    %--- Lower boundary
         R_H(end,m) = J_H(40,m);      %--- Lower boundary
-    
+
+        K_H2O(i,m) = G_H(i,m)*G_OH(i,m);
+        K_a(i,m) = (G_H(i,m)*G_A(i,m))/G_HA(i,m);
+        K_NaCl(i,m) = (G_Cl(i,m)*G_Na(i,m))/G_Na(i,m);
+        R_H(i,m) = (K_H2O(i,m)*G_H(i,m)) + (K_a(i,m)*G_HA(i,m));
+        % Start and End of cap rate values
+        if i == 2
+            R_H(i,m) = (i_z(2,m)/F);
+        end
+        R_OH(i,m) = (K_H2O(i,m)*G_OH(i,m)) + (K_NaCl(i,m)*G_Na(i,m));
+        if i == 40
+            R_OH(i,m) = (i_z(40,m)/F);
+        end        
+        R_Cl(i,m) = (K_NaCl(i,m)*G_Na(i,m));
+        R_A(i,m) = (K_a(i,m)*G_HA(i,m));
+        R_C(i,m) = R_i*coeff*(dt)/n;
     end
 end
 
