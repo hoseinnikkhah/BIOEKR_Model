@@ -506,7 +506,7 @@ for m=1:nt-1
                 
         % Current calculations
         i_z(i,m) = (1/tau^2)*(-sigma_total(i,m) - F*sum_total_r(i,m));
-         
+
         % $$$
         G_HA(end,m) = J_HA(i,m);    %--- Lower boundary
         G_OH(end,m) = J_OH(i,m);    %--- Lower boundary
@@ -541,13 +541,13 @@ yl = [10000,7900,7100,6000,5700,5500,5400,5100];
 % ###
 figure(1);  % --- EKR (Standard)
 hold on;
-plot(t_array,G_HA(10,:),'-','DisplayName', 'HA');
-plot(t_array,G_OH(10,:),'-','DisplayName', 'OH-');
-plot(t_array,G_Na(10,:),'-','DisplayName', 'Na+');
-plot(t_array,G_Cl(10,:),'-','DisplayName', 'Cl');
-plot(t_array,G_A(10,:),'-','DisplayName', 'A-');
+%plot(t_array,G_HA(10,:),'-','DisplayName', 'HA');
+%plot(t_array,G_OH(10,:),'-','DisplayName', 'OH-');
+%plot(t_array,G_Na(10,:),'-','DisplayName', 'Na+');
+%plot(t_array,G_Cl(10,:),'-','DisplayName', 'Cl');
+%plot(t_array,G_A(10,:),'-','DisplayName', 'A-');
 plot(t_array,G_H(10,:),'-','DisplayName', 'H+ ');
-plot(t_array,G_C(10,:),'-','DisplayName', 'Hydrocarbon');
+%plot(t_array,G_C(10,:),'-','DisplayName', 'Hydrocarbon');
 
 %plot(t_array,R_H(10,:),'-','DisplayName', 'H+++ ');
 
