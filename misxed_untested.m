@@ -494,18 +494,17 @@ pH_scale = linspace(1,40,41);
 xl = [0,5,10,15,20,25,30,35];
 yl = [10000,7900,7100,6000,5700,5500,5400,5100];
 
-figure(1);
+figure(1);  % --- EKR (Standard)
 
 hold on;
 
-
-%plot(t_array,G_HA_converted(10,:),'-','DisplayName', 'HA');
-%plot(t_array,G_A_converted(10,:),'-','DisplayName', 'A-');
-%plot(t_array,G_Na_converted(10,:),'-','DisplayName', 'Na+');
-%plot(t_array,G_Cl_converted(10,:),'-','DisplayName', 'Cl');
+plot(t_array,G_HA(10,:),'-','DisplayName', 'HA');
+plot(t_array,G_OH(10,:),'-','DisplayName', 'OH-');
+plot(t_array,G_Na(10,:),'-','DisplayName', 'Na+');
+plot(t_array,G_Cl(10,:),'-','DisplayName', 'Cl');
+plot(t_array,G_A(10,:),'-','DisplayName', 'A-');
 plot(t_array,G_H(10,:),'-','DisplayName', 'H+ ');
-%plot(t_array,G_OH_converted(10,:),'-','DisplayName', 'OH- ');
-%plot(t_array,G_C_TPH_f(10,:),'-','DisplayName', 'Hydrocarbon');
+plot(t_array,G_C(10,:),'-','DisplayName', 'Hydrocarbon');
 
 %plot(t_array,R_H(10,:),'-','DisplayName', 'H+++ ');
 
