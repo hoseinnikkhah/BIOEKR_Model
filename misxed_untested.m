@@ -470,7 +470,8 @@ for m=1:nt-1
     G_C(1,m) = J_C(1,m);     %--- Upper boundary
     G_H(1,m) = J_H(1,m);     %--- Upper boundary
     G_A(1,m) = J_A(1,m);     %--- Upper boundary
-    R_H(1,m) = J_H(1,m);
+    R_H(1,m) = J_H(1,m);     %--- Upper boundary
+    R_OH(1,m) = J_OH(1,m);   %--- Upper boundary
     for i=2:nx-1
 
         % $$$
@@ -527,9 +528,7 @@ for m=1:nt-1
         if i == 2
             R_H(i,m) = (i_z(2,m)/F);
         end
-
         
-        R_OH(end,m) = J_OH(i,m);
         % $$$
         G_HA(end,m) = J_HA(40,m);    %--- Lower boundary
         G_OH(end,m) = J_OH(40,m);    %--- Lower boundary
@@ -539,7 +538,8 @@ for m=1:nt-1
         G_H(end,m) = J_H(40,m);      %--- Lower boundary
         G_C(end,m) = J_C(40,m);      %--- Lower boundary
 
-
+        R_OH(end,m) = J_OH(40,m);    %--- Lower boundary
+        R_H(end,m) = J_H(40,m);      %--- Lower boundary
     
     end
 end
