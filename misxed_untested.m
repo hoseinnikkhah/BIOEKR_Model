@@ -347,6 +347,17 @@ sum_H = zeros(nx,nt);
 sum_C = zeros(nx,nt);
 sum_total = zeros(nx,nt);
 
+% $$$
+% sum values in sigma calculations (right hand)
+sum_HA_r = zeros(nx,nt);
+sum_OH_r = zeros(nx,nt);
+sum_Na_r = zeros(nx,nt);
+sum_Cl_r = zeros(nx,nt);
+sum_A_r = zeros(nx,nt);
+sum_H_r = zeros(nx,nt);
+sum_C_r = zeros(nx,nt);
+sum_total_r = zeros(nx,nt);
+
 % !!!
 C_HA = zeros(nx,nt);
 C_OH = zeros(nx,nt);
@@ -472,7 +483,8 @@ for m=1:nt-1
         G_H(i,m+1) = G_H(i,m) + ((D_H_day*h2)/tau^2)*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) - h1*((u_t_H(i+1,m) - u_t_H(i,m))*(G_H(i+1,m) - G_H(i,m)));
         G_C(i,m+1) = G_C(i,m) + ((D_C_day*h2)/tau^2)*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C(i+1,m) - G_C(i,m)));
         
-
+        % ###
+        % Sigma calculations
         sum_HA(i,m) = (z_HA^2)*v_HA*G_HA(i,m);
         sum_Na(i,m) = (z_NA^2)*v_Na*G_Na(i,m);
         sum_Cl(i,m) = (z_Cl^2)*v_Cl*G_Cl(i,m);
@@ -481,7 +493,10 @@ for m=1:nt-1
         sum_H(i,m) = (z_H^2)*v_H*G_H(i,m);
         sum_C(i,m) = (z_C^2)*v_C*G_C(i,m);
         sum_total(i,m) =  sum_HA(i,m) + sum_Na(i,m) + sum_Cl(i,m) + sum_OH(i,m) + sum_A(i,m) + sum_H(i,m) + sum_Cl(i,m);
+        sigma_total(i,m) = (F^2)*sum_total(i,m) + sigma_surface(i,m);
         
+        % Current calculations
+        i_z(i,m) = (1/tau^2)*(-sigma_total(i,m) - F*) 
         % $$$
         G_HA(end,m) = J_HA(i,m);    %--- Lower boundary
         G_OH(end,m) = J_OH(i,m);    %--- Lower boundary
