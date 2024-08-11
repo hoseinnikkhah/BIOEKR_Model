@@ -484,7 +484,14 @@ for m=1:nt-1
         G_C(i,m+1) = G_C(i,m) + ((D_C_day*h2)/tau^2)*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C(i+1,m) - G_C(i,m)));
         
 
-        J_H(i+1,m) = G_H(i-1,m);
+        J_HA(i,m) = G_HA(i-1,m);
+        J_Na(i,m) = G_Na(i-1,m);
+        J_Cl(i,m) = G_Cl(i-1,m);
+        J_OH(i,m) = G_OH(i-1,m);
+        J_A(i,m) = G_A(i-1,m);
+        J_H(i,m) = G_H(i-1,m);
+        J_C(i,m) = G_C(i-1,m);
+
         % $$$
         % Sigma calculations
         sum_HA(i,m) = (z_HA^2)*D_HA*(G_HA(i,m));
@@ -524,13 +531,13 @@ for m=1:nt-1
         
         R_OH(end,m) = J_OH(i,m);
         % $$$
-        G_HA(end,m) = J_HA(i,m);    %--- Lower boundary
-        G_OH(end,m) = J_OH(i,m);    %--- Lower boundary
-        G_Na(end,m) = J_Na(i,m);    %--- Lower boundary
-        G_Cl(end,m) = J_Cl(i,m);    %--- Lower boundary
-        G_A(end,m) = J_A(i,m);      %--- Lower boundary
+        G_HA(end,m) = J_HA(40,m);    %--- Lower boundary
+        G_OH(end,m) = J_OH(40,m);    %--- Lower boundary
+        G_Na(end,m) = J_Na(40,m);    %--- Lower boundary
+        G_Cl(end,m) = J_Cl(40,m);    %--- Lower boundary
+        G_A(end,m) = J_A(40,m);      %--- Lower boundary
         G_H(end,m) = J_H(40,m);      %--- Lower boundary
-        G_C(end,m) = J_C(i,m);      %--- Lower boundary
+        G_C(end,m) = J_C(40,m);      %--- Lower boundary
 
 
     
