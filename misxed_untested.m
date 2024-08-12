@@ -711,6 +711,26 @@ for m=1:nt-1
     G_H_bio(1,m) = J_H_bio(1,m);     %--- Upper boundary
     G_A_bio(1,m) = J_A_bio(1,m);     %--- Upper boundary
 
+    % $$$
+    % --- Set BC [Dimensionless]
+    G_OH_up(1,m) = J_OH_up(1,m);   %--- Upper boundary
+    G_HA_up(1,m) = J_HA_up(1,m);   %--- Upper boundary
+    G_Na_up(1,m) = J_Na_up(1,m);   %--- Upper boundary
+    G_Cl_up(1,m) = J_Cl_up(1,m);   %--- Upper boundary
+    G_C_up(1,m) = J_C_up(1,m);     %--- Upper boundary
+    G_H_up(1,m) = J_H_up(1,m);     %--- Upper boundary
+    G_A_up(1,m) = J_A_up(1,m);     %--- Upper boundary
+
+    % $$$
+    % --- Set BC [Dimensionless] (2nd)
+    G_OH_up1(1,m) = J_OH_up1(1,m);   %--- Upper boundary
+    G_HA_up1(1,m) = J_HA_up1(1,m);   %--- Upper boundary
+    G_Na_up1(1,m) = J_Na_up1(1,m);   %--- Upper boundary
+    G_Cl_up1(1,m) = J_Cl_up1(1,m);   %--- Upper boundary
+    G_C_up1(1,m) = J_C_up1(1,m);     %--- Upper boundary
+    G_H_up1(1,m) = J_H_up1(1,m);     %--- Upper boundary
+    G_A_up1(1,m) = J_A_up1(1,m);     %--- Upper boundary
+
     for i=2:nx-1
 
         % $$$
@@ -740,7 +760,25 @@ for m=1:nt-1
         G_A_bio(i,m+1) = G_A_bio(i,m) + growth(i,m)*(coeff*(((D_A_day*h2)/tau^2)*(G_A_bio(i+1,m) -2*G_A_bio(i,m) + G_A_bio(i-1,m)) - h1*((u_t_A(i+1,m) - u_t_A(i,m))*(G_A_bio(i+1,m) - G_A_bio(i,m)))));
         G_H_bio(i,m+1) = G_H_bio(i,m) + growth(i,m)*(coeff*(((D_H_day*h2)/tau^2)*(G_H_bio(i+1,m) -2*G_H_bio(i,m) + G_H_bio(i-1,m)) - h1*((u_t_H(i+1,m) - u_t_H(i,m))*(G_H_bio(i+1,m) - G_H_bio(i,m)))));
         G_C_bio(i,m+1) = G_C_bio(i,m) + growth(i,m)*(coeff*(((D_C_day*h2)/tau^2)*(G_C_bio(i+1,m) -2*G_C_bio(i,m) + G_C_bio(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C_bio(i+1,m) - G_C_bio(i,m)))));
-                        
+
+        % This is for total BKR [Dimensionless] (1st)
+        G_HA_up(i,m+1) = G_HA_up(i,m) + growth(i,m)*(coeff*(((D_HA_day*h2)/tau^2)*(G_HA_up(i+1,m) -2*G_HA_up(i,m) + G_HA_up(i-1,m)) - h1*((u_t_HA(i+1,m) - u_t_HA(i,m))*(G_HA_up(i+1,m) - G_HA_up(i,m)))));
+        G_Na_up(i,m+1) = G_Na_up(i,m) + growth(i,m)*(coeff*(((D_Na_day*h2)/tau^2)*(G_Na_up(i+1,m) -2*G_Na_up(i,m) + G_Na_up(i-1,m)) - h1*((u_t_Na(i+1,m) - u_t_Na(i,m))*(G_Na_up(i+1,m) - G_Na_up(i,m)))));
+        G_Cl_up(i,m+1) = G_Cl_up(i,m) + growth(i,m)*(coeff*(((D_Cl_day*h2)/tau^2)*(G_Cl_up(i+1,m) -2*G_Cl_up(i,m) + G_Cl_up(i-1,m)) - h1*((u_t_Cl(i+1,m) - u_t_Cl(i,m))*(G_Cl_up(i+1,m) - G_Cl_up(i,m)))));
+        G_OH_up(i,m+1) = G_OH_up(i,m) + growth(i,m)*(coeff*(((D_OH_day*h2)/tau^2)*(G_OH_up(i+1,m) -2*G_OH_up(i,m) + G_OH_up(i-1,m)) - h1*((u_t_OH(i+1,m) - u_t_OH(i,m))*(G_OH_up(i+1,m) - G_OH_up(i,m)))));
+        G_A_up(i,m+1) = G_A_up(i,m) + growth(i,m)*(coeff*(((D_A_day*h2)/tau^2)*(G_A_up(i+1,m) -2*G_A_up(i,m) + G_A_up(i-1,m)) - h1*((u_t_A(i+1,m) - u_t_A(i,m))*(G_A_up(i+1,m) - G_A_up(i,m)))));
+        G_H_up(i,m+1) = G_H_up(i,m) + growth(i,m)*(coeff*(((D_H_day*h2)/tau^2)*(G_H_up(i+1,m) -2*G_H_up(i,m) + G_H_up(i-1,m)) - h1*((u_t_H(i+1,m) - u_t_H(i,m))*(G_H_up(i+1,m) - G_H_up(i,m)))));
+        G_C_up(i,m+1) = G_C_up(i,m) + growth(i,m)*(coeff*(((D_C_day*h2)/tau^2)*(G_C_up(i+1,m) -2*G_C_up(i,m) + G_C_up(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C_up(i+1,m) - G_C_up(i,m)))));
+
+        % This is for total BKR [Dimensionless] (1st)
+        G_HA_up1(i,m+1) = G_HA_up1(i,m) + growth(i,m)*(coeff*(((D_HA_day*h2)/tau^2)*(G_HA_up1(i+1,m) -2*G_HA_up1(i,m) + G_HA_up1(i-1,m)) - h1*((u_t_HA(i+1,m) - u_t_HA(i,m))*(G_HA_up1(i+1,m) - G_HA_up1(i,m)))));
+        G_Na_up1(i,m+1) = G_Na_up1(i,m) + growth(i,m)*(coeff*(((D_Na_day*h2)/tau^2)*(G_Na_up1(i+1,m) -2*G_Na_up1(i,m) + G_Na_up1(i-1,m)) - h1*((u_t_Na(i+1,m) - u_t_Na(i,m))*(G_Na_up1(i+1,m) - G_Na_up1(i,m)))));
+        G_Cl_up1(i,m+1) = G_Cl_up1(i,m) + growth(i,m)*(coeff*(((D_Cl_day*h2)/tau^2)*(G_Cl_up1(i+1,m) -2*G_Cl_up1(i,m) + G_Cl_up1(i-1,m)) - h1*((u_t_Cl(i+1,m) - u_t_Cl(i,m))*(G_Cl_up1(i+1,m) - G_Cl_up1(i,m)))));
+        G_OH_up1(i,m+1) = G_OH_up1(i,m) + growth(i,m)*(coeff*(((D_OH_day*h2)/tau^2)*(G_OH_up1(i+1,m) -2*G_OH_up1(i,m) + G_OH_up1(i-1,m)) - h1*((u_t_OH(i+1,m) - u_t_OH(i,m))*(G_OH_up1(i+1,m) - G_OH_up1(i,m)))));
+        G_A_up1(i,m+1) = G_A_up1(i,m) + growth(i,m)*(coeff*(((D_A_day*h2)/tau^2)*(G_A_up1(i+1,m) -2*G_A_up1(i,m) + G_A_up1(i-1,m)) - h1*((u_t_A(i+1,m) - u_t_A(i,m))*(G_A_up1(i+1,m) - G_A_up1(i,m)))));
+        G_H_up1(i,m+1) = G_H_up1(i,m) + growth(i,m)*(coeff*(((D_H_day*h2)/tau^2)*(G_H_up1(i+1,m) -2*G_H_up1(i,m) + G_H_up1(i-1,m)) - h1*((u_t_H(i+1,m) - u_t_H(i,m))*(G_H_up1(i+1,m) - G_H_up1(i,m)))));
+        G_C_up1(i,m+1) = G_C_up1(i,m) + growth(i,m)*(coeff*(((D_C_day*h2)/tau^2)*(G_C_up1(i+1,m) -2*G_C_up1(i,m) + G_C_up1(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C_up1(i+1,m) - G_C_up1(i,m)))));
+
         % $$$
         % Adsorbed concentration
         G_HA_ads(i,m) = K_ads*G_HA(i,m);
@@ -791,6 +829,25 @@ for m=1:nt-1
         J_H_bio(i,m) = G_H_bio(i-1,m);
         J_C_bio(i,m) = G_C_bio(i-1,m);
 
+        % $$$
+        % Flux array corolation [Bio]
+        J_HA_bio(i,m) = G_HA_bio(i-1,m);
+        J_Na_bio(i,m) = G_Na_bio(i-1,m);
+        J_Cl_bio(i,m) = G_Cl_bio(i-1,m);
+        J_OH_bio(i,m) = G_OH_bio(i-1,m);
+        J_A_bio(i,m) = G_A_bio(i-1,m);
+        J_H_bio(i,m) = G_H_bio(i-1,m);
+        J_C_bio(i,m) = G_C_bio(i-1,m);
+
+        % $$$
+        % Flux array corolation [Bio]
+        J_HA_bio(i,m) = G_HA_bio(i-1,m);
+        J_Na_bio(i,m) = G_Na_bio(i-1,m);
+        J_Cl_bio(i,m) = G_Cl_bio(i-1,m);
+        J_OH_bio(i,m) = G_OH_bio(i-1,m);
+        J_A_bio(i,m) = G_A_bio(i-1,m);
+        J_H_bio(i,m) = G_H_bio(i-1,m);
+        J_C_bio(i,m) = G_C_bio(i-1,m);       
         % $$$
         % Sigma calculations
         sum_HA(i,m) = (z_HA^2)*D_HA*(G_HA(i,m));
