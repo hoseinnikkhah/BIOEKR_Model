@@ -306,6 +306,16 @@ J_H_tot = zeros(nx,nt);
 J_C_tot = zeros(nx,nt);
 
 % $$$
+% Total Flux arrays [Bio]
+J_HA_bio = zeros(nx,nt);
+J_OH_bio = zeros(nx,nt);
+J_Na_bio = zeros(nx,nt);
+J_Cl_bio = zeros(nx,nt);
+J_A_bio = zeros(nx,nt);
+J_H_bio = zeros(nx,nt);
+J_C_bio = zeros(nx,nt);
+
+% $$$
 % concentration arrays
 G_HA = zeros(nx,nt);
 G_OH = zeros(nx,nt);
@@ -324,6 +334,16 @@ G_Cl_tot = zeros(nx,nt);
 G_A_tot = zeros(nx,nt);
 G_H_tot = zeros(nx,nt);
 G_C_tot = zeros(nx,nt);
+
+% $$$
+% Total concentration arrays (Bio)
+G_HA_bio = zeros(nx,nt);
+G_OH_bio = zeros(nx,nt);
+G_Na_bio = zeros(nx,nt);
+G_Cl_bio = zeros(nx,nt);
+G_A_bio = zeros(nx,nt);
+G_H_bio = zeros(nx,nt);
+G_C_bio = zeros(nx,nt);
 
 % $$$
 % Adsorbed concentration arrays
@@ -542,7 +562,7 @@ J_C_bio(1,:) = u_t_C(1,:)*c_C;
 
 for m=1:nt-1
     % $$$
-    % --- Set BC
+    % --- Set BC [EKR Standard]
     G_OH(1,m) = J_OH(1,m);   %--- Upper boundary
     G_HA(1,m) = J_HA(1,m);   %--- Upper boundary
     G_Na(1,m) = J_Na(1,m);   %--- Upper boundary
@@ -553,7 +573,8 @@ for m=1:nt-1
     R_H(1,m) = J_H(1,m);     %--- Upper boundary
     R_OH(1,m) = J_OH(1,m);   %--- Upper boundary
 
-    % --- Set BC
+    % $$$
+    % --- Set BC [EKR Standard (with adsorbed term)]
     G_OH_tot(1,m) = J_OH_tot(1,m);   %--- Upper boundary
     G_HA_tot(1,m) = J_HA_tot(1,m);   %--- Upper boundary
     G_Na_tot(1,m) = J_Na_tot(1,m);   %--- Upper boundary
@@ -561,6 +582,16 @@ for m=1:nt-1
     G_C_tot(1,m) = J_C_tot(1,m);     %--- Upper boundary
     G_H_tot(1,m) = J_H_tot(1,m);     %--- Upper boundary
     G_A_tot(1,m) = J_A_tot(1,m);     %--- Upper boundary
+
+    % $$$
+    % --- Set BC [BKR Standard]
+    G_OH_bio(1,m) = J_OH_bio(1,m);   %--- Upper boundary
+    G_HA_bio(1,m) = J_HA_bio(1,m);   %--- Upper boundary
+    G_Na_bio(1,m) = J_Na_bio(1,m);   %--- Upper boundary
+    G_Cl_bio(1,m) = J_Cl_bio(1,m);   %--- Upper boundary
+    G_C_bio(1,m) = J_C_bio(1,m);     %--- Upper boundary
+    G_H_bio(1,m) = J_H_bio(1,m);     %--- Upper boundary
+    G_A_bio(1,m) = J_A_bio(1,m);     %--- Upper boundary
 
     for i=2:nx-1
 
@@ -613,7 +644,7 @@ for m=1:nt-1
         R_C(i,m) = G_C_ads(i,m);
 
         % $$$
-        % Flux array corolation
+        % Flux array corolation [Standard]
         J_HA(i,m) = G_HA(i-1,m);
         J_Na(i,m) = G_Na(i-1,m);
         J_Cl(i,m) = G_Cl(i-1,m);
@@ -622,7 +653,7 @@ for m=1:nt-1
         J_H(i,m) = G_H(i-1,m);
         J_C(i,m) = G_C(i-1,m);
 
-        % Flux array corolation
+        % Flux array corolation [Adsorbed]
         J_HA_tot(i,m) = G_HA_tot(i-1,m);
         J_Na_tot(i,m) = G_Na_tot(i-1,m);
         J_Cl_tot(i,m) = G_Cl_tot(i-1,m);
@@ -631,6 +662,14 @@ for m=1:nt-1
         J_H_tot(i,m) = G_H_tot(i-1,m);
         J_C_tot(i,m) = G_C_tot(i-1,m);
 
+        % Flux array corolation [Bio]
+        J_HA_bio(i,m) = G_HA_bio(i-1,m);
+        J_Na_bio(i,m) = G_Na_bio(i-1,m);
+        J_Cl_bio(i,m) = G_Cl_bio(i-1,m);
+        J_OH_bio(i,m) = G_OH_bio(i-1,m);
+        J_A_bio(i,m) = G_A_bio(i-1,m);
+        J_H_bio(i,m) = G_H_bio(i-1,m);
+        J_C_bio(i,m) = G_C_bio(i-1,m);
         % $$$
         % Sigma calculations
         sum_HA(i,m) = (z_HA^2)*D_HA*(G_HA(i,m));
@@ -659,6 +698,7 @@ for m=1:nt-1
         i_z(i,m) = (1/tau^2)*(-sigma_total(i,m) - F*sum_total_r(i,m));
 
         % $$$
+        % [For EKR Standard]
         G_HA(end,m) = J_HA(40,m);    %--- Lower boundary
         G_OH(end,m) = J_OH(40,m);    %--- Lower boundary
         G_Na(end,m) = J_Na(40,m);    %--- Lower boundary
@@ -666,10 +706,10 @@ for m=1:nt-1
         G_A(end,m) = J_A(40,m);      %--- Lower boundary
         G_H(end,m) = J_H(40,m);      %--- Lower boundary
         G_C(end,m) = J_C(40,m);      %--- Lower boundary
-
         R_OH(end,m) = J_OH(40,m);    %--- Lower boundary
         R_H(end,m) = J_H(40,m);      %--- Lower boundary
 
+        % [For adsorbed]
         G_HA_tot(end,m) = J_HA_tot(40,m);    %--- Lower boundary
         G_OH_tot(end,m) = J_OH_tot(40,m);    %--- Lower boundary
         G_Na_tot(end,m) = J_Na_tot(40,m);    %--- Lower boundary
@@ -677,6 +717,15 @@ for m=1:nt-1
         G_A_tot(end,m) = J_A_tot(40,m);      %--- Lower boundary
         G_H_tot(end,m) = J_H_tot(40,m);      %--- Lower boundary
         G_C_tot(end,m) = J_C_tot(40,m);      %--- Lower boundary
+
+        % [For Bio]
+        G_HA_bio(end,m) = J_HA_bio(40,m);    %--- Lower boundary
+        G_OH_bio(end,m) = J_OH_bio(40,m);    %--- Lower boundary
+        G_Na_bio(end,m) = J_Na_bio(40,m);    %--- Lower boundary
+        G_Cl_bio(end,m) = J_Cl_bio(40,m);    %--- Lower boundary
+        G_A_bio(end,m) = J_A_bio(40,m);      %--- Lower boundary
+        G_H_bio(end,m) = J_H_bio(40,m);      %--- Lower boundary
+        G_C_bio(end,m) = J_C_bio(40,m);      %--- Lower boundary
 
         K_H2O(i,m) = G_H(i,m)*G_OH(i,m);
         K_a(i,m) = (G_H(i,m)*G_A(i,m))/G_HA(i,m);
@@ -719,6 +768,7 @@ hold on;
 %plot(t_array,G_A(10,:),'-','DisplayName', 'A-');
 plot(t_array,G_H(10,:),'-','DisplayName', 'H+ ');
 plot(t_array,G_H_tot(10,:),'-','DisplayName', 'H+ (coeff)');
+plot(t_array,G_H_bio(10,:),'-','DisplayName', 'H+ (coeff)');
 %plot(t_array,G_C(10,:),'-','DisplayName', 'Hydrocarbon');
 
 %plot(t_array,R_H(10,:),'-','DisplayName', 'H+++ ');
