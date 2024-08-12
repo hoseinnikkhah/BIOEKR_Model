@@ -470,7 +470,7 @@ R_H_ads = zeros(nx,nt);
 R_C_ads = zeros(nx,nt);
 
 % $$$
-% --- Set IC and BC
+% --- Set IC and BC [EKR] (Standard)
 G_HA(:,1) = c_0;
 G_OH(:,1) = c_0;
 G_Na(:,1) = c_Na;
@@ -478,6 +478,26 @@ G_Cl(:,1) = c_Cl;
 G_A(:,1) = c_0;
 G_H(:,1) = c_0;
 G_C(:,1) = c_C;
+
+% $$$
+% --- Set IC and BC [EKR] (Adsorbed)
+G_HA_tot(:,1) = c_0;
+G_OH_tot(:,1) = c_0;
+G_Na_tot(:,1) = c_Na;
+G_Cl_tot(:,1) = c_Cl;
+G_A_tot(:,1) = c_0;
+G_H_tot(:,1) = c_0;
+G_C_tot(:,1) = c_C;
+
+% $$$
+% --- Set IC and BC [EKR] (Adsorbed)
+G_HA__bio(:,1) = c_0;
+G_OH_bio(:,1) = c_0;
+G_Na_bio(:,1) = c_Na;
+G_Cl_bio(:,1) = c_Cl;
+G_A_bio(:,1) = c_0;
+G_H_bio(:,1) = c_0;
+G_C__bio(:,1) = c_C;
 
 % !!!
 G_HA_up(:,1) = G_HA(:,1)/c_0;
