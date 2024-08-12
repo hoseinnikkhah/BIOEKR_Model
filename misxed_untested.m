@@ -88,7 +88,7 @@ K_ads = 0.075;                 % Exprimental adsorbing constant
 coeff = 1/(1+K_ads);
 
 % Dimentionless     [Dimentionless]
-Peclet = 47;
+Pe = 47;
 Beta = 967;
 Z = 0.049;
 k_0 = K_a;
