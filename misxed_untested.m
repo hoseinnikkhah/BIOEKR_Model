@@ -439,16 +439,6 @@ sum_C_r = zeros(nx,nt);
 sum_total_r = zeros(nx,nt);
 
 % !!!
-C_HA = zeros(nx,nt);
-C_OH = zeros(nx,nt);
-C_Na = zeros(nx,nt);
-C_Cl = zeros(nx,nt);
-C_A = zeros(nx,nt);
-C_H = zeros(nx,nt);
-C_C = zeros(nx,nt);
-C_total = zeros(nx,nt);
-
-% !!!
 % SpeciesConstants
 K_H2O_m = ones(nx,nt);
 K_H2O_m = K_H2O_m*K_H2O;
