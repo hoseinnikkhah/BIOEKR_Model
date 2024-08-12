@@ -500,7 +500,7 @@ G_H_tot(:,1) = c_0;
 G_C_tot(:,1) = c_C;
 
 % $$$
-% --- Set IC and BC [EKR] (Adsorbed)
+% --- Set IC and BC [BKR]
 G_HA_bio(:,1) = c_0;
 G_OH_bio(:,1) = c_0;
 G_Na_bio(:,1) = c_Na;
@@ -509,7 +509,8 @@ G_A_bio(:,1) = c_0;
 G_H_bio(:,1) = c_0;
 G_C_bio(:,1) = c_C;
 
-% !!!
+% ###
+% --- Set IC and BC [Dimensionless]
 G_HA_up(:,1) = G_HA(:,1)/c_0;
 G_OH_up(:,1) = G_OH(:,1)/c_0;
 G_Na_up(:,1) = G_Na(:,1)/c_Na;
@@ -517,6 +518,16 @@ G_Cl_up(:,1) = G_Cl(:,1)/c_Cl;
 G_A_up(:,1) = G_A(:,1)/c_0;
 G_H_up(:,1) = G_H(:,1)/c_0;
 G_C_up(:,1) = G_C(:,1)/c_C;
+
+% ###
+% --- Set IC and BC [Dimensionless]
+G_HA_up1(:,1) = G_HA(:,1)/c_0;
+G_OH_up1(:,1) = G_OH(:,1)/c_0;
+G_Na_up1(:,1) = G_Na(:,1)/c_Na;
+G_Cl_up1(:,1) = G_Cl(:,1)/c_Cl;
+G_A_up1(:,1) = G_A(:,1)/c_0;
+G_H_up1(:,1) = G_H(:,1)/c_0;
+G_C_up1(:,1) = G_C(:,1)/c_C;
 
 % ###
 G_HA_ads(:,1) = K_ads*(G_HA(:,1) + G_A(:,1));
