@@ -769,7 +769,7 @@ hold on;
 %plot(t_array,G_A(10,:),'-','DisplayName', 'A-');
 plot(t_array,G_H(10,:),'-','DisplayName', 'H+ ');
 plot(t_array,G_H_tot(10,:),'-','DisplayName', 'H+ (coeff)');
-plot(t_array,G_H_bio(10,:),'-','DisplayName', 'H+ (coeff)');
+plot(t_array,G_H_bio(10,:),'-','DisplayName', 'H+ (BKR)');
 %plot(t_array,G_C(10,:),'-','DisplayName', 'Hydrocarbon');
 
 %plot(t_array,R_H(10,:),'-','DisplayName', 'H+++ ');
