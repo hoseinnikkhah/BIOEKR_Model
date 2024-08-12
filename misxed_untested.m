@@ -232,7 +232,7 @@ u_t_OH_up = (u_e_OH_less + u_c_up);
 u_t_Na_up = (u_e_Na_less + u_c_up);
 u_t_Cl_up = (u_e_Cl_less + u_c_up);
 u_t_A_up = (u_e_A_less + u_c_up);
-u_t_H_up = (u_e_H_less + u_c_up);
+u_t_H_up = -(u_e_H_less + u_c_up);
 u_t_C_up = (u_e_C_less + u_c_up);
 
 % $$$
