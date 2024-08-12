@@ -316,6 +316,26 @@ J_H_bio = zeros(nx,nt);
 J_C_bio = zeros(nx,nt);
 
 % $$$
+% Flux arrays [Dimensionless]
+J_HA_up = zeros(nx,nt);
+J_OH_up = zeros(nx,nt);
+J_Na_up = zeros(nx,nt);
+J_Cl_up = zeros(nx,nt);
+J_A_up = zeros(nx,nt);
+J_H_up = zeros(nx,nt);
+J_C_up = zeros(nx,nt);
+
+% $$$
+% Flux arrays [Dimensionless] (2nd)
+J_HA_up1 = zeros(nx,nt);
+J_OH_up1 = zeros(nx,nt);
+J_Na_up1 = zeros(nx,nt);
+J_Cl_up1 = zeros(nx,nt);
+J_A_up1 = zeros(nx,nt);
+J_H_up1 = zeros(nx,nt);
+J_C_up1 = zeros(nx,nt);
+
+% $$$
 % concentration arrays
 G_HA = zeros(nx,nt);
 G_OH = zeros(nx,nt);
@@ -336,14 +356,24 @@ G_H_tot = zeros(nx,nt);
 G_C_tot = zeros(nx,nt);
 
 % $$$
-% Total concentration arrays (Bio)
-G_HA_bio = zeros(nx,nt);
-G_OH_bio = zeros(nx,nt);
-G_Na_bio = zeros(nx,nt);
-G_Cl_bio = zeros(nx,nt);
-G_A_bio = zeros(nx,nt);
-G_H_bio = zeros(nx,nt);
-G_C_bio = zeros(nx,nt);
+% concentration arrays [Dimensionless]
+G_HA_up = zeros(nx,nt);
+G_OH_up = zeros(nx,nt);
+G_Na_up = zeros(nx,nt);
+G_Cl_up = zeros(nx,nt);
+G_A_up = zeros(nx,nt);
+G_H_up = zeros(nx,nt);
+G_C_up = zeros(nx,nt);
+
+% $$$
+% concentration arrays [Dimensionless] (2nd)
+G_HA_up1 = zeros(nx,nt);
+G_OH_up1 = zeros(nx,nt);
+G_Na_up1 = zeros(nx,nt);
+G_Cl_up1 = zeros(nx,nt);
+G_A_up1 = zeros(nx,nt);
+G_H_up1 = zeros(nx,nt);
+G_C_up1 = zeros(nx,nt);
 
 % $$$
 % Adsorbed concentration arrays
