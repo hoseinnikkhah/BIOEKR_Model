@@ -527,13 +527,13 @@ for m=1:nt-1
         G_C(i,m+1) = G_C(i,m) + ((D_C_day*h2)/tau^2)*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C(i+1,m) - G_C(i,m))) + R_C(i,m)*dt;
 
         % This is for total EKR [Standard]
-        G_HA_tot(i,m+1) = G_HA_tot(i,m) + ((D_HA_day*h2)/tau^2)*(G_HA_tot(i+1,m) -2*G_HA_tot(i,m) + G_HA_tot(i-1,m)) - h1*((u_t_HA(i+1,m) - u_t_HA(i,m))*(G_HA_tot(i+1,m) - G_HA_tot(i,m))) + R_HA(i,m)*dt;
-        G_Na_tot(i,m+1) = G_Na_tot(i,m) + ((D_Na_day*h2)/tau^2)*(G_Na_tot(i+1,m) -2*G_Na_tot(i,m) + G_Na_tot(i-1,m)) - h1*((u_t_Na(i+1,m) - u_t_Na(i,m))*(G_Na_tot(i+1,m) - G_Na_tot(i,m))) + R_Na(i,m)*dt;
-        G_Cl_tot(i,m+1) = G_Cl_tot(i,m) + ((D_Cl_day*h2)/tau^2)*(G_Cl_tot(i+1,m) -2*G_Cl_tot(i,m) + G_Cl_tot(i-1,m)) - h1*((u_t_Cl(i+1,m) - u_t_Cl(i,m))*(G_Cl_tot(i+1,m) - G_Cl_tot(i,m))) + R_Cl(i,m)*dt;
-        G_OH_tot(i,m+1) = G_OH_tot(i,m) + ((D_OH_day*h2)/tau^2)*(G_OH_tot(i+1,m) -2*G_OH_tot(i,m) + G_OH_tot(i-1,m)) - h1*((u_t_OH(i+1,m) - u_t_OH(i,m))*(G_OH_tot(i+1,m) - G_OH_tot(i,m))) + R_OH(i,m)*dt;
-        G_A_tot(i,m+1) = G_A_tot(i,m) + ((D_A_day*h2)/tau^2)*(G_A_tot(i+1,m) -2*G_A_tot(i,m) + G_A_tot(i-1,m)) - h1*((u_t_A(i+1,m) - u_t_A(i,m))*(G_A_tot(i+1,m) - G_A_tot(i,m))) + R_A(i,m)*dt;
-        G_H_tot(i,m+1) = G_H_tot(i,m) + ((D_H_day*h2)/tau^2)*(G_H_tot(i+1,m) -2*G_H_tot(i,m) + G_H_tot(i-1,m)) - h1*((u_t_H(i+1,m) - u_t_H(i,m))*(G_H_tot(i+1,m) - G_H_tot(i,m))) + R_H(i,m)*dt;
-        G_C_tot(i,m+1) = G_C_tot(i,m) + ((D_C_day*h2)/tau^2)*(G_C_tot(i+1,m) -2*G_C_tot(i,m) + G_C_tot(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C_tot(i+1,m) - G_C_tot(i,m))) + R_C(i,m)*dt;
+        G_HA_tot(i,m+1) = G_HA_tot(i,m) + coeff*(((D_HA_day*h2)/tau^2)*(G_HA_tot(i+1,m) -2*G_HA_tot(i,m) + G_HA_tot(i-1,m)) - h1*((u_t_HA(i+1,m) - u_t_HA(i,m))*(G_HA_tot(i+1,m) - G_HA_tot(i,m))));
+        G_Na_tot(i,m+1) = G_Na_tot(i,m) + coeff*(((D_Na_day*h2)/tau^2)*(G_Na_tot(i+1,m) -2*G_Na_tot(i,m) + G_Na_tot(i-1,m)) - h1*((u_t_Na(i+1,m) - u_t_Na(i,m))*(G_Na_tot(i+1,m) - G_Na_tot(i,m))));
+        G_Cl_tot(i,m+1) = G_Cl_tot(i,m) + coeff*(((D_Cl_day*h2)/tau^2)*(G_Cl_tot(i+1,m) -2*G_Cl_tot(i,m) + G_Cl_tot(i-1,m)) - h1*((u_t_Cl(i+1,m) - u_t_Cl(i,m))*(G_Cl_tot(i+1,m) - G_Cl_tot(i,m))));
+        G_OH_tot(i,m+1) = G_OH_tot(i,m) + coeff*(((D_OH_day*h2)/tau^2)*(G_OH_tot(i+1,m) -2*G_OH_tot(i,m) + G_OH_tot(i-1,m)) - h1*((u_t_OH(i+1,m) - u_t_OH(i,m))*(G_OH_tot(i+1,m) - G_OH_tot(i,m))));
+        G_A_tot(i,m+1) = G_A_tot(i,m) + coeff*(((D_A_day*h2)/tau^2)*(G_A_tot(i+1,m) -2*G_A_tot(i,m) + G_A_tot(i-1,m)) - h1*((u_t_A(i+1,m) - u_t_A(i,m))*(G_A_tot(i+1,m) - G_A_tot(i,m))));
+        G_H_tot(i,m+1) = G_H_tot(i,m) + coeff*(((D_H_day*h2)/tau^2)*(G_H_tot(i+1,m) -2*G_H_tot(i,m) + G_H_tot(i-1,m)) - h1*((u_t_H(i+1,m) - u_t_H(i,m))*(G_H_tot(i+1,m) - G_H_tot(i,m))));
+        G_C_tot(i,m+1) = G_C_tot(i,m) + coeff*(((D_C_day*h2)/tau^2)*(G_C_tot(i+1,m) -2*G_C_tot(i,m) + G_C_tot(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C_tot(i+1,m) - G_C_tot(i,m))));
                 
         % $$$
         % Adsorbed concentration
@@ -564,6 +564,15 @@ for m=1:nt-1
         J_A(i,m) = G_A(i-1,m);
         J_H(i,m) = G_H(i-1,m);
         J_C(i,m) = G_C(i-1,m);
+
+        % Flux array corolation
+        J_HA_tot(i,m) = G_HA_tot(i-1,m);
+        J_Na_tot(i,m) = G_Na_tot(i-1,m);
+        J_Cl_tot(i,m) = G_Cl_tot(i-1,m);
+        J_OH_tot(i,m) = G_OH_tot(i-1,m);
+        J_A_tot(i,m) = G_A_tot(i-1,m);
+        J_H_tot(i,m) = G_H_tot(i-1,m);
+        J_C_tot(i,m) = G_C_tot(i-1,m);
 
         % $$$
         % Sigma calculations
@@ -603,6 +612,14 @@ for m=1:nt-1
 
         R_OH(end,m) = J_OH(40,m);    %--- Lower boundary
         R_H(end,m) = J_H(40,m);      %--- Lower boundary
+
+        G_HA_tot(end,m) = J_HA_tot(40,m);    %--- Lower boundary
+        G_OH_tot(end,m) = J_OH_tot(40,m);    %--- Lower boundary
+        G_Na_tot(end,m) = J_Na_tot(40,m);    %--- Lower boundary
+        G_Cl_tot(end,m) = J_Cl_tot(40,m);    %--- Lower boundary
+        G_A_tot(end,m) = J_A_tot(40,m);      %--- Lower boundary
+        G_H_tot(end,m) = J_H_tot(40,m);      %--- Lower boundary
+        G_C_tot(end,m) = J_C_tot(40,m);      %--- Lower boundary
 
         K_H2O(i,m) = G_H(i,m)*G_OH(i,m);
         K_a(i,m) = (G_H(i,m)*G_A(i,m))/G_HA(i,m);
