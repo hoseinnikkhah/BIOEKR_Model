@@ -616,13 +616,13 @@ for m=1:nt-1
         G_C_tot(i,m+1) = G_C_tot(i,m) + coeff*(((D_C_day*h2)/tau^2)*(G_C_tot(i+1,m) -2*G_C_tot(i,m) + G_C_tot(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C_tot(i+1,m) - G_C_tot(i,m))));
 
         % This is for total BKR [Standard]
-        G_HA_bio(i,m+1) = G_HA_bio(i,m) + coeff*(((D_HA_day*h2)/tau^2)*(G_HA_bio(i+1,m) -2*G_HA_bio(i,m) + G_HA_bio(i-1,m)) - h1*((u_t_HA(i+1,m) - u_t_HA(i,m))*(G_HA_bio(i+1,m) - G_HA_bio(i,m))));
-        G_Na_bio(i,m+1) = G_Na_bio(i,m) + coeff*(((D_Na_day*h2)/tau^2)*(G_Na_bio(i+1,m) -2*G_Na_bio(i,m) + G_Na_bio(i-1,m)) - h1*((u_t_Na(i+1,m) - u_t_Na(i,m))*(G_Na_bio(i+1,m) - G_Na_bio(i,m))));
-        G_Cl_bio(i,m+1) = G_Cl_bio(i,m) + coeff*(((D_Cl_day*h2)/tau^2)*(G_Cl_bio(i+1,m) -2*G_Cl_bio(i,m) + G_Cl_bio(i-1,m)) - h1*((u_t_Cl(i+1,m) - u_t_Cl(i,m))*(G_Cl_bio(i+1,m) - G_Cl_bio(i,m))));
-        G_OH_bio(i,m+1) = G_OH_bio(i,m) + coeff*(((D_OH_day*h2)/tau^2)*(G_OH_bio(i+1,m) -2*G_OH_bio(i,m) + G_OH_bio(i-1,m)) - h1*((u_t_OH(i+1,m) - u_t_OH(i,m))*(G_OH_bio(i+1,m) - G_OH_bio(i,m))));
-        G_A_bio(i,m+1) = G_A_bio(i,m) + coeff*(((D_A_day*h2)/tau^2)*(G_A_bio(i+1,m) -2*G_A_bio(i,m) + G_A_bio(i-1,m)) - h1*((u_t_A(i+1,m) - u_t_A(i,m))*(G_A_bio(i+1,m) - G_A_bio(i,m))));
-        G_H_bio(i,m+1) = G_H_bio(i,m) + coeff*(((D_H_day*h2)/tau^2)*(G_H_bio(i+1,m) -2*G_H_bio(i,m) + G_H_bio(i-1,m)) - h1*((u_t_H(i+1,m) - u_t_H(i,m))*(G_H_bio(i+1,m) - G_H_bio(i,m))));
-        G_C_bio(i,m+1) = G_C_bio(i,m) + coeff*(((D_C_day*h2)/tau^2)*(G_C_bio(i+1,m) -2*G_C_bio(i,m) + G_C_bio(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C_bio(i+1,m) - G_C_bio(i,m))));
+        G_HA_bio(i,m+1) = G_HA_bio(i,m) + growth(i,m)*(coeff*(((D_HA_day*h2)/tau^2)*(G_HA_bio(i+1,m) -2*G_HA_bio(i,m) + G_HA_bio(i-1,m)) - h1*((u_t_HA(i+1,m) - u_t_HA(i,m))*(G_HA_bio(i+1,m) - G_HA_bio(i,m)))));
+        G_Na_bio(i,m+1) = G_Na_bio(i,m) + growth(i,m)*(coeff*(((D_Na_day*h2)/tau^2)*(G_Na_bio(i+1,m) -2*G_Na_bio(i,m) + G_Na_bio(i-1,m)) - h1*((u_t_Na(i+1,m) - u_t_Na(i,m))*(G_Na_bio(i+1,m) - G_Na_bio(i,m)))));
+        G_Cl_bio(i,m+1) = G_Cl_bio(i,m) + growth(i,m)*(coeff*(((D_Cl_day*h2)/tau^2)*(G_Cl_bio(i+1,m) -2*G_Cl_bio(i,m) + G_Cl_bio(i-1,m)) - h1*((u_t_Cl(i+1,m) - u_t_Cl(i,m))*(G_Cl_bio(i+1,m) - G_Cl_bio(i,m)))));
+        G_OH_bio(i,m+1) = G_OH_bio(i,m) + growth(i,m)*(coeff*(((D_OH_day*h2)/tau^2)*(G_OH_bio(i+1,m) -2*G_OH_bio(i,m) + G_OH_bio(i-1,m)) - h1*((u_t_OH(i+1,m) - u_t_OH(i,m))*(G_OH_bio(i+1,m) - G_OH_bio(i,m)))));
+        G_A_bio(i,m+1) = G_A_bio(i,m) + growth(i,m)*(coeff*(((D_A_day*h2)/tau^2)*(G_A_bio(i+1,m) -2*G_A_bio(i,m) + G_A_bio(i-1,m)) - h1*((u_t_A(i+1,m) - u_t_A(i,m))*(G_A_bio(i+1,m) - G_A_bio(i,m)))));
+        G_H_bio(i,m+1) = G_H_bio(i,m) + growth(i,m)*(coeff*(((D_H_day*h2)/tau^2)*(G_H_bio(i+1,m) -2*G_H_bio(i,m) + G_H_bio(i-1,m)) - h1*((u_t_H(i+1,m) - u_t_H(i,m))*(G_H_bio(i+1,m) - G_H_bio(i,m)))));
+        G_C_bio(i,m+1) = G_C_bio(i,m) + growth(i,m)*(coeff*(((D_C_day*h2)/tau^2)*(G_C_bio(i+1,m) -2*G_C_bio(i,m) + G_C_bio(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C_bio(i+1,m) - G_C_bio(i,m)))));
                         
         % $$$
         % Adsorbed concentration
