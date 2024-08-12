@@ -632,6 +632,52 @@ J_H_bio(1,:) = u_t_H(1,:)*c_0;
 G_C_bio(:,1) = c_C;
 J_C_bio(1,:) = u_t_C(1,:)*c_C;
 
+% $$$
+% --- Set IC [Dimensionless]
+G_HA_up(:,1) = 1;
+J_HA_up(1,:) = u_t_HA_up(1,:);
+
+G_OH_up(:,1) = 1;
+J_OH_up(1,:) = u_t_OH_up(1,:);
+
+G_Na_up(:,1) = 1;
+J_Na_up(1,:) = u_t_Na_up(1,:);
+
+G_Cl_up(:,1) = 1;
+J_Cl_up(1,:) = u_t_Cl_up(1,:)*c_Cl;
+
+G_A_up(:,1) = 1;
+J_A_up(1,:) = u_t_A_up(1,:)*c_0;
+
+G_H_up(:,1) = 1;
+J_H_up(1,:) = u_t_H_up(1,:)*c_0;
+
+G_C_up(:,1) = 1;
+J_C_up(1,:) = u_t_C_up(1,:)*c_C;
+
+% $$$
+% --- Set IC [Dimensionless]
+G_HA_up1(:,1) = 1;
+J_HA_up1(1,:) = u_t_HA_up1(1,:);
+
+G_OH_up1(:,1) = 1;
+J_OH_up1(1,:) = u_t_OH_up1(1,:);
+
+G_Na_up1(:,1) = 1;
+J_Na_up1(1,:) = u_t_Na_up1(1,:);
+
+G_Cl_up1(:,1) = 1;
+J_Cl_up1(1,:) = u_t_Cl_up1(1,:);
+
+G_A_up1(:,1) = 1;
+J_A_up1(1,:) = u_t_A_up1(1,:);
+
+G_H_up1(:,1) = 1;
+J_H_up1(1,:) = u_t_H_up1(1,:);
+
+G_C_up1(:,1) = 1;
+J_C_up1(1,:) = u_t_C_up1(1,:);
+
 for m=1:nt-1
     % $$$
     % --- Set BC [EKR Standard]
