@@ -974,7 +974,7 @@ hold on;
 %plot(t_array,G_H_bio(10,:),'-','DisplayName', 'H+ (BKR)');
 
 plot(t_array,G_H_up(10,:),'-','DisplayName', 'H+ (less1)');
-plot(t_array,G_H_up1(10,:),'-','DisplayName', 'H+ (less1)');
+plot(t_array,G_H_up1(10,:),'-','DisplayName', 'H+ (less2)');
 
 %plot(t_array,R_H(10,:),'-','DisplayName', 'H+++ ');
 
