@@ -830,24 +830,25 @@ for m=1:nt-1
         J_C_bio(i,m) = G_C_bio(i-1,m);
 
         % $$$
-        % Flux array corolation [Bio]
-        J_HA_bio(i,m) = G_HA_bio(i-1,m);
-        J_Na_bio(i,m) = G_Na_bio(i-1,m);
-        J_Cl_bio(i,m) = G_Cl_bio(i-1,m);
-        J_OH_bio(i,m) = G_OH_bio(i-1,m);
-        J_A_bio(i,m) = G_A_bio(i-1,m);
-        J_H_bio(i,m) = G_H_bio(i-1,m);
-        J_C_bio(i,m) = G_C_bio(i-1,m);
+        % Flux array corolation [Dimensionless] (1st)
+        J_HA_up(i,m) = G_HA_up(i-1,m);
+        J_Na_up(i,m) = G_Na_up(i-1,m);
+        J_Cl_up(i,m) = G_Cl_up(i-1,m);
+        J_OH_up(i,m) = G_OH_up(i-1,m);
+        J_A_up(i,m) = G_A_up(i-1,m);
+        J_H_up(i,m) = G_H_up(i-1,m);
+        J_C_up(i,m) = G_C_up(i-1,m);
 
         % $$$
-        % Flux array corolation [Bio]
-        J_HA_bio(i,m) = G_HA_bio(i-1,m);
-        J_Na_bio(i,m) = G_Na_bio(i-1,m);
-        J_Cl_bio(i,m) = G_Cl_bio(i-1,m);
-        J_OH_bio(i,m) = G_OH_bio(i-1,m);
-        J_A_bio(i,m) = G_A_bio(i-1,m);
-        J_H_bio(i,m) = G_H_bio(i-1,m);
-        J_C_bio(i,m) = G_C_bio(i-1,m);       
+        % Flux array corolation [Dimensionless] (2nd)
+        J_HA_up1(i,m) = G_HA_up1(i-1,m);
+        J_Na_up1(i,m) = G_Na_up1(i-1,m);
+        J_Cl_up1(i,m) = G_Cl_up1(i-1,m);
+        J_OH_up1(i,m) = G_OH_up1(i-1,m);
+        J_A_up1(i,m) = G_A_up1(i-1,m);
+        J_H_up1(i,m) = G_H_up1(i-1,m);
+        J_C_up1(i,m) = G_C_up1(i-1,m);
+
         % $$$
         % Sigma calculations
         sum_HA(i,m) = (z_HA^2)*D_HA*(G_HA(i,m));
@@ -906,6 +907,26 @@ for m=1:nt-1
         G_A_bio(end,m) = J_A_bio(40,m);      %--- Lower boundary
         G_H_bio(end,m) = J_H_bio(40,m);      %--- Lower boundary
         G_C_bio(end,m) = J_C_bio(40,m);      %--- Lower boundary
+
+        % $$$
+        % [For Bio]
+        G_HA_up(end,m) = J_HA_up(40,m);    %--- Lower boundary
+        G_OH_up(end,m) = J_OH_up(40,m);    %--- Lower boundary
+        G_Na_up(end,m) = J_Na_up(40,m);    %--- Lower boundary
+        G_Cl_up(end,m) = J_Cl_up(40,m);    %--- Lower boundary
+        G_A_up(end,m) = J_A_up(40,m);      %--- Lower boundary
+        G_H_up(end,m) = J_H_up(40,m);      %--- Lower boundary
+        G_C_up(end,m) = J_C_up(40,m);      %--- Lower boundary
+
+        % $$$
+        % [For Bio]
+        G_HA_up1(end,m) = J_HA_up1(40,m);    %--- Lower boundary
+        G_OH_up1(end,m) = J_OH_up1(40,m);    %--- Lower boundary
+        G_Na_up1(end,m) = J_Na_up1(40,m);    %--- Lower boundary
+        G_Cl_up1(end,m) = J_Cl_up1(40,m);    %--- Lower boundary
+        G_A_up1(end,m) = J_A_up1(40,m);      %--- Lower boundary
+        G_H_up1(end,m) = J_H_up1(40,m);      %--- Lower boundary
+        G_C_up1(end,m) = J_C_up1(40,m);      %--- Lower boundary
 
         % ###
         K_H2O(i,m) = G_H(i,m)*G_OH(i,m);
