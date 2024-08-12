@@ -356,6 +356,16 @@ G_H_tot = zeros(nx,nt);
 G_C_tot = zeros(nx,nt);
 
 % $$$
+% Total concentration arrays [Bio]
+G_HA_bio = zeros(nx,nt);
+G_OH_bio = zeros(nx,nt);
+G_Na_bio = zeros(nx,nt);
+G_Cl_bio = zeros(nx,nt);
+G_A_bio = zeros(nx,nt);
+G_H_bio = zeros(nx,nt);
+G_C_bio = zeros(nx,nt);
+
+% $$$
 % concentration arrays [Dimensionless]
 G_HA_up = zeros(nx,nt);
 G_OH_up = zeros(nx,nt);
@@ -491,7 +501,7 @@ G_C_tot(:,1) = c_C;
 
 % $$$
 % --- Set IC and BC [EKR] (Adsorbed)
-G_HA__bio(:,1) = c_0;
+G_HA_bio(:,1) = c_0;
 G_OH_bio(:,1) = c_0;
 G_Na_bio(:,1) = c_Na;
 G_Cl_bio(:,1) = c_Cl;
