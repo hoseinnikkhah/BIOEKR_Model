@@ -497,7 +497,7 @@ G_Na_bio(:,1) = c_Na;
 G_Cl_bio(:,1) = c_Cl;
 G_A_bio(:,1) = c_0;
 G_H_bio(:,1) = c_0;
-G_C__bio(:,1) = c_C;
+G_C_bio(:,1) = c_C;
 
 % !!!
 G_HA_up(:,1) = G_HA(:,1)/c_0;
