@@ -232,7 +232,7 @@ u_t_OH_up = (u_e_OH_less + u_c_up);
 u_t_Na_up = (u_e_Na_less + u_c_up);
 u_t_Cl_up = (u_e_Cl_less + u_c_up);
 u_t_A_up = (u_e_A_less + u_c_up);
-u_t_H_up = -(u_e_H_less + u_c_up)*2.1;
+u_t_H_up = -(u_e_H_less + u_c_up)*2.303;
 u_t_C_up = (u_e_C_less + u_c_up);
 
 % $$$
@@ -975,8 +975,8 @@ hold on;
 %plot(t_array,G_H_tot(10,:),'-','DisplayName', 'H+ (coeff)');
 %plot(t_array,G_H_bio(10,:),'-','DisplayName', 'H+ (BKR)');
 
-plot(t_array,G_H_up(10,:),'-','DisplayName', 'H+ (less1)');
-%plot(t_array,G_H_up1(10,:),'-','DisplayName', 'H+ (less2)');
+%plot(t_array,G_H_up(10,:),'-','DisplayName', 'H+ (less1)');
+plot(t_array,G_H_up1(10,:),'-','DisplayName', 'H+ (less2)');
 
 %plot(t_array,R_H(10,:),'-','DisplayName', 'H+++ ');
 
