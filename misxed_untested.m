@@ -385,7 +385,7 @@ G_A_ads = zeros(nx,nt);
 G_H_ads = zeros(nx,nt);
 G_C_ads = zeros(nx,nt);
 
-% !!!
+% $$$
 % concentration arrays [Dimensionless]
 G_HA_up = zeros(nx,nt);
 G_OH_up = zeros(nx,nt);
@@ -394,6 +394,16 @@ G_Cl_up = zeros(nx,nt);
 G_A_up = zeros(nx,nt);
 G_H_up = zeros(nx,nt);
 G_C_up = zeros(nx,nt);
+
+% $$$
+% concentration arrays [Dimensionless]
+G_HA_up1 = zeros(nx,nt);
+G_OH_up1 = zeros(nx,nt);
+G_Na_up1 = zeros(nx,nt);
+G_Cl_up1 = zeros(nx,nt);
+G_A_up1 = zeros(nx,nt);
+G_H_up1 = zeros(nx,nt);
+G_C_up1 = zeros(nx,nt);
 
 % $$$
 % Current array
