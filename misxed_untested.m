@@ -654,6 +654,7 @@ for m=1:nt-1
         J_H(i,m) = G_H(i-1,m);
         J_C(i,m) = G_C(i-1,m);
 
+        % $$$
         % Flux array corolation [Adsorbed]
         J_HA_tot(i,m) = G_HA_tot(i-1,m);
         J_Na_tot(i,m) = G_Na_tot(i-1,m);
@@ -663,6 +664,7 @@ for m=1:nt-1
         J_H_tot(i,m) = G_H_tot(i-1,m);
         J_C_tot(i,m) = G_C_tot(i-1,m);
 
+        % $$$
         % Flux array corolation [Bio]
         J_HA_bio(i,m) = G_HA_bio(i-1,m);
         J_Na_bio(i,m) = G_Na_bio(i-1,m);
@@ -671,6 +673,7 @@ for m=1:nt-1
         J_A_bio(i,m) = G_A_bio(i-1,m);
         J_H_bio(i,m) = G_H_bio(i-1,m);
         J_C_bio(i,m) = G_C_bio(i-1,m);
+
         % $$$
         % Sigma calculations
         sum_HA(i,m) = (z_HA^2)*D_HA*(G_HA(i,m));
@@ -710,6 +713,7 @@ for m=1:nt-1
         R_OH(end,m) = J_OH(40,m);    %--- Lower boundary
         R_H(end,m) = J_H(40,m);      %--- Lower boundary
 
+        % $$$
         % [For adsorbed]
         G_HA_tot(end,m) = J_HA_tot(40,m);    %--- Lower boundary
         G_OH_tot(end,m) = J_OH_tot(40,m);    %--- Lower boundary
@@ -719,6 +723,7 @@ for m=1:nt-1
         G_H_tot(end,m) = J_H_tot(40,m);      %--- Lower boundary
         G_C_tot(end,m) = J_C_tot(40,m);      %--- Lower boundary
 
+        % $$$
         % [For Bio]
         G_HA_bio(end,m) = J_HA_bio(40,m);    %--- Lower boundary
         G_OH_bio(end,m) = J_OH_bio(40,m);    %--- Lower boundary
@@ -728,6 +733,7 @@ for m=1:nt-1
         G_H_bio(end,m) = J_H_bio(40,m);      %--- Lower boundary
         G_C_bio(end,m) = J_C_bio(40,m);      %--- Lower boundary
 
+        % ###
         K_H2O(i,m) = G_H(i,m)*G_OH(i,m);
         K_a(i,m) = (G_H(i,m)*G_A(i,m))/G_HA(i,m);
         R_H(i,m) = (K_H2O(i,m)*G_H(i,m)) + (K_a(i,m)*G_HA(i,m));
@@ -768,9 +774,10 @@ hold on;
 %plot(t_array,G_Cl(10,:),'-','DisplayName', 'Cl');
 %plot(t_array,G_A(10,:),'-','DisplayName', 'A-');
 plot(t_array,G_H(10,:),'-','DisplayName', 'H+ ');
+%plot(t_array,G_C(10,:),'-','DisplayName', 'Hydrocarbon');
 plot(t_array,G_H_tot(10,:),'-','DisplayName', 'H+ (coeff)');
 plot(t_array,G_H_bio(10,:),'-','DisplayName', 'H+ (BKR)');
-%plot(t_array,G_C(10,:),'-','DisplayName', 'Hydrocarbon');
+
 
 %plot(t_array,R_H(10,:),'-','DisplayName', 'H+++ ');
 
