@@ -646,16 +646,16 @@ G_Na_up(:,1) = 1;
 J_Na_up(1,:) = u_t_Na_up(1,:);
 
 G_Cl_up(:,1) = 1;
-J_Cl_up(1,:) = u_t_Cl_up(1,:)*c_Cl;
+J_Cl_up(1,:) = u_t_Cl_up(1,:);
 
 G_A_up(:,1) = 1;
-J_A_up(1,:) = u_t_A_up(1,:)*c_0;
+J_A_up(1,:) = u_t_A_up(1,:);
 
 G_H_up(:,1) = 1;
-J_H_up(1,:) = u_t_H_up(1,:)*c_0;
+J_H_up(1,:) = u_t_H_up(1,:);
 
 G_C_up(:,1) = 1;
-J_C_up(1,:) = u_t_C_up(1,:)*c_C;
+J_C_up(1,:) = u_t_C_up(1,:);
 
 % $$$
 % --- Set IC [Dimensionless]
@@ -975,8 +975,8 @@ hold on;
 %plot(t_array,G_H_tot(10,:),'-','DisplayName', 'H+ (coeff)');
 %plot(t_array,G_H_bio(10,:),'-','DisplayName', 'H+ (BKR)');
 
-%plot(t_array,G_H_up(10,:),'-','DisplayName', 'H+ (less1)');
-plot(t_array,G_H_up1(10,:),'-','DisplayName', 'H+ (less2)');
+plot(t_array,G_H_up(10,:),'-','DisplayName', 'H+ (less1)');
+%plot(t_array,G_H_up1(10,:),'-','DisplayName', 'H+ (less2)');
 
 %plot(t_array,R_H(10,:),'-','DisplayName', 'H+++ ');
 
