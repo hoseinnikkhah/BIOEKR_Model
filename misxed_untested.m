@@ -522,8 +522,7 @@ for m=1:nt-1
     G_C_tot(1,m) = J_C_tot(1,m);     %--- Upper boundary
     G_H_tot(1,m) = J_H_tot(1,m);     %--- Upper boundary
     G_A_tot(1,m) = J_A_tot(1,m);     %--- Upper boundary
-    R_H_tot(1,m) = J_H_tot(1,m);     %--- Upper boundary
-    R_OH_tot(1,m) = J_OH_tot(1,m);   %--- Upper boundary    
+
     for i=2:nx-1
 
         % $$$
@@ -671,6 +670,7 @@ hold on;
 %plot(t_array,G_Cl(10,:),'-','DisplayName', 'Cl');
 %plot(t_array,G_A(10,:),'-','DisplayName', 'A-');
 plot(t_array,G_H(10,:),'-','DisplayName', 'H+ ');
+plot(t_array,G_H_tot(10,:),'-','DisplayName', 'H+ (coeff)');
 %plot(t_array,G_C(10,:),'-','DisplayName', 'Hydrocarbon');
 
 %plot(t_array,R_H(10,:),'-','DisplayName', 'H+++ ');
