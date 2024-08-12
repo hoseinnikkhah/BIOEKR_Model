@@ -296,6 +296,16 @@ J_H = zeros(nx,nt);
 J_C = zeros(nx,nt);
 
 % $$$
+% Total Flux arrays
+J_HA_tot = zeros(nx,nt);
+J_OH_tot = zeros(nx,nt);
+J_Na_tot = zeros(nx,nt);
+J_Cl_tot = zeros(nx,nt);
+J_A_tot = zeros(nx,nt);
+J_H_tot = zeros(nx,nt);
+J_C_tot = zeros(nx,nt);
+
+% $$$
 % concentration arrays
 G_HA = zeros(nx,nt);
 G_OH = zeros(nx,nt);
