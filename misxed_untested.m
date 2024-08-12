@@ -283,6 +283,8 @@ t_array = linspace(0,tmax,nt);
 h1 = (dt/(2*dx));
 h2 = (dt/dx^2);
 
+h1_less = (t_step/(2*x_step));
+h2_less = (t_step/x_step^2);
 % --- Start of EKR (defualt)
 
 % $$$
