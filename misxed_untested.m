@@ -470,6 +470,27 @@ J_H(1,:) = u_t_H(1,:)*c_0;
 G_C(:,1) = c_C;
 J_C(1,:) = u_t_C(1,:)*c_C;
 
+% --- Set IC
+G_HA_tot(:,1) = c_0;
+J_HA_tot(1,:) = u_t_HA(1,:)*c_0;
+
+G_OH_tot(:,1) = c_0;
+J_OH_tot(1,:) = u_t_OH(1,:)*c_0;
+
+G_Na_tot(:,1) = c_Na;
+J_Na_tot(1,:) = u_t_Na(1,:)*c_Na;
+
+G_Cl_tot(:,1) = c_Cl;
+J_Cl_tot(1,:) = u_t_Cl(1,:)*c_Cl;
+
+G_A_tot(:,1) = c_0;
+J_A_tot(1,:) = u_t_A(1,:)*c_0;
+
+G_H_tot(:,1) = c_0;
+J_H_tot(1,:) = u_t_H(1,:)*c_0;
+
+G_C_tot(:,1) = c_C;
+J_C_tot(1,:) = u_t_C(1,:)*c_C;
 for m=1:nt-1
     % $$$
     % --- Set BC
@@ -482,6 +503,17 @@ for m=1:nt-1
     G_A(1,m) = J_A(1,m);     %--- Upper boundary
     R_H(1,m) = J_H(1,m);     %--- Upper boundary
     R_OH(1,m) = J_OH(1,m);   %--- Upper boundary
+
+    % --- Set BC
+    G_OH_tot(1,m) = J_OH_tot(1,m);   %--- Upper boundary
+    G_HA_tot(1,m) = J_HA_tot(1,m);   %--- Upper boundary
+    G_Na_tot(1,m) = J_Na_tot(1,m);   %--- Upper boundary
+    G_Cl_tot(1,m) = J_Cl_tot(1,m);   %--- Upper boundary
+    G_C_tot(1,m) = J_C_tot(1,m);     %--- Upper boundary
+    G_H_tot(1,m) = J_H_tot(1,m);     %--- Upper boundary
+    G_A_tot(1,m) = J_A_tot(1,m);     %--- Upper boundary
+    R_H_tot(1,m) = J_H_tot(1,m);     %--- Upper boundary
+    R_OH_tot(1,m) = J_OH_tot(1,m);   %--- Upper boundary    
     for i=2:nx-1
 
         % $$$
@@ -493,7 +525,16 @@ for m=1:nt-1
         G_A(i,m+1) = G_A(i,m) + ((D_A_day*h2)/tau^2)*(G_A(i+1,m) -2*G_A(i,m) + G_A(i-1,m)) - h1*((u_t_A(i+1,m) - u_t_A(i,m))*(G_A(i+1,m) - G_A(i,m))) + R_A(i,m)*dt;
         G_H(i,m+1) = G_H(i,m) + ((D_H_day*h2)/tau^2)*(G_H(i+1,m) -2*G_H(i,m) + G_H(i-1,m)) - h1*((u_t_H(i+1,m) - u_t_H(i,m))*(G_H(i+1,m) - G_H(i,m))) + R_H(i,m)*dt;
         G_C(i,m+1) = G_C(i,m) + ((D_C_day*h2)/tau^2)*(G_C(i+1,m) -2*G_C(i,m) + G_C(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C(i+1,m) - G_C(i,m))) + R_C(i,m)*dt;
-        
+
+        % This is for total EKR [Standard]
+        G_HA_tot(i,m+1) = G_HA_tot(i,m) + ((D_HA_day*h2)/tau^2)*(G_HA_tot(i+1,m) -2*G_HA_tot(i,m) + G_HA_tot(i-1,m)) - h1*((u_t_HA(i+1,m) - u_t_HA(i,m))*(G_HA_tot(i+1,m) - G_HA_tot(i,m))) + R_HA(i,m)*dt;
+        G_Na_tot(i,m+1) = G_Na_tot(i,m) + ((D_Na_day*h2)/tau^2)*(G_Na_tot(i+1,m) -2*G_Na_tot(i,m) + G_Na_tot(i-1,m)) - h1*((u_t_Na(i+1,m) - u_t_Na(i,m))*(G_Na_tot(i+1,m) - G_Na_tot(i,m))) + R_Na(i,m)*dt;
+        G_Cl_tot(i,m+1) = G_Cl_tot(i,m) + ((D_Cl_day*h2)/tau^2)*(G_Cl_tot(i+1,m) -2*G_Cl_tot(i,m) + G_Cl_tot(i-1,m)) - h1*((u_t_Cl(i+1,m) - u_t_Cl(i,m))*(G_Cl_tot(i+1,m) - G_Cl_tot(i,m))) + R_Cl(i,m)*dt;
+        G_OH_tot(i,m+1) = G_OH_tot(i,m) + ((D_OH_day*h2)/tau^2)*(G_OH_tot(i+1,m) -2*G_OH_tot(i,m) + G_OH_tot(i-1,m)) - h1*((u_t_OH(i+1,m) - u_t_OH(i,m))*(G_OH_tot(i+1,m) - G_OH_tot(i,m))) + R_OH(i,m)*dt;
+        G_A_tot(i,m+1) = G_A_tot(i,m) + ((D_A_day*h2)/tau^2)*(G_A_tot(i+1,m) -2*G_A_tot(i,m) + G_A_tot(i-1,m)) - h1*((u_t_A(i+1,m) - u_t_A(i,m))*(G_A_tot(i+1,m) - G_A_tot(i,m))) + R_A(i,m)*dt;
+        G_H_tot(i,m+1) = G_H_tot(i,m) + ((D_H_day*h2)/tau^2)*(G_H_tot(i+1,m) -2*G_H_tot(i,m) + G_H_tot(i-1,m)) - h1*((u_t_H(i+1,m) - u_t_H(i,m))*(G_H_tot(i+1,m) - G_H_tot(i,m))) + R_H(i,m)*dt;
+        G_C_tot(i,m+1) = G_C_tot(i,m) + ((D_C_day*h2)/tau^2)*(G_C_tot(i+1,m) -2*G_C_tot(i,m) + G_C_tot(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C_tot(i+1,m) - G_C_tot(i,m))) + R_C(i,m)*dt;
+                
         % $$$
         % Adsorbed concentration
         G_HA_ads(i,m) = K_ads*G_HA(i,m);
