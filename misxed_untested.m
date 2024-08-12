@@ -762,22 +762,22 @@ for m=1:nt-1
         G_C_bio(i,m+1) = G_C_bio(i,m) + growth(i,m)*(coeff*(((D_C_day*h2)/tau^2)*(G_C_bio(i+1,m) -2*G_C_bio(i,m) + G_C_bio(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C_bio(i+1,m) - G_C_bio(i,m)))));
 
         % This is for total BKR [Dimensionless] (1st)
-        G_HA_up(i,m+1) = G_HA_up(i,m) + growth(i,m)*(coeff*(((D_HA_day*h2)/tau^2)*(G_HA_up(i+1,m) -2*G_HA_up(i,m) + G_HA_up(i-1,m)) - h1*((u_t_HA(i+1,m) - u_t_HA(i,m))*(G_HA_up(i+1,m) - G_HA_up(i,m)))));
-        G_Na_up(i,m+1) = G_Na_up(i,m) + growth(i,m)*(coeff*(((D_Na_day*h2)/tau^2)*(G_Na_up(i+1,m) -2*G_Na_up(i,m) + G_Na_up(i-1,m)) - h1*((u_t_Na(i+1,m) - u_t_Na(i,m))*(G_Na_up(i+1,m) - G_Na_up(i,m)))));
-        G_Cl_up(i,m+1) = G_Cl_up(i,m) + growth(i,m)*(coeff*(((D_Cl_day*h2)/tau^2)*(G_Cl_up(i+1,m) -2*G_Cl_up(i,m) + G_Cl_up(i-1,m)) - h1*((u_t_Cl(i+1,m) - u_t_Cl(i,m))*(G_Cl_up(i+1,m) - G_Cl_up(i,m)))));
-        G_OH_up(i,m+1) = G_OH_up(i,m) + growth(i,m)*(coeff*(((D_OH_day*h2)/tau^2)*(G_OH_up(i+1,m) -2*G_OH_up(i,m) + G_OH_up(i-1,m)) - h1*((u_t_OH(i+1,m) - u_t_OH(i,m))*(G_OH_up(i+1,m) - G_OH_up(i,m)))));
-        G_A_up(i,m+1) = G_A_up(i,m) + growth(i,m)*(coeff*(((D_A_day*h2)/tau^2)*(G_A_up(i+1,m) -2*G_A_up(i,m) + G_A_up(i-1,m)) - h1*((u_t_A(i+1,m) - u_t_A(i,m))*(G_A_up(i+1,m) - G_A_up(i,m)))));
-        G_H_up(i,m+1) = G_H_up(i,m) + growth(i,m)*(coeff*(((D_H_day*h2)/tau^2)*(G_H_up(i+1,m) -2*G_H_up(i,m) + G_H_up(i-1,m)) - h1*((u_t_H(i+1,m) - u_t_H(i,m))*(G_H_up(i+1,m) - G_H_up(i,m)))));
-        G_C_up(i,m+1) = G_C_up(i,m) + growth(i,m)*(coeff*(((D_C_day*h2)/tau^2)*(G_C_up(i+1,m) -2*G_C_up(i,m) + G_C_up(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C_up(i+1,m) - G_C_up(i,m)))));
+        G_HA_up(i,m+1) = G_HA_up(i,m) + growth(i,m)*(coeff*(((D_HA_less*h2)/Pe)*(G_HA_up(i+1,m) -2*G_HA_up(i,m) + G_HA_up(i-1,m)) - h1*((u_t_HA_up(i+1,m) - u_t_HA_up(i,m))*(G_HA_up(i+1,m) - G_HA_up(i,m)))));
+        G_Na_up(i,m+1) = G_Na_up(i,m) + growth(i,m)*(coeff*(((D_Na_less*h2)/Pe)*(G_Na_up(i+1,m) -2*G_Na_up(i,m) + G_Na_up(i-1,m)) - h1*((u_t_Na_up(i+1,m) - u_t_Na_up(i,m))*(G_Na_up(i+1,m) - G_Na_up(i,m)))));
+        G_Cl_up(i,m+1) = G_Cl_up(i,m) + growth(i,m)*(coeff*(((D_Cl_less*h2)/Pe)*(G_Cl_up(i+1,m) -2*G_Cl_up(i,m) + G_Cl_up(i-1,m)) - h1*((u_t_Cl_up(i+1,m) - u_t_Cl_up(i,m))*(G_Cl_up(i+1,m) - G_Cl_up(i,m)))));
+        G_OH_up(i,m+1) = G_OH_up(i,m) + growth(i,m)*(coeff*(((D_OH_less*h2)/Pe)*(G_OH_up(i+1,m) -2*G_OH_up(i,m) + G_OH_up(i-1,m)) - h1*((u_t_OH_up(i+1,m) - u_t_OH_up(i,m))*(G_OH_up(i+1,m) - G_OH_up(i,m)))));
+        G_A_up(i,m+1) = G_A_up(i,m) + growth(i,m)*(coeff*(((D_A_less*h2)/Pe)*(G_A_up(i+1,m) -2*G_A_up(i,m) + G_A_up(i-1,m)) - h1*((u_t_A_up(i+1,m) - u_t_A_up(i,m))*(G_A_up(i+1,m) - G_A_up(i,m)))));
+        G_H_up(i,m+1) = G_H_up(i,m) + growth(i,m)*(coeff*(((D_H_less*h2)/Pe)*(G_H_up(i+1,m) -2*G_H_up(i,m) + G_H_up(i-1,m)) - h1*((u_t_H_up(i+1,m) - u_t_H_up(i,m))*(G_H_up(i+1,m) - G_H_up(i,m)))));
+        G_C_up(i,m+1) = G_C_up(i,m) + growth(i,m)*(coeff*(((D_C_less*h2)/Pe)*(G_C_up(i+1,m) -2*G_C_up(i,m) + G_C_up(i-1,m)) - h1*((u_t_C_up(i+1,m) - u_t_C_up(i,m))*(G_C_up(i+1,m) - G_C_up(i,m)))));
 
         % This is for total BKR [Dimensionless] (1st)
-        G_HA_up1(i,m+1) = G_HA_up1(i,m) + growth(i,m)*(coeff*(((D_HA_day*h2)/tau^2)*(G_HA_up1(i+1,m) -2*G_HA_up1(i,m) + G_HA_up1(i-1,m)) - h1*((u_t_HA(i+1,m) - u_t_HA(i,m))*(G_HA_up1(i+1,m) - G_HA_up1(i,m)))));
-        G_Na_up1(i,m+1) = G_Na_up1(i,m) + growth(i,m)*(coeff*(((D_Na_day*h2)/tau^2)*(G_Na_up1(i+1,m) -2*G_Na_up1(i,m) + G_Na_up1(i-1,m)) - h1*((u_t_Na(i+1,m) - u_t_Na(i,m))*(G_Na_up1(i+1,m) - G_Na_up1(i,m)))));
-        G_Cl_up1(i,m+1) = G_Cl_up1(i,m) + growth(i,m)*(coeff*(((D_Cl_day*h2)/tau^2)*(G_Cl_up1(i+1,m) -2*G_Cl_up1(i,m) + G_Cl_up1(i-1,m)) - h1*((u_t_Cl(i+1,m) - u_t_Cl(i,m))*(G_Cl_up1(i+1,m) - G_Cl_up1(i,m)))));
-        G_OH_up1(i,m+1) = G_OH_up1(i,m) + growth(i,m)*(coeff*(((D_OH_day*h2)/tau^2)*(G_OH_up1(i+1,m) -2*G_OH_up1(i,m) + G_OH_up1(i-1,m)) - h1*((u_t_OH(i+1,m) - u_t_OH(i,m))*(G_OH_up1(i+1,m) - G_OH_up1(i,m)))));
-        G_A_up1(i,m+1) = G_A_up1(i,m) + growth(i,m)*(coeff*(((D_A_day*h2)/tau^2)*(G_A_up1(i+1,m) -2*G_A_up1(i,m) + G_A_up1(i-1,m)) - h1*((u_t_A(i+1,m) - u_t_A(i,m))*(G_A_up1(i+1,m) - G_A_up1(i,m)))));
-        G_H_up1(i,m+1) = G_H_up1(i,m) + growth(i,m)*(coeff*(((D_H_day*h2)/tau^2)*(G_H_up1(i+1,m) -2*G_H_up1(i,m) + G_H_up1(i-1,m)) - h1*((u_t_H(i+1,m) - u_t_H(i,m))*(G_H_up1(i+1,m) - G_H_up1(i,m)))));
-        G_C_up1(i,m+1) = G_C_up1(i,m) + growth(i,m)*(coeff*(((D_C_day*h2)/tau^2)*(G_C_up1(i+1,m) -2*G_C_up1(i,m) + G_C_up1(i-1,m)) - h1*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C_up1(i+1,m) - G_C_up1(i,m)))));
+        G_HA_up1(i,m+1) = G_HA_up1(i,m) + growth(i,m)*(coeff*(((D_HA_less*h2)/Pe)*(G_HA_up1(i+1,m) -2*G_HA_up1(i,m) + G_HA_up1(i-1,m)) - h1*((u_t_HA_up1(i+1,m) - u_t_HA_up1(i,m))*(G_HA_up1(i+1,m) - G_HA_up1(i,m)))));
+        G_Na_up1(i,m+1) = G_Na_up1(i,m) + growth(i,m)*(coeff*(((D_Na_less*h2)/Pe)*(G_Na_up1(i+1,m) -2*G_Na_up1(i,m) + G_Na_up1(i-1,m)) - h1*((u_t_Na_up1(i+1,m) - u_t_Na_up1(i,m))*(G_Na_up1(i+1,m) - G_Na_up1(i,m)))));
+        G_Cl_up1(i,m+1) = G_Cl_up1(i,m) + growth(i,m)*(coeff*(((D_Cl_less*h2)/Pe)*(G_Cl_up1(i+1,m) -2*G_Cl_up1(i,m) + G_Cl_up1(i-1,m)) - h1*((u_t_Cl_up1(i+1,m) - u_t_Cl_up1(i,m))*(G_Cl_up1(i+1,m) - G_Cl_up1(i,m)))));
+        G_OH_up1(i,m+1) = G_OH_up1(i,m) + growth(i,m)*(coeff*(((D_OH_less*h2)/Pe)*(G_OH_up1(i+1,m) -2*G_OH_up1(i,m) + G_OH_up1(i-1,m)) - h1*((u_t_OH_up1(i+1,m) - u_t_OH_up1(i,m))*(G_OH_up1(i+1,m) - G_OH_up1(i,m)))));
+        G_A_up1(i,m+1) = G_A_up1(i,m) + growth(i,m)*(coeff*(((D_A_less*h2)/Pe)*(G_A_up1(i+1,m) -2*G_A_up1(i,m) + G_A_up1(i-1,m)) - h1*((u_t_A_up1(i+1,m) - u_t_A_up1(i,m))*(G_A_up1(i+1,m) - G_A_up1(i,m)))));
+        G_H_up1(i,m+1) = G_H_up1(i,m) + growth(i,m)*(coeff*(((D_H_less*h2)/Pe)*(G_H_up1(i+1,m) -2*G_H_up1(i,m) + G_H_up1(i-1,m)) - h1*((u_t_H_up1(i+1,m) - u_t_H_up1(i,m))*(G_H_up1(i+1,m) - G_H_up1(i,m)))));
+        G_C_up1(i,m+1) = G_C_up1(i,m) + growth(i,m)*(coeff*(((D_C_less*h2)/Pe)*(G_C_up1(i+1,m) -2*G_C_up1(i,m) + G_C_up1(i-1,m)) - h1*((u_t_C_up1(i+1,m) - u_t_C_up1(i,m))*(G_C_up1(i+1,m) - G_C_up1(i,m)))));
 
         % $$$
         % Adsorbed concentration
@@ -968,11 +968,13 @@ hold on;
 %plot(t_array,G_Na(10,:),'-','DisplayName', 'Na+');
 %plot(t_array,G_Cl(10,:),'-','DisplayName', 'Cl');
 %plot(t_array,G_A(10,:),'-','DisplayName', 'A-');
-plot(t_array,G_H(10,:),'-','DisplayName', 'H+ ');
+%plot(t_array,G_H(10,:),'-','DisplayName', 'H+ ');
 %plot(t_array,G_C(10,:),'-','DisplayName', 'Hydrocarbon');
-plot(t_array,G_H_tot(10,:),'-','DisplayName', 'H+ (coeff)');
-plot(t_array,G_H_bio(10,:),'-','DisplayName', 'H+ (BKR)');
+%plot(t_array,G_H_tot(10,:),'-','DisplayName', 'H+ (coeff)');
+%plot(t_array,G_H_bio(10,:),'-','DisplayName', 'H+ (BKR)');
 
+plot(t_array,G_H_up(10,:),'-','DisplayName', 'H+ (less1)');
+plot(t_array,G_H_up1(10,:),'-','DisplayName', 'H+ (less1)');
 
 %plot(t_array,R_H(10,:),'-','DisplayName', 'H+++ ');
 
