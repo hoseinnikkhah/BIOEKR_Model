@@ -20,7 +20,7 @@ dx = L/(nx-1);
 dt = tmax/(nt-1);
 
 % $$$
-% Refrence x directions        [m]      $$$
+% Refrence x directions        [m]
 x = (10^-5:dx:(nx)*dx);
 x = transpose(x);
 x_ref = repmat(x,1,nt);
@@ -1021,4 +1021,5 @@ figure(4)
 plot(x_scale,E_field_dx(:,50400),'--','DisplayName', 'Voltage Gradient')
 xlabel('Length (cm)');
 ylabel('Voltage Gradient (V/m)');
-title('Electric feild gradient')
+title('Electric feild gradient');
+legend();
