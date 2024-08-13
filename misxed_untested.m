@@ -1003,3 +1003,22 @@ scatter(xl,yl, 'DisplayName', 'Expriment Data');
 xlabel('Time');
 ylabel('Conc(mg/kg)');
 legend();
+
+hold off;
+
+% Plot for figure 3
+figure(3)
+plot(x_scale,E_field(:,50400),'--','DisplayName', 'Voltage')
+xlabel('Length (m)');
+ylabel('Voltage (V)');
+title('Electric feild')
+legend();
+
+hold off;
+
+% Plot for figure 4
+figure(4)
+plot(x_scale,E_field_x(:,50400),'--','DisplayName', 'Voltage Gradient')
+xlabel('Length (m)');
+ylabel('Voltage Gradient (V/m)');
+title('Electric feild gradient')
