@@ -945,7 +945,7 @@ for m=1:nt-1
     end
 end
 
-% !!!
+% ###
 % Convert concentration to mol/m3
 G_HA_converted = G_HA_up*c_0;
 G_OH_converted = G_OH_up*c_0;
@@ -954,8 +954,8 @@ G_Cl_converted = G_Cl_up*c_Cl;
 G_A_converted = G_A_up*c_0;
 G_H_converted = G_H_up*c_0;
 G_C_converted = G_C_up*c_C;
-G_C_TPH_f = G_C_converted*(MW/(rho*bolian));
 
+% ###
 % Convert concentration to mol/m3 (2nd)
 G_HA_converted1 = G_HA_up1*c_0;
 G_OH_converted1 = G_OH_up1*c_0;
@@ -964,22 +964,44 @@ G_Cl_converted1 = G_Cl_up1*c_Cl;
 G_A_converted1 = G_A_up1*c_0;
 G_H_converted1 = G_H_up1*c_0;
 G_C_converted1 = G_C_up1*c_C;
+
+% ###
+% conversion to TPH
+G_C_TPH_f = G_C_converted*(MW/(rho*bolian));
 G_C_TPH_f1 = G_C_converted1*(MW/(rho*bolian));
+G_C_TPH_ekr = G_C_tot*(MW/(rho*bolian));
+G_C_TPH_bkr = G_C_bio*(MW/(rho*bolian));
+G_C_TPH_ekr_nr = G_C*(MW/(rho*bolian));
 
 % !!!
 pH = log10(G_H);
-pH_scale = linspace(1,40,41);
+x_scale = linspace(1,40,41);
 xl = [0,5,10,15,20,25,30,35];
 yl = [10000,7900,7100,6000,5700,5500,5400,5100];
 
 % ###
 figure(1);  % --- EKR vs BKR
 hold on;
-plot(t_array,G_C(10,:),'-','DisplayName', 'Hydrocarbon');
-plot(t_array,G_C(10,:),'-','DisplayName', 'Hydrocarbon');
-plot(t_array,G_H_tot(10,:),'-','DisplayName', 'H+ (coeff)');
-plot(t_array,G_H_bio(10,:),'-','DisplayName', 'H+ (BKR)');
+plot(t_array,G_C(10,:),'-','DisplayName', 'Hydrocarbon (EKR without rate conturbution)');
+plot(t_array,G_C_tot(10,:),'-','DisplayName', 'Hydrocarbon (EKR with rates considered)');
+plot(t_array,G_C_bio(10,:),'-','DisplayName', 'Hydrocarbon (BKR)');
 
+xlabel('Time');
+ylabel('Conc(mol/m3)');
 
+legend();
 
+hold off;
+
+% ###
+figure(2)  % --- EKR vs BKR
+hold on;
+plot(t_array,G_C_TPH_f(10,:),'-','DisplayName', 'Hydrocarbon (BKR1)');
+plot(t_array,G_C_TPH_f2(10,:),'-','DisplayName', 'Hydrocarbon (BKR2)');
+plot(t_array,G_C_TPH_ekr(10,:),'-','DisplayName', 'Hydrocarbon (EKR with rate)');
+plot(t_array,G_C_TPH_bkr(10,:),'-','DisplayName', 'Hydrocarbon (BKR)');
+plot(t_array,G_C_TPH_ekr_nr(10,:),'-','DisplayName', 'Hydrocarbon (EKR no rate)');
+
+xlabel('Time');
+ylabel('Conc(mg/kg)');
 legend();
