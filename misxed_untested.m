@@ -996,12 +996,10 @@ hold off;
 % ###
 figure(2)  % --- EKR vs BKR
 hold on;
-plot(t_array,G_C_TPH_f(10,:),'-','DisplayName', 'Hydrocarbon (BKR1)');
-plot(t_array,G_C_TPH_f1(10,:),'-','DisplayName', 'Hydrocarbon (BKR2)');
 plot(t_array,G_C_TPH_ekr(10,:),'-','DisplayName', 'Hydrocarbon (EKR with rate)');
 plot(t_array,G_C_TPH_bkr(10,:),'-','DisplayName', 'Hydrocarbon (BKR)');
 plot(t_array,G_C_TPH_ekr_nr(10,:),'-','DisplayName', 'Hydrocarbon (EKR no rate)');
-
+scatter(xl,yl, 'DisplayName', 'Expriment Data');
 xlabel('Time');
 ylabel('Conc(mg/kg)');
 legend();
