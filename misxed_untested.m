@@ -557,9 +557,9 @@ sub = zeros(nx,nt);
 fixup = zeros(nx,nt);
 for xx = 1:nx
     for tt = 1:nt
-        M_g = exp(-K*(tt/1440)*(Z_calculated*(Beta_calculated/Peclet_calculated)));
+        M_g = exp(-K*(tt/1440)/47);
         sub(xx,tt) = M_g;
-        fixup(xx,tt) = 1/(-0.01*(tt/1440) + 0.48);
+        fixup(xx,tt) = 1/(-0.01*(tt/1440) + 0.65);
         %fixup(xx,tt) = 1/(-0.01*(tt/1440) + 0.61);
     end
 end
