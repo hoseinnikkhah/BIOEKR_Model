@@ -227,23 +227,23 @@ u_t_C_day = (u_e_C + u_c)*24*3600;
 
 % $$$
 % Toatal velocity term (1st)
-u_t_HA_up = (u_e_HA_less + u_c_up);
-u_t_OH_up = (u_e_OH_less + u_c_up);
-u_t_Na_up = (u_e_Na_less + u_c_up);
-u_t_Cl_up = (u_e_Cl_less + u_c_up);
-u_t_A_up = (u_e_A_less + u_c_up);
-u_t_H_up = -(u_e_H_less + u_c_up)*2.303;
-u_t_C_up = (u_e_C_less + u_c_up)*1.303;
+u_t_HA_up = (u_e_HA_less + u_c_up)*(Pe*Z);
+u_t_OH_up = (u_e_OH_less + u_c_up)*(Pe*Z);
+u_t_Na_up = (u_e_Na_less + u_c_up)*(Pe*Z);
+u_t_Cl_up = (u_e_Cl_less + u_c_up)*(Pe*Z);
+u_t_A_up = (u_e_A_less + u_c_up)*(Pe*Z);
+u_t_H_up = -(u_e_H_less + u_c_up)*(Pe*Z);
+u_t_C_up = (u_e_C_less + u_c_up)*(Pe*Z);
 
 % $$$
 % Toatal velocity term (2nd)
-u_t_HA_up1 = (u_e_HA_less1 + u_c_up1);
-u_t_OH_up1 = (u_e_OH_less1 + u_c_up1);
-u_t_Na_up1 = (u_e_Na_less1 + u_c_up1);
-u_t_Cl_up1 = (u_e_Cl_less1 + u_c_up1);
-u_t_A_up1 = (u_e_A_less1 + u_c_up1);
-u_t_H_up1 = (u_e_H_less1 + u_c_up1)/10;
-u_t_C_up1 = (u_e_C_less1 + u_c_up1);
+u_t_HA_up1 = (u_e_HA_less1 + u_c_up1)*(Pe*Z);
+u_t_OH_up1 = (u_e_OH_less1 + u_c_up1)*(Pe*Z);
+u_t_Na_up1 = (u_e_Na_less1 + u_c_up1)*(Pe*Z);
+u_t_Cl_up1 = (u_e_Cl_less1 + u_c_up1)*(Pe*Z);
+u_t_A_up1 = (u_e_A_less1 + u_c_up1)*(Pe*Z);
+u_t_H_up1 = (u_e_H_less1 + u_c_up1)*(Pe*Z);
+u_t_C_up1 = (u_e_C_less1 + u_c_up1)*(Pe*Z);
 
 % $$$
 % Initial concentration        [mol/m3]
@@ -557,9 +557,9 @@ sub = zeros(nx,nt);
 fixup = zeros(nx,nt);
 for xx = 1:nx
     for tt = 1:nt
-        M_g = exp(-K*(tt/1440)*(Z*(Beta/Pe)));
+        M_g = exp(-K*(tt/1440)*(Z_calculated*(Beta_calculated/Peclet_calculated)));
         sub(xx,tt) = M_g;
-        fixup(xx,tt) = 1/(-0.01*(tt/1440) + 0.61);
+        fixup(xx,tt) = 1/(-0.01*(tt/1440) + 0.48);
         %fixup(xx,tt) = 1/(-0.01*(tt/1440) + 0.61);
     end
 end
