@@ -233,7 +233,7 @@ u_t_Na_up = (u_e_Na_less + u_c_up);
 u_t_Cl_up = (u_e_Cl_less + u_c_up);
 u_t_A_up = (u_e_A_less + u_c_up);
 u_t_H_up = -(u_e_H_less + u_c_up)*2.303;
-u_t_C_up = (u_e_C_less + u_c_up);
+u_t_C_up = (u_e_C_less + u_c_up)*1.303;
 
 % $$$
 % Toatal velocity term (2nd)
@@ -242,7 +242,7 @@ u_t_OH_up1 = (u_e_OH_less1 + u_c_up1);
 u_t_Na_up1 = (u_e_Na_less1 + u_c_up1);
 u_t_Cl_up1 = (u_e_Cl_less1 + u_c_up1);
 u_t_A_up1 = (u_e_A_less1 + u_c_up1);
-u_t_H_up1 = (u_e_H_less1 + u_c_up1)*10^-1;
+u_t_H_up1 = (u_e_H_less1 + u_c_up1)/10;
 u_t_C_up1 = (u_e_C_less1 + u_c_up1);
 
 % $$$
@@ -956,6 +956,16 @@ G_H_converted = G_H_up*c_0;
 G_C_converted = G_C_up*c_C;
 G_C_TPH_f = G_C_converted*(MW/(rho*bolian));
 
+% Convert concentration to mol/m3 (2nd)
+G_HA_converted1 = G_HA_up1*c_0;
+G_OH_converted1 = G_OH_up1*c_0;
+G_Na_converted1 = G_Na_up1*c_Na;
+G_Cl_converted1 = G_Cl_up1*c_Cl;
+G_A_converted1 = G_A_up1*c_0;
+G_H_converted1 = G_H_up1*c_0;
+G_C_converted1 = G_C_up1*c_C;
+G_C_TPH_f1 = G_C_converted1*(MW/(rho*bolian));
+
 % !!!
 pH = log10(G_H);
 pH_scale = linspace(1,40,41);
@@ -963,21 +973,13 @@ xl = [0,5,10,15,20,25,30,35];
 yl = [10000,7900,7100,6000,5700,5500,5400,5100];
 
 % ###
-figure(1);  % --- EKR (Standard)
+figure(1);  % --- EKR vs BKR
 hold on;
-%plot(t_array,G_HA(10,:),'-','DisplayName', 'HA');
-%plot(t_array,G_OH(10,:),'-','DisplayName', 'OH-');
-%plot(t_array,G_Na(10,:),'-','DisplayName', 'Na+');
-%plot(t_array,G_Cl(10,:),'-','DisplayName', 'Cl');
-%plot(t_array,G_A(10,:),'-','DisplayName', 'A-');
-%plot(t_array,G_H(10,:),'-','DisplayName', 'H+ ');
-%plot(t_array,G_C(10,:),'-','DisplayName', 'Hydrocarbon');
-%plot(t_array,G_H_tot(10,:),'-','DisplayName', 'H+ (coeff)');
-%plot(t_array,G_H_bio(10,:),'-','DisplayName', 'H+ (BKR)');
+plot(t_array,G_C(10,:),'-','DisplayName', 'Hydrocarbon');
+plot(t_array,G_C(10,:),'-','DisplayName', 'Hydrocarbon');
+plot(t_array,G_H_tot(10,:),'-','DisplayName', 'H+ (coeff)');
+plot(t_array,G_H_bio(10,:),'-','DisplayName', 'H+ (BKR)');
 
-%plot(t_array,G_H_up(10,:),'-','DisplayName', 'H+ (less1)');
-plot(t_array,G_H_up1(10,:),'-','DisplayName', 'H+ (less2)');
 
-%plot(t_array,R_H(10,:),'-','DisplayName', 'H+++ ');
 
 legend();
