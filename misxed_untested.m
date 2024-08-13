@@ -1009,7 +1009,7 @@ hold off;
 % Plot for figure 3
 figure(3)
 plot(x_scale,E_field(:,50400),'--','DisplayName', 'Voltage')
-xlabel('Length (m)');
+xlabel('Length (cm)');
 ylabel('Voltage (V)');
 title('Electric feild')
 legend();
@@ -1018,7 +1018,7 @@ hold off;
 
 % Plot for figure 4
 figure(4)
-plot(x_scale,E_field_x(:,50400),'--','DisplayName', 'Voltage Gradient')
-xlabel('Length (m)');
+plot(x_scale,E_field_dx(:,50400),'--','DisplayName', 'Voltage Gradient')
+xlabel('Length (cm)');
 ylabel('Voltage Gradient (V/m)');
 title('Electric feild gradient')
