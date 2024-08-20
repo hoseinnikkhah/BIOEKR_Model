@@ -557,9 +557,9 @@ sub = zeros(nx,nt);
 fixup = zeros(nx,nt);
 for xx = 1:nx
     for tt = 1:nt
-        M_g = exp(-K*(tt/1440));
+        M_g = exp(-K*(tt/1440)/47);
         sub(xx,tt) = M_g;
-        fixup(xx,tt) = 1/(-0.01*(tt/1440) + 0.62);
+        fixup(xx,tt) = 1/(-0.01*(tt/1440) + 0.);
         %fixup(xx,tt) = 1/(-0.01*(tt/1440) + 0.61);
     end
 end
@@ -980,18 +980,18 @@ xl = [0,5,10,15,20,25,30,35];
 yl = [10000,7900,7100,6000,5700,5500,5400,5100];
 
 % ###
-%figure(1);  % --- EKR vs BKR
-%hold on;
-%plot(t_array,G_C(10,:),'-','DisplayName', 'Hydrocarbon (EKR without rate conturbution)');
-%plot(t_array,G_C_tot(10,:),'-','DisplayName', 'Hydrocarbon (EKR with rates considered)');
-%plot(t_array,G_C_bio(10,:),'-','DisplayName', 'Hydrocarbon (BKR)');
+figure(1);  % --- EKR vs BKR
+hold on;
+plot(t_array,G_C(10,:),'-','DisplayName', 'Hydrocarbon (EKR without rate conturbution)');
+plot(t_array,G_C_tot(10,:),'-','DisplayName', 'Hydrocarbon (EKR with rates considered)');
+plot(t_array,G_C_bio(10,:),'-','DisplayName', 'Hydrocarbon (BKR)');
 
-%xlabel('Time');
-%ylabel('Conc(mol/m3)');
+xlabel('Time');
+ylabel('Conc(mol/m3)');
 
-%legend();
+legend();
 
-%hold off;
+hold off;
 
 % ###
 figure(2)  % --- EKR vs BKR
@@ -1007,19 +1007,19 @@ legend();
 hold off;
 
 % Plot for figure 3
-%figure(3)
-%plot(x_scale,E_field(:,50400),'--','DisplayName', 'Voltage')
-%xlabel('Length (cm)');
-%ylabel('Voltage (V)');
-%title('Electric feild')
-%legend();
+figure(3)
+plot(x_scale,E_field(:,50400),'--','DisplayName', 'Voltage')
+xlabel('Length (cm)');
+ylabel('Voltage (V)');
+title('Electric feild')
+legend();
 
-%hold off;
+hold off;
 
 % Plot for figure 4
-%figure(4)
-%plot(x_scale,E_field_dx(:,50400),'--','DisplayName', 'Voltage Gradient')
-%xlabel('Length (cm)');
-%ylabel('Voltage Gradient (V/m)');
-%title('Electric feild gradient');
-%legend();
+figure(4)
+plot(x_scale,E_field_dx(:,50400),'--','DisplayName', 'Voltage Gradient')
+xlabel('Length (cm)');
+ylabel('Voltage Gradient (V/m)');
+title('Electric feild gradient');
+legend();
