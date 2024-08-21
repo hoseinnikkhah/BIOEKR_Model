@@ -552,7 +552,7 @@ alpha_C = (D_C/(tau^2))*10^5;
 
 % ###
 % Growth Factor
-K = 0.02;       % Growth factor obtained
+K = 0.0206;       % Growth factor obtained
 sub = zeros(nx,nt);
 fixup = zeros(nx,nt);
 for xx = 1:nx
