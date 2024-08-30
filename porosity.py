@@ -14,6 +14,9 @@ clay_content = [0, 3.44827586206897, 6.89655172413793, 10.3448275862069, 13.7931
 porosity = [25, 24, 23, 22, 21, 20, 18, 17, 16, 16, 15, 15, 14, 13, 12, 11, 17, 20, 
             24, 25, 26, 30, 33, 35, 38, 40, 46, 50, 55, 61]
 
+# Divide porosity values by 100
+porosity = [p / 100 for p in porosity]
+
 # Plotting Porosity vs. Clay Content
 plt.figure(figsize=(10, 6))
 plt.plot(clay_content, porosity, marker='o')
