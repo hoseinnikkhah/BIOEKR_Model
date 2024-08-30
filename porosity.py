@@ -1,33 +1,44 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# Clay content values
-clay_content = [0, 3.44827586206897, 6.89655172413793, 10.3448275862069, 13.7931034482759, 
-                17.2413793103448, 20.6896551724138, 24.1379310344828, 27.5862068965517, 
-                31.0344827586207, 34.4827586206897, 37.9310344827586, 41.3793103448276, 
-                44.8275862068966, 48.2758620689655, 51.7241379310345, 55.1724137931034, 
-                58.6206896551724, 62.0689655172414, 65.5172413793104, 68.9655172413793, 
-                72.4137931034483, 75.8620689655172, 79.3103448275862, 82.7586206896552, 
-                86.2068965517241, 89.6551724137931, 93.1034482758621, 96.5517241379310, 100]
+# Values for the clay content percentage
+clay_content_percentage = [
+    0, 3.45, 6.9, 10.34, 13.79, 
+    17.24, 20.69, 24.14, 27.59, 
+    31.03, 34.48, 37.93, 41.38, 
+    44.83, 48.28, 51.72, 55.17, 
+    58.62, 62.07, 65.52, 68.97, 
+    72.41, 75.86, 79.31, 82.76, 
+    86.21, 89.66, 93.10, 96.55, 100
+]
 
-# Porosity values
-porosity = [25, 24, 23, 22, 21, 20, 18, 17, 16, 16, 15, 15, 14, 13, 12, 11, 17, 20, 
-            24, 25, 26, 30, 33, 35, 38, 40, 46, 50, 55, 61]
+# Porosity values, initially in percentage
+porosity_percentage = [
+    25, 24, 23, 22, 21, 
+    20, 18, 17, 16, 16, 
+    15, 15, 14, 13, 12, 
+    11, 17, 20, 24, 25, 
+    26, 30, 33, 35, 38, 
+    40, 46, 50, 55, 61
+]
 
-# Divide porosity values by 100
-porosity = [p / 100 for p in porosity]
+# Convert porosity percentages to fractions for plotting
+porosity_fraction = [value / 100 for value in porosity_percentage]
 
-# Plotting Porosity vs. Clay Content
+# Plotting Porosity as a function of Clay Content
 plt.figure(figsize=(10, 6))
-plt.plot(clay_content, porosity, marker='o')
-plt.title('Porosity vs. Clay Content')
-plt.xlabel('Clay Content (%)')
-plt.ylabel('Porosity')
+plt.plot(clay_content_percentage, porosity_fraction, marker='o', color='b', linestyle='-', linewidth=2)
+plt.title('Porosity as a Function of Clay Content', fontsize=16)
+plt.xlabel('Clay Content (%)', fontsize=14)
+plt.ylabel('Porosity (Fraction)', fontsize=14)
 plt.grid(True)
 plt.savefig('porosity_vs_clay_content.png')
 plt.show()
 
-# Saving the data to CSV
-data = {'Clay Content (%)': clay_content, 'n (Porosity)': porosity}
-df = pd.DataFrame(data)
-df.to_csv('porosity_set.csv', index=False)
+# Save the clay content and porosity data to a CSV file
+data_dict = {
+    'Clay Content (%)': clay_content_percentage, 
+    'Porosity (Fraction)': porosity_fraction
+}
+data_frame = pd.DataFrame(data_dict)
+data_frame.to_csv('porosity_data.csv', index=False)
