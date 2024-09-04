@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 frequency = np.logspace(2, 11, 500)  # from 10^2 to 10^11 Hz
 
 # Relative permittivity (arbitrary example curve)
-permittivity = 2.2 + 0.1 / (1 + (frequency / 1e7)**2)  # Example function
+permittivity = 2.2 + 0.1 / (1 + (frequency / 1e6)**1)  # Example function
 
 # Create the plot
 plt.figure(figsize=(8, 6))
