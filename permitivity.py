@@ -1,32 +1,35 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Frequency range (logarithmic scale)
-frequency = np.logspace(2, 11, 500)  # from 10^2 to 10^11 Hz
+# Define the frequency range for the plot, using a logarithmic scale
+frequency = np.logspace(2, 11, 500)  # Frequencies ranging from 10^2 to 10^11 Hz
 
-# Relative permittivity (arbitrary example curve)
-permittivity = 2.15 + 0.15 / (1 + (frequency / 1e8)**1)  # Example function
+# Define the relative permittivity as a function of frequency
+# This is an arbitrary example curve, meant to simulate the behavior of crude oil
+permittivity = 2.15 + 0.15 / (1 + (frequency / 1e8)**1)  # Simple model for permittivity
 
-# Create the plot
+# Initialize the plot with a specified figure size
 plt.figure(figsize=(8, 6))
-plt.plot(frequency, permittivity, 'b')  # 'b' stands for blue line
 
-# Set the scale to logarithmic
+# Plot the frequency vs. permittivity, using a blue line ('b')
+plt.plot(frequency, permittivity, 'b')
+
+# Set the x-axis to a logarithmic scale to better represent the frequency range
 plt.xscale('log')
 
-# Set axis labels
+# Label the axes to indicate what is being plotted
 plt.xlabel('Frequency (Hz)')
-plt.ylabel('Relative permittivity')
+plt.ylabel('Relative Permittivity')
 
-# Set axis limits similar to your image
+# Define the limits of the axes, based on the expected range of the data
 plt.ylim([2.1, 2.35])
 plt.xlim([10**2, 10**11])
 
-# Add the title or figure caption
-plt.title('Typical permittivity spectrum of a crude oil')
+# Add a title that describes the content of the plot
+plt.title('Typical Permittivity Spectrum of Crude Oil')
 
-# Add grid
-plt.grid(True, which="both", ls="--")
+# Enable grid lines for better readability, with a dashed line style
+plt.grid(True, which="both", linestyle="--")
 
-# Show the plot
+# Display the plot to the user
 plt.show()
