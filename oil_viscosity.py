@@ -3,7 +3,7 @@ import numpy as np
 
 # Data for the plot
 API_gravity = np.array([20, 25, 30, 35, 40, 45, 50])
-viscosity_100F = np.array([100, 31.62, 10, 3.16, 1, 0.316, 0.1])
+viscosity_100F = np.array([70, 31.62, 9, 5.5, 2.51, 1.316, 0.91])
 viscosity_150F = np.array([31.62, 10, 3.16, 1, 0.316, 0.1, 0.0316])
 viscosity_200F = np.array([10, 3.16, 1, 0.316, 0.1, 0.0316, 0.01])
 viscosity_250F = np.array([3.16, 1, 0.316, 0.1, 0.0316, 0.01, 0.00316])
