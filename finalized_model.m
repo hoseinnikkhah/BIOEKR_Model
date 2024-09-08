@@ -340,7 +340,7 @@ yl = [10000,7900,7100,6000,5700,5500,5400,5100];
 % ###
 figure(1);  % --- EKR vs BKR
 hold on;
-plot(t_array,G_H_up(10,:),'-','DisplayName', 'H+');
+plot(t_array,G_H(10,:),'-','DisplayName', 'H+');
 
 xlabel('Time');
 ylabel('Conc(mol/m3)');
