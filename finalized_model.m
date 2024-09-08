@@ -283,13 +283,17 @@ t_array = linspace(0,tmax,nt);
 h_forward = dt;
 h_center = x_step;
 
+
+G_H(:,1) = c_0;
+G_H_up(:,1) = G_H/c_0; 
+
 % --- Start of EKR (defualt)
 
 % tip: m --> t node; i --> x node
 for m=1:nt-1
 
     for i=2:nx-1
-        (G_HA(i,m+1) - G_HA(i,m)) = (D_HA_less/Peclet_calculated)*((G_HA(i+1,m) - 2*G_HA(i,m) + G_HA(i-1,m))*(h_forward/(h_center^2))) - (u_t_HA_up(i+1,m)*G_HA(i+1) - u_t_HA_up(i+1,m)*G_HA(i+1))*(h_forward/(2*h_center))
+        G_H_up(i,m+1) = G_H_up(i,m) + (D_H_less/Peclet_calculated)*((G_H_up(i+1,m) - 2*G_H_up(i,m) + G_H_up(i-1,m))*(h_forward/(h_center^2))) - (u_t_H_up(i+1,m)*G_H_up(i+1) - u_t_H_up(i+1,m)*G_H_up(i+1))*(h_forward/(2*h_center)) + (1/alpha)*R_H_ads(i,m);
 
 
 
