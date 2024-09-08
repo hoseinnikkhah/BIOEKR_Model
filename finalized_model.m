@@ -285,15 +285,12 @@ h_center = x_step;
 
 c_H_ads = K_ads*c_0;
 
-
 % --- Start of EKR (defualt)
 J_H = zeros(nx,nt);
 J_H_up = zeros(nx,nt);
-J_H_ad = zeros(nx,nt);
 
 G_H = zeros(nx,nt);
 G_H_up = zeros(nx,nt);
-G_H_ad = zeros(nx,nt);
 
 % $$$
 % Current array
@@ -306,31 +303,31 @@ sigma_bar = zeros(nx,nt);
 Surface = ones(nx,nt);
 sigma_surface = sigma_surface*Surface; % Coverting sigma_surface to an array
 
-R_H = zeros(nx,nt);
-R_H_ads = zeros(nx,nt);
-R_H_ads_up = zeros(nx,nt);
 
 G_H(:,1) = c_0;
 G_H_up(:,1) = G_H(:,1)/c_0; 
-G_H_ad(:,1) = K_ads*c_0;
-G_H_ad_up(:,1) = G_H_ad(:,1)/c_H_ads;
 
 J_H(1,:) = u_t_H(1,:)*c_0;
 J_H_up(1,:) = u_t_H_up(1,:);
-J_H_ad(1,:) = u_t_H_up(1,:)*(K_ads*c_0);
-J_H_ad_up(1,:) = u_t_H_up(1,:);
+
+R_H_ads_up = ones(nx,nt);
+R_H_ads_up = R_H_ads_up*c_H_ads;
 
 % tip: m --> t node; i --> x node
 for m=1:nt-1
+    G_H(1,m) = J_H(1,m);   %--- Upper boundary
+    G_H_up(1,m) = J_H_up(1,m);     %--- Upper boundary
 
     for i=2:nx-1
         G_H_up(i,m+1) = G_H_up(i,m) + (D_H_less/Peclet_calculated)*((G_H_up(i+1,m) - 2*G_H_up(i,m) + G_H_up(i-1,m))*(h_forward/(h_center^2))) - (u_t_H_up(i+1,m)*G_H_up(i+1) - u_t_H_up(i+1,m)*G_H_up(i+1))*(h_forward/(2*h_center)) + (1/alpha)*R_H_ads_up(i,m);
 
-        G_H_ad(i,m+1) = G_H_ad(i,m) + (D_H_less/Peclet_calculated)*((G_H_ad(i+1,m) - 2*G_H_ad(i,m) + G_H_ad(i-1,m))*(h_forward/(h_center^2))) - (u_t_H_up(i+1,m)*G_H_ad(i+1) - u_t_H_up(i+1,m)*G_H_ad(i+1))*(h_forward/(2*h_center));
+        G_H(i,m+1) = G_H(i,m) + coeff*((D_H/(tau^2))*((G_H(i+1,m) - 2*G_H(i,m) + G_H(i-1,m))*(dt/(dx^2))) - (u_t_H(i+1,m)*G_H(i+1) - u_t_H(i+1,m)*G_H(i+1))*(dt/(2*dx)));
 
-        R_H_ads(i,m) = (G_H_ad(i,m+1) - G_H_ad(i,m))/dt;
-        R_H_ads_up(i,m) = R_H_ads(i,m)/(c_H_ads*k_0);
+        J_H(i,m) = G_H(i-1,m);
+        J_H_up(i,m) = G_H_up(i-1,m);
 
+        G_H(end,m) = J_H(40,m);      %--- Lower boundary
+        G_H_up(end,m) = J_H_up(40,m);      %--- Lower boundary
 
     end
 end 
