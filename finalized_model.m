@@ -332,4 +332,31 @@ for m=1:nt-1
     end
 end 
 
+pH = log10(G_H);
+x_scale = linspace(1,40,41);
+xl = [0,5,10,15,20,25,30,35];
+yl = [10000,7900,7100,6000,5700,5500,5400,5100];
 
+% ###
+figure(1);  % --- EKR vs BKR
+hold on;
+plot(t_array,G_H_up(10,:),'-','DisplayName', 'H+');
+
+xlabel('Time');
+ylabel('Conc(mol/m3)');
+
+legend();
+
+hold off;
+
+% ###
+figure(2);  % --- EKR vs BKR
+hold on;
+plot(t_array,G_H_up(10,:),'-','DisplayName', 'H+');
+
+xlabel('Time');
+ylabel('Conc(mol/m3)');
+
+legend();
+
+hold off;
