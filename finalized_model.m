@@ -285,20 +285,40 @@ h_center = x_step;
 
 c_H_ads = K_ads*c_0;
 
-G_H(:,1) = c_0;
-G_H_up(:,1) = G_H/c_0; 
-G_H_ad(:,1) = K_ads*c_0;
-
-J_HA(1,:) = u_t_HA(1,:)*c_0;
-J_HA_up(1,:) = u_t_HA_up(1,:);
-J_HA_ad(1,:) = u_t_HA_up(1,:)*(K_ads*c_0);
-
-
 
 % --- Start of EKR (defualt)
 J_H = zeros(nx,nt);
 J_H_up = zeros(nx,nt);
 J_H_ad = zeros(nx,nt);
+
+G_H = zeros(nx,nt);
+G_H_up = zeros(nx,nt);
+G_H_ad = zeros(nx,nt);
+
+% $$$
+% Current array
+i_z = zeros(nx, nt);
+
+% $$$
+% Sigma array
+sigma_total = zeros(nx,nt);
+sigma_bar = zeros(nx,nt);
+Surface = ones(nx,nt);
+sigma_surface = sigma_surface*Surface; % Coverting sigma_surface to an array
+
+R_H = zeros(nx,nt);
+R_H_ads = zeros(nx,nt);
+R_H_ads_up = zeros(nx,nt);
+
+G_H(:,1) = c_0;
+G_H_up(:,1) = G_H(:,1)/c_0; 
+G_H_ad(:,1) = K_ads*c_0;
+G_H_ad_up(:,1) = G_H_ad(:,1)/c_H_ads;
+
+J_H(1,:) = u_t_H(1,:)*c_0;
+J_H_up(1,:) = u_t_H_up(1,:);
+J_H_ad(1,:) = u_t_H_up(1,:)*(K_ads*c_0);
+J_H_ad_up(1,:) = u_t_H_up(1,:);
 
 % tip: m --> t node; i --> x node
 for m=1:nt-1
