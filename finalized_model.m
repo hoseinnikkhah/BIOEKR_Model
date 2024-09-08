@@ -319,7 +319,7 @@ for m=1:nt-1
     G_H_up(1,m) = 1;       %--- Upper boundary
     G_H_up(end,m) = 0;     %--- Lower boundary
     for i=2:nx-1
-        G_H_up(i,m+1) = G_H_up(i,m) + (D_H_less/Peclet_calculated)*((G_H_up(i+1,m) - 2*G_H_up(i,m) + G_H_up(i-1,m))*(h_forward/(h_center^2))) - (u_t_H_up1(i+1,m)*G_H_up(i+1) - u_t_H_up1(i+1,m)*G_H_up(i+1))*(h_forward/(2*h_center));
+        G_H_up(i,m+1) = G_H_up(i,m) + (D_H_less/Peclet_calculated)*((G_H_up(i+1,m) - 2*G_H_up(i,m) + G_H_up(i-1,m))*(h_forward/(h_center^2))) - (u_t_H_up1(i+1,m)*G_H_up(i+1,m) - u_t_H_up1(i+1,m)*G_H_up(i+1,m))*(h_forward/(2*h_center));
 
         G_H(i,m+1) = G_H(i,m) + coeff*((D_H/(tau^2))*((G_H(i+1,m) - 2*G_H(i,m) + G_H(i-1,m))*(dt/(dx^2))) - (u_t_H(i+1,m)*G_H(i+1) - u_t_H(i+1,m)*G_H(i+1))*(dt/(2*dx)));
 
