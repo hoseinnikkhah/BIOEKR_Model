@@ -283,19 +283,33 @@ t_array = linspace(0,tmax,nt);
 h_forward = dt;
 h_center = x_step;
 
+c_H_ads = K_ads*c_0;
 
 G_H(:,1) = c_0;
 G_H_up(:,1) = G_H/c_0; 
+G_H_ad(:,1) = K_ads*c_0;
+
+J_HA(1,:) = u_t_HA(1,:)*c_0;
+J_HA_up(1,:) = u_t_HA_up(1,:);
+J_HA_ad(1,:) = u_t_HA_up(1,:)*(K_ads*c_0);
+
+
 
 % --- Start of EKR (defualt)
+J_H = zeros(nx,nt);
+J_H_up = zeros(nx,nt);
+J_H_ad = zeros(nx,nt);
 
 % tip: m --> t node; i --> x node
 for m=1:nt-1
 
     for i=2:nx-1
-        G_H_up(i,m+1) = G_H_up(i,m) + (D_H_less/Peclet_calculated)*((G_H_up(i+1,m) - 2*G_H_up(i,m) + G_H_up(i-1,m))*(h_forward/(h_center^2))) - (u_t_H_up(i+1,m)*G_H_up(i+1) - u_t_H_up(i+1,m)*G_H_up(i+1))*(h_forward/(2*h_center)) + (1/alpha)*R_H_ads(i,m);
+        G_H_up(i,m+1) = G_H_up(i,m) + (D_H_less/Peclet_calculated)*((G_H_up(i+1,m) - 2*G_H_up(i,m) + G_H_up(i-1,m))*(h_forward/(h_center^2))) - (u_t_H_up(i+1,m)*G_H_up(i+1) - u_t_H_up(i+1,m)*G_H_up(i+1))*(h_forward/(2*h_center)) + (1/alpha)*R_H_ads_up(i,m);
 
+        G_H_ad(i,m+1) = G_H_ad(i,m) + (D_H_less/Peclet_calculated)*((G_H_ad(i+1,m) - 2*G_H_ad(i,m) + G_H_ad(i-1,m))*(h_forward/(h_center^2))) - (u_t_H_up(i+1,m)*G_H_ad(i+1) - u_t_H_up(i+1,m)*G_H_ad(i+1))*(h_forward/(2*h_center));
 
+        R_H_ads(i,m) = (G_H_ad(i,m+1) - G_H_ad(i,m))/dt;
+        R_H_ads_up(i,m) = R_H_ads(i,m)/(c_H_ads*k_0);
 
 
     end
