@@ -289,7 +289,7 @@ h_center = x_step;
 for m=1:nt-1
 
     for i=2:nx-1
-        (G_HA(i,m+1) - G_HA(i,m))/h_forward = (D_HA_less/Peclet_calculated)*((G_HA(i+1,m) - 2*G_HA(i,m) + G_HA(i-1,m))/(h_center^2)) - (u_t_HA_up(i+1,m)*G_HA(i+1) -u_t_HA_up(i+1,m)*G_HA(i+1))/(2*h_center)
+        (G_HA(i,m+1) - G_HA(i,m)) = (D_HA_less/Peclet_calculated)*((G_HA(i+1,m) - 2*G_HA(i,m) + G_HA(i-1,m))*(h_forward/(h_center^2))) - (u_t_HA_up(i+1,m)*G_HA(i+1) - u_t_HA_up(i+1,m)*G_HA(i+1))*(h_forward/(2*h_center))
 
 
 
