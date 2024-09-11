@@ -41,4 +41,4 @@ data_dict = {
     'Porosity (Fraction)': porosity_fraction
 }
 data_frame = pd.DataFrame(data_dict)
-data_frame.to_csv('porosity_data.csv', index=False)
+data_frame.to_csv('porosity.csv', index=False)

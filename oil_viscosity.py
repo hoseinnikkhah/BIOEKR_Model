@@ -8,7 +8,7 @@ viscosity_at_100F = np.array([60, 20.62, 9.96, 4.5, 2.51, 1.316, 0.91])
 gravity_API_smooth = np.linspace(np.min(gravity_API), np.max(gravity_API), 100)
 smoothed_viscosity = np.interp(gravity_API_smooth, gravity_API, viscosity_at_100F)
 
-csv_filename = 'smooth_oil_viscosity.csv'
+csv_filename = 'oil_viscosity.csv'
 with open(csv_filename, mode='w', newline='') as csvfile:
     csv_writer = csv.writer(csvfile)
     csv_writer.writerow(["API_gravity", "Viscosity_100F"])  # Header row
