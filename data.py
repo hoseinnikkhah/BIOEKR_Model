@@ -5,6 +5,7 @@ import numpy as np
 values_df = pd.read_csv('values.csv')
 oil_viscosity_df = pd.read_csv('oil_viscosity.csv')
 porosity_df = pd.read_csv('porosity.csv')
+permittivity_df = pd.read_csv('permittivity.csv')
 
 # Extract the API value from values.csv
 api_value = values_df['API'].iloc[0]  # API is in the first row
@@ -36,13 +37,35 @@ else:
     porosity_value = values_df['Porosity'].iloc[0]
     nearest_clay_content = 'N/A'  # Not applicable as we don't need to compute
 
+
+# Part 2: Relative Permittivity Handling
+# Check if the Relative Permittivity value is N/A
+if pd.isna(values_df['Relative Permittivity'].iloc[0]):
+    # If Relative Permittivity is N/A, check the Frequency
+    Frequency_value = values_df['Frequency'].iloc[0]
+    
+    # Find the nearest Frequency (%) value in Permittivity.csv
+    permittivity_df['difference'] = np.abs(permittivity_df['Frequency (Hz)'] - Frequency_value)
+    nearest_permittivity_row = permittivity_df.loc[permittivity_df['difference'].idxmin()]
+
+    # Extract the Relative Permittivity value corresponding to the nearest Frequency (Hz)
+    nearest_permittivity = nearest_permittivity_row['Frequency (Hz)']
+    permittivity_value = nearest_permittivity_row['Relative Permittivity']
+else:
+    # If Relative Permittivity has a value, use it directly
+    permittivity_value = values_df['Relative Permittivity'].iloc[0]
+    nearest_permittivity = 'N/A'  # Not applicable as we don't need to compute
+
+
 # Save the result to data.csv
 result_df = pd.DataFrame({
     'API': [api_value], 
     'Nearest_API_gravity': [nearest_api_gravity], 
     'Viscosity_100F': [viscosity_value],
     'Porosity': [porosity_value],
-    'Nearest_Clay_Content': [nearest_clay_content]
+    'Nearest_Clay_Content': [nearest_clay_content],
+    'Permittivity': [permittivity_value],
+    'Nearest_permittivity': [nearest_permittivity]
 })
 result_df.to_csv('data.csv', index=False)
 
