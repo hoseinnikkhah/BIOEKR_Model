@@ -7,7 +7,7 @@ oil_viscosity_df = pd.read_csv('oil_viscosity.csv')
 porosity_df = pd.read_csv('porosity.csv')
 
 # Extract the API value from values.csv
-api_value = values_df['API'].iloc[0]  # Assuming API is in the first row
+api_value = values_df['API'].iloc[0]  # API is in the first row
 
 # Part 1: API and Viscosity Handling
 # Find the nearest API_gravity value to the API in values.csv
@@ -20,9 +20,9 @@ viscosity_value = nearest_row['Viscosity_100F']
 
 # Part 2: Porosity Handling
 # Check if the porosity value is N/A
-if pd.isna(values_df['porosity'].iloc[0]):
+if pd.isna(values_df['porosity'].iloc[1]):
     # If porosity is N/A, check the clay content
-    clay_content_value = values_df['clay content'].iloc[0]
+    clay_content_value = values_df['clay content'].iloc[2]
     
     # Find the nearest Clay Content (%) value in porosity.csv
     porosity_df['difference'] = np.abs(porosity_df['Clay Content (%)'] - clay_content_value)
@@ -33,7 +33,7 @@ if pd.isna(values_df['porosity'].iloc[0]):
     porosity_value = nearest_porosity_row['Porosity (Fraction)']
 else:
     # If porosity has a value, use it directly
-    porosity_value = values_df['porosity'].iloc[0]
+    porosity_value = values_df['porosity'].iloc[1]
     nearest_clay_content = 'N/A'  # Not applicable as we don't need to compute
 
 # Save the result to data.csv
