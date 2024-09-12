@@ -20,9 +20,9 @@ viscosity_value = nearest_row['Viscosity_100F']
 
 # Part 2: Porosity Handling
 # Check if the Porosity value is N/A
-if pd.isna(values_df['Porosity'].iloc[1]):
+if pd.isna(values_df['Porosity'].iloc[0]):
     # If Porosity is N/A, check the clay content
-    clay_content_value = values_df['clay content'].iloc[2]
+    clay_content_value = values_df['clay content'].iloc[0]
     
     # Find the nearest Clay Content (%) value in Porosity.csv
     porosity_df['difference'] = np.abs(porosity_df['Clay Content (%)'] - clay_content_value)
@@ -33,7 +33,7 @@ if pd.isna(values_df['Porosity'].iloc[1]):
     porosity_value = nearest_porosity_row['Porosity (Fraction)']
 else:
     # If Porosity has a value, use it directly
-    porosity_value = values_df['Porosity'].iloc[1]
+    porosity_value = values_df['Porosity'].iloc[0]
     nearest_clay_content = 'N/A'  # Not applicable as we don't need to compute
 
 # Save the result to data.csv
