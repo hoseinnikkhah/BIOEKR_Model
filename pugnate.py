@@ -18,13 +18,13 @@ def gather_inputs():
 
     # 2. Ask if we have a porosity value
     porosity = None
-    tortuosity = None
+    clay_content = None
     has_porosity = input("Do we have a porosity value? (yes/no): ").strip().lower()
 
     if has_porosity == 'yes':
         porosity = input("What is the porosity value? (Enter a number): ")
     else:
-        tortuosity = input("What is the tortuosity value? (Enter a number): ")
+        clay = input("What is the clay_content value? (Enter a number between 0 and 1): ")
 
     # 3. Ask if the crude oil relative permittivity is determined
     relative_permittivity = None
@@ -37,7 +37,7 @@ def gather_inputs():
         frequency = input("What is the frequency? (Enter a value between 10^2 and 10^10 Hz): ")
 
     # Return all gathered inputs
-    return API, porosity, tortuosity, relative_permittivity, frequency
+    return API, porosity, clay_content, relative_permittivity, frequency
 
 # Save data to a CSV file
 def save_to_csv(data):
@@ -63,13 +63,13 @@ def main():
     run_scripts()
 
     # Gather inputs from the user
-    API, porosity, tortuosity, relative_permittivity, frequency = gather_inputs()
+    API, porosity, clay_content, relative_permittivity, frequency = gather_inputs()
 
     # Store collected data in a dictionary
     data = {
         'API': API,
         'Porosity': porosity,
-        'Tortuosity': tortuosity,
+        'Tortuosity': clay_content,
         'Relative Permittivity': relative_permittivity,
         'Frequency': frequency
     }
