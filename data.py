@@ -22,7 +22,7 @@ viscosity_value = nearest_row['Viscosity_100F']
 # Check if the Porosity value is N/A
 if pd.isna(values_df['Porosity'].iloc[0]):
     # If Porosity is N/A, check the clay content
-    clay_content_value = values_df['clay content'].iloc[0]
+    clay_content_value = values_df['Clay Content'].iloc[0]
     
     # Find the nearest Clay Content (%) value in Porosity.csv
     porosity_df['difference'] = np.abs(porosity_df['Clay Content (%)'] - clay_content_value)
