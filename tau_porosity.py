@@ -1,12 +1,16 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 
-# Hypothetical data resembling your plot
-porosity = np.linspace(0.01, 1, 100)  # Porosity from 0 to 1
-# Tortuosity decreases with increasing porosity (with a range up to 8, similar to your plot)
-tortuosity = 0.85 / (porosity + 0.2)  # A decreasing curve from 8 to near 1, adjusting for visual similarity
+# Generate data
+porosity = np.linspace(0.01, 1, 100)
+tortuosity = 0.85 / (porosity + 0.1)
 
-# Plotting the original data as a line
+# Save the data to a CSV file
+data = pd.DataFrame({'Porosity': porosity, 'Tortuosity': tortuosity})
+data.to_csv('tau_porosity.csv', index=False)
+
+# Plot the data
 plt.plot(porosity, tortuosity, label='Original Data', color='black')
 plt.xlabel('Porosity ϕ')
 plt.ylabel('Tortuosity τ')
