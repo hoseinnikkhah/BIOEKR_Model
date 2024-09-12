@@ -1,4 +1,5 @@
 import subprocess
+import csv
 
 # Run the specified Python files
 def run_scripts():
@@ -38,6 +39,24 @@ def gather_inputs():
     # Return all gathered inputs
     return API, porosity, tortuosity, relative_permittivity, frequency
 
+# Save data to a CSV file
+def save_to_csv(data):
+    filename = 'values.csv'
+    fieldnames = ['API', 'Porosity', 'Tortuosity', 'Relative Permittivity', 'Frequency']
+
+    # Open the CSV file and write the data
+    with open(filename, mode='w', newline='') as file:
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerow({
+            'API': data['API'],
+            'Porosity': data['Porosity'] if data['Porosity'] else 'N/A',
+            'Tortuosity': data['Tortuosity'] if data['Tortuosity'] else 'N/A',
+            'Relative Permittivity': data['Relative Permittivity'] if data['Relative Permittivity'] else 'N/A',
+            'Frequency': data['Frequency'] if data['Frequency'] else 'N/A'
+        })
+    print(f"Data saved to {filename}")
+
 # Main function
 def main():
     # Run the Python scripts
@@ -46,13 +65,22 @@ def main():
     # Gather inputs from the user
     API, porosity, tortuosity, relative_permittivity, frequency = gather_inputs()
 
-    # Output the gathered data for further use
+    # Store collected data in a dictionary
+    data = {
+        'API': API,
+        'Porosity': porosity,
+        'Tortuosity': tortuosity,
+        'Relative Permittivity': relative_permittivity,
+        'Frequency': frequency
+    }
+
+    # Output the gathered data
     print(f"\nCollected Data:")
-    print(f"API: {API}")
-    print(f"Porosity: {porosity if porosity else 'Not provided'}")
-    print(f"Tortuosity: {tortuosity if tortuosity else 'Not provided'}")
-    print(f"Relative Permittivity: {relative_permittivity if relative_permittivity else 'Not provided'}")
-    print(f"Frequency: {frequency if frequency else 'Not provided'}")
+    for key, value in data.items():
+        print(f"{key}: {value if value else 'Not provided'}")
+
+    # Save data to CSV
+    save_to_csv(data)
 
 if __name__ == "__main__":
     main()
