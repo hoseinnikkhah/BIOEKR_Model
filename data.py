@@ -43,6 +43,16 @@ if pd.isna(values_df['Relative Permittivity'].iloc[0]):
     # If Relative Permittivity is N/A, check the Frequency value
     frequency_value = values_df['Frequency'].iloc[0]
     
+    # Ensure frequency_value is a float
+    try:
+        frequency_value = float(frequency_value)
+    except ValueError:
+        print("Error: Frequency value in values.csv is not a valid float.")
+        frequency_value = np.nan
+
+    # Ensure 'Frequency (Hz)' column is numeric
+    permittivity_df['Frequency (Hz)'] = pd.to_numeric(permittivity_df['Frequency (Hz)'], errors='coerce')
+
     # Find the nearest Frequency (Hz) value in Permittivity.csv
     permittivity_df['difference'] = np.abs(permittivity_df['Frequency (Hz)'] - frequency_value)
     nearest_permittivity_row = permittivity_df.loc[permittivity_df['difference'].idxmin()]
