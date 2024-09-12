@@ -24,7 +24,7 @@ def gather_inputs():
     if has_porosity == 'yes':
         porosity = input("What is the porosity value? (Enter a number): ")
     else:
-        clay = input("What is the clay_content value? (Enter a number between 0 and 1): ")
+        clay = input("What is the clay content value? (Enter a number between 0 and 1): ")
 
     # 3. Ask if the crude oil relative permittivity is determined
     relative_permittivity = None
@@ -42,7 +42,7 @@ def gather_inputs():
 # Save data to a CSV file
 def save_to_csv(data):
     filename = 'values.csv'
-    fieldnames = ['API', 'Porosity', 'Tortuosity', 'Relative Permittivity', 'Frequency']
+    fieldnames = ['API', 'Porosity', 'Clay Content', 'Relative Permittivity', 'Frequency']
 
     # Open the CSV file and write the data
     with open(filename, mode='w', newline='') as file:
@@ -51,7 +51,7 @@ def save_to_csv(data):
         writer.writerow({
             'API': data['API'],
             'Porosity': data['Porosity'] if data['Porosity'] else 'N/A',
-            'Tortuosity': data['Tortuosity'] if data['Tortuosity'] else 'N/A',
+            'Clay Content': data['Clay Content'] if data['Clay Content'] else 'N/A',
             'Relative Permittivity': data['Relative Permittivity'] if data['Relative Permittivity'] else 'N/A',
             'Frequency': data['Frequency'] if data['Frequency'] else 'N/A'
         })
@@ -69,7 +69,7 @@ def main():
     data = {
         'API': API,
         'Porosity': porosity,
-        'Tortuosity': clay_content,
+        'Clay Content': clay_content,
         'Relative Permittivity': relative_permittivity,
         'Frequency': frequency
     }
