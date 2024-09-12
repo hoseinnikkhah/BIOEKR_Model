@@ -24,7 +24,7 @@ def gather_inputs():
     if has_porosity == 'yes':
         porosity = input("What is the porosity value? (Enter a number): ")
     else:
-        clay = input("What is the clay content value? (Enter a number between 0 and 1): ")
+        clay_content = input("What is the clay content value? (Enter a number between 0 and 1): ")
 
     # 3. Ask if the crude oil relative permittivity is determined
     relative_permittivity = None
