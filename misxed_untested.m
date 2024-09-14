@@ -16,6 +16,7 @@ Mu_csv = data(1, 3);        % Get the value for viscosity
 n_csv = data(1, 4);         % Get the value for Porosity
 epsilon_csv = data(1, 6);   % Get the value for Relative Permittivity
 tau_csv = data(1,9);        % Get the value for Tortuosity
+growth_csv data(1,10);      % Get the value for Microbial Growth
 
 % $$$
 % Geomesh info
@@ -566,7 +567,7 @@ alpha_C = (D_C/(tau^2))*10^5;
 
 % ###
 % Growth Factor
-K = 0.0206;       % Growth factor obtained
+K = growth_csv;       % Growth factor obtained
 sub = zeros(nx,nt);
 fixup = zeros(nx,nt);
 for xx = 1:nx
