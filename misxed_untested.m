@@ -8,6 +8,15 @@
 % ---
 
 % $$$
+% Read CSV file
+data = readmatrix('data.csv');
+
+API_csv = data(2, 1);       % Get the value for API
+Mu_csv = data(2, 3);        % Get the value for viscosity
+n_csv = data(2, 4);         % Get the value for Porosity
+epsilon_csv = data(2, 6);   % Get the value for Relative Permittivity
+
+% $$$
 % Geomesh info
 L = 0.4;                       % length of domain in x direction [m]
 
@@ -70,7 +79,7 @@ F = 96485;                     % Faraady constant [C/mol]
 D0 = 10^-9;                    % Reference diffusivity [m2/s]
 
 % Soil info
-n = 0.64;                      % Porosity   [Dimentionless]
+n = n_csv;                     % Porosity   [Dimentionless]
 tau = 1.25;                    % Tortuosity [Dimentionless]
 dzdx = 1/tau;                  % divertion field
 
@@ -79,8 +88,11 @@ sigma_surface = 0.0013;        % Surface conductivit [mhos/m]
 K_a = 1.75*10^-6;              % dissociation constant [mol/m3]
 K_H2O = 10^-8;                 % dissociation constant [(mol/m3)2]
 K_b = 1.75*10^-6;              % dissociation constant [mol/m3]
-mu_a = 0.001;                  % Solution viscosity [kg/m.s]
-epsilon = 7*10^10;             % Electrical permittivity [F/m]
+mu_a = Mu_csv;                 % Solution viscosity [kg/m.s]
+epsilon_0 = 8.854*10^-12;      % permittivity of free space [F/m]
+epsilon_r = epsilon_csv        % Relative permittivity [F/m]
+epsilon = epsilon_r*epsilon_0; % Electrical permittivity [F/m]
+%epsilon = 7*10^10
 zeta = -0.0027;                % Zeta Potential [V]
 zeta_0 = 2.6205e-23;           % Refrence Zeta Potential [V]
 
@@ -258,7 +270,7 @@ c_C_TPH = 10000;
 
 % $$$
 % Hydrocarbon properties
-API = 29.6;
+API = API_csv;
 MW = (6048/(API-5.9));                   % [g/mol]
 rho = 1760;                              % [kg/(m3)]
 bolian = 10^-3;                          % [g/mg]
