@@ -25,13 +25,13 @@ if pd.isna(values_df['Porosity'].iloc[0]):
     # If Porosity is N/A, check the clay content
     clay_content_value = values_df['Clay Content'].iloc[0]
     
-    # Find the nearest Clay Content (%) value in Porosity.csv
-    porosity_df['difference'] = np.abs(porosity_df['Clay Content (%)'] - clay_content_value)
+    # Find the nearest Polyfit Clay Content (x_smooth) value in Porosity.csv
+    porosity_df['difference'] = np.abs(porosity_df['Polyfit Clay Content (x_smooth)'] - clay_content_value)
     nearest_porosity_row = porosity_df.loc[porosity_df['difference'].idxmin()]
 
-    # Extract the Porosity (Fraction) value corresponding to the nearest Clay Content (%)
-    nearest_clay_content = nearest_porosity_row['Clay Content (%)']
-    porosity_value = nearest_porosity_row['Porosity (Fraction)']
+    # Extract the Polyfit Porosity (y_smooth) value corresponding to the nearest Polyfit Clay Content (x_smooth)
+    nearest_clay_content = nearest_porosity_row['Polyfit Clay Content (x_smooth)']
+    porosity_value = nearest_porosity_row['Polyfit Porosity (y_smooth)']
 else:
     # If Porosity has a value, use it directly
     porosity_value = values_df['Porosity'].iloc[0]
