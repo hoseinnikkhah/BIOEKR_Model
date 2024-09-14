@@ -49,10 +49,19 @@ plt.legend()
 plt.savefig('porosity_vs_clay_content_smoothed.png')
 plt.show()
 
-# Save the clay content and porosity data to a CSV file
+max_length = max(len(clay_content_percentage), len(x_smooth))
+
+clay_content_percentage_padded = clay_content_percentage + [np.nan] * (max_length - len(clay_content_percentage))
+porosity_fraction_padded = porosity_fraction + [np.nan] * (max_length - len(porosity_fraction))
+x_smooth_padded = list(x_smooth) + [np.nan] * (max_length - len(x_smooth))
+y_smooth_padded = list(y_smooth) + [np.nan] * (max_length - len(y_smooth))
+
 data_dict = {
-    'Clay Content (%)': clay_content_percentage, 
-    'Porosity (Fraction)': porosity_fraction
+    'Clay Content (%)': clay_content_percentage_padded,
+    'Porosity (Fraction)': porosity_fraction_padded,
+    'Polyfit Clay Content (x_smooth)': x_smooth_padded,
+    'Polyfit Porosity (y_smooth)': y_smooth_padded
 }
+
 data_frame = pd.DataFrame(data_dict)
 data_frame.to_csv('porosity.csv', index=False)
