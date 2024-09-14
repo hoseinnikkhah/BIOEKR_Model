@@ -1,2 +1,2 @@
-API,Nearest_API_gravity,Viscosity_100F,Porosity,Nearest_Clay_Content,Relative Permittivity,Nearest_Frequency,Nearest_Porosity_in_tau,Tortuosity
-25,24.848484848484848,21.81333333333334,0.64,N/A,2.2999984650053897,1023.3402121916424,0.64,1.148648648648649
+API,Nearest_API_gravity,Viscosity_100F,Porosity,Nearest_Clay_Content,Relative Permittivity,Nearest_Frequency,Nearest_Porosity_in_tau,Tortuosity,Growth Rate (k)
+25,24.848484848484848,21.81333333333334,0.64,N/A,2.2999984650053897,1023.3402121916424,0.64,1.148648648648649,0.0251643548552335

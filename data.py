@@ -7,6 +7,7 @@ oil_viscosity_df = pd.read_csv('oil_viscosity.csv')
 porosity_df = pd.read_csv('porosity.csv')
 permittivity_df = pd.read_csv('permittivity.csv')
 tau_porosity_df = pd.read_csv('tau_porosity.csv')
+growth_results_df = pd.read_csv('growth_results.csv')  # Load growth_results.csv
 
 # Extract the API value from values.csv
 api_value = values_df['API'].iloc[0]  # API is in the first row
@@ -71,6 +72,10 @@ else:
     relative_permittivity_value = values_df['Relative Permittivity'].iloc[0]
     nearest_frequency = 'N/A'  # Not applicable as we don't need to compute
 
+# Part 4: Growth Rate (k) Handling
+# Extract the Growth Rate (k) value from growth_results.csv
+growth_rate_k_value = growth_results_df['Growth Rate (k)'].iloc[0]  # Assuming the Growth Rate (k) is in the first row
+
 # Save the result to data.csv
 result_df = pd.DataFrame({
     'API': [api_value], 
@@ -81,9 +86,11 @@ result_df = pd.DataFrame({
     'Relative Permittivity': [relative_permittivity_value],
     'Nearest_Frequency': [nearest_frequency],
     'Nearest_Porosity_in_tau': [nearest_tau_porosity],  # Save the nearest porosity value from tau_porosity.csv
-    'Tortuosity': [tau_value]  # Save the Tortuosity value
+    'Tortuosity': [tau_value],  # Save the Tortuosity value
+    'Growth Rate (k)': [growth_rate_k_value]  # Save the Growth Rate (k) value from growth_results.csv
 })
 
 result_df.to_csv('data.csv', index=False)
 
-print(f"API: {api_value}, Nearest API_gravity: {nearest_api_gravity}, Viscosity_100F: {viscosity_value}, Porosity: {porosity_value}, Relative Permittivity: {relative_permittivity_value} saved to data.csv.")
+print(f"API: {api_value}, Nearest API_gravity: {nearest_api_gravity}, Viscosity_100F: {viscosity_value}, "
+      f"Porosity: {porosity_value}, Relative Permittivity: {relative_permittivity_value}, Growth Rate (k): {growth_rate_k_value} saved to data.csv.")
