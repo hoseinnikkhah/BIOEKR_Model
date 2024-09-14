@@ -15,6 +15,7 @@ API_csv = data(1, 1);       % Get the value for API
 Mu_csv = data(1, 3);        % Get the value for viscosity
 n_csv = data(1, 4);         % Get the value for Porosity
 epsilon_csv = data(1, 6);   % Get the value for Relative Permittivity
+tau_csv = data(1,9);        % Get the value for Tortuosity
 
 % $$$
 % Geomesh info
@@ -80,7 +81,7 @@ D0 = 10^-9;                    % Reference diffusivity [m2/s]
 
 % Soil info
 n = n_csv;                     % Porosity   [Dimentionless]
-tau = 1.25;                    % Tortuosity [Dimentionless]
+tau = tau_csv;                 % Tortuosity [Dimentionless]
 dzdx = 1/tau;                  % divertion field
 
 % conatmination info
