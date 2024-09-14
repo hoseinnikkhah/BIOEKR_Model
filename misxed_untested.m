@@ -11,10 +11,10 @@
 % Read CSV file
 data = readmatrix('data.csv');
 
-API_csv = data(2, 1);       % Get the value for API
-Mu_csv = data(2, 3);        % Get the value for viscosity
-n_csv = data(2, 4);         % Get the value for Porosity
-epsilon_csv = data(2, 6);   % Get the value for Relative Permittivity
+API_csv = data(1, 1);       % Get the value for API
+Mu_csv = data(1, 3);        % Get the value for viscosity
+n_csv = data(1, 4);         % Get the value for Porosity
+epsilon_csv = data(1, 6);   % Get the value for Relative Permittivity
 
 % $$$
 % Geomesh info
@@ -90,8 +90,8 @@ K_H2O = 10^-8;                 % dissociation constant [(mol/m3)2]
 K_b = 1.75*10^-6;              % dissociation constant [mol/m3]
 mu_a = Mu_csv;                 % Solution viscosity [kg/m.s]
 epsilon_0 = 8.854*10^-12;      % permittivity of free space [F/m]
-epsilon_r = epsilon_csv        % Relative permittivity [F/m]
-epsilon = epsilon_r*epsilon_0; % Electrical permittivity [F/m]
+epsilon_r = epsilon_csv;       % Relative permittivity [F/m]
+epsilon = epsilon_r/epsilon_0; % Electrical permittivity [F/m]
 %epsilon = 7*10^10
 zeta = -0.0027;                % Zeta Potential [V]
 zeta_0 = 2.6205e-23;           % Refrence Zeta Potential [V]
