@@ -1,3 +1,4 @@
+import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -25,14 +26,27 @@ porosity_percentage = [
 # Convert porosity percentages to fractions for plotting
 porosity_fraction = [value / 100 for value in porosity_percentage]
 
+# Fit a polynomial of degree 3 (you can adjust the degree)
+degree = 3
+coefficients = np.polyfit(clay_content_percentage, porosity_fraction, degree)
+
+# Generate a smooth curve by using the polynomial coefficients
+polynomial = np.poly1d(coefficients)
+
+# Generate a range of x values for a smooth curve
+x_smooth = np.linspace(min(clay_content_percentage), max(clay_content_percentage), 500)
+y_smooth = polynomial(x_smooth)
+
 # Plotting Porosity as a function of Clay Content
 plt.figure(figsize=(10, 6))
-plt.plot(clay_content_percentage, porosity_fraction, marker='o', color='b', linestyle='-', linewidth=2)
-plt.title('Porosity as a Function of Clay Content', fontsize=16)
+plt.plot(clay_content_percentage, porosity_fraction, 'o', label='Original Data', color='b')
+plt.plot(x_smooth, y_smooth, label=f'Polynomial Fit (Degree {degree})', color='r', linestyle='-', linewidth=2)
+plt.title('Porosity as a Function of Clay Content (Smoothed)', fontsize=16)
 plt.xlabel('Clay Content (%)', fontsize=14)
 plt.ylabel('Porosity (Fraction)', fontsize=14)
 plt.grid(True)
-plt.savefig('porosity_vs_clay_content.png')
+plt.legend()
+plt.savefig('porosity_vs_clay_content_smoothed.png')
 plt.show()
 
 # Save the clay content and porosity data to a CSV file
