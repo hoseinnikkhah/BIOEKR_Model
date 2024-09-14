@@ -6,6 +6,7 @@ values_df = pd.read_csv('values.csv')
 oil_viscosity_df = pd.read_csv('oil_viscosity.csv')
 porosity_df = pd.read_csv('porosity.csv')
 permittivity_df = pd.read_csv('permittivity.csv')
+tau_porosity_df = pd.read_csv('tau_porosity.csv')
 
 # Extract the API value from values.csv
 api_value = values_df['API'].iloc[0]  # API is in the first row
@@ -36,6 +37,11 @@ else:
     # If Porosity has a value, use it directly
     porosity_value = values_df['Porosity'].iloc[0]
     nearest_clay_content = 'N/A'  # Not applicable as we don't need to compute
+
+tau_porosity_df['difference'] = np.abs(tau_porosity_df['Porosity'] - porosity_value)
+nearest_tau_porosity_row = tau_porosity_df.loc[tau_porosity_df['difference'].idxmin()]
+nearest_tau_porosity = nearest_tau_porosity_row['Porosity']
+tau_value = nearest_tau_porosity_row['Tortuosity']
 
 # Part 3: Relative Permittivity Handling
 # Check if the Relative Permittivity value is N/A
@@ -73,8 +79,11 @@ result_df = pd.DataFrame({
     'Porosity': [porosity_value],
     'Nearest_Clay_Content': [nearest_clay_content],
     'Relative Permittivity': [relative_permittivity_value],
-    'Nearest_Frequency': [nearest_frequency]
+    'Nearest_Frequency': [nearest_frequency],
+    'Nearest_Porosity_in_tau': [nearest_tau_porosity],  # Save the nearest porosity value from tau_porosity.csv
+    'Tortuosity': [tau_value]  # Save the Tortuosity value
 })
+
 result_df.to_csv('data.csv', index=False)
 
 print(f"API: {api_value}, Nearest API_gravity: {nearest_api_gravity}, Viscosity_100F: {viscosity_value}, Porosity: {porosity_value}, Relative Permittivity: {relative_permittivity_value} saved to data.csv.")
