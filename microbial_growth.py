@@ -24,6 +24,7 @@ log_concentration = np.log(microbial_concentration)
 # Plotting the log-transformed concentration data over time
 plt.figure(figsize=(8, 5))
 plt.plot(days, log_concentration, color='purple', marker='o', linestyle='--', label='ln(Concentration)')
+plt.plot(days, microbial_concentration, color='green', marker='x', linestyle='-', label='Concentration')
 plt.xlabel('Time (days)')
 plt.ylabel('ln(Microbial Concentration) (mg/L)')
 plt.title('Logarithmic Growth of Microbial Concentration')
