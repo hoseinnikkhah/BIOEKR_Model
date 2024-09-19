@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import csv
+from matplotlib.ticker import ScalarFormatter
 
 gravity_API = np.array([20, 25, 30, 35, 40, 45, 50])
 viscosity_at_100F = np.array([60, 20.62, 9.96, 4.5, 2.51, 1.316, 0.91])
@@ -32,6 +33,11 @@ plt.xlabel('API Gravity of Oil')
 plt.ylabel('Viscosity (Cp)')
 plt.grid(True, which="both", linestyle="--", linewidth=0.7)
 plt.legend()
+
+# Set flow format for the y-axis instead of scientific notation
+plt.gca().yaxis.set_major_formatter(ScalarFormatter())
+plt.gca().yaxis.set_minor_formatter(ScalarFormatter())
+plt.gca().ticklabel_format(style='plain', axis='y')
 
 plt.ylim(0.01, 100)
 
