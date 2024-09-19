@@ -9,7 +9,7 @@ days = np.arange(1, 36)
 # Given microbial concentration data (mg/L) over the time period
 
 microbial_concentration_up = np.array([
-    1.02552020405620, 1.05169168892748, 1.07853107543312, 1.10605540855913, 1.13428216828303,
+     1.02552020405620, 1.05169168892748, 1.07853107543312, 1.10605540855913, 1.13428216828303,
      1.16322928067492, 1.19291512928190, 1.22335856680290, 1.25457892706162, 1.28659603728484,
      1.31943023069425, 1.35310235941949, 1.38763380774081, 1.42304650566964, 1.45936294287580,
      1.49660618297005, 1.53479987815122, 1.57396828422707, 1.61413627601854, 1.65532936315706,
@@ -30,12 +30,13 @@ microbial_concentration = np.array([
 
 
 # Calculate the natural logarithm of the concentration data
-log_concentration = np.log(microbial_concentration)
+log_concentration = np.log(microbial_concentration_up)
 
 # Plotting the log-transformed concentration data over time
 plt.figure(figsize=(8, 5))
 plt.plot(days, log_concentration, color='purple', marker='o', linestyle='--', label='ln(Concentration)')
 plt.plot(days, microbial_concentration, color='green', marker='x', linestyle='-', label='Concentration')
+plt.plot(days, microbial_concentration_up, color='red', marker='x', linestyle='-', label='Concentration_up')
 plt.xlabel('Time (days)')
 plt.ylabel('ln(Microbial Concentration) (mg/L)')
 plt.title('Logarithmic Growth of Microbial Concentration')
