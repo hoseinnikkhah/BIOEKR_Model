@@ -7,7 +7,7 @@ import os
 days = np.arange(1, 36)
 
 # Given microbial concentration data (mg/L) over the time period
-'''
+
 microbial_concentration = np.array([
     1.64872127070013, 1.68301736879343, 1.71802688180127, 1.75376464992030, 1.79024582204753,
     1.82748586220180, 1.86550055607883, 1.90430601774260, 1.94391869645598, 1.98435538365342,
@@ -27,7 +27,7 @@ microbial_concentration = np.array([
     1.01470588235294,1.03529411764706,1.05588235294118,1.07647058823529,1.09705882352941,
     1.11764705882353,1.13823529411765,1.15882352941176,1.17941176470588,1.20000000000000
 ])
-
+'''
 # Calculate the natural logarithm of the concentration data
 log_concentration = np.log(microbial_concentration)
 
