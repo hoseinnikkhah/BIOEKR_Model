@@ -4,7 +4,7 @@ import numpy as np
 a = 0.0252
 
 # Define the range of x values
-x_values = np.arange(1, 37)
+x_values = np.arange(1, 36)
 
 # Assuming b = 0 (no intercept)
 b = 0
