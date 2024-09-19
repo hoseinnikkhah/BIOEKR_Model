@@ -16,7 +16,7 @@ with open(csv_filename, mode='w', newline='') as csvfile:
 
 plt.figure()
 
-plt.plot(gravity_API_smooth, smoothed_viscosity, label='Viscosity at 100F', color='blue')
+plt.plot(gravity_API_smooth, smoothed_viscosity, label='Viscosity', color='blue')
 plt.yscale('log')
 plt.xlabel('API Gravity of Oil')
 plt.ylabel('Viscosity (Cp) at 100F')
