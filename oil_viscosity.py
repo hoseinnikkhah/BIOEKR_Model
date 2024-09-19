@@ -19,7 +19,7 @@ plt.figure()
 plt.plot(gravity_API_smooth, smoothed_viscosity, label='Viscosity', color='blue')
 plt.yscale('log')
 plt.xlabel('API Gravity of Oil')
-plt.ylabel('Viscosity (Cp) at 100F')
+plt.ylabel('Viscosity (Cp)')
 plt.grid(True, which="both", linestyle="--", linewidth=0.7)
 plt.legend()
 
