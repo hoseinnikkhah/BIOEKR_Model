@@ -4,7 +4,7 @@ import csv
 from matplotlib.ticker import ScalarFormatter
 
 gravity_API = np.array([20, 25, 30, 35, 40, 45, 50])
-viscosity_at_100F = np.array([60, 20.62, 9.96, 4.5, 2.51, 1.316, 0.91])
+viscosity_at_100F = np.array([60, 20.62, 9.96, 4.5, 2.51, 1.316, 0.85])
 
 # Fit a polynomial of degree 2 (you can adjust the degree if needed)
 poly_coeff = np.polyfit(gravity_API, np.log(viscosity_at_100F), 2)  # log for log scale fitting
@@ -34,9 +34,11 @@ plt.ylabel('Viscosity (Cp)')
 plt.grid(True, which="both", linestyle="--", linewidth=0.7)
 plt.legend()
 
-# Set flow format for the y-axis instead of scientific notation
+# Set specific y-axis ticks
+plt.yticks([0.01, 0.1, 1.0, 10, 100], ['0.01', '0.1', '1.0', '10', '100'])
+
+# Set flow format for the y-axis
 plt.gca().yaxis.set_major_formatter(ScalarFormatter())
-plt.gca().yaxis.set_minor_formatter(ScalarFormatter())
 plt.gca().ticklabel_format(style='plain', axis='y')
 
 plt.ylim(0.01, 100)
