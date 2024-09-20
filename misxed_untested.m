@@ -997,9 +997,9 @@ yl = [10000,7900,7100,6000,5700,5500,5400,5100];
 % ###
 %figure(1);  % --- EKR vs BKR
 %hold on;
-%plot(t_array,G_C(10,:),'-','DisplayName', 'Hydrocarbon (EKR without rate conturbution)');
-%plot(t_array,G_C_tot(10,:),'-','DisplayName', 'Hydrocarbon (EKR with rates considered)');
-%plot(t_array,G_C_bio(10,:),'-','DisplayName', 'Hydrocarbon (BKR)');
+%plot(t_array,G_H(10,:),'-','DisplayName', 'Hydrocarbon (EKR without rate conturbution)');
+%plot(t_array,G_H_tot(10,:),'-','DisplayName', 'Hydrocarbon (EKR with rates considered)');
+%plot(t_array,G_H_bio(10,:),'-','DisplayName', 'Hydrocarbon (BKR)');
 
 %xlabel('Time');
 %ylabel('Conc(mol/m3)');
@@ -1022,19 +1022,19 @@ legend();
 hold off;
 
 % Plot for figure 3
-%figure(3)
-%plot(x_scale,E_field(:,50400),'--','DisplayName', 'Voltage')
-%xlabel('Length (cm)');
-%ylabel('Voltage (V)');
-%title('Electric feild')
-%legend();
+figure(3)
+plot(x_scale,E_field(:,50400),'--','DisplayName', 'Voltage')
+xlabel('Length (cm)');
+ylabel('Voltage (V)');
+title('Electric feild')
+legend();
 
-%hold off;
+hold off;
 
 % Plot for figure 4
-%figure(4)
-%plot(x_scale,E_field_dx(:,50400),'--','DisplayName', 'Voltage Gradient')
-%xlabel('Length (cm)');
-%ylabel('Voltage Gradient (V/m)');
-%title('Electric feild gradient');
-%legend();
+figure(4)
+plot(x_scale,E_field_dx(:,50400),'--','DisplayName', 'Voltage Gradient')
+xlabel('Length (cm)');
+ylabel('Voltage Gradient (V/m)');
+title('Electric feild gradient');
+legend();

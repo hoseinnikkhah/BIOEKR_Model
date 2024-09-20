@@ -522,7 +522,7 @@ plot(t, G_H_B(10,:), '-', 'DisplayName', 'H+ (Log E file)');
 
 
 
-scatter(xl, yl, 'DisplayName', 'Experiment Data');
+% scatter(xl, yl, 'DisplayName', 'Experiment Data');
 
 xlabel('Time');
 ylabel('Conc (mg/kg)');
