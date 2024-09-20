@@ -11,7 +11,7 @@ data = pd.DataFrame({'Porosity': porosity, 'Tortuosity': tortuosity})
 data.to_csv('tau_porosity.csv', index=False)
 
 # Plot the data
-plt.plot(porosity, tortuosity, label='Original Data', color='black')
+plt.plot(porosity, tortuosity, label='Gathered Data', color='black')
 plt.xlabel('Porosity ϕ')
 plt.ylabel('Tortuosity τ')
 plt.title('Tortuosity vs. Porosity')
