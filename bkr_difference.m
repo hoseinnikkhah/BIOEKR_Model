@@ -393,6 +393,16 @@ G_H_bio = zeros(nx,nt);
 G_C_bio = zeros(nx,nt);
 
 % $$$
+% Total concentration arrays [Bio]
+G_HA_bio_alt = zeros(nx,nt);
+G_OH_bio_alt = zeros(nx,nt);
+G_Na_bio_alt = zeros(nx,nt);
+G_Cl_bio_alt = zeros(nx,nt);
+G_A_bio_alt = zeros(nx,nt);
+G_H_bio_alt = zeros(nx,nt);
+G_C_bio_alt = zeros(nx,nt);
+
+% $$$
 % concentration arrays [Dimensionless]
 G_HA_up = zeros(nx,nt);
 G_OH_up = zeros(nx,nt);
@@ -536,6 +546,16 @@ G_A_bio(:,1) = c_0;
 G_H_bio(:,1) = c_0;
 G_C_bio(:,1) = c_C;
 
+% $$$
+% --- Set IC and BC [BKR]
+G_HA_bio_alt(:,1) = c_0;
+G_OH_bio_alt(:,1) = c_0;
+G_Na_bio_alt(:,1) = c_Na;
+G_Cl_bio_alt(:,1) = c_Cl;
+G_A_bio_alt(:,1) = c_0;
+G_H_bio_alt(:,1) = c_0;
+G_C_bio_alt(:,1) = c_C;
+
 % ###
 % --- Set IC and BC [Dimensionless]
 G_HA_up(:,1) = G_HA(:,1)/c_0;
@@ -578,18 +598,25 @@ alpha_C = (D_C/(tau^2))*10^5;
 % ###
 % Growth Factor
 K = growth_csv;       % Growth factor obtained
+K_alt = 0.038
 sub = zeros(nx,nt);
 fixup = zeros(nx,nt);
+
+sub_alt = zeros(nx,nt);
+fixup_alt = zeros(nx,nt);
+
 for xx = 1:nx
     for tt = 1:nt
         M_g = exp(-K*(tt/1440));
+        M_g_alt = exp(-K_alt*(tt/1440));
         sub(xx,tt) = M_g;
+        sub_alt(xx,tt) = M_g_alt;
         fixup(xx,tt) = 1/(-0.01*(tt/1440) + 0.62);
-        %fixup(xx,tt) = 1/(-0.01*(tt/1440) + 0.61);
+        fixup_alt(xx,tt) = 1/(-0.01*(tt/1440) + 0.62);
     end
 end
 growth = sub.*fixup;
-
+growth_alt = sub_alt.*fixup_alt;
 % $$$
 % --- Set IC [EKR Standard]
 G_HA(:,1) = c_0;
@@ -658,6 +685,29 @@ J_H_bio(1,:) = u_t_H(1,:)*c_0;
 
 G_C_bio(:,1) = c_C;
 J_C_bio(1,:) = u_t_C(1,:)*c_C;
+
+% $$$
+% --- Set IC [BKR Standard]
+G_HA_bio_alt(:,1) = c_0;
+J_HA_bio_alt(1,:) = u_t_HA(1,:)*c_0;
+
+G_OH_bio_alt(:,1) = c_0;
+J_OH_bio_alt(1,:) = u_t_OH(1,:)*c_0;
+
+G_Na_bio_alt(:,1) = c_Na;
+J_Na_bio_alt(1,:) = u_t_Na(1,:)*c_Na;
+
+G_Cl_bio_alt(:,1) = c_Cl;
+J_Cl_bio_alt(1,:) = u_t_Cl(1,:)*c_Cl;
+
+G_A_bio_alt(:,1) = c_0;
+J_A_bio_alt(1,:) = u_t_A(1,:)*c_0;
+
+G_H_bio_alt(:,1) = c_0;
+J_H_bio_alt(1,:) = u_t_H(1,:)*c_0;
+
+G_C_bio_alt(:,1) = c_C;
+J_C_bio_alt(1,:) = u_t_C(1,:)*c_C;
 
 % $$$
 % --- Set IC [Dimensionless]
@@ -737,6 +787,16 @@ for m=1:nt-1
     G_C_bio(1,m) = J_C_bio(1,m);     %--- Upper boundary
     G_H_bio(1,m) = J_H_bio(1,m);     %--- Upper boundary
     G_A_bio(1,m) = J_A_bio(1,m);     %--- Upper boundary
+
+    % $$$
+    % --- Set BC [BKR Standard]
+    G_OH_bio_alt(1,m) = J_OH_bio_alt(1,m);   %--- Upper boundary
+    G_HA_bio_alt(1,m) = J_HA_bio_alt(1,m);   %--- Upper boundary
+    G_Na_bio_alt(1,m) = J_Na_bio_alt(1,m);   %--- Upper boundary
+    G_Cl_bio_alt(1,m) = J_Cl_bio_alt(1,m);   %--- Upper boundary
+    G_C_bio_alt(1,m) = J_C_bio_alt(1,m);     %--- Upper boundary
+    G_H_bio_alt(1,m) = J_H_bio_alt(1,m);     %--- Upper boundary
+    G_A_bio_alt(1,m) = J_A_bio_alt(1,m);     %--- Upper boundary
 
     % $$$
     % --- Set BC [Dimensionless]
@@ -866,6 +926,16 @@ for m=1:nt-1
         J_C_bio(i,m) = G_C_bio(i-1,m);
 
         % $$$
+        % Flux array corolation [Bio]
+        J_HA_bio_alt(i,m) = G_HA_bio_alt(i-1,m);
+        J_Na_bio_alt(i,m) = G_Na_bio_alt(i-1,m);
+        J_Cl_bio_alt(i,m) = G_Cl_bio_alt(i-1,m);
+        J_OH_bio_alt(i,m) = G_OH_bio_alt(i-1,m);
+        J_A_bio_alt(i,m) = G_A_bio_alt(i-1,m);
+        J_H_bio_alt(i,m) = G_H_bio_alt(i-1,m);
+        J_C_bio_alt(i,m) = G_C_bio_alt(i-1,m);
+
+        % $$$
         % Flux array corolation [Dimensionless] (1st)
         J_HA_up(i,m) = G_HA_up(i-1,m);
         J_Na_up(i,m) = G_Na_up(i-1,m);
@@ -946,6 +1016,16 @@ for m=1:nt-1
 
         % $$$
         % [For Bio]
+        G_HA_bio_alt(end,m) = J_HA_bio_alt(40,m);    %--- Lower boundary
+        G_OH_bio_alt(end,m) = J_OH_bio_alt(40,m);    %--- Lower boundary
+        G_Na_bio_alt(end,m) = J_Na_bio_alt(40,m);    %--- Lower boundary
+        G_Cl_bio_alt(end,m) = J_Cl_bio_alt(40,m);    %--- Lower boundary
+        G_A_bio_alt(end,m) = J_A_bio_alt(40,m);      %--- Lower boundary
+        G_H_bio_alt(end,m) = J_H_bio_alt(40,m);      %--- Lower boundary
+        G_C_bio_alt(end,m) = J_C_bio(40,m);      %--- Lower boundary
+
+        % $$$
+        % [For Bio]
         G_HA_up(end,m) = J_HA_up(40,m);    %--- Lower boundary
         G_OH_up(end,m) = J_OH_up(40,m);    %--- Lower boundary
         G_Na_up(end,m) = J_Na_up(40,m);    %--- Lower boundary
@@ -1005,6 +1085,7 @@ G_C_TPH_f = G_C_converted*(MW/(rho*bolian));
 G_C_TPH_f1 = G_C_converted1*(MW/(rho*bolian));
 G_C_TPH_ekr = G_C_tot*(MW/(rho*bolian));
 G_C_TPH_bkr = G_C_bio*(MW/(rho*bolian));
+G_C_TPH_bkr_alt = G_C_bio_alt*(MW/(rho*bolian));
 G_C_TPH_ekr_nr = G_C*(MW/(rho*bolian));
 
 % !!!
@@ -1014,25 +1095,26 @@ xl = [0,5,10,15,20,25,30,35];
 yl = [10000,7900,7100,6000,5700,5500,5400,5100];
 
 % ###
-%figure(1);  % --- EKR vs BKR
-%hold on;
-%plot(t_array,G_H(10,:),'-','DisplayName', 'Hydrocarbon (EKR without rate conturbution)');
-%plot(t_array,G_H_tot(10,:),'-','DisplayName', 'Hydrocarbon (EKR with rates considered)');
-%plot(t_array,G_H_bio(10,:),'-','DisplayName', 'Hydrocarbon (BKR)');
+figure(1);  % --- EKR vs BKR
+hold on;
+plot(t_array,G_H(10,:),'-','DisplayName', 'H+ (EKR without rate conturbution)');
+plot(t_array,G_H_tot(10,:),'-','DisplayName', 'H+ (EKR with rates considered)');
+plot(t_array,G_H_bio(10,:),'-','DisplayName', 'H+ (BKR)');
+plot(t_array,G_H_bio_alt(10,:),'-','DisplayName', 'H+ (BKR condensed biom)');
 
-%xlabel('Time');
-%ylabel('Conc(mol/m3)');
+xlabel('Time');
+ylabel('Conc(mol/m3)');
 
-%legend();
+legend();
 
-%hold off;
+hold off;
 
 % ###
 figure(2)  % --- EKR vs BKR
 hold on;
 plot(t_array,G_C_TPH_ekr(10,:),'-','DisplayName', 'Hydrocarbon (EKR with rate)');
 plot(t_array,G_C_TPH_bkr(10,:),'-','DisplayName', 'Hydrocarbon (BKR)');
-plot(t_array,G_C_TPH_ekr_nr(10,:),'-','DisplayName', 'Hydrocarbon (EKR no rate)');
+plot(t_array,G_C_TPH_bkr_alt(10,:),'-','DisplayName', 'Hydrocarbon (BKR condensed biom)');
 scatter(xl,yl, 'DisplayName', 'Expriment Data');
 xlabel('Time');
 ylabel('Conc(mg/kg)');
