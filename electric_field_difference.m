@@ -60,21 +60,38 @@ for timestep = 1:nt
     E_field(:,timestep) = M;
 end
 
+E_field_e = ones(nx,nt);
+ke = 5; % Adjust this value to change the steepness of the exponential curve
+% Create a steep exponential distribution from dEdx to 0
+Me = linspace(0, 1, nx);       % Create a normalized linear space for exponents
+Me = dEdx * exp(-ke * Me);       % Transform to get steep exponential distribution
 
+for timestep = 1:nt
+    E_field_e(:,timestep) = Me;
+end
 
-% ###
+% $$$
 % Setting inital value at t=0 and for all z (or x)
 E_field(:,1) = (V-V_end);
+E_field_e(:,1) = (V-V_end);
 
-% !!!
-% Dimensionless Voltage     [Dimentionless]
+% $$$
+% Dimensionless Voltage (Static)    [Dimentionless]
 phi_bar = E_field/(V-V_end);
 dphidx = phi_bar./x_less;
 dphidx(1,:) = 40; % Fixing damping value
 
+% Dimensionless Voltage (log10)    [Dimentionless]
+phi_bar_e = E_field_e/(V-V_end);
+dphidx_e = phi_bar_e./x_less;
+dphidx_e(1,:) = 40; % Fixing damping value
+
 % $$$
 % Voltage gradient          [V/m]
 E_field_dx = E_field/L;
+
+% Voltage gradient          [V/m]
+E_field_dx_e = E_field_e/L;
 
 % Global Physical info
 T = 25 + 273;                  % Tempature [K]
@@ -169,6 +186,15 @@ u_e_A = -v_A*z_A*F*E_field_dx*(1/tau^2);
 u_e_H = -v_H*z_H*F*E_field_dx*(1/tau^2);
 u_e_C = -v_C*z_C*F*E_field_dx*(1/tau^2);
 
+% Electroelectromigration velocity (Normal)     [m/s]
+u_e_HA_e = -v_HA*z_HA*F*E_field_dx_e*(1/tau^2);
+u_e_OH_e = -v_OH*z_OH*F*E_field_dx_e*(1/tau^2);
+u_e_Na_e = -v_Na*z_Na*F*E_field_dx_e*(1/tau^2);
+u_e_Cl_e = -v_Cl*z_Cl*F*E_field_dx*(1/tau^2);
+u_e_A_e = -v_A*z_A*F*E_field_dx_e*(1/tau^2);
+u_e_H_e = -v_H*z_H*F*E_field_dx_e*(1/tau^2);
+u_e_C_e = -v_C*z_C*F*E_field_dx_e*(1/tau^2);
+
 % $$$
 % Dimentionless Calculated     [Dimentionless]
 Peclet_calculated = (epsilon*zeta_0*V)/(mu_a*D0);
@@ -184,15 +210,23 @@ u_0 = (1/tau^2)*((epsilon*zeta_0)/mu_a)*((V-V_end)/L);
 u_eo = ((epsilon*zeta)/mu_a)*E_field_dx;
 u_x = (epsilon/mu_a)*(zeta*E_field_dx);
 
+u_eo_e = ((epsilon*zeta)/mu_a)*E_field_dx_e;
+u_x_e = (epsilon/mu_a)*(zeta*E_field_dx_e);
+
 % $$$
 % Convection velocity (itself)
 u_c = (1/tau^2)*(epsilon/mu_a)*(zeta*E_field_dx);
 u_c1 = u_x/((tau^2));
+
+u_c_e = (1/tau^2)*(epsilon/mu_a)*(zeta*E_field_dx_e);
+u_c1_e = u_x_e/((tau^2));
+
 % both are same and are here for assumptions
 
 % $$$
 % Convection velocity [Dimentionless]
 u_c_up = -((zeta/zeta_0)*dphidx);
+u_c_up_e = -((zeta/zeta_0)*dphidx_e);
 u_c_up1 = u_c/u_0;
 
 % ###
@@ -210,6 +244,15 @@ u_e_Cl_less = (-1/Z_calculated)*D_Cl_less*z_Cl*dphidx;
 u_e_A_less = (-1/Z_calculated)*D_A_less*z_A*dphidx;
 u_e_H_less = (-1/Z_calculated)*D_H_less*z_H*dphidx;
 u_e_C_less = (-1/Z_calculated)*D_C_less*z_C*dphidx;
+
+% Electroelectromigration velocity (1st)  [Dimentionless]
+u_e_HA_less_e = (-1/Z_calculated)*D_HA_less*z_HA*dphidx_e;
+u_e_OH_less_e = (-1/Z_calculated)*D_OH_less*z_OH*dphidx_e;
+u_e_Na_less_e = (-1/Z_calculated)*D_Na_less*z_Na*dphidx_e;
+u_e_Cl_less_e = (-1/Z_calculated)*D_Cl_less*z_Cl*dphidx_e;
+u_e_A_less_e = (-1/Z_calculated)*D_A_less*z_A*dphidx_e;
+u_e_H_less_e = (-1/Z_calculated)*D_H_less*z_H*dphidx_e;
+u_e_C_less_e = (-1/Z_calculated)*D_C_less*z_C*dphidx_e;
 
 % $$$
 % Electroelectromigration velocity (2nd)  [Dimentionless]
@@ -231,6 +274,16 @@ u_t_Cl = (u_e_Cl + u_c);
 u_t_H = (u_e_H + u_c);
 u_t_A = (u_e_A + u_c);
 u_t_C = (u_e_C + u_c);
+
+% $$$
+% Toatal velocity term (Normal)           [m/s]
+u_t_HA = (u_e_HA_e + u_c_e);
+u_t_OH = (u_e_OH_e + u_c_e);
+u_t_Na = (u_e_Na_e + u_c_e);
+u_t_Cl = (u_e_Cl_e + u_c_e);
+u_t_H = (u_e_H_e + u_c_e);
+u_t_A = (u_e_A_e + u_c_e);
+u_t_C = (u_e_C_e + u_c_e);
 
 % $$$
 % Toatal velocity term (Normal)           [m/day]
@@ -335,6 +388,16 @@ J_H_bio = zeros(nx,nt);
 J_C_bio = zeros(nx,nt);
 
 % $$$
+% Total Flux arrays [Bio]
+J_HA_bio_e = zeros(nx,nt);
+J_OH_bio_e = zeros(nx,nt);
+J_Na_bio_e = zeros(nx,nt);
+J_Cl_bio_e = zeros(nx,nt);
+J_A_bio_e = zeros(nx,nt);
+J_H_bio_e = zeros(nx,nt);
+J_C_bio_e = zeros(nx,nt);
+
+% $$$
 % Flux arrays [Dimensionless]
 J_HA_up = zeros(nx,nt);
 J_OH_up = zeros(nx,nt);
@@ -383,6 +446,16 @@ G_Cl_bio = zeros(nx,nt);
 G_A_bio = zeros(nx,nt);
 G_H_bio = zeros(nx,nt);
 G_C_bio = zeros(nx,nt);
+
+% $$$
+% Total concentration arrays [Bio]
+G_HA_bio_e = zeros(nx,nt);
+G_OH_bio_e = zeros(nx,nt);
+G_Na_bio_e = zeros(nx,nt);
+G_Cl_bio_e = zeros(nx,nt);
+G_A_bio_e = zeros(nx,nt);
+G_H_bio_e = zeros(nx,nt);
+G_C_bio_e = zeros(nx,nt);
 
 % $$$
 % concentration arrays [Dimensionless]
@@ -652,6 +725,29 @@ G_C_bio(:,1) = c_C;
 J_C_bio(1,:) = u_t_C(1,:)*c_C;
 
 % $$$
+% --- Set IC [BKR Standard]
+G_HA_bio_e(:,1) = c_0;
+J_HA_bio_e(1,:) = u_t_HA_e(1,:)*c_0;
+
+G_OH_bio_e(:,1) = c_0;
+J_OH_bio_e(1,:) = u_t_OH_e(1,:)*c_0;
+
+G_Na_bio_e(:,1) = c_Na;
+J_Na_bio_e(1,:) = u_t_Na_e(1,:)*c_Na;
+
+G_Cl_bio_e(:,1) = c_Cl;
+J_Cl_bio_e(1,:) = u_t_Cl_e(1,:)*c_Cl;
+
+G_A_bio_e(:,1) = c_0;
+J_A_bio_e(1,:) = u_t_A_e(1,:)*c_0;
+
+G_H_bio_e(:,1) = c_0;
+J_H_bio_e(1,:) = u_t_H_e(1,:)*c_0;
+
+G_C_bio_e(:,1) = c_C;
+J_C_bio_e(1,:) = u_t_C_e(1,:)*c_C;
+
+% $$$
 % --- Set IC [Dimensionless]
 G_HA_up(:,1) = 1;
 J_HA_up(1,:) = u_t_HA_up(1,:);
@@ -731,6 +827,16 @@ for m=1:nt-1
     G_A_bio(1,m) = J_A_bio(1,m);     %--- Upper boundary
 
     % $$$
+    % --- Set BC [BKR Standard]
+    G_OH_bio_e(1,m) = J_OH_bio_e(1,m);   %--- Upper boundary
+    G_HA_bio_e(1,m) = J_HA_bio_e(1,m);   %--- Upper boundary
+    G_Na_bio_e(1,m) = J_Na_bio_e(1,m);   %--- Upper boundary
+    G_Cl_bio_e(1,m) = J_Cl_bio_e(1,m);   %--- Upper boundary
+    G_C_bio_e(1,m) = J_C_bio_e(1,m);     %--- Upper boundary
+    G_H_bio_e(1,m) = J_H_bio_e(1,m);     %--- Upper boundary
+    G_A_bio_e(1,m) = J_A_bio_e(1,m);     %--- Upper boundary
+
+    % $$$
     % --- Set BC [Dimensionless]
     G_OH_up(1,m) = J_OH_up(1,m);   %--- Upper boundary
     G_HA_up(1,m) = J_HA_up(1,m);   %--- Upper boundary
@@ -779,6 +885,15 @@ for m=1:nt-1
         G_A_bio(i,m+1) = G_A_bio(i,m) + growth(i,m)*(coeff*(((D_A_day*h2)/(n*(tau^2)))*(G_A_bio(i+1,m) -2*G_A_bio(i,m) + G_A_bio(i-1,m)) - (h1/n)*((u_t_A(i+1,m) - u_t_A(i,m))*(G_A_bio(i+1,m) - G_A_bio(i,m)))));
         G_H_bio(i,m+1) = G_H_bio(i,m) + growth(i,m)*(coeff*(((D_H_day*h2)/(n*(tau^2)))*(G_H_bio(i+1,m) -2*G_H_bio(i,m) + G_H_bio(i-1,m)) - (h1/n)*((u_t_H(i+1,m) - u_t_H(i,m))*(G_H_bio(i+1,m) - G_H_bio(i,m)))));
         G_C_bio(i,m+1) = G_C_bio(i,m) + growth(i,m)*(coeff*(((D_C_day*h2)/(n*(tau^2)))*(G_C_bio(i+1,m) -2*G_C_bio(i,m) + G_C_bio(i-1,m)) - (h1/n)*((u_t_C(i+1,m) - u_t_C(i,m))*(G_C_bio(i+1,m) - G_C_bio(i,m)))));
+
+        % This is for total BKR [Standard]
+        G_HA_bio_e(i,m+1) = G_HA_bio_e(i,m) + growth(i,m)*(coeff*(((D_HA_day*h2)/(n*(tau^2)))*(G_HA_bio_e(i+1,m) -2*G_HA_bio_e(i,m) + G_HA_bio_e(i-1,m)) - (h1/n)*((u_t_HA_e(i+1,m) - u_t_HA_e(i,m))*(G_HA_bio_e(i+1,m) - G_HA_bio_e(i,m)))));
+        G_Na_bio_e(i,m+1) = G_Na_bio_e(i,m) + growth(i,m)*(coeff*(((D_Na_day*h2)/(n*(tau^2)))*(G_Na_bio_e(i+1,m) -2*G_Na_bio_e(i,m) + G_Na_bio_e(i-1,m)) - (h1/n)*((u_t_Na_e(i+1,m) - u_t_Na_e(i,m))*(G_Na_bio_e(i+1,m) - G_Na_bio_e(i,m)))));
+        G_Cl_bio_e(i,m+1) = G_Cl_bio_e(i,m) + growth(i,m)*(coeff*(((D_Cl_day*h2)/(n*(tau^2)))*(G_Cl_bio_e(i+1,m) -2*G_Cl_bio_e(i,m) + G_Cl_bio_e(i-1,m)) - (h1/n)*((u_t_Cl_e(i+1,m) - u_t_Cl_e(i,m))*(G_Cl_bio_e(i+1,m) - G_Cl_bio_e(i,m)))));
+        G_OH_bio_e(i,m+1) = G_OH_bio_e(i,m) + growth(i,m)*(coeff*(((D_OH_day*h2)/(n*(tau^2)))*(G_OH_bio_e(i+1,m) -2*G_OH_bio_e(i,m) + G_OH_bio_e(i-1,m)) - (h1/n)*((u_t_OH_e(i+1,m) - u_t_OH_e(i,m))*(G_OH_bio_e(i+1,m) - G_OH_bio_e(i,m)))));
+        G_A_bio_e(i,m+1) = G_A_bio_e(i,m) + growth(i,m)*(coeff*(((D_A_day*h2)/(n*(tau^2)))*(G_A_bio_e(i+1,m) -2*G_A_bio_e(i,m) + G_A_bio_e(i-1,m)) - (h1/n)*((u_t_A_e(i+1,m) - u_t_A_e(i,m))*(G_A_bio_e(i+1,m) - G_A_bio_e(i,m)))));
+        G_H_bio_e(i,m+1) = G_H_bio_e(i,m) + growth(i,m)*(coeff*(((D_H_day*h2)/(n*(tau^2)))*(G_H_bio_e(i+1,m) -2*G_H_bio_e(i,m) + G_H_bio_e(i-1,m)) - (h1/n)*((u_t_H_e(i+1,m) - u_t_H_e(i,m))*(G_H_bio_e(i+1,m) - G_H_bio_e(i,m)))));
+        G_C_bio_e(i,m+1) = G_C_bio_e(i,m) + growth(i,m)*(coeff*(((D_C_day*h2)/(n*(tau^2)))*(G_C_bio_e(i+1,m) -2*G_C_bio_e(i,m) + G_C_bio_e(i-1,m)) - (h1/n)*((u_t_C_e(i+1,m) - u_t_C_e(i,m))*(G_C_bio_e(i+1,m) - G_C_bio_e(i,m)))));
 
         % This is for total BKR [Dimensionless] (1st)
         G_HA_up(i,m+1) = G_HA_up(i,m) + growth(i,m)*(coeff*(((D_HA_less*h2_less)/(n*Pe))*(G_HA_up(i+1,m) -2*G_HA_up(i,m) + G_HA_up(i-1,m)) - ((h1_less/n)/n)*((u_t_HA_up(i+1,m) - u_t_HA_up(i,m))*(G_HA_up(i+1,m) - G_HA_up(i,m)))));
@@ -847,6 +962,15 @@ for m=1:nt-1
         J_A_bio(i,m) = G_A_bio(i-1,m);
         J_H_bio(i,m) = G_H_bio(i-1,m);
         J_C_bio(i,m) = G_C_bio(i-1,m);
+
+        % Flux array corolation [Bio]
+        J_HA_bio_e(i,m) = G_HA_bio_e(i-1,m);
+        J_Na_bio_e(i,m) = G_Na_bio_e(i-1,m);
+        J_Cl_bio_e(i,m) = G_Cl_bio_e(i-1,m);
+        J_OH_bio_e(i,m) = G_OH_bio_e(i-1,m);
+        J_A_bio_e(i,m) = G_A_bio_e(i-1,m);
+        J_H_bio_e(i,m) = G_H_bio_e(i-1,m);
+        J_C_bio_e(i,m) = G_C_bio_e(i-1,m);
 
         % $$$
         % Flux array corolation [Dimensionless] (1st)
@@ -929,6 +1053,16 @@ for m=1:nt-1
 
         % $$$
         % [For Bio]
+        G_HA_bio_e(end,m) = J_HA_bio_e(40,m);    %--- Lower boundary
+        G_OH_bio_e(end,m) = J_OH_bio_e(40,m);    %--- Lower boundary
+        G_Na_bio_e(end,m) = J_Na_bio_e(40,m);    %--- Lower boundary
+        G_Cl_bio_e(end,m) = J_Cl_bio_e(40,m);    %--- Lower boundary
+        G_A_bio_e(end,m) = J_A_bio_e(40,m);      %--- Lower boundary
+        G_H_bio_e(end,m) = J_H_bio_e(40,m);      %--- Lower boundary
+        G_C_bio_e(end,m) = J_C_bio_e(40,m);      %--- Lower boundary
+
+        % $$$
+        % [For Bio]
         G_HA_up(end,m) = J_HA_up(40,m);    %--- Lower boundary
         G_OH_up(end,m) = J_OH_up(40,m);    %--- Lower boundary
         G_Na_up(end,m) = J_Na_up(40,m);    %--- Lower boundary
@@ -997,18 +1131,19 @@ xl = [0,5,10,15,20,25,30,35];
 yl = [10000,7900,7100,6000,5700,5500,5400,5100];
 
 % ###
-%figure(1);  % --- EKR vs BKR
-%hold on;
-%plot(t_array,G_H(10,:),'-','DisplayName', 'Hydrocarbon (EKR without rate conturbution)');
-%plot(t_array,G_H_tot(10,:),'-','DisplayName', 'Hydrocarbon (EKR with rates considered)');
-%plot(t_array,G_H_bio(10,:),'-','DisplayName', 'Hydrocarbon (BKR)');
+figure(1);  % --- EKR vs BKR
+hold on;
+plot(t_array,G_H(10,:),'-','DisplayName', 'H+ (EKR without rate conturbution)');
+plot(t_array,G_H_tot(10,:),'-','DisplayName', 'H+ (EKR with rates considered)');
+plot(t_array,G_H_bio(10,:),'-','DisplayName', 'H+ (BKR)');
+plot(t_array,G_H_bio_e(10,:),'-','DisplayName', 'H+ (BKR modified voltage gradient)');
 
-%xlabel('Time');
-%ylabel('Conc(mol/m3)');
+xlabel('Time');
+ylabel('Conc(mol/m3)');
 
-%legend();
+legend();
 
-%hold off;
+hold off;
 
 % ###
 figure(2)  % --- EKR vs BKR
@@ -1016,6 +1151,7 @@ hold on;
 plot(t_array,G_C_TPH_ekr(10,:),'-','DisplayName', 'Hydrocarbon (EKR with rate)');
 plot(t_array,G_C_TPH_bkr(10,:),'-','DisplayName', 'Hydrocarbon (BKR)');
 plot(t_array,G_C_TPH_ekr_nr(10,:),'-','DisplayName', 'Hydrocarbon (EKR no rate)');
+plot(t_array,G_C_TPH_bkr(10,:),'-','DisplayName', 'Hydrocarbon (BKR modified voltage gradient)');
 scatter(xl,yl, 'DisplayName', 'Expriment Data');
 xlabel('Time');
 ylabel('Conc(mg/kg)');
@@ -1026,17 +1162,10 @@ hold off;
 % Plot for figure 3
 figure(3)
 plot(x_scale,E_field(:,50400),'--','DisplayName', 'Voltage')
+plot(x_scale,E_field_dx(:,50400),'--','DisplayName', 'Voltage Gradient')
 xlabel('Length (cm)');
 ylabel('Voltage (V)');
 title('Electric feild')
 legend();
 
 hold off;
-
-% Plot for figure 4
-figure(4)
-plot(x_scale,E_field_dx(:,50400),'--','DisplayName', 'Voltage Gradient')
-xlabel('Length (cm)');
-ylabel('Voltage Gradient (V/m)');
-title('Electric feild gradient');
-legend();
