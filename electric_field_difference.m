@@ -232,6 +232,7 @@ u_c_up1 = u_c/u_0;
 % ###
 % Testing new abberation
 u_c = u_c*10^-17;
+u_c_e = u_c_e*10^-17;
 u_c_up1 = u_c_up1*10^-18;
 u_c_up = u_c_up*10^-18;
 
