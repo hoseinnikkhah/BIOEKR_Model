@@ -1038,3 +1038,12 @@ xlabel('Length (cm)');
 ylabel('Voltage Gradient (V/m)');
 title('Electric feild gradient');
 legend();
+
+figure(3);  % --- EKR vs BKR
+hold on;
+plot(pH_scale,pH(:,50400),'-','DisplayName', 'pH (BKR)')
+xlabel('position');
+ylabel('pH');
+legend();
+
+hold off;
