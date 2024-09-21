@@ -64,7 +64,7 @@ E_field_e = ones(nx,nt);
 ke = 5; % Adjust this value to change the steepness of the exponential curve
 % Create a steep exponential distribution from dEdx to 0
 Me = linspace(0, 1, nx);       % Create a normalized linear space for exponents
-Me = dEdx * exp(-ke * Me);       % Transform to get steep exponential distribution
+Me = dVdx * exp(-ke * Me);       % Transform to get steep exponential distribution
 
 for timestep = 1:nt
     E_field_e(:,timestep) = Me;
@@ -277,13 +277,13 @@ u_t_C = (u_e_C + u_c);
 
 % $$$
 % Toatal velocity term (Normal)           [m/s]
-u_t_HA = (u_e_HA_e + u_c_e);
-u_t_OH = (u_e_OH_e + u_c_e);
-u_t_Na = (u_e_Na_e + u_c_e);
-u_t_Cl = (u_e_Cl_e + u_c_e);
-u_t_H = (u_e_H_e + u_c_e);
-u_t_A = (u_e_A_e + u_c_e);
-u_t_C = (u_e_C_e + u_c_e);
+u_t_HA_e = (u_e_HA_e + u_c_e);
+u_t_OH_e = (u_e_OH_e + u_c_e);
+u_t_Na_e = (u_e_Na_e + u_c_e);
+u_t_Cl_e = (u_e_Cl_e + u_c_e);
+u_t_H_e = (u_e_H_e + u_c_e);
+u_t_A_e = (u_e_A_e + u_c_e);
+u_t_C_e = (u_e_C_e + u_c_e);
 
 % $$$
 % Toatal velocity term (Normal)           [m/day]
