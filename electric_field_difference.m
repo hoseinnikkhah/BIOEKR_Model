@@ -1150,8 +1150,8 @@ hold off;
 figure(2)  % --- EKR vs BKR
 hold on;
 plot(t_array,G_C_TPH_ekr(10,:),'-','DisplayName', 'Hydrocarbon (EKR with rate)');
-plot(t_array,G_C_TPH_bkr(10,:),'-','DisplayName', 'Hydrocarbon (BKR)');
 plot(t_array,G_C_TPH_ekr_nr(10,:),'-','DisplayName', 'Hydrocarbon (EKR no rate)');
+plot(t_array,G_C_TPH_bkr(10,:),'-','DisplayName', 'Hydrocarbon (BKR)');
 plot(t_array,G_C_TPH_bkr(10,:),'-','DisplayName', 'Hydrocarbon (BKR modified voltage gradient)');
 scatter(xl,yl, 'DisplayName', 'Expriment Data');
 xlabel('Time');
@@ -1162,11 +1162,13 @@ hold off;
 
 % Plot for figure 3
 figure(3)
+hold on
 plot(x_scale,E_field(:,50400),'--','DisplayName', 'Voltage')
-plot(x_scale,E_field_dx(:,50400),'--','DisplayName', 'Voltage Gradient')
+plot(x_scale,E_field_e(:,50400),'--','DisplayName', 'Modified Voltage')
 xlabel('Length (cm)');
 ylabel('Voltage (V)');
 title('Electric feild')
 legend();
+hold off
 
 hold off;
