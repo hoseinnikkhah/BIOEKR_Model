@@ -984,12 +984,11 @@ G_C_converted1 = G_C_up1*c_C;
 
 % ###
 % conversion to TPH
-G_C_TPH_f = G_C_converted/c_C;
-G_C_TPH_f1 = G_C_converted1/c_C;
-G_C_TPH_ekr = G_C_tot/c_C;
-G_C_TPH_bkr = G_C_bio/c_C;
-G_C_TPH_ekr_nr = G_C/c_C;
-
+G_C_TPH_f = G_C_converted*(MW/(rho*mass));
+G_C_TPH_f1 = G_C_converted1*(MW/(rho*mass));
+G_C_TPH_ekr = G_C_tot*(MW/(rho*mass));
+G_C_TPH_bkr = G_C_bio*(MW/(rho*mass));
+G_C_TPH_ekr_nr = G_C*(MW/(rho*mass));
 
 % !!!
 pH = log10(G_H);
@@ -1017,16 +1016,16 @@ hold on;
 plot(t_array,G_C_TPH_ekr(10,:),'-','DisplayName', 'Hydrocarbon (EKR with rate)');
 plot(t_array,G_C_TPH_bkr(10,:),'-','DisplayName', 'Hydrocarbon (BKR)');
 plot(t_array,G_C_TPH_ekr_nr(10,:),'-','DisplayName', 'Hydrocarbon (EKR no rate)');
-%scatter(xl,yl, 'DisplayName', 'Expriment Data');
+scatter(xl,yl, 'DisplayName', 'Expriment Data');
 xlabel('Time');
-ylabel('Conc(g/kg)');
+ylabel('Conc(mg/kg)');
 legend();
 
 hold off;
 
 % Plot for figure 3
 figure(3)
-plot(x_scale,E_field(:,36000),'--','DisplayName', 'Voltage')
+plot(x_scale,E_field(:,50400),'--','DisplayName', 'Voltage')
 xlabel('Length (cm)');
 ylabel('Voltage (V)');
 title('Electric feild')
@@ -1036,17 +1035,17 @@ hold off;
 
 % Plot for figure 4
 figure(4)
-plot(x_scale,E_field_dx(:,36000),'--','DisplayName', 'Voltage Gradient')
+plot(x_scale,E_field_dx(:,50400),'--','DisplayName', 'Voltage Gradient')
 xlabel('Length (cm)');
 ylabel('Voltage Gradient (V/m)');
 title('Electric feild gradient');
 legend();
 
-%figure(3);  % --- EKR vs BKR
-%hold on;
-%plot(pH_scale,pH(:,36000),'-','DisplayName', 'pH (BKR)')
-%xlabel('position');
-%ylabel('pH');
-%legend();
+figure(3);  % --- EKR vs BKR
+hold on;
+plot(pH_scale,pH(:,50400),'-','DisplayName', 'pH (BKR)')
+xlabel('position');
+ylabel('pH');
+legend();
 
 hold off;
