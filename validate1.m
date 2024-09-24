@@ -897,55 +897,55 @@ for m=1:nt-1
 
         % $$$
         % [For EKR Standard]
-        G_HA(end,m) = J_HA(40,m);    %--- Lower boundary
-        G_OH(end,m) = J_OH(40,m);    %--- Lower boundary
-        G_Na(end,m) = J_Na(40,m);    %--- Lower boundary
-        G_Cl(end,m) = J_Cl(40,m);    %--- Lower boundary
-        G_A(end,m) = J_A(40,m);      %--- Lower boundary
-        G_H(end,m) = J_H(40,m);      %--- Lower boundary
-        G_C(end,m) = J_C(40,m);      %--- Lower boundary
-        R_OH(end,m) = J_OH(40,m);    %--- Lower boundary
-        R_H(end,m) = J_H(40,m);      %--- Lower boundary
+        G_HA(end,m) = J_HA(20,m);    %--- Lower boundary
+        G_OH(end,m) = J_OH(20,m);    %--- Lower boundary
+        G_Na(end,m) = J_Na(20,m);    %--- Lower boundary
+        G_Cl(end,m) = J_Cl(20,m);    %--- Lower boundary
+        G_A(end,m) = J_A(20,m);      %--- Lower boundary
+        G_H(end,m) = J_H(20,m);      %--- Lower boundary
+        G_C(end,m) = J_C(20,m);      %--- Lower boundary
+        R_OH(end,m) = J_OH(20,m);    %--- Lower boundary
+        R_H(end,m) = J_H(20,m);      %--- Lower boundary
 
         % $$$
         % [For adsorbed]
-        G_HA_tot(end,m) = J_HA_tot(40,m);    %--- Lower boundary
-        G_OH_tot(end,m) = J_OH_tot(40,m);    %--- Lower boundary
-        G_Na_tot(end,m) = J_Na_tot(40,m);    %--- Lower boundary
-        G_Cl_tot(end,m) = J_Cl_tot(40,m);    %--- Lower boundary
-        G_A_tot(end,m) = J_A_tot(40,m);      %--- Lower boundary
-        G_H_tot(end,m) = J_H_tot(40,m);      %--- Lower boundary
-        G_C_tot(end,m) = J_C_tot(40,m);      %--- Lower boundary
+        G_HA_tot(end,m) = J_HA_tot(20,m);    %--- Lower boundary
+        G_OH_tot(end,m) = J_OH_tot(20,m);    %--- Lower boundary
+        G_Na_tot(end,m) = J_Na_tot(20,m);    %--- Lower boundary
+        G_Cl_tot(end,m) = J_Cl_tot(20,m);    %--- Lower boundary
+        G_A_tot(end,m) = J_A_tot(20,m);      %--- Lower boundary
+        G_H_tot(end,m) = J_H_tot(20,m);      %--- Lower boundary
+        G_C_tot(end,m) = J_C_tot(20,m);      %--- Lower boundary
 
         % $$$
         % [For Bio]
-        G_HA_bio(end,m) = J_HA_bio(40,m);    %--- Lower boundary
-        G_OH_bio(end,m) = J_OH_bio(40,m);    %--- Lower boundary
-        G_Na_bio(end,m) = J_Na_bio(40,m);    %--- Lower boundary
-        G_Cl_bio(end,m) = J_Cl_bio(40,m);    %--- Lower boundary
-        G_A_bio(end,m) = J_A_bio(40,m);      %--- Lower boundary
-        G_H_bio(end,m) = J_H_bio(40,m);      %--- Lower boundary
-        G_C_bio(end,m) = J_C_bio(40,m);      %--- Lower boundary
+        G_HA_bio(end,m) = J_HA_bio(20,m);    %--- Lower boundary
+        G_OH_bio(end,m) = J_OH_bio(20,m);    %--- Lower boundary
+        G_Na_bio(end,m) = J_Na_bio(20,m);    %--- Lower boundary
+        G_Cl_bio(end,m) = J_Cl_bio(20,m);    %--- Lower boundary
+        G_A_bio(end,m) = J_A_bio(20,m);      %--- Lower boundary
+        G_H_bio(end,m) = J_H_bio(20,m);      %--- Lower boundary
+        G_C_bio(end,m) = J_C_bio(20,m);      %--- Lower boundary
 
         % $$$
         % [For Bio]
-        G_HA_up(end,m) = J_HA_up(40,m);    %--- Lower boundary
-        G_OH_up(end,m) = J_OH_up(40,m);    %--- Lower boundary
-        G_Na_up(end,m) = J_Na_up(40,m);    %--- Lower boundary
-        G_Cl_up(end,m) = J_Cl_up(40,m);    %--- Lower boundary
-        G_A_up(end,m) = J_A_up(40,m);      %--- Lower boundary
-        G_H_up(end,m) = J_H_up(40,m);      %--- Lower boundary
-        G_C_up(end,m) = J_C_up(40,m);      %--- Lower boundary
+        G_HA_up(end,m) = J_HA_up(20,m);    %--- Lower boundary
+        G_OH_up(end,m) = J_OH_up(20,m);    %--- Lower boundary
+        G_Na_up(end,m) = J_Na_up(20,m);    %--- Lower boundary
+        G_Cl_up(end,m) = J_Cl_up(20,m);    %--- Lower boundary
+        G_A_up(end,m) = J_A_up(20,m);      %--- Lower boundary
+        G_H_up(end,m) = J_H_up(20,m);      %--- Lower boundary
+        G_C_up(end,m) = J_C_up(20,m);      %--- Lower boundary
 
         % $$$
         % [For Bio]
-        G_HA_up1(end,m) = J_HA_up1(40,m);    %--- Lower boundary
-        G_OH_up1(end,m) = J_OH_up1(40,m);    %--- Lower boundary
-        G_Na_up1(end,m) = J_Na_up1(40,m);    %--- Lower boundary
-        G_Cl_up1(end,m) = J_Cl_up1(40,m);    %--- Lower boundary
-        G_A_up1(end,m) = J_A_up1(40,m);      %--- Lower boundary
-        G_H_up1(end,m) = J_H_up1(40,m);      %--- Lower boundary
-        G_C_up1(end,m) = J_C_up1(40,m);      %--- Lower boundary
+        G_HA_up1(end,m) = J_HA_up1(20,m);    %--- Lower boundary
+        G_OH_up1(end,m) = J_OH_up1(20,m);    %--- Lower boundary
+        G_Na_up1(end,m) = J_Na_up1(20,m);    %--- Lower boundary
+        G_Cl_up1(end,m) = J_Cl_up1(20,m);    %--- Lower boundary
+        G_A_up1(end,m) = J_A_up1(20,m);      %--- Lower boundary
+        G_H_up1(end,m) = J_H_up1(20,m);      %--- Lower boundary
+        G_C_up1(end,m) = J_C_up1(20,m);      %--- Lower boundary
 
         % ###
         K_H2O(i,m) = G_H(i,m)*G_OH(i,m);
@@ -955,8 +955,8 @@ for m=1:nt-1
         if i == 2
             R_H(i,m) = (i_z(2,m)/F);
         end
-        if i == 40
-            R_OH(i,m) = (i_z(40,m)/F);
+        if i == 20
+            R_OH(i,m) = (i_z(20,m)/F);
         end        
         R_A(i,m) = (K_a(i,m)*G_HA(i,m));
     end
@@ -992,7 +992,7 @@ G_C_TPH_ekr_nr = G_C*(MW/(rho*bolian));
 
 % !!!
 pH = log10(G_H);
-x_scale = linspace(1,40,41);
+x_scale = linspace(1,20,21);
 xl = [0,5,10,15,20,25,30,35];
 yl = [10000,7900,7100,6000,5700,5500,5400,5100];
 
