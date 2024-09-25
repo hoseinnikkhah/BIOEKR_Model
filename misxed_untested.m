@@ -567,7 +567,7 @@ alpha_C = (D_C/(tau^2))*10^5;
 
 % ###
 % Growth Factor
-K = growth_csv;       % Growth factor obtained
+K = -1*growth_csv;       % Growth factor obtained
 sub = zeros(nx,nt);
 fixup = zeros(nx,nt);
 for xx = 1:nx
