@@ -125,7 +125,7 @@ D_Na_less = 1.34;         % Na+
 D_Cl_less = 2.05;         % Cl-
 D_A_less = 1.2;           % Acid Agent
 D_H_less = 9.35;          % H+
-D_C_less = 1.51;          % Carbon
+D_C_less = 2.05;          % Carbon
 
 % $$$
 % Species diffusivities (Normal)    [m2/s]      
@@ -266,7 +266,7 @@ c_0 = 500;
 c_p = 200;
 c_Na = c_p;
 c_Cl = c_Na;
-
+c_H = 10^10.5;
 % $$$
 % Initial Hydrocarbon concentration        [mg/kg]
 c_C_TPH = 10.65;
@@ -505,7 +505,7 @@ G_OH(:,1) = c_0;
 G_Na(:,1) = c_Na;
 G_Cl(:,1) = c_Cl;
 G_A(:,1) = c_0;
-G_H(:,1) = c_0;
+G_H(:,1) = c_H;
 G_C(:,1) = c_C;
 
 % $$$
@@ -515,7 +515,7 @@ G_OH_tot(:,1) = c_0;
 G_Na_tot(:,1) = c_Na;
 G_Cl_tot(:,1) = c_Cl;
 G_A_tot(:,1) = c_0;
-G_H_tot(:,1) = c_0;
+G_H_tot(:,1) = c_H;
 G_C_tot(:,1) = c_C;
 
 % $$$
@@ -525,7 +525,7 @@ G_OH_bio(:,1) = c_0;
 G_Na_bio(:,1) = c_Na;
 G_Cl_bio(:,1) = c_Cl;
 G_A_bio(:,1) = c_0;
-G_H_bio(:,1) = c_0;
+G_H_bio(:,1) = c_H;
 G_C_bio(:,1) = c_C;
 
 % ###
@@ -535,7 +535,7 @@ G_OH_up(:,1) = G_OH(:,1)/c_0;
 G_Na_up(:,1) = G_Na(:,1)/c_Na;
 G_Cl_up(:,1) = G_Cl(:,1)/c_Cl;
 G_A_up(:,1) = G_A(:,1)/c_0;
-G_H_up(:,1) = G_H(:,1)/c_0;
+G_H_up(:,1) = G_H(:,1)/c_H;
 G_C_up(:,1) = G_C(:,1)/c_C;
 
 % ###
@@ -545,7 +545,7 @@ G_OH_up1(:,1) = G_OH(:,1)/c_0;
 G_Na_up1(:,1) = G_Na(:,1)/c_Na;
 G_Cl_up1(:,1) = G_Cl(:,1)/c_Cl;
 G_A_up1(:,1) = G_A(:,1)/c_0;
-G_H_up1(:,1) = G_H(:,1)/c_0;
+G_H_up1(:,1) = G_H(:,1)/c_H;
 G_C_up1(:,1) = G_C(:,1)/c_C;
 
 % ###
@@ -569,7 +569,7 @@ alpha_C = (D_C/(tau^2))*10^5;
 
 % ###
 % Growth Factor
-K = growth_csv;       % Growth factor obtained
+K = growth_csv;      % Growth factor obtained
 sub = zeros(nx,nt);
 fixup = zeros(nx,nt);
 for xx = 1:nx
@@ -599,8 +599,8 @@ J_Cl(1,:) = u_t_Cl(1,:)*c_Cl;
 G_A(:,1) = c_0;
 J_A(1,:) = u_t_A(1,:)*c_0;
 
-G_H(:,1) = c_0;
-J_H(1,:) = u_t_H(1,:)*c_0;
+G_H(:,1) = c_H;
+J_H(1,:) = u_t_H(1,:)*c_H;
 
 G_C(:,1) = c_C;
 J_C(1,:) = u_t_C(1,:)*c_C;
@@ -622,8 +622,8 @@ J_Cl_tot(1,:) = u_t_Cl(1,:)*c_Cl;
 G_A_tot(:,1) = c_0;
 J_A_tot(1,:) = u_t_A(1,:)*c_0;
 
-G_H_tot(:,1) = c_0;
-J_H_tot(1,:) = u_t_H(1,:)*c_0;
+G_H_tot(:,1) = c_H;
+J_H_tot(1,:) = u_t_H(1,:)*c_H;
 
 G_C_tot(:,1) = c_C;
 J_C_tot(1,:) = u_t_C(1,:)*c_C;
@@ -645,8 +645,8 @@ J_Cl_bio(1,:) = u_t_Cl(1,:)*c_Cl;
 G_A_bio(:,1) = c_0;
 J_A_bio(1,:) = u_t_A(1,:)*c_0;
 
-G_H_bio(:,1) = c_0;
-J_H_bio(1,:) = u_t_H(1,:)*c_0;
+G_H_bio(:,1) = c_H;
+J_H_bio(1,:) = u_t_H(1,:)*c_H;
 
 G_C_bio(:,1) = c_C;
 J_C_bio(1,:) = u_t_C(1,:)*c_C;
@@ -969,7 +969,7 @@ G_OH_converted = G_OH_up*c_0;
 G_Na_converted = G_Na_up*c_Na;
 G_Cl_converted = G_Cl_up*c_Cl;
 G_A_converted = G_A_up*c_0;
-G_H_converted = G_H_up*c_0;
+G_H_converted = G_H_up*c_H;
 G_C_converted = G_C_up*c_C;
 
 % ###
@@ -979,7 +979,7 @@ G_OH_converted1 = G_OH_up1*c_0;
 G_Na_converted1 = G_Na_up1*c_Na;
 G_Cl_converted1 = G_Cl_up1*c_Cl;
 G_A_converted1 = G_A_up1*c_0;
-G_H_converted1 = G_H_up1*c_0;
+G_H_converted1 = G_H_up1*c_H;
 G_C_converted1 = G_C_up1*c_C;
 
 % ###
@@ -1011,15 +1011,36 @@ yl = [10000,7900,7100,6000,5700,5500,5400,5100];
 
 %hold off;
 
+
+Bk = [1 0.75 0.675 0.57 0.45 0.395];
+Bl = [1 0.78 0.501 0.31 0.21 0.141];
+Rd = [1 0.81 0.611 0.375 0.285 0.225];
+time = 0:5:25;
+
+figure(1);
+hold on;
+plot(time, Bk, '-o', 'LineWidth', 1, 'MarkerSize', 4, 'Color', 'k','DisplayName', 'test 1');
+plot(time, Rd, '-o', 'LineWidth', 1, 'MarkerSize', 4, 'Color', 'r','DisplayName', 'test 2');
+plot(time, Bl, '-o', 'LineWidth', 1, 'MarkerSize', 4, 'Color', 'b','DisplayName', 'test 3');
+
+xlabel('Time (days)');
+ylabel('Residual concentrations of cyclododecane C/C0');
+title('Degradation extents of cyclododecane among the treatments over time.');
+grid on;
+legend();
+
 % ###
 figure(2)  % --- EKR vs BKR
 hold on;
 plot(t_array,G_C_TPH_ekr(10,:),'-','DisplayName', 'Hydrocarbon (EKR with rate)');
 plot(t_array,G_C_TPH_bkr(10,:),'-','DisplayName', 'Hydrocarbon (BKR)');
 plot(t_array,G_C_TPH_ekr_nr(10,:),'-','DisplayName', 'Hydrocarbon (EKR no rate)');
+plot(time, Bk, '-o', 'LineWidth', 1, 'MarkerSize', 4, 'Color', 'k','DisplayName', 'test 1');
+plot(time, Rd, '-o', 'LineWidth', 1, 'MarkerSize', 4, 'Color', 'r','DisplayName', 'test 2');
+plot(time, Bl, '-o', 'LineWidth', 1, 'MarkerSize', 4, 'Color', 'b','DisplayName', 'test 3');
 %scatter(xl,yl, 'DisplayName', 'Expriment Data');
 xlabel('Time');
-ylabel('Conc(g/kg)');
+ylabel('Hydrocarbon Dimensionless factor');
 legend();
 
 hold off;
@@ -1042,11 +1063,11 @@ ylabel('Voltage Gradient (V/m)');
 title('Electric feild gradient');
 legend();
 
-%figure(3);  % --- EKR vs BKR
-%hold on;
-%plot(pH_scale,pH(:,36000),'-','DisplayName', 'pH (BKR)')
-%xlabel('position');
-%ylabel('pH');
-%legend();
+figure(5);  % --- EKR vs BKR
+hold on;
+plot(x_scale,pH(:,36000),'-','DisplayName', 'pH (BKR)')
+xlabel('position');
+ylabel('pH');
+legend();
 
 hold off;
