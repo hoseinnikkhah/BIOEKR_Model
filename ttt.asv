@@ -27,8 +27,8 @@ plot(wave_number,a4);
 plot(wave_number,a5);
 plot(wave_number,a6);
 plot(wave_number,a7);
-plot(wave_number,a8);
+plot(wave_number,a8, 'LineWidth', 1, 'MarkerSize', 4, 'Color', 'b','DisplayName', 'a8');
 
 
 
-%plot(time, Bl, '-o', 'LineWidth', 1, 'MarkerSize', 4, 'Color', 'b','DisplayName', 'test 3');
+plot(time, Bl, '-o', 'LineWidth', 1, 'MarkerSize', 4, 'Color', 'b','DisplayName', 'test 3');
