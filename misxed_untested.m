@@ -567,7 +567,7 @@ alpha_C = (D_C/(tau^2))*10^5;
 
 % ###
 % Growth Factor
-K = 0.04;       % Growth factor obtained
+K = 0.03;       % Growth factor obtained
 sub = zeros(nx,nt);
 fixup = zeros(nx,nt);
 for xx = 1:nx
@@ -1039,11 +1039,11 @@ ylabel('Voltage Gradient (V/m)');
 title('Electric feild gradient');
 legend();
 
-figure(3);  % --- EKR vs BKR
-hold on;
-plot(pH_scale,pH(:,50400),'-','DisplayName', 'pH (BKR)')
-xlabel('position');
-ylabel('pH');
-legend();
+%figure(5);  % --- EKR vs BKR
+%hold on;
+%plot(x_scale,pH(:,50400),'-','DisplayName', 'pH (BKR)')
+%xlabel('position');
+%ylabel('pH');
+%legend();
 
-hold off;
+%hold off;
